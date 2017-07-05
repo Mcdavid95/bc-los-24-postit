@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createInitiative">Create New Group</button>
+            <div id="createInitiative" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">New Group</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h1>Create New Group</h1>
+                                <form action="/groups" method="POST" autocomplete="on">
+                                <div class="form-group">
+                                    <label for="author" class="control-label">Author</label>
+                                    <input type="text" name="group[author]" class="form-control" id="author" placeholder="Enter Author's name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="title" class="control-label">Group Name</label>
+                                    <input type="text" name="group[title]" class="form-control" id="title" placeholder="Enter title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="image" class="control-label" id="image">Image</label>
+                                    <input type="url" name="group[image]" class="form-control" placeholer="http://domain.com/your_image.png">
+                                </div>
+                                <div class="form-group">
+                                    <label for="content" class="control-label">Description</label>
+                                    <textarea type="text" name="group[body]" class="form-control" rows="6" id="content"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="t1">Add Users<abbr title="This field is mandatory">*</abbr></label>
+                                    <input type="text" class="form-control" id="t1" name="fruit" list="l1" required
+                                        pattern="[Bb]anana|[Cc]herry|[Aa]pple|[Ss]trawberry|[Ll]emon|[Oo]range">
+                                    <datalist id="l1">
+                                    </datalist>
+                                </div>
+                                <div class="form-group">
+                                    <label for="submit" class="control-label"></label>
+                                    <button type="submit" class="form-control btn btn-primary" >Submit</button>
+                                </div>
+                                </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+    </body>
+</html>
