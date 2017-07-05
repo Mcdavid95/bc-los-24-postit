@@ -1,0 +1,32 @@
+{
+  "name": "bc-los-24-postit",
+  "version": "1.0.0",
+  "description": "A message delivery app",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mcdavid95/bc-los-24-postit.git"
+  },
+  "keywords": [
+    "post",
+    "group",
+    "chat"
+  ],
+  "author": "Mcdavid Emereuwa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mcdavid95/bc-los-24-postit/issues"
+  },
+  "homepage": "https://github.com/Mcdavid95/bc-los-24-postit#readme",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.24.1",
+    "eslint": "^4.1.1",
+    "jasmine-node": "^1.14.5",
+    "node-sass": "^4.5.3",
+    "sequelize": "^4.2.1"
+  }
+}
