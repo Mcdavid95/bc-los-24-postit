@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Login Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div>
+        <h1>Login to Create and view posts</h1>
+        <div class="container">
+                <form action="/login" method="POST">
+                    <div class="form-group">
+                        <label for="email" class="control-label">Email: </label>
+                        <input type="email" name="email" class="form-control" placeholder="name@email.com" required>
+                    </div><br>
+                    <div class="form-group">
+                        <label for="passwword">Password: </label>
+                        <input id="password" type="password" class="form-control" placeholder="...........">
+                    </div>
+                    <button type="submit" class="form-control btn btn-login btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+    </body>
+</html> 
