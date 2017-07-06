@@ -1,7 +1,28 @@
-hr {
-     width: 30%;
-     }
+$primaryColor: #ffe;
+body {
+  background: $primaryColor;
 
-form {
-        margin: auto 30%;
-      }
+  #brand {
+    font-family: 'Kurale', serif;
+  }
+
+  #New-post {
+    margin-left: 90%
+  }
+
+   hr {
+    width: 30%;
+  }
+
+  form {
+    margin: auto 30%;
+  }
+}
+
+#content { 
+  margin-top: 5%
+}
+
+h1 {
+  margin: auto
+}

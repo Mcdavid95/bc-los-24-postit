@@ -1,0 +1,18 @@
+body {
+  background: #ffe; }
+  body #brand {
+    font-family: 'Kurale', serif; }
+  body #New-post {
+    margin-left: 90%; }
+  body hr {
+    width: 30%; }
+  body form {
+    margin: auto 30%; }
+
+#content {
+  margin-top: 5%; }
+
+h1 {
+  margin: auto; }
+
+/*# sourceMappingURL=auth.css.map */
