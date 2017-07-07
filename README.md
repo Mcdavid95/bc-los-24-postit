@@ -14,7 +14,7 @@ PostIt is a simple application that allows friends and colleagues create groups 
         - Critical: in-app, email and SMS notifications.
 * Reset passsword
 
-## Tecnology Used
+## Tecnologies Used
 * JavaScript(Node)
 * HTML and CSS - Front-end Display
 * PostGresql - for data persistency
