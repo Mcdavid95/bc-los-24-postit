@@ -1,18 +1,34 @@
 body {
-  background: #ffe; }
+  background: #fff; }
   body #brand {
-    font-family: 'Kurale', serif; }
-  body #New-post {
-    margin-left: 90%; }
+    font-family: "Kurale", serif; }
+  body h1 {
+    margin: 3%  auto; }
+  body #New-group {
+    margin-left: 90%;
+    padding: 1%; }
   body hr {
     width: 30%; }
   body form {
     margin: auto 30%; }
+
+.brand {
+  font-family: "Kurale", serif;
+  color: palevioletred; }
+
+.navbar-inverse {
+  background: #2c3e56; }
+
+#signup {
+  margin-left: 80%; }
 
 #content {
   margin-top: 5%; }
 
 h1 {
   margin: auto; }
+
+.nav-pills {
+  width: 10%; }
 
 /*# sourceMappingURL=auth.css.map */
