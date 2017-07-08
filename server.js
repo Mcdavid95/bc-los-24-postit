@@ -11,11 +11,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.redirect('/api/user/signup');
+  res.redirect('/api/user/signin');
 });
 
 app.post('/api/user/signin', (req, res) => res.status(200).json({
   message: 'welcome to the login page',
+}));
+
+app.post('/api/user/signup', (req, res) => res.status(200).json({
+  message: 'welcome to the signup page',
 }));
 
 app.post('/api/group/', (req, res) => {
