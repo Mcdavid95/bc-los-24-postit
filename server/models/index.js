@@ -3,18 +3,19 @@ import path from 'path';
 import Sequelize from 'sequelize';
 import dotenv from 'dotenv';
 
+dotenv.config();
+
 const basename = path.basename(module.filename);
 const env = process.env.NODE_ENV || 'development';
 
-const config = require('../config/config.json')[env];
+const config = require(`${__dirname}/../config/config.json`)[env];
 
 const db = {};
 
-dotenv.config();
 let sequelize;
 
-if (config.url) {
-  sequelize = new Sequelize(process.env[config.url]);
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
   sequelize = new Sequelize(
     config.database,
