@@ -1,43 +1,28 @@
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-
-
-module.exports = (sequalize, DataTypes) => {
-  const User = sequalize.define('user', {
+module.exports = (sequelize, DataTypes) => {
+  const Users = sequelize.define('Users', {
     username: {
-      allowNull: false,
       type: DataTypes.STRING,
+      allowNull: false
     },
     email: {
-      allowNull: false,
       type: DataTypes.STRING,
+      allowNull: false,
       isEmail: true,
       unique: true
     },
     password: {
+      type: DataTypes.STRING,
       allowNull: false,
-      type: DataTypes.String
     }
   }, {
     classMethods: {
       associate(models) {
-        User.hasMany(models.UserGroups, {
-          foreignKey: 'userId',
+        // associations can be defined here
+        Users.hasOne(models.Groups, {
+          foreignKey: 'groupsId'
         });
       }
-    },
-
-    hooks: {
-      beforeCreate: (user, options) => {
-        user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(8));
-      },
-      beeforeUpdate: {
-        if (user._changed.password) {
-          user.hashPassword();
-        }
-      }
     }
-  }
-  );
-  return User;
+  });
+  return Users;
 };

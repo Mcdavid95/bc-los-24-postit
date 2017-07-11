@@ -1,21 +1,21 @@
 module.exports = {
-  up(queryInterface, Sequelize) {
-    return queryInterface.createTable('Groups', {
+  up: (queryInterface, Sequelize) =>
+    queryInterface.createTable('Groups', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      title: {
         type: Sequelize.STRING
       },
       description: {
         type: Sequelize.STRING
       },
-      picture: {
-        type: Sequelize.URL
-      },
+      // picture: {
+      //   type: Sequelize.URL
+      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -25,18 +25,15 @@ module.exports = {
         type: Sequelize.DATE
       },
       userId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
         references: {
-          model: 'User',
+          model: 'Users',
           key: 'id',
-          as: 'userId',
+          as: 'creatorId'
         },
       },
-
-    });
-  },
-  down(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Groups');
-  }
+    }),
+  down: queryInterface =>
+    queryInterface.dropTable('Groups')
 };
