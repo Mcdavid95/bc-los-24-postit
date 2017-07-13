@@ -4,6 +4,7 @@
   "description": "A message delivery app",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon --exec babel-node server.js",
     "test": "jasmine"
   },
   "repository": {
@@ -28,6 +29,8 @@
     "babel-register": "^6.24.1",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.2",
+    "connect-multiparty": "^2.0.0",
+    "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "eslint": "^4.1.1",
@@ -36,16 +39,22 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
     "express": "^4.15.3",
+    "express-session": "^1.15.3",
     "jasmine-node": "^1.14.5",
     "jsonwebtoken": "^7.4.1",
+    "morgan": "^1.8.2",
     "node-sass": "^4.5.3",
     "nodemon": "^1.11.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-local-sequelize": "^0.7.0",
     "pg": "^6.4.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.2.1",
     "sequelize-cli": "^2.7.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "eslint": "^4.1.1"
   }
 }

@@ -1,48 +1,54 @@
+import dotenv from 'dotenv';
 import express from 'express';
 import bodyParser from 'body-parser';
-import fs from 'fs';
-import dotenv from 'dotenv';
+import path from 'path';
+import logger from 'morgan';
 
-const app = express();
+
+// ROUTES
+
+import authRoutes from './server/routes/authRoute';
+import groupRoutes from './server/routes/groupRoute';
 
 dotenv.config();
 
-app.use(bodyParser.json());
+
+const app = express();
+app.use(logger('dev'));
+
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  res.redirect('/api/user/signin');
+app.use(require('connect-multiparty')());
+
+app.use(express.static(path.join(__dirname, '/public')));
+
+
+// Express CONFIGURATION
+// app.use(require('express-session')({
+//   secret: 'Anywhere I go',
+//   resave: false,
+//   saveUninitialized: false
+// }));
+
+
+// ROUTES CONFIG
+app.use(authRoutes);
+app.use(groupRoutes);
+
+
+// If no route is matched return a 404
+app.use((req, res, next) => {
+  res.status(501).send({
+    status: false,
+    message: 'Sorry, this address is not supported by this API.'
+  });
+  next();
 });
 
-app.post('/api/user/signin', (req, res) => res.status(200).json({
-  message: 'welcome to the login page',
-}));
-
-app.post('/api/user/signup', (req, res) => res.status(200).json({
-  message: 'welcome to the signup page',
-}));
-
-app.post('/api/group/', (req, res) => {
-  res.json('I am a user');
+// Listening PORT
+app.listen(process.env.PORT || 8080, () => {
+  console.log('serving on port 8080');
 });
 
-app.post('/api/group/:id/user', (req, res) => {
-  res.json('I add a group user');
-});
-
-app.post('/api/group/:id/message', (req, res) => {
-  res.json('I am a message');
-});
-
-app.post('/api/group/:id/messages', (req, res) => {
-  res.json('I messages in a group');
-});
-
-app.get('*', (req, res) => res.status(200).json({
-  message: 'Welcome to the beginning of nothingness.',
-}));
-
-const port = 1337;
-const server = app.listen(process.env.PORT || port, () => (`LISTENING ON PORT ${port}...`));
-export default server;
-
+export default app;

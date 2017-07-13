@@ -1,9 +1,14 @@
+// import passportLocalSequelize from 'passport-local-sequelize';
+// import sequelize from 'sequelize';
+
 module.exports = (sequelize, DataTypes) => {
-  const Users = sequelize.define('Users', {
+  const User = sequelize.define('User', {
     username: {
       type: DataTypes.STRING,
+      unique: true,
       allowNull: false
     },
+
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -11,18 +16,25 @@ module.exports = (sequelize, DataTypes) => {
       unique: true
     },
     password: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
-    }
+    },
   }, {
     classMethods: {
       associate(models) {
         // associations can be defined here
-        Users.hasOne(models.Groups, {
-          foreignKey: 'groupsId'
+        User.hasMany(models.Group, {
+          foreignKey: 'userId',
+          onDelete: 'CASCADE'
+        });
+        User.hasMany(models.Message);
+        User.belongsToMany(models.Group, {
+          through: 'Groupmember',
+          foreignKey: 'userId',
+          onDelete: 'CASCADE',
         });
       }
-    }
+    },
   });
-  return Users;
+  return User;
 };

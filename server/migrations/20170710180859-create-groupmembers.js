@@ -21,6 +21,15 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
+      userId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Users',
+          key: 'id'
+        },
+      },
       groupId: {
         allowNull: false,
         type: Sequelize.INTEGER,
@@ -33,7 +42,6 @@ module.exports = {
 
     });
   },
-  down(queryInterface, Sequelize) {
-    return queryInterface.dropTable('GroupMembers');
-  }
+  down: queryInterface =>
+    queryInterface.dropTable('GroupMembers')
 };
