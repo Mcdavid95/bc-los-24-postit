@@ -1,5 +1,5 @@
 {
-  "development": {
+  "production": {
      "use_env_variable": "MyDB_URL"
   },
   "test": {
@@ -10,10 +10,10 @@
     "port": 5432,
     "dialect": "postgres"
   },
-  "production": {
+  "development": {
     "username": "postgres",
     "password": "janike_13",
-    "database": "postit-prod",
+    "database": "postit-dev",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
