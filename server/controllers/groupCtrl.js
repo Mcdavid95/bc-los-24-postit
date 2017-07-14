@@ -2,7 +2,7 @@ import model from '../models/';
 
 const Group = model.Group;
 const Message = model.message;
-// const GroupMembers = model.GroupMember;
+const GroupMembers = model.GroupMember;
 
 export default {
 
@@ -13,34 +13,52 @@ export default {
     }
     if (!req.body.description) {
       res.status(400).send({ message: 'Add Group Description' });
-
-      return;
+    } else {
+      Group
+        .findOne({
+          where: {
+            name: req.body.name.toLowerCase()
+          },
+        })
+        .then((groupExist) => {
+          if (groupExist) {
+            res.status(409).send({
+              message: 'groupname already exists'
+            });
+          } else {
+            return Group
+              .create({
+                name: req.body.name.toLowerCase(),
+                description: req.body.description.toLowerCase(),
+                userId: req.body.userId
+              })
+              .then((group) => {
+                res.status(201).send(`Group ${group.name} successfully created`);
+              })
+              .catch((error) => {
+                res.status(400).send(error);
+              });
+          }
+        });
     }
-
-    return Group
-      .create({
-        name: req.body.name,
-        description: req.body.description
-      })
-      .then((group) => {
-        res.status(201).send(group);
-      })
-      .catch((error) => {
-        res.status(400).send(error);
-      });
   },
 
   listGroups(req, res) {
     return Group
-
-      .findAll()
-
+      .findAll({
+        attributes:
+        ['id', 'name', 'userId']
+      })
       .then(groups => res.status(200).send(groups))
 
       .catch(error => res.status(400).send(error));
   },
 
   groupMember(req, res) {
+    if (req.body.)
+  }
+
+  ListgroupMembers(req, res) {
     return Group
 
       .findAll({ where: { id: req.params.id } })
