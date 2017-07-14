@@ -1,7 +1,7 @@
 import express from 'express';
 import Verify from '../controllers/jwtVerify';
 import GroupCtrl from '../controllers/groupCtrl';
-import MessageCtrl from '../controllers/messagectrl';
+import MessageCtrl from '../controllers/messageCtrl';
 
 const router = express.Router();
 
