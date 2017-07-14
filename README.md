@@ -2,7 +2,6 @@
 # bc-los-24-postit
 # POSTIT
 [![Build Status](https://travis-ci.org/Mcdavid95/bc-los-24-postit.svg?branch=server)](https://travis-ci.org/Mcdavid95/bc-los-24-postit)
-# bc-los-24-postit
 
 [link on heroku](https://postit-dyno.herokuapp.com/)
 
@@ -32,7 +31,4 @@ PostIt is a simple application that allows friends and colleagues create groups 
 * Sequelize
 * React
 * Babel
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/server
