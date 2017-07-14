@@ -1,4 +1,6 @@
 import express from 'express';
+import Verify from '../controllers/jwtVerify';
+
 import AuthCtrl from '../controllers/authentication';
 
 const router = express.Router();
@@ -17,6 +19,6 @@ router.post('/api/user/login', AuthCtrl.login);
 // Add logout route
 router.get('/api/user/logout', AuthCtrl.logout);
 
-router.get('/api/users', AuthCtrl.listUsers);
+router.get('/api/users', Verify.hasToken, AuthCtrl.listUsers);
 
 export default router;
