@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/Mcdavid95/bc-los-24-postit.svg?branch=server)](https://travis-ci.org/Mcdavid95/bc-los-24-postit)
 # bc-los-24-postit
+<<<<<<< HEAD
 
 # bc-los-24-postit
 # POSTIT
@@ -31,3 +32,5 @@ PostIt is a simple application that allows friends and colleagues create groups 
 * Sequelize
 * React
 * Babel
+=======
+>>>>>>> 3f093496ed99528181bce8aa1a5855924522f8b8
