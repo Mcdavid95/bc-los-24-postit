@@ -10,6 +10,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
 
+    userId: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Users',
+        key: 'id',
+        as: 'creatorId'
+      },
+    },
+
   }, {
     classMethods: {
       associate(models) {

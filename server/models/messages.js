@@ -7,6 +7,18 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING
     },
+    userId: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      onDelete: null,
+    },
+
+
+    groupId: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      onDelete: null,
+    },
   }, {
     classMethods: {
       associate(models) {
