@@ -1,4 +1,5 @@
 import model from '../models';
+import jwt from './jwtVerify';
 
 const Message = model.Message;
 
@@ -9,7 +10,7 @@ export default {
 
       .create({
 
-        userId: req.body.userId,
+        userId: jwt.hasToken.id,
 
         groupId: req.params.groupId,
 
@@ -29,11 +30,19 @@ export default {
   listMessages(req, res) {
     Message
       .findAll({
-        where: { groupId: [req.params.id] },
-        attributes: ['id', 'message', 'userId', 'groupId'],
+        where: { groupId: req.params.groupId },
+        attributes: ['id', 'content', 'userId', 'groupId'],
       })
 
-      .then(messages => res.status(200).send(messages.attributes))
+      .then((messages) => {
+        if (messages) {
+          res.send(messages);
+        } else {
+          res.status(404).send({
+            message: 'No messages found'
+          });
+        }
+      })
 
       .catch(error => res.status(404).send(error));
   }
