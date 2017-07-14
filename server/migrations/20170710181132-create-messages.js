@@ -24,21 +24,13 @@ module.exports = {
       groupId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'Groups',
-          key: 'id'
-        },
+        onDelete: null,
       },
 
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'Users',
-          key: 'id'
-        },
+        onDelete: null,
       },
     }),
   down: queryInterface =>
