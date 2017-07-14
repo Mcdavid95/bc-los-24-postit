@@ -1,5 +1,7 @@
 import express from 'express';
+import Verify from '../controllers/jwtVerify';
 import GroupCtrl from '../controllers/groupCtrl';
+import MessageCtrl from '../controllers/messagectrl';
 
 const router = express.Router();
 
@@ -8,16 +10,18 @@ const router = express.Router();
 // ======================
 
 // create group
-router.post('/api/group', GroupCtrl.createGroup);
+router.post('/api/group', Verify.hasToken, GroupCtrl.createGroup);
+
+router.get('/api/groups', Verify.hasToken, GroupCtrl.listGroups);
 
 // add user to group
 
-router.post('/api/group/:id/user', GroupCtrl.groupMember);
+router.post('/api/group/:groupId/user', Verify.hasToken, GroupCtrl.groupMember);
 
 // post message to group
-router.get('/api/group/:id/message', GroupCtrl.message);
+router.post('/api/group/:groupId/message', Verify.hasToken, MessageCtrl.postMessage);
 
 // fetch all messages in group
-router.get('/api/group/:id/messages', GroupCtrl.listMessages);
+router.get('/api/group/:groupId/messages', Verify.hasToken, MessageCtrl.listMessages);
 
 export default router;
