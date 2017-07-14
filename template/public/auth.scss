@@ -1,0 +1,51 @@
+$primaryColor: #fff;
+$brandFont: 'Kurale', serif;
+body {
+  background: $primaryColor;
+
+  #brand {
+    font-family: $brandFont;
+  }
+
+  h1 {
+    margin: 3%  auto;
+  }
+
+  #New-group {
+    margin-left: 90%;
+    padding: 1%;
+  }
+
+   hr {
+    width: 30%;
+  }
+
+  form {
+    margin: auto 30%;
+  }
+}
+
+.brand {
+    font-family: $brandFont;
+    color: palevioletred
+  }
+
+.navbar-inverse {
+    background: #2c3e56
+}
+
+#signup {
+  margin-left: 80%
+}
+
+#content { 
+  margin-top: 5%;
+}
+
+h1 {
+  margin: auto;
+}
+
+.nav-pills {
+  width: 10%
+}
