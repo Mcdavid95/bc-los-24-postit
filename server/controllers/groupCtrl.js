@@ -1,7 +1,6 @@
 import model from '../models/';
 
 const Group = model.Group;
-const Message = model.message;
 const GroupMembers = model.GroupMember;
 
 export default {
@@ -55,11 +54,38 @@ export default {
   },
 
   groupMember(req, res) {
-    if (req.body.)
-  }
+    if (!(req.body.name || req.body.email)) {
+      res.status(401).send({ message: 'Please add Username' });
+    } else {
+      GroupMembers
+        .findOne({
+          where: {
+            name: req.body.name
+          }
+        })
+        .then((UserExists) => {
+          if (UserExists) {
+            res.status(400).send({
+              message: `User with username: ${req.body.name} already in this group`
+            });
+          } else {
+            GroupMembers
+              .create({
+                groupId: req.params.groupId,
+                name: req.body.name
+              })
+              .then(newUser => res.status(200).send({
+                message: `Group-Member with Username:${newUser.name} added successfully`
+              }))
+              .catch((error => res.status(400).send(error)));
+          }
+        });
+    }
+  },
+
 
   ListgroupMembers(req, res) {
-    return Group
+    return GroupMembers
 
       .findAll({ where: { id: req.params.id } })
 
@@ -69,55 +95,4 @@ export default {
         res.status(400).send(error);
       });
   },
-
-  message(req, res) {
-    return Message
-
-      .create({
-
-        from_user: req.body.from_user,
-
-        to_group: req.body.to_group,
-
-        message: req.body.message,
-
-        priority: req.body.priority
-
-      })
-      .then((message) => {
-        res.status(200).send(message);
-      })
-      .catch((error) => {
-        res.status(400).send(error);
-      });
-  },
-
-  listMessages(req, res) {
-    Message
-      .findAll({
-
-        where: { to_group: [req.params.id] },
-
-        attributes: [
-
-          'id',
-
-          'message',
-
-          'from_user',
-
-          'to_group',
-
-          'priority',
-
-          'createdAt'
-
-        ],
-
-      })
-
-      .then(messages => res.status(200).send(messages))
-
-      .catch(error => res.status(404).send(error));
-  }
 };
