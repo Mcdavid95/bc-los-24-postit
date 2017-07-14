@@ -8,6 +8,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       email: {
@@ -21,23 +22,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      userId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'Users',
-          key: 'id'
-        },
-      },
+
       groupId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'Groups',
-          key: 'id'
-        },
+        onDelete: null,
       },
 
     });
