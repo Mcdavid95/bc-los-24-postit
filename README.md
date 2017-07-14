@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-# bc-los-24-postit
-# POSTIT
-=======
-[![Build Status](https://travis-ci.org/Mcdavid95/bc-los-24-postit.svg?branch=server)](https://travis-ci.org/Mcdavid95/bc-los-24-postit)
-# bc-los-24-postit
 
 # bc-los-24-postit
 # POSTIT
+[![Build Status](https://travis-ci.org/Mcdavid95/bc-los-24-postit.svg?branch=server)](https://travis-ci.org/Mcdavid95/bc-los-24-postit)
+
 [link on heroku](https://postit-dyno.herokuapp.com/)
->>>>>>> refs/remotes/origin/server
 
 ## Description
 PostIt is a simple application that allows friends and colleagues create groups for notifications. This way one person can post notifications to everyone by sending a message once. The application allows people create accounts, create groups and add registered users to the groups, and then send messages out to these groups whenever they want.
@@ -23,12 +18,9 @@ PostIt is a simple application that allows friends and colleagues create groups 
         - Critical: in-app, email and SMS notifications.
 * Reset passsword
 
-<<<<<<< HEAD
-=======
 ## Usage
 * Test on postman using the /api/...suffix
 
->>>>>>> refs/remotes/origin/server
 ## Tecnologies Used
 * JavaScript(Node)
 * HTML and CSS - Front-end Display
@@ -39,7 +31,4 @@ PostIt is a simple application that allows friends and colleagues create groups 
 * Sequelize
 * React
 * Babel
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/server
