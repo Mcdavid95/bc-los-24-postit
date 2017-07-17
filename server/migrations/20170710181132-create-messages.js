@@ -7,20 +7,32 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+
       title: {
         type: Sequelize.STRING
       },
+
       content: {
         type: Sequelize.STRING
       },
+
+      priority: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        defaultValue: 'normal',
+        isIn: [['normal', 'urgent', 'critical']]
+      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
+
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
+
       groupId: {
         allowNull: false,
         type: Sequelize.INTEGER,

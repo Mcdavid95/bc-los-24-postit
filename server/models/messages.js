@@ -13,6 +13,12 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: null,
     },
 
+    priority: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: 'normal',
+      isIn: [['normal', 'urgent', 'critical']]
+    },
 
     groupId: {
       allowNull: false,
