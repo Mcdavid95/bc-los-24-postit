@@ -16,7 +16,10 @@ module.exports = {
       phoneNumber: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true
+        unique: true,
+        validate: {
+          not: ['[a-z]', 'i']
+        }
       },
 
       email: {
