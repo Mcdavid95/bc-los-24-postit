@@ -12,6 +12,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       onDelete: null
     },
+
+    userId: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'User',
+        key: 'id',
+        as: 'creatorId'
+      },
+    },
   }, {
     classMethods: {
       associate: (models) => {

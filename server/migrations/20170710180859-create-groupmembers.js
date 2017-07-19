@@ -14,6 +14,16 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
+
+      userId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id',
+          as: 'memberId'
+        },
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
