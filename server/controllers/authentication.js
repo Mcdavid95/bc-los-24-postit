@@ -21,49 +21,76 @@ const saltRounds = 10;
 //  */
 export default {
   register(req, res) {
-    User
-      .findOne({
-        where: {
-          username: req.body.username.toLowerCase()
-        },
-      })
-      .then((user) => {
-        if (user) {
-          res.status(409).send({ message: 'Username already in use' });
-        } else {
-          User
-            .findOne({
-              where: {
-                email: req.body.email
-              },
-            })
-            .then((emailExists) => {
-              if (emailExists) {
-                res.status(409).send({ message: 'Email Already in use' });
-              }
-              bcrypt.hash(req.body.password, saltRounds)
-                .then((hash) => {
+    if (typeof (req.body.username) === 'undefined') {
+      res.status(409).send({
+        message: 'Username field must not be empty'
+      });
+    } else if (typeof (req.body.password) === 'undefined') {
+      res.status(409).send({
+        message: 'Password field must not be empty'
+      });
+    } else if (typeof (req.body.email) === 'undefined') {
+      res.status(409).send({
+        message: 'Email field must not be empty'
+      });
+    } else {
+      User
+        .findOne({
+          where: {
+            phoneNumber: req.body.phoneNumber
+          },
+        })
+        .then((phone) => {
+          if (phone) {
+            res.status(409).send({ message: 'phone number already in use' });
+          } else {
+            User
+              .findOne({
+                where: {
+                  username: req.body.username.toLowerCase()
+                },
+              })
+              .then((user) => {
+                if (user) {
+                  res.status(409).send({ message: 'Username already in use' });
+                } else {
                   User
-                    .create({
-                      username: req.body.username.toLowerCase(),
-                      password: hash,
-                      email: req.body.email.toLowerCase()
+                    .findOne({
+                      where: {
+                        email: req.body.email
+                      },
                     })
-                    .then(() => {
-                      res.status(201).send({
-                        sucsess: true,
-                        message: `Welcome to POSTIT!! ${req.body.username}`
-                      })
-                        .catch(() => {
-                          res.status(404).send({
-                            error: 'Username or Email already in use'
-                          });
+                    .then((emailExists) => {
+                      if (emailExists) {
+                        res.status(409).send({ message: 'Email Already in use' });
+                      }
+                      bcrypt.hash(req.body.password, saltRounds)
+                        .then((hash) => {
+                          User
+                            .create({
+                              username: req.body.username.toLowerCase(),
+                              password: hash,
+                              email: req.body.email.toLowerCase(),
+                              phoneNumber: req.body.phoneNumber
+                            })
+                            .then(() => {
+                              res.status(201).send({
+                                sucsess: true,
+                                message: `Welcome to POSTIT!! ${req.body.username}`
+                              });
+                            })
+                            .catch(() => {
+                              res.status(404).send({
+                                error: 'phone number already in use'
+                              });
+                            });
                         });
                     });
-                });
-            });
-        }
-      });
+                }
+              });
+          }
+        });
+    }
   },
 
   listUsers(req, res) {
