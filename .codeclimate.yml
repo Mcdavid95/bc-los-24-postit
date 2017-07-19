@@ -19,12 +19,10 @@ engines:
       - javascript
 ratings:
   paths:
-  - app/**
-  - lib/**
-  - "**.rb"
-  - "**.go"
+  - "server/*.js"
+  - "server/**/*.js"
 exclude_paths:
-- spec/**/*
-- "**/vendor/**/*"
-- bootstrap/**/*
-- migrations/**/*
+- node_modules/
+- server/tests/
+- template/bootstrap/
+- template/bootstrap4/
