@@ -3,9 +3,9 @@
 # POSTIT
 [![Build Status](https://travis-ci.org/Mcdavid95/bc-los-24-postit.svg?branch=server)](https://travis-ci.org/Mcdavid95/bc-los-24-postit)
 
-[![Code Climate](https://codeclimate.com/github/Mcdavid95/bc-los-24-postit/gpa.svg)](https://codeclimate.com/github/Mcdavid95/bc-los-24-postit)
+[![Code Climate](https://codeclimate.com/github/Mcdavid95/bc-los-24-postit/badges/gpa.svg)](https://codeclimate.com/github/Mcdavid95/bc-los-24-postit)
 
-[![Issue Count](https://codeclimate.com/github/Mcdavid95/bc-los-24-postit/issue_count.svg)](https://codeclimate.com/github/Mcdavid95/bc-los-24-postit)
+[![Issue Count](https://codeclimate.com/github/Mcdavid95/bc-los-24-postit/badges/issue_count.svg)](https://codeclimate.com/github/Mcdavid95/bc-los-24-postit)
 
 [link on heroku](https://postit-dyno.herokuapp.com/)
 
