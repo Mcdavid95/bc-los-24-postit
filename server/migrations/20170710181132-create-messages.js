@@ -43,6 +43,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         onDelete: null,
+        references: {
+          model: 'Users',
+          key: 'id',
+          as: 'senderId'
+        }
       },
     }),
   down: queryInterface =>

@@ -16,7 +16,9 @@ export default {
 
         content: req.body.content,
 
-        title: req.body.title
+        title: req.body.title,
+
+        priority: req.body.priority
 
       })
       .then((message) => {

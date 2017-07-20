@@ -51,7 +51,7 @@ app.use((req, res, next) => {
 
 // Listening PORT
 app.listen(process.env.PORT || 3000, () => {
-  console.log('serving on port 8080');
+  console.log('serving on port 3000');
 });
 
 export default app;
