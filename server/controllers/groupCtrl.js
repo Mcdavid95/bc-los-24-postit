@@ -1,5 +1,6 @@
 import model from '../models/';
 
+const User = model.User;
 const Group = model.Group;
 const GroupMembers = model.GroupMember;
 
@@ -25,7 +26,7 @@ export default {
               message: 'groupname already exists'
             });
           } else {
-            return Group
+            Group
               .create({
                 name: req.body.name.toLowerCase(),
                 description: req.body.description.toLowerCase(),
@@ -53,46 +54,94 @@ export default {
       .catch(error => res.status(400).send(error));
   },
 
-  groupMember(req, res) {
-    if (!(req.body.name || req.body.email)) {
-      res.status(401).send({ message: 'Please add Username' });
+  addGroupMember(req, res) {
+    if (!(req.body.username || req.body.email)) {
+      res.status(401).send({ message: 'Please add Username or email' });
     } else {
-      GroupMembers
+      Group
         .findOne({
           where: {
-            name: req.body.name
+            id: req.params.groupId
           }
         })
-        .then((UserExists) => {
-          if (UserExists) {
-            res.status(400).send({
-              message: `User with username: ${req.body.name} already in this group`
-            });
+        .then((groupExist) => {
+          if (groupExist) {
+            User.findOne({
+              where: { username: req.body.username }
+            })
+              .then((user) => {
+                if (user) {
+                  GroupMembers.findOne({
+                    where: {
+                      username: req.body.username,
+                      userId: req.body.userId
+                    }
+                  })
+                    .then((inGroup) => {
+                      if (!inGroup) {
+                        GroupMembers.create({
+                          where: {
+                            userId: req.body.userId,
+                            groupId: req.params.groupId,
+                            username: req.body.username,
+
+                          }
+                        })
+                          .spread((member, added) => {
+                            if (added) {
+                              res.status(201).send({
+                                message: `New member ${req.body.username} has been successfully added to this group`
+                              });
+                            } else {
+                              res.status(409).send({
+                                error: 'An error occured, unable to add user'
+                              });
+                            }
+                          });
+                      } else {
+                        res.status(401).send({
+                          Error: 'User already in group'
+                        });
+                      }
+                    });
+                } else {
+                  res.status(404).send({
+                    Error: 'User does not exist'
+                  });
+                }
+              });
           } else {
-            GroupMembers
-              .create({
-                groupId: req.params.groupId,
-                name: req.body.name
-              })
-              .then(newUser => res.status(200).send({
-                message: `Group-Member with Username:${newUser.name} added successfully`
-              }))
-              .catch((error => res.status(400).send(error)));
+            res.status(404).send({
+              Error: 'Group does not exist'
+            });
           }
+        })
+        .catch((error) => {
+          res.status(400).send(error);
         });
     }
   },
 
+  ListGroupMembers(req, res) {
+    Group
+      .findOne({
+        where: { id: req.params.groupId }
+      })
+      .then((group) => {
+        if (group) {
+          GroupMembers
+            .findAll({ where: { groupId: req.params.groupId } })
 
-  ListgroupMembers(req, res) {
-    return GroupMembers
+            .then(groups => res.status(200).send(groups))
 
-      .findAll({ where: { id: req.params.id } })
-
-      .then(groups => res.status(200).send(groups))
-
-      .catch((error) => {
-        res.status(400).send(error);
+            .catch((error) => {
+              res.status(400).send(error);
+            });
+        } else {
+          res.status(404).send({
+            Error: `Group with id: ${req.params.groupId} does not exist`
+          });
+        }
       });
   },
 };

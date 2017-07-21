@@ -13,7 +13,9 @@ export default {
         return next();
       });
     } else {
-      res.status(403).send('Token not provided');
+      res.status(403).send({
+        message: 'You have to be loggedin first'
+      });
     }
   }
 };
