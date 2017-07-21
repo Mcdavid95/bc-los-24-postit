@@ -7,8 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        allowNull: false,
+      username: {
         type: Sequelize.STRING
       },
       email: {
@@ -36,7 +35,7 @@ module.exports = {
       groupId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        onDelete: null,
+        onDelete: null
       },
 
     });

@@ -34,7 +34,9 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 // ROUTES CONFIG
 app.get('/', (req, res) => {
-  res.status(200).send('Welcome to postit');
+  res.status(200).send({
+    message: 'Welcome to postit'
+  });
 });
 app.use(authRoutes);
 app.use(groupRoutes);

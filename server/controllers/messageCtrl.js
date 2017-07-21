@@ -2,30 +2,40 @@ import model from '../models';
 import jwt from './jwtVerify';
 
 const Message = model.Message;
+const Group = model.Group;
 
 export default {
 
   postMessage(req, res) {
-    return Message
+    Group.findOne({
+      where: { id: req.params.groupId }
+    })
+      .then((group) => {
+        if (group) {
+          Message
 
-      .create({
+            .create({
 
-        userId: jwt.hasToken.id,
+              groupId: req.params.groupId,
 
-        groupId: req.params.groupId,
+              content: req.body.content,
 
-        content: req.body.content,
+              title: req.body.title,
 
-        title: req.body.title,
+              priority: req.body.priority
 
-        priority: req.body.priority
-
-      })
-      .then((message) => {
-        res.status(200).send(message);
-      })
-      .catch((error) => {
-        res.status(400).send(error.message);
+            })
+            .then((message) => {
+              res.status(200).send(message);
+            })
+            .catch((error) => {
+              res.status(400).send(error.message);
+            });
+        } else {
+          res.status(404).send({
+            Error: `Group userId: ${req.params.groupId} does not exist`
+          });
+        }
       });
   },
 

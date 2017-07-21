@@ -17,7 +17,7 @@ router.post('/api/user/register', AuthCtrl.register);
 router.post('/api/user/login', AuthCtrl.login);
 
 // Add logout route
-router.get('/api/user/logout', AuthCtrl.logout);
+router.post('/api/user/logout', AuthCtrl.logout);
 
 router.get('/api/users', Verify.hasToken, AuthCtrl.listUsers);
 

@@ -16,7 +16,10 @@ router.get('/api/groups', Verify.hasToken, GroupCtrl.listGroups);
 
 // add user to group
 
-router.post('/api/group/:groupId/user', Verify.hasToken, GroupCtrl.groupMember);
+router.post('/api/group/:groupId/user', Verify.hasToken, GroupCtrl.addGroupMember);
+
+// fetch users in a group
+router.get('/api/group/:groupId/users', Verify.hasToken, GroupCtrl.ListGroupMembers);
 
 // post message to group
 router.post('/api/group/:groupId/message', Verify.hasToken, MessageCtrl.postMessage);
