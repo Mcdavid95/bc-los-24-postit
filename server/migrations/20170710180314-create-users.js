@@ -14,7 +14,7 @@ module.exports = {
       },
 
       phoneNumber: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL,
         allowNull: false,
         unique: true,
         validate: {

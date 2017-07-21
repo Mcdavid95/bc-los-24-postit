@@ -18,7 +18,7 @@ module.exports = {
 
       priority: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
         defaultValue: 'normal',
         isIn: [['normal', 'urgent', 'critical']]
       },

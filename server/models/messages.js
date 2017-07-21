@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
 
     priority: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       defaultValue: 'normal',
       isIn: [['normal', 'urgent', 'critical']]
     },

@@ -1,7 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const GroupMember = sequelize.define('GroupMember', {
-    name: {
-      allowNull: false,
+    username: {
       type: DataTypes.STRING
     },
     email: {

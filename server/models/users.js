@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 
     phoneNumber: {
       allowNull: false,
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL,
       unique: true,
       validate: {
         not: ['[a-z]', 'i']
