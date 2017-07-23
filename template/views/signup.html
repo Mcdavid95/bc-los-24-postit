@@ -5,35 +5,36 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../materialize/css/materialize.min.css" rel="stylesheet">
         <link href="../public/auth.css" rel="stylesheet">
+         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Kurale" rel="stylesheet">
     </head>
     <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" 
-                        data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        </button>
-                        <a href="#" class="navbar-brand navbar-left brand">POSTIT!</a>
-                    </div>
-                    <div class="collapse navbar-collapse" id="bs-nav-demo">
-                        <ul class="nav navbar-nav">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="./login.html">Login <span class="glyphicon glyphicon-user"></span></a></li>
-                        </ul>
-                    </div>
+        <header>
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper container">
+                    <a href="#" class="brand-logo center" id="brand">POSTIT!!</a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li class="active"><a href="sass.html">Home</a></li>
+                    <li><a href="badges.html">Components</a></li>
+                    <li><a href="collapsible.html">JavaScript</a></li>
+                </ul>
+                <ul id="nav-mobile" class="right">
+                    <li><a href="./login.html">Login <span class="glyphicon glyphicon-user"></span></a></li>
+                </ul>
                 </div>
-        </nav>
+            </nav>
+        </div>
+        </header>
+        <main>
         <div class="container" id="content">
-            <h1>Create an Account</h1>
+            <div class="row">
+                <div class="col s12 m6 l9">
+                    <h1><span id="acct">Create an Account</span></h1>
+                </div>
+            </div>
 
             <form action="./login.html">
                 <div class="form-group">
@@ -64,7 +65,34 @@
                 
             </form>
         </div>
+        </main>
+        <footer>
+            <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text" id="brand">POSTIT!!</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2017 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
         <script src="../js/jquery-3.2.1.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <script src="../materialize/js/materialize.min.js"></script>
     </body>
 </html>
