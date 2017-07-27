@@ -7,6 +7,7 @@ const GroupMembers = model.GroupMember;
 export default {
 
   createGroup(req, res) {
+    const id = req.decoded.id;
     if (!req.body.name) {
       res.status(400).json({ message: 'Please add Group name' });
       return;
@@ -30,9 +31,10 @@ export default {
               .create({
                 name: req.body.name.toLowerCase(),
                 description: req.body.description.toLowerCase(),
-                userId: req.body.userId
+                userId: id
               })
               .then((group) => {
+                group.addGroupMember(id);
                 res.status(201).send(`Group ${group.name} successfully created`);
               })
               .catch((error) => {

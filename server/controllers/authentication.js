@@ -106,42 +106,48 @@ export default {
   },
 
   login(req, res) {
-    return User
-      .findOne({
-        where:
-        { username: req.body.username.toLowerCase() }
-      })
-      .then((user) => {
-        if (!user) {
-          res.status(401).send({
-            message: 'Username not correct'
-          });
-        }
-        if (!bcrypt.compareSync(req.body.password, user.password)) {
-          res.status(401).send({
-            message: 'Incorrect password'
-          });
-        }
-        if (user) {
-          const myToken = jwt.sign({
-            id: user.id
-          },
-          'process.env.SECRET',
-          { expiresIn: 24 * 60 * 60 });
-          res.status(202).send({
-            myToken,
-            message: `Welcome back ${req.body.username}`
-          });
-        }
-        res.status(404).send({
-          message: 'Validation Error'
-        });
-      })
-      .catch(() => {
-        res.status(400).send({
-          error: 'Validation error'
-        });
+    if (typeof (req.body.username) === 'undefined') {
+      res.status(409).send({
+        message: 'Input username field'
       });
+    } else {
+      return User
+        .findOne({
+          where:
+        { username: req.body.username.toLowerCase() }
+        })
+        .then((user) => {
+          if (!user) {
+            res.status(401).send({
+              message: 'Username not correct'
+            });
+          }
+          if (!bcrypt.compareSync(req.body.password, user.password)) {
+            res.status(401).send({
+              message: 'Incorrect password'
+            });
+          }
+          if (user) {
+            const myToken = jwt.sign({
+              id: user.id
+            },
+            'process.env.SECRET',
+            { expiresIn: 24 * 60 * 60 });
+            res.status(202).send({
+              myToken,
+              message: `Welcome back ${req.body.username}`
+            });
+          }
+          res.status(404).send({
+            message: 'Validation Error'
+          });
+        })
+        .catch(() => {
+          res.status(400).send({
+            error: 'Validation error'
+          });
+        });
+    }
   },
   logout(req, res) {
     res.status(200).json({

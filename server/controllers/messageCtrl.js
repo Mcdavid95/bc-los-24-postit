@@ -33,7 +33,7 @@ export default {
             });
         } else {
           res.status(404).send({
-            Error: `Group userId: ${req.params.groupId} does not exist`
+            Error: `Group with: ${req.params.groupId} does not exist`
           });
         }
       });
