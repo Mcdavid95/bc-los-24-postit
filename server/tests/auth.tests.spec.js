@@ -10,6 +10,8 @@ const api = supertest.agent(server);
 const should = chai.should();
 const expect = chai.expect();
 
+let token;
+
 before((done) => {
   models.sequelize.sync({ force: true }).then(() => {
     done(null);
@@ -105,6 +107,7 @@ describe('Authentication Route', () => {
       .type('form')
       .send(valid)
       .end((err, res) => {
+        token = res.body.token;
         res.status.should.equal(201);
         res.body.message.should.equal(`Welcome to POSTIT!! ${valid.username}`);
         done();
@@ -178,8 +181,55 @@ describe('Authentication Route', () => {
         password: 'janike_13'
       })
       .end((err, res) => {
+        token = res.body.myToken;
         res.status.should.equal(202);
         res.body.message.should.equal('Welcome back mcdavid');
+        done();
+      });
+  });
+
+  it('Should not allow user with wrong username to log in ', (done) => {
+    api
+      .post('/api/user/login')
+      .set('Connetion', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        username: 'emmanuel',
+        password: 'janike_13'
+      })
+      .end((err, res) => {
+        res.status.should.equal(401);
+        res.body.message.should.equal('Username not correct');
+        done();
+      });
+  });
+
+  it('Should not allow user with wrong password to log in ', (done) => {
+    api
+      .post('/api/user/login')
+      .set('Connetion', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        username: 'mcdavid',
+        password: 'janike_13a'
+      })
+      .end((err, res) => {
+        res.status.should.equal(401);
+        res.body.message.should.equal('Incorrect password');
+        done();
+      });
+  });
+
+  it('Should get all registered users ', (done) => {
+    api
+      .get('/api/users')
+      .set('x-access-token', token)
+      .expect(200)
+      .end((err, res) => {
+        res.status.should.equal(200);
+        res.body.length.should.equal(2);
         done();
       });
   });
