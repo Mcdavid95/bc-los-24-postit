@@ -42,7 +42,7 @@ export default {
         })
         .then((phone) => {
           if (phone) {
-            res.status(409).send({ message: 'phone number already in use' });
+            res.status(409).send({ message: 'Phone Number already in use' });
           } else {
             User
               .findOne({
@@ -62,7 +62,7 @@ export default {
                     })
                     .then((emailExists) => {
                       if (emailExists) {
-                        res.status(409).send({ message: 'Email Already in use' });
+                        res.status(409).send({ message: 'Email already in use' });
                       }
                       bcrypt.hash(req.body.password, saltRounds)
                         .then((hash) => {

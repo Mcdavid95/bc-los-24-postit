@@ -3,35 +3,19 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../../server';
 import models from '../models';
-import { valid, anotherValid, inValid } from '../seeders/authSeeds';
+import { valid, anotherValid, invalidUsername, invalidEmail, invalidNumber } from '../seeders/authSeeds';
 
 chai.use(chaiHttp);
-const api = supertest(server);
+const api = supertest.agent(server);
 const should = chai.should();
 const expect = chai.expect();
 
-models.User.destroy({
-  cascade: true,
-  truncate: true,
-  restartIdentity: true
-});
-
-models.Message.destroy({
-  cascade: true,
-  truncate: true,
-  restartIdentity: true
-});
-
-models.Group.destroy({
-  cascade: true,
-  truncate: true,
-  restartIdentity: true
-});
-
-models.GroupMember.destroy({
-  cascade: true,
-  truncate: true,
-  restartIdentity: true
+before((done) => {
+  models.sequelize.sync({ force: true }).then(() => {
+    done(null);
+  }).catch((errors) => {
+    done(errors);
+  });
 });
 
 describe('Authentication Route', () => {
@@ -57,7 +41,7 @@ describe('Authentication Route', () => {
 
   it('Should prevent users not logged in to access protected routes', (done) => {
     api
-      .get('api/users')
+      .get('/api/users')
       .expect(403)
       .end((err, res) => {
         res.status.should.equal(403);
@@ -66,17 +50,136 @@ describe('Authentication Route', () => {
       });
   });
 
-  it('Should allow a new user to register', (done) => {
+  it('Should not allow a new user to register with an empty field', (done) => {
     api
-      .post('api/user/register')
-      .set('Connection', 'keep alive')
+      .post('/api/user/register')
+      .expect(403)
+      .end((err, res) => {
+        res.status.should.equal(409);
+        res.body.message.should.equal('Username field must not be empty');
+        done();
+      });
+  });
+
+  it('Should not allow user with empty password field to log in', (done) => {
+    api
+      .post('/api/user/register')
+      .set('Connetion', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        username: 'mcdavid',
+        phoneNumber: 9093839393,
+        email: 'mcdavidemereuwa@gmail.com'
+      })
+      .end((err, res) => {
+        res.status.should.equal(409);
+        res.body.message.should.equal('Password field must not be empty');
+        done();
+      });
+  });
+
+  it('Should not create user with empty email field', (done) => {
+    api
+      .post('/api/user/register')
+      .set('Connetion', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        username: 'mcdavid',
+        phoneNumber: 9093839393,
+        password: 'mcdavidemereuwa@gmail.com'
+      })
+      .end((err, res) => {
+        res.status.should.equal(409);
+        res.body.message.should.equal('Email field must not be empty');
+        done();
+      });
+  });
+
+  it('Should allow new user to create an account', (done) => {
+    api
+      .post('/api/user/register')
+      .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
       .send(valid)
-      .expect(201)
       .end((err, res) => {
         res.status.should.equal(201);
         res.body.message.should.equal(`Welcome to POSTIT!! ${valid.username}`);
+        done();
+      });
+  });
+
+  it('Should not allow new user to create an account if username is in use', (done) => {
+    api
+      .post('/api/user/register')
+      .set('Connetion', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(invalidUsername)
+      .end((err, res) => {
+        res.status.should.equal(409);
+        res.body.message.should.equal('Username already in use');
+        done();
+      });
+  });
+
+  it('Should not allow new user to create an account if Email is in use', (done) => {
+    api
+      .post('/api/user/register')
+      .set('Connetion', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(invalidEmail)
+      .end((err, res) => {
+        res.status.should.equal(409);
+        res.body.message.should.equal('Email already in use');
+        done();
+      });
+  });
+
+  it('Should not allow new user to create an account if phone number is in use', (done) => {
+    api
+      .post('/api/user/register')
+      .set('Connetion', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(invalidNumber)
+      .end((err, res) => {
+        res.status.should.equal(409);
+        res.body.message.should.equal('Phone Number already in use');
+        done();
+      });
+  });
+
+  it('Should allow new user to create an account', (done) => {
+    api
+      .post('/api/user/register')
+      .set('Connetion', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(anotherValid)
+      .end((err, res) => {
+        res.status.should.equal(201);
+        res.body.message.should.equal(`Welcome to POSTIT!! ${anotherValid.username}`);
+        done();
+      });
+  });
+
+  it('Should allow registered user to log in ', (done) => {
+    api
+      .post('/api/user/login')
+      .set('Connetion', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        username: 'mcdavid',
+        password: 'janike_13'
+      })
+      .end((err, res) => {
+        res.status.should.equal(202);
+        res.body.message.should.equal('Welcome back mcdavid');
         done();
       });
   });

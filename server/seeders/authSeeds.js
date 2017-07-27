@@ -12,9 +12,23 @@ export const anotherValid = {
   phoneNumber: 8167188889
 };
 
-export const invalidUser = {
-  username: 'Steven',
+export const invalidUsername = {
+  username: 'mcdavid',
   password: 'step_hen',
   email: 'steve@gmail.com',
+  phoneNumber: 8033379342
+};
+
+export const invalidNumber = {
+  username: 'stephen',
+  password: 'step_hen',
+  email: 'steve@gmail.com',
+  phoneNumber: 8173753955
+};
+
+export const invalidEmail = {
+  username: 'stephen',
+  password: 'step_hen',
+  email: 'mcdavidemereuwa95@gmail.com',
   phoneNumber: 8033379342
 };

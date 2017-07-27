@@ -10,11 +10,11 @@ module.exports = (sequelize, DataTypes) => {
     userId: {
       allowNull: false,
       type: DataTypes.INTEGER,
-      references: {
-        model: 'User',
-        key: 'id',
-        as: 'senderId'
-      },
+      // references: {
+      //   model: 'User',
+      //   key: 'id',
+      //   as: 'senderId'
+      // },
     },
 
     priority: {
