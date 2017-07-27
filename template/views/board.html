@@ -5,34 +5,31 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../materialize/css/materialize.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Kurale" rel="stylesheet">
         <link href="../public/auth.css" rel="stylesheet">
     </head>
     <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" 
-                        data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="true">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        </button>
-                        <a href="#" class="navbar-brand navbar-left" id="brand">POSTIT</a>
-                    </div>
-                    <div class="collapse navbar-collapse" id="bs-nav-demo">
-                        <ul class="nav navbar-nav">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About</a></li>
-                            <li><a href="./New-post.html">New message</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="./login.html">LogOut <span class="glyphicon glyphicon-user"></span></a></li>
-                        </ul>
-                    </div>
+        <header>
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper container">
+                    <a href="#" class="brand-logo center" id="brand">POSTIT!!</a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li class="active"><a href="sass.html">Home</a></li>
+                    <li><a href="badges.html">Components</a></li>
+                    <li><a href="collapsible.html">JavaScript</a></li>
+                </ul>
+                <ul id="nav-mobile" class="right">
+                    <li><a href="./login.html">Login <span class="glyphicon glyphicon-user"></span></a></li>
+                </ul>
                 </div>
-        </nav>
-        <div class="container" id="content">
+            </nav>
+        </div>
+        <div class="container">
+            <ul id="slide-out" class="side-nav fixed">
+                <li>
                     <button type="button" id="New-group" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createInitiative">Create New Group</button>
             <div id="createInitiative" class="modal fade" role="dialog">
                 <div class="modal-dialog">
@@ -76,26 +73,20 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
-                    </div>
+                </li>
+                <li><a href="#!">First Sidebar Link</a></li>
+                <li><a href="#!">Second Sidebar Link</a></li>
+            </ul>
+            <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
+        </div>
+        </header>
+       
 
                 </div>
             </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-6">
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            <h1>Message Board</h1>
-            <h4>My Groups</h4>
-            <ul class="nav nav-pills nav-stacked">
-                <li role="presentation" class="active"><a href="./mygroup">Family</a></li>
-                <li role="presentation"><a href="#">Work</a></li>
-           </ul>
         </div>
         <script src="../js/jquery-3.2.1.min.js"></script>
+        <script src="../materialize/js/materialize.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
     </body>
 </html>
