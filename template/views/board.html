@@ -4,89 +4,86 @@
         <title></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../materialize/css/materialize.min.css" rel="stylesheet">
+        <link href="../public/materialize.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Kurale" rel="stylesheet">
         <link href="../public/auth.css" rel="stylesheet">
     </head>
     <body>
         <header>
-        <div class="navbar-fixed">
-            <nav>
-                <div class="nav-wrapper container">
-                    <a href="#" class="brand-logo center" id="brand">POSTIT!!</a>
-                <ul id="nav-mobile" class="left hide-on-med-and-down">
-                    <li class="active"><a href="sass.html">Home</a></li>
-                    <li><a href="badges.html">Components</a></li>
-                    <li><a href="collapsible.html">JavaScript</a></li>
+            <div class="navbar-fixed">
+                <nav>
+                    <div class="nav-wrapper container">
+                        <a href="#" class="brand-logo center" id="brand">POSTIT!!</a>
+                        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                        <ul id="nav-mobile" class="left hide-on-med-and-down">
+                            <li class="active"><a href="sass.html">Home</a></li>
+                            <li><a href="#">Components</a></li>
+                            <li><a href="#">JavaScript</a></li>
+                        </ul>
+                        <ul id="nav-mobile" class="right">
+                            <li><a href="./login.html">Login <span class="glyphicon glyphicon-user"></span></a></li>
+                        </ul>
+                        <ul class="side-nav" id="mobile-demo">
+                            <li class="active"><a href="sass.html">Home</a></li>
+                            <li><a href="#">Components</a></li>
+                            <li><a href="#">JavaScript</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="container">
+                <ul id="slide-out" class="side-nav fixed">
+                    <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1">Create New Group</a></li>
+                    <li><a href="#!">First Sidebar Link</a></li>
+                    <li><a href="#!">Second Sidebar Link</a></li>
                 </ul>
-                <ul id="nav-mobile" class="right">
-                    <li><a href="./login.html">Login <span class="glyphicon glyphicon-user"></span></a></li>
-                </ul>
-                </div>
-            </nav>
-        </div>
-        <div class="container">
-            <ul id="slide-out" class="side-nav fixed">
-                <li>
-                    <button type="button" id="New-group" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createInitiative">Create New Group</button>
-            <div id="createInitiative" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">New Group</h4>
-                        </div>
-                        <div class="modal-body">
-                            <h1>Create New Group</h1>
-                                <form action="/groups" method="POST" autocomplete="on">
-                                <div class="form-group">
-                                    <label for="author" class="control-label">Author</label>
-                                    <input type="text" name="group[author]" class="form-control" id="author" placeholder="Enter Author's name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="title" class="control-label">Group Name</label>
-                                    <input type="text" name="group[title]" class="form-control" id="title" placeholder="Enter title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="image" class="control-label" id="image">Image</label>
-                                    <input type="url" name="group[image]" class="form-control" placeholer="http://domain.com/your_image.png">
-                                </div>
-                                <div class="form-group">
-                                    <label for="content" class="control-label">Description</label>
-                                    <textarea type="text" name="group[body]" class="form-control" rows="6" id="content"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="t1">Add Users<abbr title="This field is mandatory">*</abbr></label>
-                                    <input type="text" class="form-control" id="t1" name="fruit" list="l1" required
-                                        pattern="[Bb]anana|[Cc]herry|[Aa]pple|[Ss]trawberry|[Ll]emon|[Oo]range">
-                                    <datalist id="l1">
-                                    </datalist>
-                                </div>
-                                <div class="form-group">
-                                    <label for="submit" class="control-label"></label>
-                                    <button type="submit" class="form-control btn btn-primary" >Submit</button>
-                                </div>
-                                </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                </li>
-                <li><a href="#!">First Sidebar Link</a></li>
-                <li><a href="#!">Second Sidebar Link</a></li>
-            </ul>
-            <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
-        </div>
+                <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
+            </div>
         </header>
        
-
-                </div>
+        <div id="modal1" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <button type="button" class="waves-effect waves-light btn modal-close" data-dismiss="modal">&times;</button>
+                <h1>Create New Group</h1>
+                <form action="/groups" method="POST" autocomplete="on">
+                    <div class="input-field">
+                        <label for="author" class="control-label">Author</label>
+                        <input type="text" name="group[author]" class="form-control" id="author" placeholder="Enter Author's name">
+                    </div>
+                    <div class="input-field">
+                        <label for="title" class="control-label">Group Name</label>
+                        <input type="text" name="group[title]" class="form-control" id="title" placeholder="Enter title">
+                    </div>
+                    <div class="input-field">
+                        <label for="image" class="control-label" id="image">Image</label>
+                        <input type="url" name="group[image]"  placeholder="http://domain.com/your_image.png">
+                    </div>
+                    <div class="input-field">
+                        <textarea id="textarea1" class="materialize-textarea" placeholder="Purpose for creating this group"></textarea>
+                        <label for="textarea1">Description</label>
+                    </div>
+                    <div class="input-field">
+                        <select multiple>
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                        </select>
+                        <label>Add Members</label>
+                    </div>
+                    <div class="input-field">
+                        <label for="submit" class="control-label"></label>
+                        <button type="submit" class="btn waves-effect waves-light" name="action">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
             </div>
         </div>
         <script src="../js/jquery-3.2.1.min.js"></script>
-        <script src="../materialize/js/materialize.min.js"></script>
-        <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <script src="../js/materialize.min.js"></script>
+        <script src="../js/post.js"></script>
     </body>
 </html>
