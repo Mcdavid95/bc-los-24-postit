@@ -1,0 +1,40 @@
+body {
+  background: #fff; }
+  body #brand {
+    font-family: "Kurale", serif;
+    color: palevioletred; }
+  body footer {
+    background: #2c3e56; }
+  body h1 {
+    margin: 3%  auto; }
+  body hr {
+    width: 30%; }
+  body form {
+    margin: auto 30%;
+    margin-bottom: 30%; }
+
+#acct {
+  color: #2c3e56; }
+
+.brand {
+  font-family: "Kurale", serif;
+  color: palevioletred; }
+
+nav {
+  background: #2c3e56; }
+
+#signup {
+  margin-left: 80%; }
+
+h1 {
+  margin: auto; }
+
+.side-nav {
+  padding-top: 10px;
+  margin-top: 5.5%; }
+
+@media only screen and (max-width: 992px) {
+  header, main, footer {
+    padding-left: 0; } }
+
+/*# sourceMappingURL=auth.css.map */
