@@ -18,3 +18,4 @@ exclude_paths:
 - server/tests/
 - template/bootstrap/
 - template/bootstrap4/
+- client/js/index.bundle.js
