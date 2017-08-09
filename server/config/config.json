@@ -11,10 +11,6 @@
     "dialect": "postgres"
   },
   "development": {
-    "username": "postgres",
-    "password": "janike_13",
-    "database": "postit-dev",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "use_env_variable": "MyDB_URL"
   }
 }
