@@ -6,7 +6,7 @@
   "scripts": {
     "db:migrate": "sequelize db:migrate",
     "start": "npm run db:migrate && nodemon --exec babel-node server.js",
-    "test": "NODE_ENV=production npm run db:migrate && mocha --timeout 15000 --compilers js:babel-core/register ./server/tests",
+    "test": "npm run db:migrate && mocha --timeout 15000 --compilers js:babel-core/register ./server/tests",
     "dev": "webpack-dev-server --content-base client --inline --hot"
   },
   "repository": {
