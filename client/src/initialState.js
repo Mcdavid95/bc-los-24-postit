@@ -10,7 +10,7 @@ const initialState = {
     username: '',
     isLoggedIn: false
   },
-  auth: {
+  setAuthToken: {
     isAuthenticated: false,
     user: {}
   }
