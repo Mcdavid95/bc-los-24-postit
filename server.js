@@ -3,6 +3,11 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
 import logger from 'morgan';
+import open from 'open';
+import webpack from 'webpack';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import config from './webpack.config';
 
 
 // ROUTES
@@ -11,8 +16,8 @@ import authRoutes from './server/routes/authRoute';
 import groupRoutes from './server/routes/groupRoute';
 
 dotenv.config();
-
-
+const compiler = webpack(config);
+const port = process.env.PORT;
 const app = express();
 app.use(logger('dev'));
 
@@ -21,7 +26,11 @@ app.use(bodyParser.json());
 
 app.use(require('connect-multiparty')());
 
-app.use(express.static(path.join(__dirname, '/public')));
+app.use(webpackDevMiddleware(compiler, {
+  publicPath: config.output.publicPath
+}));
+
+app.use(webpackHotMiddleware(compiler));
 
 
 // Express CONFIGURATION
@@ -33,10 +42,8 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 
 // ROUTES CONFIG
-app.get('/', (req, res) => {
-  res.status(200).send({
-    message: 'Welcome to postit'
-  });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './client/index.html'));
 });
 app.use(authRoutes);
 app.use(groupRoutes);
@@ -52,8 +59,10 @@ app.use((req, res, next) => {
 });
 
 // Listening PORT
-app.listen(process.env.PORT || 3000, () => {
-  console.log('serving on port 3000');
+app.listen(port, (err) => {
+  if (!err) open(`http://localhost:${port}`); else {
+    console.log(err);
+  }
 });
 
 export default app;
