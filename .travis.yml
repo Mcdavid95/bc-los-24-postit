@@ -3,3 +3,13 @@ language: node_js
 node_js:
   - "node"
   - "6.10.0"
+services:
+  - postgresql
+ 
+before_script:
+  - npm install -g sequelize-cli
+  - sudo -u postgres createuser postgres
+  - createdb postit-dev
+
+script:
+  - npm run test
