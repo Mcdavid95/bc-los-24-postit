@@ -1,7 +1,7 @@
 import supertest from 'supertest';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../../server';
+import server from '../../serverTest';
 import models from '../models';
 import { valid, anotherValid, invalidUsername, invalidEmail, invalidNumber } from '../seeders/authSeeds';
 
@@ -21,12 +21,12 @@ before((done) => {
 });
 
 describe('Authentication Route', () => {
-  it('Returns a Welcome message for an empty route', (done) => {
+  it('Returns a status 200', (done) => {
     api
       .get('/')
       .expect(200)
       .end((err, res) => {
-        res.body.message.should.equal('Welcome to postit');
+        res.status.should.equal(200);
         done();
       });
   });
