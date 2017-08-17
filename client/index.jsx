@@ -12,6 +12,7 @@ import configureStore from './src/store';
 import history from './src/utils/History';
 import setAuthToken from './src/utils/setAuthToken';
 import setCurrentUser from './src/actions/currentUserActions';
+import requireAuth from './src/utils/Authenticate';
 
 import './public/materialize.min.css';
 import './public/auth.css';
@@ -35,7 +36,7 @@ ReactDom.render(
         <Route exact path="/layout" component={Layout} />
         <Route exact path="/api/user/register" name="signup" component={Signup} />
         <Route exact path="/api/user/login" name="login" component={Login} />
-        <Route exact path="/dashboard" name="board" component={Board} />
+        <Route exact path="/dashboard" name="board" component={requireAuth(Board)} />
       </Switch>
     </Router>
   </Provider>

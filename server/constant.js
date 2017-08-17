@@ -10,7 +10,6 @@ export const ADD_USER_TO_GROUP_ERROR = 'ADD_USER_TO_GROUP';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const CREATE_MESSAGE = 'CREATE_MESSAGE';
 export const GET_MESSAGES = 'GET_MESSAGES';
-export const NEW_MESSAGE = 'NEW_MESSAGE';
 export const GET_GROUPS = 'GET_GROUPS';
 export const GET_GROUPS_ERROR = 'GET_GROUPS_ERROR';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';

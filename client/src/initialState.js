@@ -13,6 +13,7 @@ const initialState = {
   setAuthToken: {
     isAuthenticated: false,
     user: {}
-  }
+  },
+  addflashMessages: []
 };
 export default initialState;
