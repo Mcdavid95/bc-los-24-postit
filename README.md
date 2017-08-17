@@ -1,7 +1,7 @@
 
 # bc-los-24-postit
 # POSTIT
-[![Build Status](https://travis-ci.org/Mcdavid95/bc-los-24-postit.svg?branch=server)](https://travis-ci.org/Mcdavid95/bc-los-24-postit)
+[![Build Status](https://travis-ci.org/Mcdavid95/bc-los-24-postit.svg?branch=server)](https://travis-ci.org/Mcdavid95/bc-los-24-postit) [![Coverage Status](https://coveralls.io/repos/github/Mcdavid95/bc-los-24-postit/badge.svg)](https://coveralls.io/github/Mcdavid95/bc-los-24-postit)
 
 [![Code Climate](https://codeclimate.com/github/Mcdavid95/bc-los-24-postit/badges/gpa.svg)](https://codeclimate.com/github/Mcdavid95/bc-los-24-postit)
 
