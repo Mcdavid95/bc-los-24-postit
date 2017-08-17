@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import initialState from '../initialState';
+
 
 /**
  * @class Signup
@@ -11,15 +13,7 @@ export default class SignupForm extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = {
-      username: '',
-      fullname: '',
-      password: '',
-      confirmPassword: '',
-      email: '',
-      phoneNumber: +234
-
-    };
+    this.state = initialState.signup;
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -47,7 +41,7 @@ export default class SignupForm extends Component {
    */
   render() {
     return (
-      <div>
+      <div className="form-margin">
         <main>
           <div className="container" id="content">
             <div className="row">
@@ -57,21 +51,9 @@ export default class SignupForm extends Component {
             </div>
 
             <form onSubmit={this.onSubmit}>
-              <div className="form-group">
-                <label className="control-label">Full Name:</label>
-                <input
-                  name="fullname"
-                  type="text"
-                  className="form-control"
-                  placeholder="John"
-                  required
-                  value={this.state.fullname}
-                  onChange={this.onChange}
-                />
-              </div>
 
-              <div className="form-group">
-                <label className="control-label">User Name:</label>
+              <div className="form-group col s12 m6 l9">
+                <label htmlFor="username" className="control-label">User Name:</label>
                 <input
                   className="form-control"
                   name="username"
@@ -83,8 +65,8 @@ export default class SignupForm extends Component {
                 />
               </div>
               <hr />
-              <div className="form-group">
-                <label className="control-label">Email:</label>
+              <div className="form-group col s12 m6 l9">
+                <label htmlFor="email" className="control-label">Email:</label>
                 <input
                   className="form-control"
                   type="email"
@@ -96,7 +78,7 @@ export default class SignupForm extends Component {
                 />
               </div>
               <hr />
-              <div className="form-group">
+              <div className="form-group col s12 m6 l9">
                 <label htmlFor="phone" className="control-label">Phone:</label>
                 <input
                   className="form-control"
@@ -106,11 +88,11 @@ export default class SignupForm extends Component {
                   min="10"
                   required
                   title="Phone Number must be 10 or more digits"
-                  value={this.state.phone}
+                  value={this.state.phoneNumber}
                   onChange={this.onChange}
                 />
                 <hr />
-                <label className="control-label">Password:</label>
+                <label htmlFor="password" className="control-label">Password:</label>
                 <input
                   className="form-control"
                   name="password"
@@ -120,18 +102,6 @@ export default class SignupForm extends Component {
                   required
                   title="Password must be between 5 and 10 characters"
                   value={this.state.password}
-                  onChange={this.onChange}
-                />
-                <hr />
-                <input
-                  className="form-control"
-                  name="confirmPassword"
-                  type="password"
-                  placeholder="Confirm Password"
-                  pattern=".{5,10}"
-                  required
-                  title="Password must be between 5 and 10 characters"
-                  value={this.state.confirmPassword}
                   onChange={this.onChange}
                 />
               </div>
@@ -150,3 +120,4 @@ export default class SignupForm extends Component {
 SignupForm.propTypes = {
   userSignupRequest: PropTypes.func.isRequired
 };
+

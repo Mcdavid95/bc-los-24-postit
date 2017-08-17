@@ -6,7 +6,6 @@ export default {
     if (token) {
       jwt.verify(token, 'process.env.SECRET', (err, decoded) => {
         if (err) {
-          console.error('JWT Verification Error', err);
           return res.status(403).send(err);
         }
         req.decoded = decoded;

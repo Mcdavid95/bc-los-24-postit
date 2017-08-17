@@ -22,7 +22,7 @@ const saltRounds = 10;
 export default {
   register(req, res) {
     if (typeof (req.body.username) === 'undefined') {
-      res.status(409).send({
+      res.status(409).json({
         message: 'Username field must not be empty'
       });
     } else if (typeof (req.body.password) === 'undefined') {
@@ -32,6 +32,10 @@ export default {
     } else if (typeof (req.body.email) === 'undefined') {
       res.status(409).send({
         message: 'Email field must not be empty'
+      });
+    } else if (typeof (req.body.phoneNumber) === 'undefined') {
+      res.status(409).send({
+        message: 'Phone Number field must not be empty'
       });
     } else {
       User
@@ -81,7 +85,7 @@ export default {
                             })
                             .catch(() => {
                               res.status(404).send({
-                                error: 'phone number already in use'
+                                message: 'phone number already in use'
                               });
                             });
                         });
@@ -129,7 +133,8 @@ export default {
           }
           if (user) {
             const myToken = jwt.sign({
-              id: user.id
+              id: user.id,
+              name: user.username,
             },
             'process.env.SECRET',
             { expiresIn: 24 * 60 * 60 });
@@ -144,7 +149,7 @@ export default {
         })
         .catch(() => {
           res.status(400).send({
-            error: 'Validation error'
+            message: 'Validation error'
           });
         });
     }
