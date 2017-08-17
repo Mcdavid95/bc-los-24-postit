@@ -7,7 +7,7 @@
     "db:migrate": "sequelize db:migrate",
     "start": "npm run db:migrate && nodemon --exec babel-node server.js",
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
-    "test": "NODE_ENV=test npm run db:migrate && nyc --reporter=text --reporter=html --reporter=lcov mocha --compilers js:babel-core/register ./server/tests/ --timeout 15000 && coverage-report",
+    "test": "NODE_ENV=test npm run db:migrate && nyc --reporter=text --reporter=html --reporter=lcov mocha --compilers js:babel-core/register ./server/tests/ --timeout 15000 && npm run coverage-report",
     "dev": "webpack-dev-server --content-base client --inline --hot"
   },
   "repository": {
