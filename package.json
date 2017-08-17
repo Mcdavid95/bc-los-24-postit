@@ -6,7 +6,7 @@
   "scripts": {
     "db:migrate": "sequelize db:migrate",
     "start": "npm run db:migrate && nodemon --exec babel-node server.js",
-    "test": "npm run db:migrate && mocha --timeout 15000 --compilers js:babel-core/register ./server/tests",
+    "test": "npm run db:migrate && nyc --reporter=text --reporter=html --reporter=lcov mocha --compilers js:babel-core/register ./server/tests/ --timeout 15000 && coverage-report",
     "dev": "webpack-dev-server --content-base client --inline --hot"
   },
   "repository": {
@@ -40,6 +40,7 @@
     "classnames": "^2.2.5",
     "connect-multiparty": "^2.0.0",
     "cookie-parser": "^1.4.3",
+    "coveralls": "^2.13.1",
     "css-loader": "^0.28.4",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
@@ -61,9 +62,11 @@
     "jsonwebtoken": "^7.4.1",
     "logger": "0.0.1",
     "mocha": "^3.4.2",
+    "mocha-lcov-reporter": "^1.3.0",
     "morgan": "^1.8.2",
     "node-sass": "^4.5.3",
     "nodemon": "^1.11.0",
+    "nyc": "^11.1.0",
     "open": "0.0.5",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
