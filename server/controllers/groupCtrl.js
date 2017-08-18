@@ -7,8 +7,8 @@ const GroupMembers = model.GroupMember;
 export default {
 
   createGroup(req, res) {
-    const id = req.decoded.id;
-    if (!req.body.name) {
+    // const userId = req.decoded.id;
+    if (!req.body.GroupName) {
       res.status(400).json({ message: 'Please add Group name' });
       return;
     }
@@ -18,7 +18,7 @@ export default {
       Group
         .findOne({
           where: {
-            name: req.body.name.toLowerCase()
+            GroupName: req.body.GroupName.toLowerCase()
           },
         })
         .then((groupExist) => {
@@ -29,13 +29,25 @@ export default {
           } else {
             Group
               .create({
-                name: req.body.name.toLowerCase(),
+                GroupName: req.body.GroupName.toLowerCase(),
                 description: req.body.description.toLowerCase(),
-                userId: id
+                userId: req.decoded.id
               })
               .then((group) => {
-                group.addGroupMember(id);
-                res.status(201).send(`Group ${group.name} successfully created`);
+                if (group) {
+                  const groupMember = {
+                    groupId: group.id,
+                    userId: req.decoded.id,
+                    isCreator: true,
+                    username: req.decoded.name
+                  };
+                  GroupMembers.create(groupMember);
+                } else {
+                  res.status(409).send({
+                    message: 'could not add to group'
+                  });
+                }
+                res.status(201).send(`Group ${group.GroupName} successfully created`);
               })
               .catch((error) => {
                 res.status(400).send(error);
@@ -49,7 +61,7 @@ export default {
     return Group
       .findAll({
         attributes:
-        ['id', 'name', 'userId']
+        ['id', 'GroupName']
       })
       .then(groups => res.status(200).send(groups))
 
@@ -76,27 +88,22 @@ export default {
                   GroupMembers.findOne({
                     where: {
                       username: req.body.username,
-                      userId: req.body.userId
+                      $and: {
+                        groupId: req.params.groupId
+                      }
                     }
                   })
                     .then((inGroup) => {
                       if (!inGroup) {
                         GroupMembers.create({
-                          where: {
-                            userId: req.body.userId,
-                            groupId: req.params.groupId,
-                            username: req.body.username,
+                          groupId: req.params.groupId,
+                          username: req.body.username
 
-                          }
                         })
-                          .spread((member, added) => {
-                            if (added) {
-                              res.status(201).send({
-                                message: `New member ${req.body.username} has been successfully added to this group`
-                              });
-                            } else {
-                              res.status(409).send({
-                                error: 'An error occured, unable to add user'
+                          .then((success) => {
+                            if (success) {
+                              res.status(200).send({
+                                message: success
                               });
                             }
                           });
@@ -105,6 +112,9 @@ export default {
                           Error: 'User already in group'
                         });
                       }
+                    })
+                    .catch((err) => {
+                      res.send(err);
                     });
                 } else {
                   res.status(404).send({

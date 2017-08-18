@@ -8,17 +8,14 @@ module.exports = {
         type: Sequelize.INTEGER
       },
 
-      title: {
-        type: Sequelize.STRING
-      },
-
-      content: {
-        type: Sequelize.STRING
+      message: {
+        allowNull: false,
+        type: Sequelize.TEXT
       },
 
       priority: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 'normal',
         isIn: [['normal', 'urgent', 'critical']]
       },
@@ -37,6 +34,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         onDelete: null,
+        references: {
+          model: 'Groups',
+          foreignKey: 'id'
+        }
       },
 
       userId: {
@@ -45,7 +46,7 @@ module.exports = {
         onDelete: null,
         references: {
           model: 'Users',
-          key: 'id',
+          foreignKey: 'id',
           as: 'senderId'
         }
       },

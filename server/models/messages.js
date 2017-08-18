@@ -1,34 +1,17 @@
 module.exports = (sequelize, DataTypes) => {
   const Message = sequelize.define('Message', {
-    tittle: {
-      type: DataTypes.STRING
-    },
-    content: {
+    message: {
       allowNull: false,
-      type: DataTypes.STRING
-    },
-    userId: {
-      allowNull: false,
-      type: DataTypes.INTEGER,
-      // references: {
-      //   model: 'User',
-      //   key: 'id',
-      //   as: 'senderId'
-      // },
+      type: DataTypes.TEXT
     },
 
     priority: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       defaultValue: 'normal',
       isIn: [['normal', 'urgent', 'critical']]
     },
 
-    groupId: {
-      allowNull: false,
-      type: DataTypes.INTEGER,
-      onDelete: null,
-    },
   }, {
     classMethods: {
       associate(models) {

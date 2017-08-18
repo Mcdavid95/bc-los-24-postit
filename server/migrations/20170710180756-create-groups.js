@@ -7,7 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      GroupName: {
         allowNull: false,
         type: Sequelize.STRING
       },
@@ -15,9 +15,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      // picture: {
-      //   type: Sequelize.URL
-      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

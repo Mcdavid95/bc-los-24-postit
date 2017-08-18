@@ -34,11 +34,10 @@ module.exports = (sequelize, DataTypes) => {
     classMethods: {
       associate(models) {
         // associations can be defined here
-        User.hasMany(models.Group, {
+        User.hasMany(models.Message, {
           foreignKey: 'userId',
-          onDelete: 'CASCADE'
+          onDelete: null
         });
-        User.hasMany(models.Message);
         User.belongsToMany(models.Group, {
           through: 'Groupmember',
           foreignKey: 'userId',

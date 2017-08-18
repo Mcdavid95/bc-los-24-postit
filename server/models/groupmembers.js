@@ -1,31 +1,29 @@
 module.exports = (sequelize, DataTypes) => {
   const GroupMember = sequelize.define('GroupMember', {
-    username: {
-      type: DataTypes.STRING
+    isCreator: {
+      type: DataTypes.BOOLEAN,
     },
-    email: {
+    userId: {
       type: DataTypes.STRING
     },
     groupId: {
-      allowNull: false,
       type: DataTypes.INTEGER,
       onDelete: null
     },
 
-    userId: {
-      allowNull: false,
-      type: DataTypes.INTEGER,
-      // references: {
-      //   model: 'User',
-      //   key: 'id',
-      //   as: 'creatorId'
-      // },
-    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+
   }, {
     classMethods: {
       associate: (models) => {
-        models.User.belongsToMany(models.Group, {
-          through: 'GroupMember'
+        GroupMember.belongsTo(models.User, {
+          foreignKey: 'userId'
+        });
+        GroupMember.belongsTo(models.Group, {
+          foreignKey: 'groupId'
         });
       }
     }

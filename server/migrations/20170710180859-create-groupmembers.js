@@ -7,22 +7,18 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
+      userId: {
         type: Sequelize.STRING
       },
-      email: {
-        type: Sequelize.STRING
+      isCreator: {
+        type: Sequelize.BOOLEAN
       },
 
-      userId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id',
-          as: 'memberId'
-        },
+      username: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

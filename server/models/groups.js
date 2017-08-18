@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Group = sequelize.define('Group', {
-    name: {
+    GroupName: {
       allowNull: false,
       type: DataTypes.STRING,
       unique: true,
@@ -13,13 +13,12 @@ module.exports = (sequelize, DataTypes) => {
     userId: {
       allowNull: false,
       type: DataTypes.INTEGER,
-      // references: {
-      //   model: 'User',
-      //   key: 'id',
-      //   as: 'creatorId'
-      // },
-    },
-
+      references: {
+        model: 'Users',
+        key: 'id',
+        as: 'creatorId'
+      },
+    }
   }, {
     classMethods: {
       associate(models) {
@@ -28,7 +27,8 @@ module.exports = (sequelize, DataTypes) => {
           foreignKey: 'groupId'
         });
         Group.belongsToMany(models.User, {
-          through: 'Groupmember',
+          through: 'GroupMember',
+          foreignKey: 'groupId',
           onDelete: 'CASCADE'
         });
       }
