@@ -42,13 +42,13 @@ app.use(webpackHotMiddleware(compiler));
 
 
 // ROUTES CONFIG
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './client/index.html'));
-});
+
 app.use(authRoutes);
 app.use(groupRoutes);
 
-
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, './client', 'index.html'));
+});
 // If no route is matched return a 404
 app.use((req, res, next) => {
   res.status(501).send({

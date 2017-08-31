@@ -3,20 +3,31 @@ import React, { Component } from 'react';
 export default class Message extends Component {
   render() {
     return (
-      <div>
-        <div className="row">
-          <form className="col s12 center">
-            <div className="row">
-              <div className="input-field col s6">
-                <i className="material-icons prefix">mode_edit</i>
-                <textarea id="icon_prefix2" className="materialize-textarea" />
-                <label htmlFor="icon_prefix2">First Name</label>
-              </div>
-              <button type="submit" className="btn-floating btn-large waves-effect waves-light teal lighten-2"><i className="material-icons"></i> href="#">Submit</button>
-            </div>
-          </form>
+      // <div className="click-to-toggle">
+      //   <a className="btn-floating btn-large red">
+      //     <i className="large material-icons">mode_edit</i>
+      //   </a>
+    // <div>
+      <form id="message">
+        <div className="input-field">
+          <label htmlFor="message" className="control-label">Message: </label>
+          <input
+            type="text"
+            name="message"
+            // value="message"
+            required
+          />
         </div>
-      </div>
+        <div>
+          <select name="priority">
+            <option value="normal" selected>normal</option>
+            <option value="urgent">urgent</option>
+            <option value="critical">critical</option>
+          </select>
+        </div>
+      </form>
+    // </div>
+      // </div>
     );
   }
 }

@@ -1,7 +1,15 @@
-$primaryColor: #fff;
+$primaryColor: #EBEBEB;
 $brandFont: 'Kurale', serif;
 body {
   background: $primaryColor;
+
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+
+  main {
+    flex: 1 0 auto;
+  }
 
   #brand {
     font-family: $brandFont;
@@ -9,24 +17,35 @@ body {
     
   }
 
-  footer {
+  .page-footer {
     background: #2c3e56;
+    bottom: 0;
+    margin-top: 100%;
+    margin-left: 20%
   }
 
   h1 {
     margin: 3%  auto;
   }
 
-  
+  .list-group {
+    margin-left: 1%;
+    background: #576883;
+  }
+
+  .list-group:hover {
+    background: #ebebeb
+  }
 
    hr {
     width: 30%;
   }
 
-  form {
-    margin: auto 30%;
-    margin-bottom: 30%
-  }
+}
+
+form {
+  margin: auto 30%;
+  margin-bottom: 30%
 }
 
 #acct {
@@ -42,6 +61,10 @@ body {
   margin-top: 30%
 }
 
+#slide-out {
+  margin-bottom: 10
+}
+
 nav {
     background: #2c3e56
 }
@@ -50,15 +73,27 @@ nav {
   margin-left: 80%
 }
 
+#login {
+  margin-left: 80%
+}
 
 h1 {
   margin: auto;
 }
 
+#side-nav {
+  text-decoration: none;
+}
+
 .side-nav {
   padding-top: 10px;
-  margin-top: 5.5%
+  margin-top: 5%;
 }
+
+form#message {
+  bottom: 0;
+}
+
 
 
     @media only screen and (max-width : 992px) {
