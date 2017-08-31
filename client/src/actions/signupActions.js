@@ -14,7 +14,7 @@ const userSignupRequest = userData => dispatch => axios.post('/api/user/register
   .then((response) => {
     dispatch(signupUserSuccess(response));
     Materialize.toast(response.data.message, 3000, 'rounded green');
-    history.push('/api/user/login');
+    history.push('/login');
   }).catch((err) => {
     dispatch(signupUserFail(err));
     Materialize.toast(err.response.data.message, 3000, 'rounded red');
