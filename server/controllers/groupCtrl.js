@@ -39,7 +39,8 @@ export default {
                     groupId: group.id,
                     userId: req.decoded.id,
                     isCreator: true,
-                    username: req.decoded.name
+                    username: req.decoded.name,
+                    groupName: group.GroupName
                   };
                   GroupMembers.create(groupMember);
                 } else {
@@ -72,33 +73,33 @@ export default {
     if (!(req.body.username || req.body.email)) {
       res.status(401).send({ message: 'Please add Username or email' });
     } else {
-      Group
-        .findOne({
-          where: {
-            id: req.params.groupId
-          }
-        })
-        .then((groupExist) => {
-          if (groupExist) {
-            User.findOne({
-              where: { username: req.body.username }
+      User.findOne({
+        where: { username: req.body.username.toLowerCase() }
+      })
+        .then((user) => {
+          if (user) {
+            GroupMembers.findOne({
+              where: {
+                username: req.body.username.toLowerCase(),
+                $and: {
+                  groupId: req.params.groupId
+                }
+              }
             })
-              .then((user) => {
-                if (user) {
-                  GroupMembers.findOne({
-                    where: {
-                      username: req.body.username,
-                      $and: {
-                        groupId: req.params.groupId
+              .then((inGroup) => {
+                if (!inGroup) {
+                  Group
+                    .findOne({
+                      where: {
+                        id: req.params.groupId
                       }
-                    }
-                  })
-                    .then((inGroup) => {
-                      if (!inGroup) {
+                    })
+                    .then((groupExist) => {
+                      if (groupExist) {
                         GroupMembers.create({
                           groupId: req.params.groupId,
-                          username: req.body.username
-
+                          username: req.body.username.toLowerCase(),
+                          groupName: groupExist.GroupName
                         })
                           .then((success) => {
                             if (success) {
@@ -109,7 +110,7 @@ export default {
                           });
                       } else {
                         res.status(401).send({
-                          Error: 'User already in group'
+                          Error: 'Group does not exist'
                         });
                       }
                     })
@@ -118,13 +119,13 @@ export default {
                     });
                 } else {
                   res.status(404).send({
-                    Error: 'User does not exist'
+                    Error: 'User already in Group'
                   });
                 }
               });
           } else {
             res.status(404).send({
-              Error: 'Group does not exist'
+              Error: 'User does not exist'
             });
           }
         })
@@ -132,6 +133,17 @@ export default {
           res.status(400).send(error);
         });
     }
+  },
+
+  listUserGroups(req, res) {
+    GroupMembers
+      .findAll({
+        where: { username: req.decoded.name },
+        attributes: ['groupName', 'groupId']
+      })
+      .then((group) => {
+        res.send(group);
+      });
   },
 
   ListGroupMembers(req, res) {

@@ -4,11 +4,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
     },
     userId: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     groupId: {
       type: DataTypes.INTEGER,
-      onDelete: null
+      onDelete: null,
+    },
+
+    groupName: {
+      type: DataTypes.STRING,
+      onDelete: null,
     },
 
     username: {
@@ -18,11 +23,11 @@ module.exports = (sequelize, DataTypes) => {
 
   }, {
     classMethods: {
-      associate: (models) => {
-        GroupMember.belongsTo(models.User, {
+      associate: (model) => {
+        GroupMember.belongsTo(model.User, {
           foreignKey: 'userId'
         });
-        GroupMember.belongsTo(models.Group, {
+        GroupMember.belongsTo(model.Group, {
           foreignKey: 'groupId'
         });
       }

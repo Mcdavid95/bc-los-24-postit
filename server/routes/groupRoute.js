@@ -27,4 +27,7 @@ router.post('/api/group/:groupId/message', Verify.hasToken, MessageCtrl.postMess
 // fetch all messages in group
 router.get('/api/group/:groupId/messages', Verify.hasToken, MessageCtrl.listMessages);
 
+// fetch all groups of a single user
+router.get('/api/user/groups', Verify.hasToken, GroupCtrl.listUserGroups);
+
 export default router;

@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id',
         as: 'creatorId'
       },
+
     }
   }, {
     classMethods: {
@@ -30,6 +31,9 @@ module.exports = (sequelize, DataTypes) => {
           through: 'GroupMember',
           foreignKey: 'groupId',
           onDelete: 'CASCADE'
+        });
+        Group.hasMany(models.GroupMember, {
+          foreignKey: 'groupId'
         });
       }
     }

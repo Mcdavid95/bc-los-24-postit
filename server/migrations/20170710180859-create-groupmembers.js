@@ -8,10 +8,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
+        onDelete: null,
       },
       isCreator: {
         type: Sequelize.BOOLEAN
+      },
+
+      groupName: {
+        type: Sequelize.STRING,
+        onDelete: null
       },
 
       username: {
@@ -29,9 +35,8 @@ module.exports = {
       },
 
       groupId: {
-        allowNull: false,
         type: Sequelize.INTEGER,
-        onDelete: null
+        onDelete: null,
       },
 
     });
