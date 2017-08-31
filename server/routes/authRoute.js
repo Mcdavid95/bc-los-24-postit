@@ -1,6 +1,7 @@
 import express from 'express';
 import Verify from '../controllers/jwtVerify';
 
+
 import AuthCtrl from '../controllers/authentication';
 
 const router = express.Router();

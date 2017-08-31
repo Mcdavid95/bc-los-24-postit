@@ -148,9 +148,9 @@ export default {
           });
         })
         .catch(() => {
-          res.status(400).send({
-            message: 'Validation error'
-          });
+          // res.status(400).send({
+          //  message: 'Validation error'
+          // });
         });
     }
   },

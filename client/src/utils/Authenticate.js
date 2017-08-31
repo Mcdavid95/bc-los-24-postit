@@ -12,9 +12,17 @@ const AuthenticateFunc = (ComposedComponent) => {
           type: 'error',
           text: 'You need to be loggedIn first'
         });
-        history.push('/api/user/login');
+        history.push('/login');
       }
     }
+
+    componentWillUpdate (nextProps) {
+      if(!nextProps.isAuthenticated){
+        isAuthenticated = false;
+        history.push('/login');
+      }
+    }
+
     render() {
       return (
         <ComposedComponent {...this.props} />

@@ -7,6 +7,12 @@ const signupReducer = (state = initialState.signup, action) => {
       return [...state,
         Object.assign({}, action.userData)
       ];
+
+    case types.SIGNUP_USER_ERROR:
+      return [
+        ...state,
+        Object.assign({}, action.userData)
+      ];
     default:
       return state;
   }

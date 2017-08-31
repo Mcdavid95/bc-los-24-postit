@@ -13,7 +13,7 @@ const logout = () => (dispatch) => {
   setAuthToken(false);
   dispatch(setCurrentUser({}));
   dispatch(logoutSuccess());
-  history.push('/api/user/login');
+  history.push('/login');
 };
 
 export default logout;
