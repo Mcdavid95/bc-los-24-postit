@@ -6,6 +6,7 @@ import Header from '../../components/Header/Header';
 import LoginForm from '../../containers/LoginForm';
 import userLoginRequest from '../../actions/loginActions';
 import FlashMessage from '../../containers/FlashMessageList';
+import Footer from '../../containers/Footer';
 
 /**
  * @class
@@ -20,14 +21,17 @@ class Login extends Component {
       <div>
         <Header />
         <FlashMessage />
+        <main>
         <div className="row">
           <div className=" col-lg-9 col-sm-12 col-md-6">
             <h1>Welcome to <span className="brand" id="top">POSTIT!!</span></h1>
             <h5>Connect to friends and loved ones all it takes is a click!!! Login to get started</h5>
-            <p id="signup">Don't have an account? Click <Link to="/api/user/register">here to Register</Link></p>
+            <p id="signup">Don't have an account? Click <Link to="/register">here to Register</Link></p>
           </div>
           <LoginForm userLoginRequest={userLoginRequest} />
         </div>
+        </main>
+        <Footer />
       </div>
     );
   }

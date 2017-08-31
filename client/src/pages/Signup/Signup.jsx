@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../../components/Header/Header';
 import SignupForm from '../../containers/SignUpForm';
 import userSignupRequest from '../../actions/signupActions';
+import Footer from '../../containers/Footer';
 
 
 class Signup extends Component {
@@ -13,6 +14,7 @@ class Signup extends Component {
       <div>
         <Header />
         <SignupForm userSignupRequest={userSignupRequest} />
+        <Footer />
       </div>
     );
   }

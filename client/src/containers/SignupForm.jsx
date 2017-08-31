@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import initialState from '../initialState';
 
 
@@ -47,6 +48,9 @@ export default class SignupForm extends Component {
             <div className="row">
               <div className="col s12 m6 l9">
                 <h1><span id="acct">Create an Account</span></h1>
+                <p id="login">
+                Already have an account? Click <Link to="/login">here to Login</Link>
+                </p>
               </div>
             </div>
 

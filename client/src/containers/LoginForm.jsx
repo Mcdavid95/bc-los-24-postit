@@ -41,7 +41,7 @@ export default class LoginForm extends Component {
     return (
       <div>
         <form onSubmit={this.onSubmit}>
-          <div className="form-group">
+          <div className="input-field">
             <label htmlFor="email" className="control-label">Username: </label>
             <input
               type="text"
@@ -53,8 +53,9 @@ export default class LoginForm extends Component {
               onChange={this.onChange}
             />
           </div>
+          <hr />
           <br />
-          <div className="form-group">
+          <div className="input-field">
             <label htmlFor="password">Password: </label>
             <input
               type="password"
@@ -67,6 +68,7 @@ export default class LoginForm extends Component {
             />
           </div>
           <button type="submit" className="form-control btn btn-login btn-primary">Login</button>
+          <hr />
           <br />
           <p><Link to="#"> Forgot password?</Link></p>
         </form>

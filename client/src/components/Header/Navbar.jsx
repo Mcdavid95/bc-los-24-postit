@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import logout from '../../actions/logoutActions';
+import initialState from '../../initialState';
+//
 /**
  * @class
  */
@@ -14,7 +16,17 @@ class Navbar extends Component {
   constructor(props) {
     super(props);
     this.logout = this.logout.bind(this);
+    this.isAuthenticated = this.props.setAuthToken;
   }
+
+  // componentWillReceiveProps(nextProps) {
+  //   this.setState({
+  //     setAuthToken: !nextProps.setAuthToken.isAuthenticated
+  //   })
+  // }
+  
+
+
   /**
    * @return {Props} listens for event and returns props
    * @param {*} e 
@@ -24,7 +36,7 @@ class Navbar extends Component {
     this.props.logout();
   }
   /**
-   * @return {DOM} Rrnders Dom Elements
+   * @return {DOM} Renders Dom Elements
    */
   render() {
     const { isAuthenticated } = this.props.setAuthToken;
@@ -33,7 +45,7 @@ class Navbar extends Component {
       <ul className="right hide-on-med-and-down">
         <li><NavLink to="board" activeClassName="active">Home</NavLink></li>
         <li><NavLink to="#" activeClassName="active">New message</NavLink></li>
-        <li><NavLink to="/api/user/login" onClick={this.logout}>LOGOUT</NavLink></li>
+        <li><NavLink to="/login" onClick={this.logout}>LOGOUT</NavLink></li>
         <li><NavLink to="#" activeClassName="active">About</NavLink></li>
       </ul>
     );
@@ -48,7 +60,7 @@ class Navbar extends Component {
       <ul className="side-nav" id="mobile-demo">
         <li><NavLink to="/dashboard" activeClassName="active">Home</NavLink></li>
         <li><NavLink to="#">New message</NavLink></li>
-        <li><NavLink to="/api/user/login" onClick={this.logout}>LOGOUT</NavLink></li>
+        <li><NavLink to="/login" onClick={this.logout}>LOGOUT</NavLink></li>
         <li><NavLink to="#" activeClassName="active">About</NavLink></li>
       </ul>
     );
@@ -63,12 +75,14 @@ class Navbar extends Component {
       <div className="row">
         <nav>
           <div className="nav-wrapper container">
-            <NavLink to="/api/group/:groupId/message" className="brand-logo"id="brand">POSTIT!!</NavLink>
+            <NavLink to="/api/group/:groupId/message" className="brand-logo"id="brand">
+            POSTIT!!
+            </NavLink>
             <NavLink to="#" data-activates="mobile-demo" className="button-collapse">
-              <i className="material-icons">Menu</i>
+              <i className="material-icons">menu</i>
             </NavLink>
             { isAuthenticated ? userLinks : guestLinks }
-            { isAuthenticated ? sideNavUsers : sideNavGuests}
+            { isAuthenticated ? sideNavUsers : sideNavGuests }
           </div>
         </nav>
       </div>
