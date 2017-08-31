@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../../components/Header/Header';
-import SignupForm from '../../containers/SignUpForm';
+import SignupForm from '../../containers/SignupForm';
 import userSignupRequest from '../../actions/signupActions';
 import Footer from '../../containers/Footer';
 
