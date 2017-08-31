@@ -21,7 +21,7 @@ module.exports = {
     ]
   },
 
-  watch: true,
+ // watch: true,
 
   devServer: {
     historyApiFallback: true,

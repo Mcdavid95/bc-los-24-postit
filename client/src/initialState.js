@@ -1,19 +1,27 @@
 const initialState = {
   signup: {
     username: '',
-    fullname: '',
     email: '',
     phoneNumber: +234,
-    loggedIn: false
+    loggedIn: false,
+    password: ''
   },
   login: {
     username: '',
+    password: '',
     isLoggedIn: false
   },
   setAuthToken: {
     isAuthenticated: false,
     user: {}
   },
-  addflashMessages: []
+  addflashMessages: [],
+
+  group: {
+    GroupName: '',
+    description: ''
+  },
+  userGroupList: []
+
 };
 export default initialState;
