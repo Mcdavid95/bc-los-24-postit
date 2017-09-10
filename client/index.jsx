@@ -3,8 +3,9 @@ import ReactDom from 'react-dom';
 import { Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import jwt from 'jsonwebtoken';
-import Group from '../client/src/containers/GroupForm';
 
+import Group from './src/containers/GroupForm';
+import Message from './src/containers/Message';
 import Board from './src/pages/MessageBoard/Board';
 import Layout from './src/components/Layout';
 import Login from './src/pages/Login/Login';
@@ -30,7 +31,6 @@ if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
   store.dispatch(setCurrentUser(jwt.decode(localStorage.jwtToken)));
 }
-store.dispatch(loadGroups());
 
 ReactDom.render(
   <Provider store={store}>
@@ -41,7 +41,7 @@ ReactDom.render(
         <Route exact path="/register" name="signup" component={Signup} />
         <Route exact path="/login" name="login" component={Login} />
         <Route exact path="/dashboard" name="board" component={requireAuth(Board)} />
-        <Route exact path="/group" name="group" component={requireAuth(Group)} />
+        <Route path="/group/:groupId" name="group" component={requireAuth(Message)} />
       </Switch>
     </Router>
   </Provider>
