@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as types from '../../constant';
 import userGroups from './loadUserGroupListActions';
+import history from '../utils/History';
 
 const createGroupSuccess = group => ({ type: types.CREATE_GROUP_SUCCESS, group });
 
@@ -12,6 +13,7 @@ const createGroupRequest = groupdata => dispatch => axios.post('/api/group', gro
     dispatch(createGroupSuccess(response));
     dispatch(userGroups());
     Materialize.toast(response.data.message, 3000, 'rounded, green');
+    history.push('dashboard');
   })
   .catch((response) => {
     dispatch(createGroupFailed(response));

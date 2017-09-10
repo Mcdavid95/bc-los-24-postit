@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import initialState from '../initialState';
+import createGroupRequest from '../actions/createGroupAction';
 /**
  * @class
  */
@@ -31,7 +33,9 @@ class GroupForm extends Component {
    */
   onSubmit(e) {
     e.preventDefault();
-    this.props.createGroupRequest(this.state);
+    this.props.createGroupRequest(this.state)
+      .then(() => {
+      });
   }
 
   /**
@@ -68,8 +72,7 @@ class GroupForm extends Component {
             <label htmlFor="submit" className="control-label" />
             <button
               type="submit"
-              className="btn waves-effect waves-light"
-              name="action"
+              className="btn waves-effect waves-light modal-action modal-close"
             >Submit</button>
           </div>
         </form>
@@ -83,4 +86,5 @@ GroupForm.propTypes = {
 
 };
 
-export default GroupForm;
+
+export default connect(null, { createGroupRequest })(GroupForm);

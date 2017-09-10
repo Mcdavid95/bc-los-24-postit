@@ -22,8 +22,8 @@ class Login extends Component {
         <Header />
         <FlashMessage />
         <main>
-        <div className="row">
-          <div className=" col-lg-9 col-sm-12 col-md-6">
+        <div className="container">
+          <div>
             <h1>Welcome to <span className="brand" id="top">POSTIT!!</span></h1>
             <h5>Connect to friends and loved ones all it takes is a click!!! Login to get started</h5>
             <p id="signup">Don't have an account? Click <Link to="/register">here to Register</Link></p>

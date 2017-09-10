@@ -5,36 +5,52 @@ import Header from '../../components/Header/Header';
 import FlashMessage from '../../containers/FlashMessageList';
 import SideNav from '../sideNav';
 import Footer from '../../containers/Footer';
-import Message from '../../containers/Message';
 import GroupForm from '../../containers/GroupForm';
 import createGroupRequest from '../../actions/createGroupAction';
+import loadGroups from '../../actions/loadUserGroupListActions';
+import messages from '../../actions/getMessagesActions';
 /**
  * @class
  */
 class Board extends Component {
+    /**
+   * 
+   * @param {*} props 
+   */
+  constructor(props) {
+    super(props);
+    this.userGroupList = this.props;
+  }
+  /**
+   * 
+   */
+  componentDidMount() {
+    this.props.loadGroups();
+    $('select').material_select();
+    this.props.messages(1);
+    $('.modal').modal();
+  }
   /**
    * @return{DOM} returns DOM element
    */
   render() {
-    const { createGroupRequest } = this.props;
     return (
       <div>
         <Header />
         <FlashMessage />
-        <SideNav />
-        <Message />
-
-        <div id="modal1" className="modal modal-fixed-footer">
-          <div className="modal-content">
-            <button type="button" className="waves-effect waves-light btn modal-close" data-dismiss="modal">&times;</button>
-            <h1>Create New Group</h1>
-            <GroupForm createGroupRequest={createGroupRequest} />
+        <main>
+          <SideNav />
+          <div id="modal1" className="modal modal-fixed-footer">
+            <div className="modal-content">
+              <button type="button" className="waves-effect waves-light btn modal-close" data-dismiss="modal">&times;</button>
+              <h1>Create New Group</h1>
+              <GroupForm createGroupRequest={this.props.createGroupRequest} />
+            </div>
+            <div className="modal-footer">
+              <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+            </div>
           </div>
-          <div className="modal-footer">
-            <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
-          </div>
-        </div>
-        <main />
+        </main>
         <Footer />
       </div>
     );
@@ -42,7 +58,12 @@ class Board extends Component {
 }
 
 Board.propTypes = {
-  createGroupRequest: PropTypes.func.isRequired
+  createGroupRequest: PropTypes.func.isRequired,
+  loadGroups: PropTypes.func.isRequired,
+  messages: PropTypes.func.isRequired,
+  userGroupList: PropTypes.array.isRequired
 };
 
-export default connect(null, { createGroupRequest })(Board);
+const mapStateToProps = state => ({ userGroupList: state.userGroupList });
+
+export default connect(mapStateToProps, { createGroupRequest, loadGroups, messages })(Board);
