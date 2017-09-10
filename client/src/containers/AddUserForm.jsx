@@ -22,19 +22,32 @@ class AddUserForm extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+  /**
+   * 
+   * @param {object} nextProps 
+   * @return {object} new state
+   */
   componentWillReceiveProps(nextProps) {
     console.log(this.props.allUsers);
     this.setState({
       users: nextProps.allUsers[0]
     });
   }
-
+  /**
+ * 
+ * @param {Event} e 
+ * @return {object} new state
+ */
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     });
   }
-
+  /**
+ * 
+ * @param {Event} e 
+ * @return {func} send request to api
+ */
   onSubmit(e) {
     e.preventDefault();
     this.props.addUserRequest(this.state, this.props.groupId)
@@ -44,10 +57,9 @@ class AddUserForm extends Component {
   }
 
   /**
-   * 
+   * @return {object} DOM Object
    */
   render() {
-    console.log(this.state);
     return (
       <div className="row">
         <div>

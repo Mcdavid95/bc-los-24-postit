@@ -77,8 +77,15 @@ export default {
                               email: req.body.email.toLowerCase(),
                               phoneNumber: req.body.phoneNumber
                             })
-                            .then(() => {
+                            .then((detail) => {
+                              const myToken = jwt.sign({
+                                id: detail.id,
+                                name: detail.username,
+                              },
+                              'process.env.SECRET',
+                              { expiresIn: 24 * 60 * 60 });
                               res.status(201).send({
+                                myToken,
                                 sucsess: true,
                                 message: `Welcome to POSTIT!! ${req.body.username}`
                               });
