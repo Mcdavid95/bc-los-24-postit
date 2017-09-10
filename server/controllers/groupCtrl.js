@@ -40,7 +40,8 @@ export default {
                     userId: req.decoded.id,
                     isCreator: true,
                     username: req.decoded.name,
-                    groupName: group.GroupName
+                    groupName: group.GroupName,
+                    description: group.description
                   };
                   GroupMembers.create(groupMember);
                 } else {
@@ -48,7 +49,9 @@ export default {
                     message: 'could not add to group'
                   });
                 }
-                res.status(201).send(`Group ${group.GroupName} successfully created`);
+                res.status(201).send({
+                  message: `Group ${group.GroupName} successfully created`
+                });
               })
               .catch((error) => {
                 res.status(400).send(error);
@@ -99,12 +102,14 @@ export default {
                         GroupMembers.create({
                           groupId: req.params.groupId,
                           username: req.body.username.toLowerCase(),
-                          groupName: groupExist.GroupName
+                          groupName: groupExist.GroupName,
+                          description: groupExist.description
+                          
                         })
                           .then((success) => {
                             if (success) {
                               res.status(200).send({
-                                message: success
+                                message: 'User sucessfully addded'
                               });
                             }
                           });

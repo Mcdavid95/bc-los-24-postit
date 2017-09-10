@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: null,
     },
 
+    description: {
+      type: DataTypes.STRING
+    },
+
     username: {
       type: DataTypes.STRING,
       allowNull: false

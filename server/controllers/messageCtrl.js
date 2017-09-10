@@ -7,12 +7,12 @@ export default {
 
   postMessage(req, res) {
     if (typeof (req.body.message) === 'undefined') {
-      res.send({
-        message: 'Message content must not be empty'
+      res.status(404).send({
+        Error: 'Message content must not be empty'
       });
     } else if (req.body.message.trim().length === 0) {
-      res.status(304).send({
-        message: 'Message content must not be empty'
+      res.status(404).send({
+        Error: 'Message content must not be empty'
       });
     } else {
       Group.findOne({
@@ -34,15 +34,15 @@ export default {
                 priority: req.body.priority
 
               })
-              .then((message) => {
-                res.status(200).send(message);
+              .then((response) => {
+                res.status(200).send({ message: response.message });
               })
               .catch((error) => {
                 res.status(400).send(error.message);
               });
           } else {
             res.status(404).send({
-              Error: `Group with: ${req.params.groupId} does not exist`
+              Error: `Group with id: ${req.params.groupId} does not exist`
             });
           }
         });

@@ -12,6 +12,7 @@ const router = express.Router();
 // create group
 router.post('/api/group', Verify.hasToken, GroupCtrl.createGroup);
 
+// fetch all groups
 router.get('/api/groups', Verify.hasToken, GroupCtrl.listGroups);
 
 // add user to group
@@ -29,5 +30,6 @@ router.get('/api/group/:groupId/messages', Verify.hasToken, MessageCtrl.listMess
 
 // fetch all groups of a single user
 router.get('/api/user/groups', Verify.hasToken, GroupCtrl.listUserGroups);
+
 
 export default router;

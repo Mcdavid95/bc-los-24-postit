@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
-// import sequelize from 'sequelize';
+import crypto from 'crypto';
+// import { sendResetMail, sendSuccessfulResetMail } from './priority';
 import model from '../models/';
 
 dotenv.config();
@@ -165,5 +166,151 @@ export default {
     res.status(200).json({
       message: 'LogOut Successful'
     });
+  },
+
+  forgotPassoword(req, res) {
+    if (!req.body.email) {
+      res.status(401).send({
+        message: 'Please provide your email'
+      });
+    } else {
+      return User
+        .findOne({
+          where: {
+            email: req.body.email
+          }
+        })
+        .then((user) => {
+          if (!user) {
+            res.status(401).send({
+              message: 'Account associated with this email not found'
+            });
+          } else {
+            const token = crypto.randomBytes(20).toString('hex');
+            User.update({
+              resetPasswordToken: token,
+              expiryTime: Date.now() + 3600000
+            }, (err) => {
+              res.status(400).send({
+                message: err.message
+              });
+            })
+              .then((updatedUser) => {
+                res.send({
+                  success: true
+                });
+                sendResetMail(updatedUser.resetPasswordToken, updatedUser.email, req.headers.host);
+              }, (err) => {
+                res.status(400).send({
+                  success: false,
+                  message: err.message
+                });
+              });
+          }
+        }, (err) => {
+          res.status(400).send({
+            success: false,
+            message: err.message
+          });
+        });
+    }
+  },
+
+  reset(req, res) {
+    return User
+      .findOne({
+        where: {
+          resetPasswordToken: req.params.token
+        }
+      })
+      .then((user) => {
+        if (!user) {
+          res.status(400).send({
+            success: false,
+            message: 'failed token authentication'
+          });
+        } else {
+          console.log(Date.now());
+          console.log(user.expiryTime);
+          if ((Date.now()) > user.expiryTime) {
+            user.update({
+              resetPasswordToken: null,
+              expiryTime: null
+            })
+              .then(() => {
+                res.status(400).send({ success: false });
+              }, err => res.status(400).send(err.message));
+          } else if (req.body.newPassword &&
+            req.body.newPassword.length > 7 &&
+            req.body.confirmPassword &&
+            req.body.confirmPassword.length > 7 &&
+            (req.body.newPassword === req.body.confirmPassword)
+          ) {
+            user.update({
+              password: bcrypt.hashSync(req.body.confirmPassword, 10),
+              resetPasswordToken: null,
+              expiryTime: null
+            })
+              .then((updatedUser) => {
+                sendSuccessfulResetMail(updatedUser.email);
+                res.status(201).send({
+                  success: true,
+                  message: 'successfully updated password'
+                });
+              }, (err) => {
+                res.status(400).send({
+                  success: false,
+                  message: err.message
+                });
+              });
+          } else {
+            res.status(400).send({
+              success: false,
+              message: 'invalid passwords'
+            });
+          }
+        }
+      }, (err) => {
+        res.status(400).send({
+          success: false,
+          message: err.message
+        });
+      });
+  },
+
+  authToken(req, res) {
+    if (!req.body.token) {
+      res.status(400).send({
+        success: false,
+        message: 'No token provided'
+      });
+    } else {
+      return User
+        .findOne({
+          where: {
+            resetPasswordToken: req.body.token
+          }
+        })
+        .then((user) => {
+          if (!user) {
+            res.status(400).send({
+              success: false,
+              message: 'failed token authentication'
+            });
+          } else {
+            res.status(200).send({
+              success: true,
+              message: 'valid token',
+              UserName: user.UserName
+            });
+          }
+        }, (err) => {
+          res.status(400).send({
+            success: false,
+            message: err.message
+          });
+        });
+    }
   }
+
 };

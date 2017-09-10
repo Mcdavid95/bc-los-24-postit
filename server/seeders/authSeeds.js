@@ -12,6 +12,13 @@ export const anotherValid = {
   phoneNumber: 8167188889
 };
 
+export const yetAnotherValid = {
+  username: 'Kelechi',
+  password: 'kele_13',
+  email: 'kelechi@gmail.com',
+  phoneNumber: 98167188889
+};
+
 export const invalidUsername = {
   username: 'mcdavid',
   password: 'step_hen',

@@ -21,6 +21,14 @@ module.exports = {
           not: ['[a-z]', 'i']
         }
       },
+      resetPasswordToken: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      expiryTime: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
 
       email: {
         type: Sequelize.STRING,

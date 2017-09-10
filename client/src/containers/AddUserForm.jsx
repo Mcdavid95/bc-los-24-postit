@@ -28,7 +28,6 @@ class AddUserForm extends Component {
    * @return {object} new state
    */
   componentWillReceiveProps(nextProps) {
-    console.log(this.props.allUsers);
     this.setState({
       users: nextProps.allUsers[0]
     });

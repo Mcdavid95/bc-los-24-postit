@@ -19,6 +19,11 @@ module.exports = {
         defaultValue: 'normal',
         isIn: [['normal', 'urgent', 'critical']]
       },
+      username: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+
 
       createdAt: {
         allowNull: false,

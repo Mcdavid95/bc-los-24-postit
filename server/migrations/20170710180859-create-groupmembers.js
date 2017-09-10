@@ -20,6 +20,10 @@ module.exports = {
         onDelete: null
       },
 
+      description: {
+        type: Sequelize.STRING
+      },
+
       username: {
         type: Sequelize.STRING,
         allowNull: false

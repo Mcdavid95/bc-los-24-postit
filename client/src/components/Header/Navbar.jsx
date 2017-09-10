@@ -15,17 +15,22 @@ class Navbar extends Component {
  */
   constructor(props) {
     super(props);
+    this.state = {
+      isAuthenticated: initialState.setAuthToken.isAuthenticated
+    };
     this.logout = this.logout.bind(this);
     this.isAuthenticated = this.props.setAuthToken;
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState({
-  //     setAuthToken: !nextProps.setAuthToken.isAuthenticated
-  //   })
-  // }
-  
-
+  /**
+ * 
+ * @param {boolean} nextProps 
+ * @return {boolean} set auth status
+ */
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      isAuthenticated: !nextProps.setAuthToken.isAuthenticated
+    });
+  }
 
   /**
    * @return {Props} listens for event and returns props
@@ -42,12 +47,15 @@ class Navbar extends Component {
     const { isAuthenticated } = this.props.setAuthToken;
 
     const userLinks = (
-      <ul className="right hide-on-med-and-down">
-        <li><NavLink to="board" activeClassName="active">Home</NavLink></li>
-        <li><NavLink to="#" activeClassName="active">New message</NavLink></li>
-        <li><NavLink to="/login" onClick={this.logout}>LOGOUT</NavLink></li>
-        <li><NavLink to="#" activeClassName="active">About</NavLink></li>
-      </ul>
+      <div>
+        <ul className="right hide-on-med-and-down">
+          <li><NavLink to="board" activeClassName="active">Home</NavLink></li>
+          <li><NavLink to="#" activeClassName="active">New message</NavLink></li>
+          <li><NavLink to="/login" onClick={this.logout}>LOGOUT</NavLink></li>
+          <li><NavLink to="#" activeClassName="active">About</NavLink></li>
+        </ul>
+        <NavLink to="#" activeClassName="active">Search</NavLink>
+      </div>
     );
 
     const guestLinks = (
