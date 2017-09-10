@@ -4,7 +4,6 @@ import * as types from '../../constant';
 import history from '../utils/History';
 import setAuthToken from '../utils/setAuthToken';
 import setCurrentUser from './currentUserActions';
-import groupListActions from './loadUserGroupListActions';
 
 const userLoginSuccess = user => ({ type: types.LOGIN_USER, user });
 
@@ -23,8 +22,8 @@ const userLoginRequest = userData => dispatch => axios.post('/api/user/login', u
     Materialize.toast(response.data.message, 3000, 'rounded green');
     history.push('/dashboard');
   })
-  .catch((response) => {
-    dispatch(userLoginFailed(response));
-    Materialize.toast(response.data.message, 3000, 'rounded red');
+  .catch((err) => {
+    dispatch(userLoginFailed(err));
+    Materialize.toast(err.response.data.message, 3000, 'rounded red');
   });
 export default userLoginRequest;

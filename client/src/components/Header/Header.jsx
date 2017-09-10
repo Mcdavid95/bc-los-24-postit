@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Navbar from './Navbar.jsx';
+import Navbar from './Navbar';
+import SideNav from '../../pages/sideNav';
 
 export default class Header extends Component {
   render() {

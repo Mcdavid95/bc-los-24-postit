@@ -42,48 +42,38 @@ export default class SignupForm extends Component {
    */
   render() {
     return (
-      <div className="form-margin">
-        <main>
-          <div className="container" id="content">
+      <div className="container">
+        <h1 className="center-align" id="acct">CREATE AN ACCOUNT</h1>
+
+        <div className="row">
+          <form className="col s12" onSubmit={this.onSubmit}>
             <div className="row">
-              <div className="col s12 m6 l9">
-                <h1><span id="acct">Create an Account</span></h1>
-                <p id="login">
-                Already have an account? Click <Link to="/login">here to Login</Link>
-                </p>
-              </div>
-            </div>
-
-            <form onSubmit={this.onSubmit}>
-
-              <div className="form-group col s12 m6 l9">
-                <label htmlFor="username" className="control-label">User Name:</label>
-                <input
-                  className="form-control"
-                  name="username"
-                  type="text"
-                  placeholder="Doe"
-                  required
-                  value={this.state.username}
-                  onChange={this.onChange}
-                />
-              </div>
-              <hr />
-              <div className="form-group col s12 m6 l9">
-                <label htmlFor="email" className="control-label">Email:</label>
+              <div className="input-field col s12 m6">
                 <input
                   className="form-control"
                   type="email"
                   name="email"
-                  placeholder="your email"
                   required
                   value={this.state.email}
                   onChange={this.onChange}
                 />
+                <label htmlFor="email" className="control-label">Email</label>
               </div>
-              <hr />
-              <div className="form-group col s12 m6 l9">
-                <label htmlFor="phone" className="control-label">Phone:</label>
+
+              <div className="input-field col s12 m6">
+                <input
+                  className="form-control"
+                  name="username"
+                  type="text"
+                  required
+                  value={this.state.username}
+                  onChange={this.onChange}
+                />
+                <label htmlFor="username" className="control-label">User Name</label>
+              </div>
+            </div>
+            <div className="row">
+              <div className="input-field col s12 m6">
                 <input
                   className="form-control"
                   name="phoneNumber"
@@ -95,8 +85,9 @@ export default class SignupForm extends Component {
                   value={this.state.phoneNumber}
                   onChange={this.onChange}
                 />
-                <hr />
-                <label htmlFor="password" className="control-label">Password:</label>
+                <label htmlFor="phone" className="control-label">Phone:</label>
+              </div>
+              <div className="input-field col s12 m6">
                 <input
                   className="form-control"
                   name="password"
@@ -108,14 +99,15 @@ export default class SignupForm extends Component {
                   value={this.state.password}
                   onChange={this.onChange}
                 />
+                <label htmlFor="password" className="control-label">Password:</label>
               </div>
-              <hr />
-
+            </div>
+            <div className="row">
               <button type="submit" className="btn btn-success" href="#">Submit</button>
-
-            </form>
-          </div>
-        </main>
+              <p className="col s12 m6" id="signin"> Already have an account? <Link to="/login">Login</Link> to continue with the app </p>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }
