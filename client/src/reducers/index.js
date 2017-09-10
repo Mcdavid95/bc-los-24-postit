@@ -5,6 +5,10 @@ import setAuthToken from './authTokenReducer';
 import addflashMessages from './flashMessageReducer';
 import group from './createGroupReducer';
 import userGroupList from './groupListReducer';
+import groupMessages from './getMessagesReducer';
+import postMessage from './postMessageReducer';
+import addUser from './addUserToGroupReducer';
+import allUsers from './getAllUsersReducer';
 
 const rootReducer = combineReducers({
   signup,
@@ -12,7 +16,11 @@ const rootReducer = combineReducers({
   setAuthToken,
   addflashMessages,
   group,
-  userGroupList
+  userGroupList,
+  groupMessages,
+  postMessage,
+  addUser,
+  allUsers
 });
 
 export default rootReducer;
