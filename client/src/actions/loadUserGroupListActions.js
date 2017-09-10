@@ -5,10 +5,6 @@ const loadGroupsSuccess = groups => ({ type: types.LOAD_GROUPS_SUCCESS, groups }
 
 const loadGroupFailed = groups => ({ type: types.LOAD_GROUPS_FAILED, groups });
 
-const userGroupsSuccess = groups => ({ type: types.USER_GROUPS_SUCCESS, groups });
-
-const userGroupFailed = groups => ({ type: types.USER_GROUPS_FAILED, groups });
-
 const getUserGroups = () => (dispatch) => {
   axios.get('/api/user/groups')
     .then((response) => {

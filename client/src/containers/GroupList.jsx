@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Proptypes from 'prop-types';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import history from '../utils/History';
+import messages from '../actions/getMessagesActions';
 /**
  * 
  */
@@ -12,6 +13,7 @@ class GroupList extends Component {
    */
   constructor(props) {
     super(props);
+    this.groupMessages = this.props;
     this.state = {
       groups: this.props.userGroupList
     };
@@ -23,25 +25,47 @@ class GroupList extends Component {
    * @return {Array} new State
    */
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      groups: nextProps.userGroupList[0]
-    });
+    if (nextProps.userGroupList.length === 1) {
+      this.setState({
+        groups: nextProps.userGroupList[0]
+      });
+    } else {
+      this.setState({
+        groups: nextProps.userGroupList[1]
+      });
+    }
   }
 
-  onClick(groupId) {
-    history.push(`dashboard/group/:${groupId}`);
-  }
   /**
    * 
+   * @param {*} e 
+   * @return {*} any
+   */
+  onClick(e) {
+    console.log(this.props.match.params.groupId);
+    e.preventDefault();
+    this.props.messages(this.props.match.params.groupId)
+      .then(() => {
+        history.push(`/group/${this.props.match.params.groupId}/messages`);
+      })
+    ;
+  }
+  /**
+   * @return {Object} DOM Object
    */
   render() {
     return (
-      <ul>
-        {this.state.groups.map(groups =>
-          (<li className="list-group" key={groups.groupId}>
-            <Link to={`dashboard/group/:${groups.groupId}`} onClick={this.onClick}>
-              <h5>{groups.groupName}</h5>
-            </Link>
+      <ul className="row">
+        {this.state.groups.map(group =>
+          (<li key={group.groupId}>
+            <div className="col s12">
+              <div className="card blue-grey darken-1">
+                <div className="card-content white-text">
+                  <Link onClick={this.onClick} to={`/group/${group.groupId}/messages`}><span className="card-title list-group"> {group.groupName}</span></Link>
+                  <p>{group.description}</p>
+                </div>
+              </div>
+            </div>
           </li>)
         )}
       </ul>
@@ -51,7 +75,13 @@ class GroupList extends Component {
 
 
 GroupList.propTypes = {
-  userGroupList: Proptypes.array.isRequired
+  match: PropTypes.object.isRequired,
+  userGroupList: PropTypes.array.isRequired,
+  messages: PropTypes.func.isRequired,
 };
 
-export default GroupList;
+const mapStateToProps = state => ({
+  groupMessages: state.groupMessages
+});
+
+export default connect(mapStateToProps, { messages })(GroupList);
