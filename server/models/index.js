@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const basename = path.basename(module.filename);
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'development' || 'test';
 
 const config = require(`${__dirname}/../config/config.json`)[env];
 
