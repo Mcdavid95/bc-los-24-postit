@@ -5,7 +5,13 @@ import history from './History';
 import flashMessage from '../actions/flashMessageAction';
 
 const AuthenticateFunc = (ComposedComponent) => {
+  /**
+   * 
+   */
   class Authenticate extends Component {
+    /**
+     * 
+     */
     componentWillMount() {
       if (!this.props.isAuthenticated) {
         this.props.flashMessage({
@@ -15,14 +21,20 @@ const AuthenticateFunc = (ComposedComponent) => {
         history.push('/login');
       }
     }
-
-    componentWillUpdate (nextProps) {
-      if(!nextProps.isAuthenticated){
-        isAuthenticated = false;
+    /**
+     * 
+     * @param {*} nextProps 
+     * @return {}
+     */
+    componentWillUpdate(nextProps) {
+      if (!nextProps.isAuthenticated) {
+        this.props.isAuthenticated = false;
         history.push('/login');
       }
     }
-
+/**
+ * 
+ */
     render() {
       return (
         <ComposedComponent {...this.props} />
