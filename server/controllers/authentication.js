@@ -2,24 +2,13 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import crypto from 'crypto';
-// import { sendResetMail, sendSuccessfulResetMail } from './priority';
+import { resetPasswordMail, sendSuccessfulResetMail } from './emailNotificationCtrl';
 import model from '../models/';
 
 dotenv.config();
 const User = model.User;
 
 const saltRounds = 10;
-
-/**
- * This class handles the logic for registering an account signin and signing out
- */
-// export default class AuthCtrl {
-// /**
-//  * This method handles logic for registering a user
-//  * @param {*} req
-//  * @param {*} res
-//  * @returns {void}
-//  */
 export default {
   register(req, res) {
     if (typeof (req.body.username) === 'undefined') {
@@ -190,16 +179,27 @@ export default {
             User.update({
               resetPasswordToken: token,
               expiryTime: Date.now() + 3600000
-            }, (err) => {
-              res.status(400).send({
-                message: err.message
-              });
+            }, {
+              where: {
+                email: req.body.email
+              }
             })
               .then((updatedUser) => {
-                res.send({
-                  success: true
-                });
-                sendResetMail(updatedUser.resetPasswordToken, updatedUser.email, req.headers.host);
+                if (updatedUser) {
+                  User.findOne({
+                    where: {
+                      email: req.body.email
+                    }
+                  })
+                    .then((isEmail) => {
+                      res.send({
+                        success: true,
+                        token: isEmail.resetPasswordToken
+                      });
+                      resetPasswordMail(isEmail.resetPasswordToken, isEmail.email, req.headers.host);
+                    },
+                    );
+                }
               }, (err) => {
                 res.status(400).send({
                   success: false,
@@ -236,6 +236,10 @@ export default {
             user.update({
               resetPasswordToken: null,
               expiryTime: null
+            }, {
+              where: {
+                resetPasswordToken: req.params.token
+              }
             })
               .then(() => {
                 res.status(400).send({ success: false });
