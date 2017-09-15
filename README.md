@@ -30,3 +30,6 @@ PostIt is a simple application that allows friends and colleagues create groups 
 * React
 * Babel
 
+## Documentation
+check out the documentation for this project in the link below
+[Documentation](http://docs.postit6.apiary.io/)
