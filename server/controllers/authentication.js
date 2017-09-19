@@ -71,6 +71,7 @@ export default {
                               const myToken = jwt.sign({
                                 id: detail.id,
                                 name: detail.username,
+                                email: detail.email
                               },
                               'process.env.SECRET',
                               { expiresIn: 24 * 60 * 60 });
@@ -106,6 +107,69 @@ export default {
       });
   },
 
+  // searchUser(req, res) {
+  //   return User
+  //     .findAll({
+  //       offset: req.params.offset * 5,
+  //       limit: 5,
+  //       where: {
+  //         username: { $like: `%${req.body.username}%` }
+  //       },
+  //       attributes: ['id', 'username', 'email'],
+  //     })
+  //     .then((users) => {
+  //       res.status(201).send({
+  //         result: users,
+  //         message: 'success'
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       res.status(409).send({
+  //         success: false,
+  //         users: [],
+  //         message: 'An error occured, could not fetch result'
+  //       });
+  //     });
+  // },
+
+  searchUser(req, res) {
+    const limit = 5;
+    let offset = 0;
+    User
+      .findAndCountAll({
+        where: {
+          username: { $like: `%${req.body.username}%` }
+        },
+      })
+      .then((users) => {
+        const page = req.params.page;
+        const pages = Math.ceil(users.count / limit);
+        offset = limit * (page - 1);
+        return User
+          .findAll({
+            where: {
+              username: { $like: `%${req.body.username}%` }
+            },
+            attributes: ['id', 'username', 'email'],
+            limit,
+            offset,
+            $sort: { id: 1 }
+          })
+          .then((searchResult) => {
+            res.status(201).send({
+              result: searchResult,
+              count: users.count,
+              pages,
+              offset
+            });
+          });
+      })
+      .catch((err) => {
+        res.status(400).send(err);
+      });
+  },
+
   login(req, res) {
     if (typeof (req.body.username) === 'undefined') {
       res.status(409).send({
@@ -132,6 +196,7 @@ export default {
             const myToken = jwt.sign({
               id: user.id,
               name: user.username,
+              email: user.email
             },
             'process.env.SECRET',
             { expiresIn: 24 * 60 * 60 });
@@ -192,11 +257,14 @@ export default {
                     }
                   })
                     .then((isEmail) => {
-                      res.send({
+                      res.status(201).send({
                         success: true,
                         token: isEmail.resetPasswordToken
                       });
-                      resetPasswordMail(isEmail.resetPasswordToken, isEmail.email, req.headers.host);
+                      resetPasswordMail(isEmail.resetPasswordToken,
+                        isEmail.email,
+                        req.headers.host
+                      );
                     },
                     );
                 }

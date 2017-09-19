@@ -30,6 +30,12 @@ const initialState = {
     priority: 'normal'
   },
 
+  search: {
+    username: ''
+  },
+
+  userList: [],
+
   addUser: {
     username: ''
   },
@@ -37,7 +43,16 @@ const initialState = {
   allUsers: [],
 
   userGroupList: [],
-  groupMessages: []
+  groupMessages: [],
+
+  forgotPassword: {
+    email: ''
+  },
+
+  resetPassword: {
+    newPassword: '',
+    confirmPassword: ''
+  }
 
 };
 export default initialState;

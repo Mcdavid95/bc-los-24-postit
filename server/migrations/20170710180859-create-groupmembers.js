@@ -20,6 +20,11 @@ module.exports = {
         onDelete: null
       },
 
+      email: {
+        type: Sequelize.STRING,
+        onDelete: null
+      },
+
       description: {
         type: Sequelize.STRING
       },

@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Navbar from './Navbar';
-import SideNav from '../../pages/sideNav';
 
-export default class Header extends Component {
-  render() {
-    return (
-      <header>
-        <Navbar />
-      </header>
-    );
-  }
-}
+const Header = () => (
+  <header>
+    <Navbar />
+  </header>
+);
+export default Header;

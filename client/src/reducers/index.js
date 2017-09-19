@@ -9,6 +9,9 @@ import groupMessages from './getMessagesReducer';
 import postMessage from './postMessageReducer';
 import addUser from './addUserToGroupReducer';
 import allUsers from './getAllUsersReducer';
+import forgotPassword from './forgotPassworrdReducer';
+import resetPassword from './resetPasswordReducer';
+import search from './searchUserReducer';
 
 const rootReducer = combineReducers({
   signup,
@@ -20,7 +23,10 @@ const rootReducer = combineReducers({
   groupMessages,
   postMessage,
   addUser,
-  allUsers
+  allUsers,
+  forgotPassword,
+  resetPassword,
+  search
 });
 
 export default rootReducer;

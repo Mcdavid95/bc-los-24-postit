@@ -49,12 +49,11 @@ class Navbar extends Component {
     const userLinks = (
       <div>
         <ul className="right hide-on-med-and-down">
-          <li><NavLink to="board" activeClassName="active">Home</NavLink></li>
-          <li><NavLink to="#" activeClassName="active">New message</NavLink></li>
+          <li><NavLink to="dashboard" activeClassName="active">Home</NavLink></li>
           <li><NavLink to="/login" onClick={this.logout}>LOGOUT</NavLink></li>
           <li><NavLink to="#" activeClassName="active">About</NavLink></li>
         </ul>
-        <NavLink to="#" activeClassName="active">Search</NavLink>
+        <NavLink to="/search-user" className="right" activeClassName="active">Search User</NavLink>
       </div>
     );
 
@@ -67,7 +66,6 @@ class Navbar extends Component {
     const sideNavUsers = (
       <ul className="side-nav" id="mobile-demo">
         <li><NavLink to="/dashboard" activeClassName="active">Home</NavLink></li>
-        <li><NavLink to="#">New message</NavLink></li>
         <li><NavLink to="/login" onClick={this.logout}>LOGOUT</NavLink></li>
         <li><NavLink to="#" activeClassName="active">About</NavLink></li>
       </ul>
@@ -83,7 +81,7 @@ class Navbar extends Component {
       <div className="row">
         <nav>
           <div className="nav-wrapper container">
-            <NavLink to="/api/group/:groupId/message" className="brand-logo"id="brand">
+            <NavLink to="/dashboard" className="brand-logo"id="brand">
             POSTIT!!
             </NavLink>
             <NavLink to="#" data-activates="mobile-demo" className="button-collapse">
