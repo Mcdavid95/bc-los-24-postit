@@ -4,6 +4,8 @@ node_js:
   - "6.10.0"
 services:
   - postgresql
+  
+group: deprecated-2017Q3
  
 before_script:
   - npm install -g sequelize-cli
