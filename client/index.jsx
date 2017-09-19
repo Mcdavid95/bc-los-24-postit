@@ -4,18 +4,18 @@ import { Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import jwt from 'jsonwebtoken';
 
-import Group from './src/containers/GroupForm';
 import Message from './src/containers/Message';
 import Board from './src/pages/MessageBoard/Board';
-import Layout from './src/components/Layout';
 import Login from './src/pages/Login/Login';
 import Signup from './src/pages/Signup/Signup';
 import configureStore from './src/store';
 import history from './src/utils/History';
 import setAuthToken from './src/utils/setAuthToken';
 import setCurrentUser from './src/actions/currentUserActions';
-import loadGroups from './src/actions/loadUserGroupListActions';
 import requireAuth from './src/utils/Authenticate';
+import ForgotPasswordPage from './src/pages/ForgotPassword';
+import ResetPassword from './src/pages/ResetPassword';
+import SearchUserPage from './src/containers/SearchPage';
 
 import './public/materialize.min.css';
 // import './public/auth.css';
@@ -37,11 +37,13 @@ ReactDom.render(
     <Router history={history}>
       <Switch>
         <Route exact path="/" component={Login} />
-        <Route exact path="/layout" component={Layout} />
         <Route exact path="/register" name="signup" component={Signup} />
         <Route exact path="/login" name="login" component={Login} />
+        <Route exact path="/forgot-password" name="forgot-password" component={ForgotPasswordPage} />
         <Route exact path="/dashboard" name="board" component={requireAuth(Board)} />
         <Route path="/group/:groupId" name="group" component={requireAuth(Message)} />
+        <Route path="/reset" name="reset" component={ResetPassword} />
+        <Route path="/search-user" name="search-user" component={requireAuth(SearchUserPage)} />
       </Switch>
     </Router>
   </Provider>

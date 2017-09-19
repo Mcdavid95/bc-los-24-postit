@@ -138,14 +138,21 @@ h1 {
   width: 40%
 }
 
-.message-content {
+.message-card {
   margin-top: 10px;
   border: 0px solid #fff7aa;
   width: 100%;
   border-radius: 3px;
-  background-color: #576883;
-  color: white;
-  height: 50px
+  background-color: rgba(239, 239, 239, 0.96);
+  height: 100px
+}
+
+#message-content {
+  color: black
+}
+
+.card {
+  max-height: 40px
 }
 
 #users{
@@ -155,6 +162,46 @@ h1 {
 
 form#message {
   margin: auto 25%
+}
+
+#forgot-password {
+  color: whitesmoke;
+  margin-bottom: 10%
+}
+
+.normal{
+  border: 1px solid #2FFF6F;
+  border-radius: 3px;
+  background: #2FFF6F 
+}
+
+.urgent{
+  border: 1px solid #8A693E;
+  border-radius: 3px;
+  background: #8A693E 
+}
+
+.critical{
+  border: 1px solid red;
+  border-radius: 3px;
+  background: red 
+}
+
+#message-content {
+  font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif
+
+}
+
+#sidenav-overlay {
+  z-index: 0;
+}
+
+.username {
+  color: palevioletred;
+}
+
+th {
+  color: paleturquoise
 }
 
 
