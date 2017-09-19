@@ -18,6 +18,7 @@ class MessageBoard extends Component {
     this.state = {
       messages: this.props.groupMessages
     };
+    this.handlePriority = this.handlePriority.bind(this);
   }
   /**
  * 
@@ -38,18 +39,42 @@ class MessageBoard extends Component {
     }
   }
   /**
+   * 
+   * @param {*} priority 
+   * @return {DOM} DOM
+   */
+  handlePriority(priority) {
+    if (priority === 'normal') {
+      return (
+        <span className="normal">{priority}</span>
+      );
+    } else if (priority === 'urgent') {
+      return (
+        <span className="urgent">{priority}</span>
+      );
+    }
+    return (
+      <span className="critical">{priority}</span>
+    );
+  }
+  /**
    * @return {Object} DOM Object
    */
   render() {
-    console.log('====>', this.props.groupMessages);
     return (
       <div>
         <div id="message-board">
           <ul className="row">
             {this.state.messages.map(message =>
               (<li key={message.id} className="message-content">
-                <span id="sender-name">{message.username}</span>
-                <span className="message-content">{message.message}</span>
+                <div className="message-card">
+                  <em><span className="username">  @{message.username} </span></em>
+                  {this.handlePriority(message.priority)}
+                  <br />
+                  <p>
+                    <span className="center-align" id="messsage-content">{message.message}  </span>
+                  </p>
+                </div>
               </li>)
             )}
           </ul>

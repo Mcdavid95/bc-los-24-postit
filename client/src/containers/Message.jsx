@@ -41,10 +41,12 @@ class Message extends Component {
 
     $('select').material_select();
     $('.modal').modal();
+    $('.tooltipped').tooltip({ delay: 50 });
   }
   /**
    * 
    * @param {*} nextProps 
+   * @return {*} update state
    */
   componentWillReceiveProps(nextProps) {
     this.setState({
@@ -61,22 +63,38 @@ class Message extends Component {
       <div>
         <Header />
         <main>
-          <SideNav />
+          <SideNav groupId={this.props.match.params.groupId} />
           <div id="modal1" className="modal  modal-fixed-footer">
             <div className="modal-content">
-              <button type="button" className="waves-effect waves-light btn modal-close" data-dismiss="modal">&times;</button>
+
+              <button
+                type="button"
+                className="waves-effect waves-light btn modal-close"
+                data-dismiss="modal"
+              >&times;</button>
+
               <h1>Create New Group</h1>
               <GroupForm createGroupRequest={this.props.createGroupRequest} />
             </div>
             <div className="modal-footer">
-              <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+              <a
+                href="#!"
+                className="modal-action modal-close waves-effect waves-green btn-flat "
+              >Close</a>
             </div>
           </div>
           <div id="modal2" className="modal modal-fixed-footer">
             <div className="modal-content">
-              <button type="button" className="waves-effect waves-light btn modal-close" data-dismiss="modal">&times;</button>
+              <button
+                type="button"
+                className="waves-effect waves-light btn modal-close"
+                data-dismiss="modal"
+              >&times;</button>
               <h1>Add New User To This Group</h1>
-              <AddUserForm addUserRequest={this.props.addUserRequest} groupId={this.props.match.params.groupId} />
+              <AddUserForm
+                addUserRequest={this.props.addUserRequest}
+groupId={this.props.match.params.groupId}
+              />
             </div>
             <div className="modal-footer">
               <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
@@ -112,4 +130,8 @@ Message.propTypes = {
 
 };
 
-export default connect(mapStateToProps, { loadGroups, users, messages, postMessagesRequest })(Message);
+export default connect(mapStateToProps,
+  { loadGroups,
+    users,
+    messages,
+    postMessagesRequest })(Message);

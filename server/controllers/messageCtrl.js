@@ -1,7 +1,9 @@
 import model from '../models';
+import { sendUrgentMail } from './emailNotificationCtrl';
 
 const Message = model.Message;
 const Group = model.Group;
+const GroupMembers = model.GroupMember;
 
 export default {
 
@@ -23,7 +25,7 @@ export default {
             Message
 
               .create({
-                username: req.decoded.username,
+                username: req.decoded.name,
 
                 userId: req.decoded.id,
 
@@ -34,8 +36,23 @@ export default {
                 priority: req.body.priority
 
               })
-              .then((response) => {
-                res.status(200).send({ message: response.message });
+              .then((message) => {
+                GroupMembers.findAll({
+                  where: {
+                    groupId: req.params.groupId,
+                  },
+
+                  attributes: ['userId', 'email']
+                })
+                  .then((users) => {
+                    console.log(users);
+                    if (req.body.priority === 'critical') {
+                      sendUrgentMail(users, { message });
+                    } else if (req.body.priority === 'urgent') {
+                      sendUrgentMail(users, { message });
+                    }
+                  });
+                res.status(200).send(message);
               })
               .catch((error) => {
                 res.status(400).send(error.message);
@@ -53,7 +70,7 @@ export default {
     Message
       .findAll({
         where: { groupId: req.params.groupId },
-        attributes: ['id', 'message', 'userId', 'groupId'],
+        attributes: ['id', 'message', 'userId', 'groupId', 'username', 'priority'],
       })
 
       .then((messages) => {

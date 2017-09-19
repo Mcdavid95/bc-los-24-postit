@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import initialState from '../initialState';
-import history from '../utils/History';
 import postMessagesRequest from '../actions/postMessageAction';
 import messages from '../actions/getMessagesActions';
 /**

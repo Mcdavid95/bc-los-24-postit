@@ -70,7 +70,7 @@ export default class LoginForm extends Component {
           <button type="submit" className="form-control btn btn-login btn-primary">Login</button>
           <hr />
           <br />
-          <p><Link to="#"> Forgot password?</Link></p>
+          <p><Link to="/forgot-password"> Forgot password? click to reset </Link></p>
         </form>
       </div>
     );

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import messages from '../actions/getMessagesActions';
+import history from '../utils/History';
 /**
  * 
  */
@@ -60,10 +61,7 @@ class GroupList extends Component {
           (<li key={group.groupId}>
             <div className="col s12">
               <div className="card blue-grey darken-1">
-                <div className="card-content white-text">
-                  <Link onClick={this.onClick} to={`/group/${group.groupId}/messages`}><span className="card-title list-group"> {group.groupName}</span></Link>
-                  <p>{group.description}</p>
-                </div>
+                <Link onClick={this.onClick} to={`/group/${group.groupId}/messages`}><span className="card-title list-group"> {group.groupName}</span></Link>
               </div>
             </div>
           </li>)
