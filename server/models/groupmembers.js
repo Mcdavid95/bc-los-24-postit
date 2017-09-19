@@ -16,6 +16,11 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: null,
     },
 
+    email: {
+      type: DataTypes.STRING,
+      onDelete: null
+    },
+
     description: {
       type: DataTypes.STRING
     },

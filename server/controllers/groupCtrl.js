@@ -41,7 +41,8 @@ export default {
                     isCreator: true,
                     username: req.decoded.name,
                     groupName: group.GroupName,
-                    description: group.description
+                    description: group.description,
+                    email: req.decoded.email
                   };
                   GroupMembers.create(groupMember);
                 } else {
@@ -103,7 +104,9 @@ export default {
                           groupId: req.params.groupId,
                           username: req.body.username.toLowerCase(),
                           groupName: groupExist.GroupName,
-                          description: groupExist.description
+                          description: groupExist.description,
+                          email: req.decoded.email,
+                          isCreator: false
                           
                         })
                           .then((success) => {
@@ -144,7 +147,7 @@ export default {
     GroupMembers
       .findAll({
         where: { username: req.decoded.name },
-        attributes: ['groupName', 'groupId']
+        attributes: ['groupName', 'groupId', 'description']
       })
       .then((group) => {
         res.send(group);
