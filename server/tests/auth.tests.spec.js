@@ -4,7 +4,7 @@ import chaiHttp from 'chai-http';
 import server from '../../serverTest';
 import models from '../models';
 import { valid, yetAnotherValid, anotherValid, invalidUsername, invalidEmail, invalidNumber } from '../seeders/authSeeds';
-import { Group1, Group2, addUser1 } from '../seeders/groupSeeds';
+import { Group1 } from '../seeders/groupSeeds';
 
 chai.use(chaiHttp);
 const api = supertest.agent(server);
@@ -540,6 +540,25 @@ describe('Message Routes', () => {
       .end((err, res) => {
         res.status.should.equal(200);
         res.body.length.should.equal(1);
+        done();
+      });
+  });
+});
+
+describe('Forgot Password route', () => {
+  it('should generate a token if user passes in a correct email address', (done) => {
+    api
+      .post('/api/forgot-password')
+      .expect(200)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        email: 'mcdavidemereuwa95@gmail.com'
+      })
+      .end((err, res) => {
+        res.status.should.equal(201);
+        expect(res.body.token).to.be.a('string');
         done();
       });
   });
