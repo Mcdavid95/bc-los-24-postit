@@ -16,9 +16,9 @@ import requireAuth from './src/utils/Authenticate';
 import ForgotPasswordPage from './src/pages/ForgotPassword';
 import ResetPassword from './src/pages/ResetPassword';
 import SearchUserPage from './src/containers/SearchPage';
+import PageNotFound from './src/pages/404/PageNotFound';
 
 import './public/materialize.min.css';
-// import './public/auth.css';
 import './public/auth.scss';
 import './js/jquery-3.2.1.min';
 import './js/materialize.min';
@@ -36,14 +36,20 @@ ReactDom.render(
   <Provider store={store}>
     <Router history={history}>
       <Switch>
-        <Route exact path="/" component={Login} />
+        <Route exact path="/" component={requireAuth(Board)} />
         <Route exact path="/register" name="signup" component={Signup} />
         <Route exact path="/login" name="login" component={Login} />
-        <Route exact path="/forgot-password" name="forgot-password" component={ForgotPasswordPage} />
+        <Route
+          exact
+          path="/forgot-password"
+          name="forgot-password"
+          component={ForgotPasswordPage}
+        />
         <Route exact path="/dashboard" name="board" component={requireAuth(Board)} />
         <Route path="/group/:groupId" name="group" component={requireAuth(Message)} />
-        <Route path="/reset" name="reset" component={ResetPassword} />
+        <Route path="/reset/:token" name="reset" component={ResetPassword} />
         <Route path="/search-user" name="search-user" component={requireAuth(SearchUserPage)} />
+        <Route path="*" component={PageNotFound} />
       </Switch>
     </Router>
   </Provider>
