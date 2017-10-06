@@ -1,5 +1,5 @@
 import setCurrentUser from './currentUserActions';
-import setAuthToken from '../reducers/authTokenReducer';
+import setAuthToken from '../utils/setAuthToken';
 import { LOGOUT_USER } from '../../constant';
 import history from '../utils/History';
 

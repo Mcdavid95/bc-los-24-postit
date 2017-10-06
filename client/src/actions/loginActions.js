@@ -10,7 +10,7 @@ const userLoginSuccess = user => ({ type: types.LOGIN_USER, user });
 const userLoginFailed = user => ({ type: types.LOGIN_USER_ERROR, user });
 
 
-const userLoginRequest = userData => dispatch => axios.post('/api/user/login', userData)
+const userLoginRequest = userData => dispatch => axios.post('/api/v1/user/login', userData)
   .then((response) => {
     dispatch(userLoginSuccess(response));
     const token = response.data.myToken;

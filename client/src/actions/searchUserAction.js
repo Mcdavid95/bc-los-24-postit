@@ -5,10 +5,10 @@ const searchUserSuccess = users => ({ type: types.SEARCH_USERS_SUCCESS, users })
 
 const searchUserFailed = users => ({ type: types.SEARCH_USERS_FAILED, users });
 
-const searchUsers = (page, username) => dispatch =>
-  axios.post(`/api/users/searchList/${page}`, username)
+const searchUsers = (username, offset) => dispatch =>
+  axios.post(`/api/v1/users/searchList/${offset}`, username)
     .then((response) => {
-      dispatch(searchUserSuccess(response.data.result));
+      dispatch(searchUserSuccess(response.data));
     })
     .catch((response) => {
       dispatch(searchUserFailed(response));

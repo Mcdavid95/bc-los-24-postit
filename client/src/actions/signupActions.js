@@ -9,7 +9,7 @@ const signupUserSuccess = user => ({ type: types.SIGNUP_USER, user });
 
 const signupUserFail = user => ({ type: types.SIGNUP_USER_ERROR, user });
 
-const userSignupRequest = userData => dispatch => axios.post('/api/user/register', userData)
+const userSignupRequest = userData => dispatch => axios.post('/api/v1/user/register', userData)
   .then((response) => {
     dispatch(signupUserSuccess(response));
     const token = response.data.myToken;

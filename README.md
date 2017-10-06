@@ -17,7 +17,7 @@ PostIt is a simple application that allows friends and colleagues create groups 
 * Reset passsword
 
 ## Usage
-* Test on postman using the /api/...suffix
+* Test on postman using the /api/v1/...suffix
 
 ## Tecnologies Used
 * JavaScript(Node)

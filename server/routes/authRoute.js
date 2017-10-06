@@ -11,28 +11,28 @@ const router = express.Router();
 // ======================
 
 // Sign up logic
-router.post('/api/user/register', AuthCtrl.register);
+router.post('/api/v1/user/register', AuthCtrl.register);
 
 // route to paginate all users
-router.post('/api/users/searchList/:page', Verify.hasToken, AuthCtrl.searchUser);
+router.post('/api/v1/users/searchList/:offset', AuthCtrl.searchUser);
 
 // Login logic
 
-router.post('/api/user/login', AuthCtrl.login);
+router.post('/api/v1/user/login', AuthCtrl.login);
 
 // Add logout route
-router.post('/api/user/logout', AuthCtrl.logout);
+router.post('/api/v1/user/logout', AuthCtrl.logout);
 
-router.get('/api/users', Verify.hasToken, AuthCtrl.listUsers);
+router.get('/api/v1/users', Verify.hasToken, AuthCtrl.listUsers);
 
 // forgot password api for the user
-router.post('/api/forgot-password', AuthCtrl.forgotPassoword);
+router.post('/api/v1/forgot-password', AuthCtrl.forgotPassoword);
 
 // update user password
-router.post('/api/reset-password/:token', AuthCtrl.reset);
+router.post('/api/v1/reset-password/:token', AuthCtrl.reset);
 
 // authenticate reset password token
-router.post('/api/reset/token', AuthCtrl.authToken);
+router.post('/api/v1/reset/token', AuthCtrl.authToken);
 
 
 export default router;

@@ -6,7 +6,7 @@ const getAllUsersSuccess = users => ({ type: types.GET_USERS_SUCCESS, users });
 const getAllUsersFailed = users => ({ type: types.GET_USERS_FAILED, users });
 
 const getAllUsers = () => dispatch =>
-  axios.get('/api/users')
+  axios.get('/api/v1/users')
     .then((response) => {
       dispatch(getAllUsersSuccess(response.data));
     })

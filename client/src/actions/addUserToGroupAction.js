@@ -5,7 +5,7 @@ const addUserSuccess = username => ({ type: types.ADD_USER_TO_GROUP_SUCCESS, use
 
 const addUserFailed = username => ({ type: types.ADD_USER_TO_GROUP_FAILED, username });
 
-const addUserRequest = (userData, groupId) => dispatch => axios.post(`/api/group/${groupId}/user`, userData)
+const addUserRequest = (userData, groupId) => dispatch => axios.post(`/api/v1/group/${groupId}/user`, userData)
   .then((response) => {
     dispatch(addUserSuccess(response));
   })

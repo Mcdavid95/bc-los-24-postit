@@ -11,7 +11,7 @@ const getMessageFailed = messages => ({
 
 const getGroupMesssages = groupId =>
   dispatch =>
-    axios.get(`/api/group/${groupId}/messages`)
+    axios.get(`/api/v1/group/${groupId}/messages`)
       .then((response) => {
         dispatch(getMessageSuccess(response.data));
       })

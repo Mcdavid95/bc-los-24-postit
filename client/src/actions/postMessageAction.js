@@ -5,7 +5,7 @@ const postMessageSuccess = message => ({ type: types.POST_MESSAGE_SUCCESS, messa
 
 const postMessageFailed = message => ({ type: types.POST_MESSAGE_FAILED, message });
 
-const postMessageRequest = (groupId, messageData) => dispatch => axios.post(`/api/group/${groupId}/message`, messageData)
+const postMessageRequest = (groupId, messageData) => dispatch => axios.post(`/api/v1/group/${groupId}/message`, messageData)
   .then((details) => {
     dispatch(postMessageSuccess(details));
   })

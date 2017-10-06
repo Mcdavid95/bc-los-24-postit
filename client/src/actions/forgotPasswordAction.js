@@ -11,7 +11,7 @@ const confirmEmailFailed = email => ({
 });
 
 const confirmEmailRequest = email => dispatch =>
-  axios.post('/api/forgot-password', email)
+  axios.post('/api/v1/forgot-password', email)
     .then((response) => {
       dispatch(confirmEmailSuccess(response));
       Materialize.toast('A Link has been sent to your mail to reset your email /n It expires after 30mins', 6000, 'rounded, green');

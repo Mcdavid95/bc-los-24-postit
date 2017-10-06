@@ -8,7 +8,7 @@ const createGroupSuccess = group => ({ type: types.CREATE_GROUP_SUCCESS, group }
 const createGroupFailed = group => ({ type: types.CREATE_GROUP_ERROR, group });
 
 
-const createGroupRequest = groupdata => dispatch => axios.post('/api/group', groupdata)
+const createGroupRequest = groupdata => dispatch => axios.post('/api/v1/group', groupdata)
   .then((response) => {
     dispatch(createGroupSuccess(response));
     dispatch(userGroups());

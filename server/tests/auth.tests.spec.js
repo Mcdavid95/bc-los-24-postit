@@ -34,7 +34,7 @@ describe('Authentication Route', () => {
 
   it('should prevent access to an undefined route', (done) => {
     api
-      .get('/api/creepy')
+      .get('/api/v1/creepy')
       .expect(501)
       .end((err, res) => {
         res.body.message.should.equal('Sorry, this address is not supported by this API.');
@@ -44,7 +44,7 @@ describe('Authentication Route', () => {
 
   it('should prevent users not logged in to access protected routes', (done) => {
     api
-      .get('/api/users')
+      .get('/api/v1/users')
       .expect(403)
       .end((err, res) => {
         res.status.should.equal(403);
@@ -55,7 +55,7 @@ describe('Authentication Route', () => {
 
   it('should not allow a new user to register with an empty field', (done) => {
     api
-      .post('/api/user/register')
+      .post('/api/v1/user/register')
       .expect(403)
       .end((err, res) => {
         res.status.should.equal(409);
@@ -66,7 +66,7 @@ describe('Authentication Route', () => {
 
   it('should not allow user with empty password field to log in', (done) => {
     api
-      .post('/api/user/register')
+      .post('/api/v1/user/register')
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
@@ -84,7 +84,7 @@ describe('Authentication Route', () => {
 
   it('should not create user with empty email field', (done) => {
     api
-      .post('/api/user/register')
+      .post('/api/v1/user/register')
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
@@ -102,7 +102,7 @@ describe('Authentication Route', () => {
 
   it('should allow new user to create an account', (done) => {
     api
-      .post('/api/user/register')
+      .post('/api/v1/user/register')
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
@@ -117,7 +117,7 @@ describe('Authentication Route', () => {
 
   it('should not allow new user to create an account if username is in use', (done) => {
     api
-      .post('/api/user/register')
+      .post('/api/v1/user/register')
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
@@ -131,7 +131,7 @@ describe('Authentication Route', () => {
 
   it('should not allow new user to create an account if Email is in use', (done) => {
     api
-      .post('/api/user/register')
+      .post('/api/v1/user/register')
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
@@ -145,7 +145,7 @@ describe('Authentication Route', () => {
 
   it('should not allow new user to create an account if phone number is in use', (done) => {
     api
-      .post('/api/user/register')
+      .post('/api/v1/user/register')
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
@@ -159,7 +159,7 @@ describe('Authentication Route', () => {
 
   it('should allow new user to create an account', (done) => {
     api
-      .post('/api/user/register')
+      .post('/api/v1/user/register')
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
@@ -173,7 +173,7 @@ describe('Authentication Route', () => {
 
   it('should generate token when user creates an account', (done) => {
     api
-      .post('/api/user/register')
+      .post('/api/v1/user/register')
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
@@ -187,7 +187,7 @@ describe('Authentication Route', () => {
 
   it('should allow registered user to log in ', (done) => {
     api
-      .post('/api/user/login')
+      .post('/api/v1/user/login')
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
@@ -205,7 +205,7 @@ describe('Authentication Route', () => {
 
   it('should not allow user with wrong username to log in ', (done) => {
     api
-      .post('/api/user/login')
+      .post('/api/v1/user/login')
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
@@ -222,7 +222,7 @@ describe('Authentication Route', () => {
 
   it('should not allow user with wrong password to log in ', (done) => {
     api
-      .post('/api/user/login')
+      .post('/api/v1/user/login')
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
@@ -239,7 +239,7 @@ describe('Authentication Route', () => {
 
   it('should generate token when user logs in', (done) => {
     api
-      .post('/api/user/login')
+      .post('/api/v1/user/login')
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
@@ -256,7 +256,7 @@ describe('Authentication Route', () => {
 
   it('should get all registered users ', (done) => {
     api
-      .get('/api/users')
+      .get('/api/v1/users')
       .set('x-access-token', token)
       .expect(200)
       .end((err, res) => {
@@ -270,7 +270,7 @@ describe('Authentication Route', () => {
 describe('Group Route', () => {
   it('should allow loggedin user to create new group', (done) => {
     api
-      .post('/api/group')
+      .post('/api/v1/group')
       .set('Connetion', 'keep alive')
       .set('x-access-token', token)
       .set('Content-Type', 'application/json')
@@ -286,7 +286,7 @@ describe('Group Route', () => {
 
   it('should not allow loggedin user to create new group if group name already exists', (done) => {
     api
-      .post('/api/group')
+      .post('/api/v1/group')
       .set('Connetion', 'keep alive')
       .set('x-access-token', token)
       .set('Content-Type', 'application/json')
@@ -302,7 +302,7 @@ describe('Group Route', () => {
 
   it('should not allow loggedin user to create new group without group name', (done) => {
     api
-      .post('/api/group')
+      .post('/api/v1/group')
       .set('Connetion', 'keep alive')
       .set('x-access-token', token)
       .set('Content-Type', 'application/json')
@@ -320,7 +320,7 @@ describe('Group Route', () => {
 
   it('should not allow loggedin user to create new group without description', (done) => {
     api
-      .post('/api/group')
+      .post('/api/v1/group')
       .set('Connetion', 'keep alive')
       .set('x-access-token', token)
       .set('Content-Type', 'application/json')
@@ -338,7 +338,7 @@ describe('Group Route', () => {
 
   it('should get all created groups', (done) => {
     api
-      .get('/api/groups')
+      .get('/api/v1/groups')
       .set('x-access-token', token)
       .expect(200)
       .end((err, res) => {
@@ -350,7 +350,7 @@ describe('Group Route', () => {
 
   it('should allow loggedin user to add another user to a group', (done) => {
     api
-      .post('/api/group/1/user')
+      .post('/api/v1/group/1/user')
       .set('Connetion', 'keep alive')
       .set('x-access-token', token)
       .set('Content-Type', 'application/json')
@@ -368,7 +368,7 @@ describe('Group Route', () => {
 
   it('should not allow loggedin user to add another user twice to a group', (done) => {
     api
-      .post('/api/group/1/user')
+      .post('/api/v1/group/1/user')
       .set('Connetion', 'keep alive')
       .set('x-access-token', token)
       .set('Content-Type', 'application/json')
@@ -386,7 +386,7 @@ describe('Group Route', () => {
 
   it('should not allow loggedin user to add another user to group that does not exist', (done) => {
     api
-      .post('/api/group/2/user')
+      .post('/api/v1/group/2/user')
       .set('Connetion', 'keep alive')
       .set('x-access-token', token)
       .set('Content-Type', 'application/json')
@@ -404,7 +404,7 @@ describe('Group Route', () => {
 
   it('should not allow loggedin user to add another user to group with wrong username', (done) => {
     api
-      .post('/api/group/1/user')
+      .post('/api/v1/group/1/user')
       .set('Connetion', 'keep alive')
       .set('x-access-token', token)
       .set('Content-Type', 'application/json')
@@ -422,7 +422,7 @@ describe('Group Route', () => {
 
   it('should get all users in a particular group', (done) => {
     api
-      .get('/api/group/1/users')
+      .get('/api/v1/group/1/users')
       .set('x-access-token', token)
       .expect(200)
       .end((err, res) => {
@@ -434,7 +434,7 @@ describe('Group Route', () => {
 
   it('should not get all users in a particular group if groupId is incorrect', (done) => {
     api
-      .get('/api/group/2/users')
+      .get('/api/v1/group/2/users')
       .set('x-access-token', token)
       .expect(404)
       .end((err, res) => {
@@ -446,7 +446,7 @@ describe('Group Route', () => {
 
   it('should get all groups belonging to a single user', (done) => {
     api
-      .get('/api/user/groups')
+      .get('/api/v1/user/groups')
       .set('x-access-token', token)
       .expect(200)
       .end((err, res) => {
@@ -460,7 +460,7 @@ describe('Group Route', () => {
 describe('Message Routes', () => {
   it('should not post message if message body is undefined', (done) => {
     api
-      .post('/api/group/1/message')
+      .post('/api/v1/group/1/message')
       .set('Connetion', 'keep alive')
       .set('x-access-token', token)
       .set('Content-Type', 'application/json')
@@ -478,7 +478,7 @@ describe('Message Routes', () => {
 
   it('should not post message if message body is has only white spaces', (done) => {
     api
-      .post('/api/group/1/message')
+      .post('/api/v1/group/1/message')
       .set('Connetion', 'keep alive')
       .set('x-access-token', token)
       .set('Content-Type', 'application/json')
@@ -496,7 +496,7 @@ describe('Message Routes', () => {
 
   it('should post message to a group', (done) => {
     api
-      .post('/api/group/1/message')
+      .post('/api/v1/group/1/message')
       .set('Connetion', 'keep alive')
       .set('x-access-token', token)
       .set('Content-Type', 'application/json')
@@ -514,7 +514,7 @@ describe('Message Routes', () => {
   });
   it('should post message to a group with wrong id', (done) => {
     api
-      .post('/api/group/2/message')
+      .post('/api/v1/group/2/message')
       .set('Connetion', 'keep alive')
       .set('x-access-token', token)
       .set('Content-Type', 'application/json')
@@ -534,7 +534,7 @@ describe('Message Routes', () => {
 
   it('should get all messages belonging to a single group', (done) => {
     api
-      .get('/api/group/1/messages')
+      .get('/api/v1/group/1/messages')
       .set('x-access-token', token)
       .expect(200)
       .end((err, res) => {
@@ -548,7 +548,7 @@ describe('Message Routes', () => {
 describe('Forgot Password route', () => {
   it('should generate a token if user passes in a correct email address', (done) => {
     api
-      .post('/api/forgot-password')
+      .post('/api/v1/forgot-password')
       .expect(200)
       .set('Connection', 'keep alive')
       .set('Content-Type', 'application/json')
