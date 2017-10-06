@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import crypto from 'crypto';
 import { resetPasswordMail, sendSuccessfulResetMail } from './emailNotificationCtrl';
 import model from '../models/';
+import paginate from './pagination';
 
 dotenv.config();
 const User = model.User;
@@ -107,63 +108,23 @@ export default {
       });
   },
 
-  // searchUser(req, res) {
-  //   return User
-  //     .findAll({
-  //       offset: req.params.offset * 5,
-  //       limit: 5,
-  //       where: {
-  //         username: { $like: `%${req.body.username}%` }
-  //       },
-  //       attributes: ['id', 'username', 'email'],
-  //     })
-  //     .then((users) => {
-  //       res.status(201).send({
-  //         result: users,
-  //         message: 'success'
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       res.status(409).send({
-  //         success: false,
-  //         users: [],
-  //         message: 'An error occured, could not fetch result'
-  //       });
-  //     });
-  // },
-
   searchUser(req, res) {
     const limit = 5;
-    let offset = 0;
+    const offset = req.params.offset;
     User
       .findAndCountAll({
         where: {
           username: { $like: `%${req.body.username}%` }
         },
+        attributes: ['id', 'username', 'email'],
+        limit,
+        offset
       })
       .then((users) => {
-        const page = req.params.page;
-        const pages = Math.ceil(users.count / limit);
-        offset = limit * (page - 1);
-        return User
-          .findAll({
-            where: {
-              username: { $like: `%${req.body.username}%` }
-            },
-            attributes: ['id', 'username', 'email'],
-            limit,
-            offset,
-            $sort: { id: 1 }
-          })
-          .then((searchResult) => {
-            res.status(201).send({
-              result: searchResult,
-              count: users.count,
-              pages,
-              offset
-            });
-          });
+        res.status(201).send({
+          user: users.rows,
+          metadata: paginate(users.count, limit, offset),
+        });
       })
       .catch((err) => {
         res.status(400).send(err);
@@ -297,50 +258,46 @@ export default {
             success: false,
             message: 'failed token authentication'
           });
-        } else {
-          console.log(Date.now());
-          console.log(user.expiryTime);
-          if ((Date.now()) > user.expiryTime) {
-            user.update({
-              resetPasswordToken: null,
-              expiryTime: null
-            }, {
-              where: {
-                resetPasswordToken: req.params.token
-              }
-            })
-              .then(() => {
-                res.status(400).send({ success: false });
-              }, err => res.status(400).send(err.message));
-          } else if (req.body.newPassword &&
+        } else if ((Date.now()) > user.expiryTime) {
+          user.update({
+            resetPasswordToken: null,
+            expiryTime: null
+          }, {
+            where: {
+              resetPasswordToken: req.params.token
+            }
+          })
+            .then(() => {
+              res.status(400).send({ success: false });
+            }, err => res.status(400).send(err.message));
+        } else if (req.body.newPassword &&
             req.body.newPassword.length > 7 &&
             req.body.confirmPassword &&
             req.body.confirmPassword.length > 7 &&
             (req.body.newPassword === req.body.confirmPassword)
-          ) {
-            user.update({
-              password: bcrypt.hashSync(req.body.confirmPassword, 10),
-              resetPasswordToken: null,
-              expiryTime: null
-            })
-              .then((updatedUser) => {
-                sendSuccessfulResetMail(updatedUser.email);
-                res.status(201).send({
-                  success: true,
-                  message: 'successfully updated password'
-                });
-              }, (err) => {
-                res.status(400).send({
-                  success: false,
-                  message: err.message
-                });
+        ) {
+          user.update({
+            password: bcrypt.hashSync(req.body.confirmPassword, 10),
+            resetPasswordToken: null,
+            expiryTime: null
+          })
+            .then((updatedUser) => {
+              sendSuccessfulResetMail(updatedUser.email);
+              res.status(201).send({
+                success: true,
+                message: 'successfully updated password'
               });
-          } else {
-            res.status(400).send({
-              success: false,
-              message: 'invalid passwords'
+            }, (err) => {
+              res.status(400).send({
+                success: false,
+                message: err.message
+              });
             });
-          }
+        } else {
+          res.status(400).send({
+            success: false,
+            message: 'invalid passwords'
+          });
         }
       }, (err) => {
         res.status(400).send({
