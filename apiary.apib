@@ -1,0 +1,348 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# PostIT
+
+POSTIT is an application that allows users to create groups and reach them all at the same time.
+
+It includes a RESTful API that allows registered users to create groups and add other users to their groups.
+The cool feature about the app is the email notifications for its users
+
+## User SignUp [/api/user/register]
+
+### SIGNUP [POST]
+
+You can register as new user using this action. It takes a JSON object containing the credentials of the new user which includes the following
+
+* username
+* email
+* phone number
+* password
+
+It returns a success message and a jwt(JSON web token)
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "username": "Jabuike",
+                "email": "jabike@gmail.com",
+                "password": "jay4Dlion",
+                "phoneNumber": 82888299299,
+            }
+        
++ Response 201 (aplication/json)
+
+    + Body
+    
+            {
+                "myToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphYnVpa2UiLCJlbWFpbCI6ImphYmlrZUBnbWFpbC5jb20iLCJpYXQiOjE1MDU0MTg5OTksImV4cCI6MTUwNTUwNTM5OX0.bKPH5AgVw7BRNHp33QeuV_4wZ60ENs6PgXvqE4vezco",
+                "sucsess": true,
+                "message": "Welcome to POSTIT!! Jabuike"
+            }
+
+## User Login [/api/user/login]
+
+### LOGIN [POST]
+
+This action logs in an existing user. It takes in a JSON object containing user login credentials which includes the following
+
+* username
+* password
+
+It returns a welcome message and a (jwt)JSON web token 
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "username": "Jabuike",
+                "password": "jay4Dlion"
+            }
+
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                "myToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphYnVpa2UiLCJlbWFpbCI6ImphYmlrZUBnbWFpbC5jb20iLCJpYXQiOjE1MDU0MjAyMDMsImV4cCI6MTUwNTUwNjYwM30.kIrAqGIx-ahvfXo7moW5Llu5G0fBlqOa2dz7d6ctN9Y",
+                "message": "Welcome back Jabuike"
+            }
+            
+## Get All Users [/api/users]
+
+### Get User [GET]
+
+This action gets all registered users returning the following:
+
+* User id
+* username
+* email
+
++ Response 201 (application/json)
+
+    + Body
+
+            [
+                {
+                    "id": 1,
+                    "username": "steven",
+                    "email": "steve@hifh.com"
+                },
+                {
+                    "id": 2,
+                    "username": "jabuike",
+                    "email": "jabike@gmail.com"
+                }
+            ]
+            
+## Create Group [/api/group]
+
+### Create New Group [POST]
+
+This action allows a loggedin user to create new groups. It takes i a JSON object containing the group credentials which includes the following:
+
+* GroupName
+* description
+
+It return a success message, confirming group
+
++ Request (application/json)
+
+    + Headers
+    
+            x-access-token:  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphYnVpa2UiLCJlbWFpbCI6ImphYmlrZUBnbWFpbC5jb20iLCJpYXQiOjE1MDU0MjAyMDMsImV4cCI6MTUwNTUwNjYwM30.kIrAqGIx-ahvfXo7moW5Llu5G0fBlqOa2dz7d6ctN9Y"
+            
+    + Body
+    
+            {
+                "GroupName": "Angular Ninjas"
+                "description": "For the Love of angular 4"
+            }
+
+
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                "message": "Group killers successfully created"
+            }
+
+
+## Add User to Group [/api/group/:groupId/user]
+
+### Add User to Group [POST]
+
+This action allows a user to add other registered users to groups they belong to.
+ it takes in a JSON object that contains the username of the user to be added.
+ 
+
++ Request (aplication/json)
+
+    + Headers
+    
+            x-access-token:  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphYnVpa2UiLCJlbWFpbCI6ImphYmlrZUBnbWFpbC5jb20iLCJpYXQiOjE1MDU0MjAyMDMsImV4cCI6MTUwNTUwNjYwM30.kIrAqGIx-ahvfXo7moW5Llu5G0fBlqOa2dz7d6ctN9Y"
+
+    + Body
+    
+                {
+                    "username": "steven"
+                }
+
+
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                "message": "Group killers successfully created"
+            }
+
+
+## Send Message [/api/group/:groupId/message]
+
+### Create Message [POST]
+
+This action allows users to send broadcast messages to members of a particular group they belong to.
+It takes in a JSON object which includes the following:
+
+* message
+*  priority:-
+    * normal
+    * urgent
+    * critical
+    
+    
+Upon completion of action if the priority chosen is either `urgent` or `critical`, the message is broadcast to everyone in that group via email.
+
+
++ Request (aplication/json)
+
+    + Headers
+    
+            x-access-token:  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphYnVpa2UiLCJlbWFpbCI6ImphYmlrZUBnbWFpbC5jb20iLCJpYXQiOjE1MDU0MjAyMDMsImV4cCI6MTUwNTUwNjYwM30.kIrAqGIx-ahvfXo7moW5Llu5G0fBlqOa2dz7d6ctN9Y"
+
+    + Body
+    
+                {
+                    "message": "hi humans"
+                }
+
+
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                 "priority": "normal",
+                 "id": 15,
+                 "username": "steven",
+                 "userId": 1,
+                 "groupId": 1,
+                 "message": "hey",
+                 "updatedAt": "2017-09-14T23:22:28.852Z",
+                 "createdAt": "2017-09-14T23:22:28.852Z"
+            }
+
+
+## List all Messages [/api/group/:groupId/messages]
+
+### Get all Messages [GET]
+
+This action get all messages in a single group
+
++ Response 201 (apication/json)
+
+    + Headers
+    
+            x-access-token:  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphYnVpa2UiLCJlbWFpbCI6ImphYmlrZUBnbWFpbC5jb20iLCJpYXQiOjE1MDU0MjAyMDMsImV4cCI6MTUwNTUwNjYwM30.kIrAqGIx-ahvfXo7moW5Llu5G0fBlqOa2dz7d6ctN9Y"
+
+
+    + Body
+    
+            [
+                {
+                    "id": 1,
+                    "message": "hi guys",
+                    "userId": 1,
+                    "groupId": 1,
+                    "username": "steven",
+                    "priority": "normal"
+                },
+                {
+                    "id": 2,
+                    "message": "how do you mean",
+                    "userId": 1,
+                    "groupId": 1,
+                    "username": "steven",
+                    "priority": "normal"
+                },
+                {
+                    "id": 3,
+                    "message": "hey",
+                    "userId": 1,
+                    "groupId": 1,
+                    "username": "steven",
+                    "priority": "normal"
+                },
+                {
+                    "id": 7,
+                    "message": "hey",
+                    "userId": 1,
+                    "groupId": 1,
+                    "username": "steven",
+                    "priority": "normal"
+                },
+                {
+                    "id": 8,
+                    "message": "yoyo",
+                    "userId": 1,
+                    "groupId": 1,
+                    "username": "steven",
+                    "priority": "normal"
+                },
+                {
+                    "id": 9,
+                    "message": "hallo",
+                    "userId": 1,
+                        "groupId": 1,
+                        "username": "steven",
+                        "priority": "normal"
+                    },
+                    {
+                    "id": 10,
+                    "message": "hi",
+                    "userId": 1,
+                    "groupId": 1,
+                    "username": "steven",
+                    "priority": "normal"
+                },
+                {
+                    "id": 11,
+                    "message": "halo",
+                    "userId": 1,
+                    "groupId": 1,
+                    "username": "steven",
+                    "priority": "normal"
+                },
+                {
+                    "id": 12,
+                    "message": "work",
+                    "userId": 1,
+                    "groupId": 1,
+                    "username": "steven",
+                    "priority": "urgent"
+                },
+                {
+                    "id": 13,
+                    "message": "HELP!!!!!!",
+                    "userId": 1,
+                    "groupId": 1,
+                    "username": "steven",
+                    "priority": "critical"
+                },
+                {
+                    "id": 14,
+                    "message": "guess what yamen is here beside me, so weird of a guy",
+                    "userId": 1,
+                    "groupId": 1,
+                    "username": "steven",
+                    "priority": "critical"
+                },
+                {
+                    "id": 15,
+                    "message": "hey",
+                    "userId": 1,
+                    "groupId": 1,
+                    "username": "steven",
+                    "priority": "normal"
+                }
+            ]
+
+
+
+## Get Group Belonging to a  single User [/api/user/groups]
+
+### Get all Group belnging to one user [GET]
+
+This action get all groups where a user has been added to.
+
++ Response 201 (apication/json)
+
+    + Headers
+    
+            x-access-token:  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphYnVpa2UiLCJlbWFpbCI6ImphYmlrZUBnbWFpbC5jb20iLCJpYXQiOjE1MDU0MjAyMDMsImV4cCI6MTUwNTUwNjYwM30.kIrAqGIx-ahvfXo7moW5Llu5G0fBlqOa2dz7d6ctN9Y"
+
+
+    + Body
+
+            [
+                {
+                    "groupName": "lana",
+                    "groupId": 4,
+                    "description": "we kill"
+                }
+            ]
