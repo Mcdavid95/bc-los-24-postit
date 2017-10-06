@@ -82,7 +82,7 @@ class MessageForm extends Component {
               />
             </div>
             <div className="input-field col m4 select-dropdown">
-              <select value={this.state.priority} className="browser-default" onChange={this.handleSelectChange}>
+              <select value={this.state.priority} id="options" className="browser-default" onChange={this.handleSelectChange}>
                 <option value="">Chose your Priority</option>
                 <option value="normal">Normal</option>
                 <option value="urgent">Urgent</option>

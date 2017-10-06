@@ -4,15 +4,12 @@ import initialState from '../initialState';
 const signupReducer = (state = initialState.signup, action) => {
   switch (action.type) {
     case types.SIGNUP_USER:
-      return [...state,
-        Object.assign({}, action.userData)
+      return [
+        ...state, action
       ];
 
     case types.SIGNUP_USER_ERROR:
-      return [
-        ...state,
-        Object.assign({}, action.userData)
-      ];
+      return [];
     default:
       return state;
   }

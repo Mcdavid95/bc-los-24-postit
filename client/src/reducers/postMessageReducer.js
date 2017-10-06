@@ -5,14 +5,11 @@ const postMessageReducer = (state = initialState.postMessage, action) => {
   switch (action.type) {
     case types.POST_MESSAGE_SUCCESS:
       return [
-        ...state,
-        Object.assign({}, action.messageData)
+        ...state, action.messageData
       ];
 
     case types.POST_MESSAGE_FAILED:
-      return [
-        state
-      ];
+      return [];
 
     default:
       return state;

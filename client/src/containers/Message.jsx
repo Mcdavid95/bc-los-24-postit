@@ -32,7 +32,7 @@ class Message extends Component {
     };
   }
   /**
- * 
+ * @return {*} loads actions when page loads initially
  */
   componentDidMount() {
     this.props.loadGroups();
@@ -73,7 +73,7 @@ class Message extends Component {
                 data-dismiss="modal"
               >&times;</button>
 
-              <h1>Create New Group</h1>
+            
               <GroupForm createGroupRequest={this.props.createGroupRequest} />
             </div>
             <div className="modal-footer">
@@ -84,7 +84,7 @@ class Message extends Component {
             </div>
           </div>
           <div id="modal2" className="modal modal-fixed-footer">
-            <div className="modal-content">
+            <div className="modal-content" id="options">
               <button
                 type="button"
                 className="waves-effect waves-light btn modal-close"
@@ -93,17 +93,26 @@ class Message extends Component {
               <h1>Add New User To This Group</h1>
               <AddUserForm
                 addUserRequest={this.props.addUserRequest}
-groupId={this.props.match.params.groupId}
+                groupId={this.props.match.params.groupId}
               />
             </div>
             <div className="modal-footer">
-              <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+              <a
+                href="#!"
+                className="modal-action modal-close waves-effect waves-green btn-flat "
+              >Close</a>
             </div>
           </div>
           <div className="row">
-            <a className="modal-trigger center-align" id="users" href="#modal2">Add new user</a>
-            <MessageBoard groupMessages={this.state.messages} groupId={this.props.match.params.groupId} />
-            <MessageForm groupId={this.props.match.params.groupId} postMessagesRequest={this.props.postMessagesRequest} />
+            <a className="modal-trigger center-align waves-effect waves-light btn" id="users" href="#modal2">Add new user</a>
+            <MessageBoard
+              groupMessages={this.state.messages}
+              groupId={this.props.match.params.groupId}
+            />
+            <MessageForm
+              groupId={this.props.match.params.groupId}
+              postMessagesRequest={this.props.postMessagesRequest}
+            />
           </div>
         </main>
         <Footer />
@@ -126,6 +135,8 @@ Message.propTypes = {
   loadGroups: PropTypes.func.isRequired,
   userGroupList: PropTypes.array.isRequired,
   users: PropTypes.func.isRequired,
+  addUserRequest: PropTypes.func.isRequired,
+  createGroupRequest: PropTypes.func.isRequired,
   allUsers: PropTypes.array.isRequired
 
 };

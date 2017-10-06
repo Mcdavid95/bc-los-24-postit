@@ -7,14 +7,12 @@ const userGroupsReducer = (state = initialState.userGroupList, action = {}) => {
       return [
         ...state,
         action.groups
-        // Object.assign({}, action.groups)
       ];
 
     case types.LOAD_GROUPS_FAILED:
       return [
         ...state,
         action.groups
-        // Object.assign({}, action.groups)
       ];
 
     default:

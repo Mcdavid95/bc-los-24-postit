@@ -5,15 +5,11 @@ const forgotPasswordReducer = (state = initialState.forgotPassword, action = {})
   switch (action.type) {
     case types.CONFIRM_EMAIL_SUCCESS:
       return [
-        state,
-        Object.assign({}, action.email)
+        ...state, action.email
       ];
 
     case types.CONFIRM_EMAIL_FAILED:
-      return [
-        state,
-        Object.assign({}, action.email)
-      ];
+      return [];
 
     default:
       return state;

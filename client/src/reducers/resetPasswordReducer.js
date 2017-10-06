@@ -11,8 +11,6 @@ const resetPasswordReducer = (state = initialState.forgotPassword, action = {}) 
 
     case types.RESET_PASSWORD_FAILED:
       return [
-        state,
-        Object.assign({}, action.password)
       ];
 
     default:

@@ -5,15 +5,11 @@ const loginReducer = (state = initialState.login, action) => {
   switch (action.type) {
     case types.LOGIN_USER:
       return [
-        ...state,
-        Object.assign({}, action.userData)
+        ...state, action
       ];
 
     case types.LOGIN_USER_ERROR:
-      return [
-        ...state,
-        Object.assign({}, action.userData)
-      ];
+      return [];
 
     default:
       return state;

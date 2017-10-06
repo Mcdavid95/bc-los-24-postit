@@ -9,9 +9,7 @@ const searchUser = (state = initialState.search, action) => {
         action.users
       ];
     case types.SEARCH_USERS_FAILED:
-      return [
-        state
-      ];
+      return [];
 
     default:
       return state;
