@@ -35,7 +35,7 @@ class ResetPasswordPage extends Component {
    */
   onSubmit(e) {
     e.preventDefault();
-    this.props.resetPasswordRequest(this.state);
+    this.props.resetPasswordRequest(this.props.match.params.token, this.state);
   }
   /**
    * @return {DOM} DOM

@@ -13,7 +13,7 @@ import messages from '../../actions/getMessagesActions';
  * @class
  */
 class Board extends Component {
-    /**
+  /**
    * 
    * @param {*} props 
    */
@@ -22,7 +22,7 @@ class Board extends Component {
     this.userGroupList = this.props;
   }
   /**
-   * 
+   *  @return {DOM} DOM elements
    */
   componentDidMount() {
     this.props.loadGroups();
@@ -43,7 +43,7 @@ class Board extends Component {
           <div id="modal1" className="modal modal-fixed-footer">
             <div className="modal-content">
               <button type="button" className="waves-effect waves-light btn modal-close" data-dismiss="modal">&times;</button>
-              <h1>Create New Group</h1>
+              <h1 className="group-form">Create New Group</h1>
               <GroupForm createGroupRequest={this.props.createGroupRequest} />
             </div>
             <div className="modal-footer">

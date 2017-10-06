@@ -45,7 +45,7 @@ class Navbar extends Component {
    */
   render() {
     const { isAuthenticated } = this.props.setAuthToken;
-
+    console.log('===========', this.props);
     const userLinks = (
       <div>
         <ul className="right hide-on-med-and-down">

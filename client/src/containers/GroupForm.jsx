@@ -44,7 +44,7 @@ class GroupForm extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.onSubmit} className="group-form">
           <div className="input-field">
             <label htmlFor="title" className="control-label">Group Name</label>
             <input

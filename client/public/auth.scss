@@ -5,6 +5,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  color: white;
 
   
   main {
@@ -144,7 +145,8 @@ h1 {
   width: 100%;
   border-radius: 3px;
   background-color: rgba(239, 239, 239, 0.96);
-  height: 100px
+  height: 100px;
+  color: black;
 }
 
 #message-content {
@@ -167,6 +169,10 @@ form#message {
 #forgot-password {
   color: whitesmoke;
   margin-bottom: 10%
+}
+
+#options {
+  color: black;
 }
 
 .normal{
@@ -202,6 +208,10 @@ form#message {
 
 th {
   color: paleturquoise
+}
+
+.group-form {
+  color: black;
 }
 
 
