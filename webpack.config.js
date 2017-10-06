@@ -4,6 +4,7 @@ const path = require('path');
 
 module.exports = {
   devtool: debug ? 'inline-sourcemap' : false,
+  // entry point
   entry: [
     'eventsource-polyfill', // necessary for hot reloading with IE
     'webpack-hot-middleware/client?reload=true',
@@ -18,10 +19,36 @@ module.exports = {
       { test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
         loader: 'file-loader?name=fonts/[name].[ext]'
       },
+      {
+        test: /\.(gif|png|jpg|svg)$/i,
+        loaders: [
+          'file-loader', {
+            loader: 'image-webpack-loader',
+            options: {
+              gifsicle: {
+                interlaced: false,
+              },
+              optipng: {
+                optimizationLevel: 7,
+              },
+              pngquant: {
+                quality: '65-90',
+                speed: 4
+              },
+              mozjpeg: {
+                progressive: true,
+                quality: 65
+              },
+              // Specifying webp here will create a WEBP version of your JPG/PNG images
+              webp: {
+                quality: 75
+              }
+            }
+          }
+        ]
+      }
     ]
   },
-
- // watch: true,
 
   devServer: {
     historyApiFallback: true,
@@ -46,7 +73,6 @@ module.exports = {
   ],
 
   resolve: {
-    // you can now require("file") instead of require("file.coffee")
     extensions: ['.js', '.json', '.jsx']
   },
 
