@@ -60,3 +60,5 @@ typings/
 # vscode settings folder
 .vscode/
 
+client/dist/
+
