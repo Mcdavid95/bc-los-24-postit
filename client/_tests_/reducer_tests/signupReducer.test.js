@@ -7,7 +7,6 @@ test('reducers', () => {
     signup: { username: '', email: '', phoneNumber: 234, loggedIn: false, password: '' },
     login: [null],
     setAuthToken: { isAuthenticated: true, user: { id: 1, name: 'mcdavid', email: 'mcdavidemereuwa95@gmail.com', iat: 1505944828, exp: 1506031228 } },
-    addflashMessages: [],
     group: { GroupName: '', description: '' },
     userGroupList: [[{ groupName: 'jonny', groupId: 1, description: 'for yemi alade' }]],
     groupMessages: [],
@@ -23,7 +22,6 @@ test('reducers', () => {
     { username: '', email: '', phoneNumber: 234, loggedIn: false, password: '' },
   login: [null],
   setAuthToken: { isAuthenticated: true, user: { id: 1, name: 'mcdavid', email: 'mcdavidemereuwa95@gmail.com', iat: 1505944828, exp: 1506031228 } },
-  addflashMessages: [],
   group: { GroupName: '', description: '' },
   userGroupList: [[{ groupName: 'jonny', groupId: 1, description: 'for yemi alade' }]],
   groupMessages: [[{ id: 1, message: 'hi', userId: 1, groupId: 1, username: 'mcdavid', priority: 'normal' }]],
@@ -63,5 +61,24 @@ describe('Signup Reducer', () => {
         loggedIn: false,
         password: 'jhiuiui'
       }]);
+  });
+});
+
+describe('Signup Reducer', () => {
+  it('should return SIGNUP_USER_ERROR', () => {
+    const state = {
+      username: '',
+      email: '',
+      phoneNumber: 234,
+      loggedIn: false,
+      password: ''
+    };
+    const action = {
+      type: types.SIGNUP_USER_ERROR,
+      male: ''
+    };
+    const results = signup(state, action);
+    expect(results)
+      .toEqual([]);
   });
 });
