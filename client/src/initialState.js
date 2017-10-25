@@ -34,8 +34,6 @@ const initialState = {
     username: ''
   },
 
-  userList: [],
-
   addUser: {
     username: ''
   },

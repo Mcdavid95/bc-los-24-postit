@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import initialState from '../initialState';
-import createGroupRequest from '../actions/createGroupAction';
+import { createGroupRequest } from '../actions';
 /**
- * @class
+ * @class GroupForm
+ * @extends React.Component
  */
-class GroupForm extends Component {
+export class GroupForm extends Component {
   /**
-   * 
+   * Creates Instance of GroupForm
    * @param {Object} props 
+   * @memberOf GrouForm
    */
   constructor(props) {
     super(props);
@@ -20,22 +22,20 @@ class GroupForm extends Component {
   }
   /**
    * 
-   * @param {Event} e 
+   * @param {Event} event 
    * @return {Object} updates State
    */
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+  onChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
   /**
-   * 
-   * @param {Event} e 
+   * @description makes API call to create group
+   * @param {Event} event 
    * @return {state} updates state
    */
-  onSubmit(e) {
-    e.preventDefault();
-    this.props.createGroupRequest(this.state)
-      .then(() => {
-      });
+  onSubmit(event) {
+    event.preventDefault();
+    this.props.createGroupRequest(this.state);
   }
 
   /**

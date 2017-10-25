@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import messages from '../actions/getMessagesActions';
+import { getGroupMessages } from '../actions';
 import history from '../utils/History';
 /**
- * 
+ * @class GroupList
+ * @extends React.Component
  */
-class GroupList extends Component {
+export class GroupList extends Component {
   /**
-   * 
+   * @description Creates Instance of Group Form
    * @param {*} props 
    */
   constructor(props) {
@@ -21,7 +22,7 @@ class GroupList extends Component {
     this.onClick = this.onClick.bind(this);
   }
   /**
-   * 
+   * @method componentWillReceiveProps
    * @param { Array } nextProps 
    * @return {Array} new State
    */
@@ -38,14 +39,13 @@ class GroupList extends Component {
   }
 
   /**
-   * 
-   * @param {*} e 
+   * @method onClick
+   * @param {*} event 
    * @return {*} any
    */
-  onClick(e) {
-    console.log(this.props.match.params.groupId);
-    e.preventDefault();
-    this.props.messages(this.props.match.params.groupId)
+  onClick(event) {
+    event.preventDefault();
+    this.props.getGroupMessages(this.props.match.params.groupId)
       .then(() => {
         history.push(`/group/${this.props.match.params.groupId}/messages`);
       })
@@ -75,11 +75,11 @@ class GroupList extends Component {
 GroupList.propTypes = {
   match: PropTypes.object.isRequired,
   userGroupList: PropTypes.array.isRequired,
-  messages: PropTypes.func.isRequired,
+  getGroupMessages: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   groupMessages: state.groupMessages
 });
 
-export default connect(mapStateToProps, { messages })(GroupList);
+export default connect(mapStateToProps, { getGroupMessages })(GroupList);

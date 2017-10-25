@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../../components/Header/Header';
 import LoginForm from '../../containers/LoginForm';
-import userLoginRequest from '../../actions/loginActions';
-import FlashMessage from '../../containers/FlashMessageList';
+import { userLoginRequest } from '../../actions';
 import Footer from '../../containers/Footer';
 
 /**
@@ -20,7 +19,6 @@ class Login extends Component {
     return (
       <div>
         <Header />
-        <FlashMessage />
         <main>
           <div className="container">
             <div>

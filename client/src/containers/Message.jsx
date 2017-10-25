@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import MessageBoard from './MessageBoard';
-import MessageForm from './MessageForm';
-import GroupForm from '../containers/GroupForm';
+import Messageboard from './MessageBoard';
+import Messageform from './MessageForm';
+import Groupform from '../containers/GroupForm';
 import Header from '../components/Header/Header';
-import SideNav from '../pages/sideNav';
+import Sidenav from '../pages/SideNav';
 import Footer from '../containers/Footer';
-import loadGroups from '../actions/loadUserGroupListActions';
-import messages from '../actions/getMessagesActions';
+import { createGroupRequest, getUserGroups, addUserRequest, getGroupMessages, postMessageRequest, getAllUsers } from '../actions';
 import initialState from '../initialState';
-import postMessagesRequest from '../actions/postMessageAction';
-import AddUserForm from './AddUserForm';
-import users from '../actions/getAllUsersActions';
+import AddUserform from './AddUserForm';
 /**
- * @class
+ * @class Message
+ * @extends React.Component
  */
-class Message extends Component {
+export class Message extends Component {
   /**
-   * 
+   * @constructor
+   * @description Creates Instance of Message
+   * @memberOf Message
    * @param {*} props
    */
   constructor(props) {
@@ -32,12 +32,13 @@ class Message extends Component {
     };
   }
   /**
- * @return {*} loads actions when page loads initially
- */
+   *
+   * @return {*} loads actions when page loads initially
+   */
   componentDidMount() {
-    this.props.loadGroups();
-    this.props.messages(this.props.match.params.groupId);
-    this.props.users();
+    this.props.getUserGroups();
+    this.props.getGroupMessages(this.props.match.params.groupId);
+    this.props.getAllUsers();
 
     $('select').material_select();
     $('.modal').modal();
@@ -63,7 +64,7 @@ class Message extends Component {
       <div>
         <Header />
         <main>
-          <SideNav groupId={this.props.match.params.groupId} />
+          <Sidenav groupId={this.props.match.params.groupId} />
           <div id="modal1" className="modal  modal-fixed-footer">
             <div className="modal-content">
 
@@ -73,8 +74,7 @@ class Message extends Component {
                 data-dismiss="modal"
               >&times;</button>
 
-            
-              <GroupForm createGroupRequest={this.props.createGroupRequest} />
+              <Groupform createGroupRequest={this.props.createGroupRequest} />
             </div>
             <div className="modal-footer">
               <a
@@ -91,7 +91,7 @@ class Message extends Component {
                 data-dismiss="modal"
               >&times;</button>
               <h1>Add New User To This Group</h1>
-              <AddUserForm
+              <AddUserform
                 addUserRequest={this.props.addUserRequest}
                 groupId={this.props.match.params.groupId}
               />
@@ -104,14 +104,18 @@ class Message extends Component {
             </div>
           </div>
           <div className="row">
-            <a className="modal-trigger center-align waves-effect waves-light btn" id="users" href="#modal2">Add new user</a>
-            <MessageBoard
+            <a
+              className="modal-trigger center-align waves-effect waves-light btn"
+              id="users"
+              href="#modal2"
+            >Add new user</a>
+            <Messageboard
               groupMessages={this.state.messages}
               groupId={this.props.match.params.groupId}
             />
-            <MessageForm
+            <Messageform
               groupId={this.props.match.params.groupId}
-              postMessagesRequest={this.props.postMessagesRequest}
+              postMessageRequest={this.props.postMessageRequest}
             />
           </div>
         </main>
@@ -128,21 +132,24 @@ const mapStateToProps = state => ({
 });
 
 Message.propTypes = {
-  match: PropTypes.object.isRequired,
-  messages: PropTypes.func.isRequired,
-  groupMessages: PropTypes.array.isRequired,
-  postMessagesRequest: PropTypes.func.isRequired,
-  loadGroups: PropTypes.func.isRequired,
-  userGroupList: PropTypes.array.isRequired,
-  users: PropTypes.func.isRequired,
   addUserRequest: PropTypes.func.isRequired,
+  allUsers: PropTypes.array.isRequired,
   createGroupRequest: PropTypes.func.isRequired,
-  allUsers: PropTypes.array.isRequired
+  getAllUsers: PropTypes.func.isRequired,
+  getGroupMessages: PropTypes.func.isRequired,
+  getUserGroups: PropTypes.func.isRequired,
+  groupMessages: PropTypes.array.isRequired,
+  match: PropTypes.object.isRequired,
+  postMessageRequest: PropTypes.func.isRequired,
+  userGroupList: PropTypes.array.isRequired,
 
 };
 
 export default connect(mapStateToProps,
-  { loadGroups,
-    users,
-    messages,
-    postMessagesRequest })(Message);
+  {
+    addUserRequest,
+    getUserGroups,
+    getAllUsers,
+    createGroupRequest,
+    getGroupMessages,
+    postMessageRequest })(Message);

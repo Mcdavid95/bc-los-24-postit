@@ -2,28 +2,39 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
 import history from '../utils/History';
-import getMessages from '../actions/getMessagesActions';
+import { getGroupMessages } from '../actions';
+import handlePriority from '../utils/handlePriority';
 
 
 /**
- * @class
+ * @class MessageBoard
+ * @extends React.Component
  */
-class MessageBoard extends Component {
+export class MessageBoard extends Component {
   /**
-   * 
+   * Creates Instance of MessageBoard
    * @param {*} props 
+   * @memberOf MessageBoard
    */
   constructor(props) {
     super(props);
     this.state = {
       messages: this.props.groupMessages
     };
-    this.handlePriority = this.handlePriority.bind(this);
+    this.handlePriority = handlePriority.bind(this);
+    this.dateOptions = {
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    };
   }
   /**
- * 
- * @param {Array} nextProps 
- * @returns {Array} new state
+ * @description updates state when props changes
+ * @param {Object} nextProps 
+ * @returns {Object} new state
  */
   componentWillReceiveProps(nextProps) {
     if (nextProps.groupMessages.length === 1) {
@@ -39,44 +50,33 @@ class MessageBoard extends Component {
     }
   }
   /**
-   * 
-   * @param {*} priority 
-   * @return {DOM} DOM
-   */
-  handlePriority(priority) {
-    if (priority === 'normal') {
-      return (
-        <span className="normal">{priority}</span>
-      );
-    } else if (priority === 'urgent') {
-      return (
-        <span className="urgent">{priority}</span>
-      );
-    }
-    return (
-      <span className="critical">{priority}</span>
-    );
-  }
-  /**
    * @return {Object} DOM Object
    */
   render() {
     return (
-      <div>
+      <div className="container">
         <div id="message-board">
           <ul className="row">
-            {this.state.messages.map(message =>
-              (<li key={message.id} className="message-content">
-                <div className="message-card">
-                  <em><span className="username">  @{message.username} </span></em>
-                  {this.handlePriority(message.priority)}
-                  <br />
-                  <p>
-                    <span className="center-align" id="messsage-content">{message.message}  </span>
-                  </p>
-                </div>
-              </li>)
-            )}
+            {this.state.messages.length === 0 ? (<h3>You have no messages in this Group</h3>) :
+              this.state.messages.map(message =>
+                (<li key={message.id} className="message-content">
+                  <div className="message-card">
+                    <em><span className="username">  @{message.username} </span></em>
+                    <small>
+                      <span className="priority">{this.handlePriority(message.priority)}</span>
+                    </small>
+                    <small><span className="createdAt"> sent: {new Date(message.createdAt).toLocaleString('en-us', this.dateOptions)}</span></small>
+                    <br />
+                    <p>
+                      <strong>
+                        <span className="center-align" id="message-content">
+                          {message.message}
+                        </span>
+                      </strong>
+                    </p>
+                  </div>
+                </li>)
+              )}
           </ul>
         </div>
       </div>
@@ -93,4 +93,4 @@ const mapStateToProps = state => ({
   groupMessages: state.groupMessages
 });
 
-export default connect(mapStateToProps, { getMessages })(MessageBoard);
+export default connect(mapStateToProps, { getGroupMessages })(MessageBoard);
