@@ -1,0 +1,20 @@
+import setCurrentUser from './currentUserActions';
+import setAuthToken from '../utils/setAuthToken';
+import { LOGOUT_USER } from '../../constant';
+import history from '../utils/History';
+
+const logoutSuccess = user => ({
+  type: LOGOUT_USER,
+  user
+});
+
+const logout = () => (dispatch) => {
+  localStorage.removeItem('jwtToken');
+  setAuthToken(false);
+  dispatch(setCurrentUser({}));
+  dispatch(logoutSuccess());
+  history.push('/login');
+};
+
+export default logout;
+

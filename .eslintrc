@@ -7,6 +7,14 @@
     "mocha": true,
     "jasmine": true
   },
+  "globals": {
+    "Materialize": true,
+    "localStorage": true,
+    "document": true,
+    "$": true,
+    "jest": true,
+    "configureStore": true
+},
   "rules": {
     "one-var": 0,
     "one-var-declaration-per-line": 0,
@@ -17,6 +25,7 @@
     "comma-dangle": 0,
     "curly": ["error", "multi-line"],
     "no-shadow": ["error", { "allow": ["req", "done", "res", "err"] }],
+    "react/forbid-prop-types": 0,
     "valid-jsdoc": ["error", {
       "requireReturn": true,
       "requireReturnType": true,

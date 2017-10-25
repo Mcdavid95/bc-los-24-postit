@@ -1,0 +1,46 @@
+body {
+  background: #fff; }
+  body #brand {
+    font-family: "Kurale", serif; }
+  body h1 {
+    margin: 3%  auto; }
+  body #New-group {
+    margin-left: 90%;
+    padding: 1%; }
+  body hr {
+    width: 30%; }
+  body form {
+    margin: auto 30%; }
+
+.brand {
+  font-family: "Kurale", serif;
+  color: palevioletred; }
+
+.navbar-inverse {
+  background: #2c3e56; }
+
+#signup {
+  margin-left: 80%; }
+
+#content {
+  margin-top: 5%; }
+
+h1 {
+  margin: auto; }
+
+.nav-pills {
+  width: 10%; 
+  margin-left: 1px;
+  margin-top: 5%
+}
+.row {
+  margin : 13%;
+  align-content: center
+}
+
+#sideBar {
+  border: 1px solid black;
+  width: 20%;
+  margin: 1px;
+}
+/*# sourceMappingURL=auth.css.map */

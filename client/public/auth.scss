@@ -1,0 +1,223 @@
+$primaryColor: #2c3e56;
+$brandFont: 'Kurale', serif;
+body {
+  background: $primaryColor;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  color: white;
+
+  
+  main {
+    flex: 1 0 auto;
+  }
+
+  #brand {
+    font-family: $brandFont;
+    color: palevioletred
+    
+  }
+
+  .page-footer {
+    background: #2c3e56;
+    padding-top: 0
+  }
+
+  h1 {
+    margin: 3%  auto;
+  }
+
+  .list-group {
+    margin-left: 1%;
+    background: #576883;
+  }
+
+  .list-group:hover {
+    background: #ebebeb
+  }
+
+   hr {
+    width: 30%;
+  }
+
+}
+
+footer {
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+form {
+  margin: auto 30%;
+
+  textarea#message {
+    margin-bottom: 0;
+    padding-bottom: 0
+  }
+}
+
+.select-dropdown {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#acct {
+  color: #2c3e56
+}
+
+.brand {
+    font-family: $brandFont;
+    color: palevioletred
+  }
+
+#top {
+  margin-top: 30%
+}
+
+#slide-out {
+  margin-bottom: 10
+}
+
+
+nav {
+    background: #2c3e56;
+    //margin-left: 2%
+}
+
+#signup {
+  margin-left: 80%
+}
+
+#login {
+  margin-left: 80%
+}
+
+h1 {
+  margin: auto;
+}
+
+#signin {
+  margin-top: 0
+}
+
+#side-nav {
+  text-decoration: none;
+}
+
+.footer-copyright {
+  padding-top: 0
+}
+
+.side-nav {
+  padding-top: 10px;
+  margin-top: 5%;
+}
+
+.side {
+  z-index: 1;
+  margin-top: 5%;
+  height: 85%;
+  position: relative;
+}
+
+#message-board {
+  height:390px;
+  width: 40%;
+  border: 0px solid #576883;
+  margin: auto;
+  overflow-y: scroll
+}
+
+// #message-card {
+//   border: 0px solid black;
+//   border-radius: 0.5px;
+// }
+
+#message {
+  width: 40%
+}
+
+.message-card {
+  margin-top: 10px;
+  border: 0px solid #fff7aa;
+  width: 100%;
+  border-radius: 3px;
+  background-color: rgba(239, 239, 239, 0.96);
+  height: 100px;
+  color: black;
+}
+
+#message-content {
+  color: black
+}
+
+.card {
+  max-height: 40px
+}
+
+#users{
+  position: relative;
+  left: 50%
+}
+
+form#message {
+  margin: auto 25%
+}
+
+#forgot-password {
+  color: whitesmoke;
+  margin-bottom: 10%
+}
+
+#options {
+  color: black;
+}
+
+.normal{
+  border: 1px solid #2FFF6F;
+  border-radius: 3px;
+  background: #2FFF6F 
+}
+
+.urgent{
+  border: 1px solid #8A693E;
+  border-radius: 3px;
+  background: #8A693E 
+}
+
+.critical{
+  border: 1px solid red;
+  border-radius: 3px;
+  background: red 
+}
+
+#message-content {
+  font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif
+
+}
+
+#sidenav-overlay {
+  z-index: 0;
+}
+
+.username {
+  color: palevioletred;
+}
+
+th {
+  color: paleturquoise
+}
+
+.group-form {
+  color: black;
+}
+
+
+
+    @media only screen and (max-width : 992px) {
+      header, main, footer {
+        padding-left: 0;
+      }
+    }

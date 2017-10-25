@@ -57,3 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# vscode settings folder
+.vscode/
+
+client/dist/
+

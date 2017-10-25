@@ -1,0 +1,17 @@
+{
+  "production": {
+     "use_env_variable": "MyDB_URL"
+  },
+  "test": {
+    "use_env_variable": "MyDB_URL",
+    "logging": false
+  },
+  "development": {
+    "username": "postgres",
+    "password": "janike_13",
+    "database": "postit-dev",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "dialect": "postgres"
+  }
+}
