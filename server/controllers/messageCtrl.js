@@ -45,7 +45,6 @@ export default {
                   attributes: ['userId', 'email']
                 })
                   .then((users) => {
-                    console.log(users);
                     if (req.body.priority === 'critical') {
                       sendUrgentMail(users, { message });
                     } else if (req.body.priority === 'urgent') {
@@ -67,22 +66,36 @@ export default {
   },
 
   listMessages(req, res) {
-    Message
-      .findAll({
-        where: { groupId: req.params.groupId },
-        attributes: ['id', 'message', 'userId', 'groupId', 'username', 'priority'],
+    Group
+      .findOne({
+        where: {
+          id: req.params.groupId
+        },
       })
+      .then((group) => {
+        if (group) {
+          Message
+            .findAll({
+              where: { groupId: req.params.groupId },
+              attributes: ['id', 'message', 'userId', 'groupId', 'username', 'priority', 'createdAt'],
+            })
 
-      .then((messages) => {
-        if (messages) {
-          res.send(messages);
+            .then((messages) => {
+              if (messages) {
+                res.send(messages);
+              } else {
+                res.status(404).send({
+                  message: 'No messages found'
+                });
+              }
+            })
+
+            .catch(error => res.status(404).send(error));
         } else {
           res.status(404).send({
-            message: 'No messages found'
+            Error: 'Group does not exist'
           });
         }
-      })
-
-      .catch(error => res.status(404).send(error));
+      });
   }
 };
