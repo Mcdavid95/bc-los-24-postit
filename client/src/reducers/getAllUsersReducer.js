@@ -5,11 +5,11 @@ const getAllUsers = (state = initialState.allUsers, action) => {
   switch (action.type) {
     case types.GET_USERS_SUCCESS:
       return [
-        ...state, action.users
+        ...state, action
       ];
 
     case types.GET_USERS_FAILED:
-      return state;
+      return [];
 
     default:
       return state;

@@ -5,12 +5,10 @@ const addUserToGroup = (state = initialState.addUser, action) => {
   switch (action.type) {
     case types.ADD_USER_TO_GROUP_SUCCESS:
       return [
-        ...state, action.username
+        ...state, action
       ];
     case types.ADD_USER_TO_GROUP_FAILED:
-      return [
-        state
-      ];
+      return [];
 
     default:
       return state;
