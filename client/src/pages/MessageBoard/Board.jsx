@@ -6,9 +6,7 @@ import FlashMessage from '../../containers/FlashMessageList';
 import SideNav from '../sideNav';
 import Footer from '../../containers/Footer';
 import GroupForm from '../../containers/GroupForm';
-import createGroupRequest from '../../actions/createGroupAction';
-import loadGroups from '../../actions/loadUserGroupListActions';
-import messages from '../../actions/getMessagesActions';
+import { createGroupRequest, getUserGroups, getGroupMessages } from '../../actions';
 /**
  * @class
  */
@@ -25,9 +23,9 @@ class Board extends Component {
    *  @return {DOM} DOM elements
    */
   componentDidMount() {
-    this.props.loadGroups();
+    this.props.getUserGroups();
     $('select').material_select();
-    this.props.messages(1);
+    this.props.getGroupMessages(1);
     $('.modal').modal();
   }
   /**
@@ -59,11 +57,11 @@ class Board extends Component {
 
 Board.propTypes = {
   createGroupRequest: PropTypes.func.isRequired,
-  loadGroups: PropTypes.func.isRequired,
-  messages: PropTypes.func.isRequired,
+  getUserGroups: PropTypes.func.isRequired,
+  getGroupMessages: PropTypes.func.isRequired,
   userGroupList: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({ userGroupList: state.userGroupList });
 
-export default connect(mapStateToProps, { createGroupRequest, loadGroups, messages })(Board);
+export default connect(mapStateToProps, { createGroupRequest, getUserGroups, getGroupMessages })(Board);

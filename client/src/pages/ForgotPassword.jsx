@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../components/Header/Header';
 import Footer from '../containers/Footer';
 import initialState from '../initialState';
-import forgotPasswordRequest from '../actions/forgotPasswordAction';
+import { forgotPassword } from '../actions';
 /**
  * @class
  */
@@ -35,7 +35,7 @@ class ForgotPasswordPage extends Component {
    */
   onSubmit(e) {
     e.preventDefault();
-    this.props.forgotPasswordRequest(this.state);
+    this.props.forgotPassword(this.state);
   }
   /**
    * @return {DOM} DOM
@@ -72,7 +72,7 @@ class ForgotPasswordPage extends Component {
 }
 
 ForgotPasswordPage.propTypes = {
-  forgotPasswordRequest: PropTypes.func.isRequired
+  forgotPassword: PropTypes.func.isRequired
 };
 
-export default connect(null, { forgotPasswordRequest })(ForgotPasswordPage);
+export default connect(null, { forgotPassword })(ForgotPasswordPage);

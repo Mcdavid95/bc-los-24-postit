@@ -11,7 +11,7 @@ import Signup from './src/pages/Signup/Signup';
 import configureStore from './src/store';
 import history from './src/utils/History';
 import setAuthToken from './src/utils/setAuthToken';
-import setCurrentUser from './src/actions/currentUserActions';
+import { setCurrentUser } from './src/actions';
 import requireAuth from './src/utils/Authenticate';
 import ForgotPasswordPage from './src/pages/ForgotPassword';
 import ResetPassword from './src/pages/ResetPassword';

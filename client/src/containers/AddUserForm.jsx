@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import initialState from '../initialState';
-import users from '../actions/getAllUsersActions';
-import addUserRequest from '../actions/addUserToGroupAction';
+import { searchUsers, addUserRequest } from '../actions';
 /**
  * @class
  */
@@ -105,4 +104,4 @@ const mapStateToProps = state => ({
   allUsers: state.allUsers
 });
 
-export default connect(mapStateToProps, { users, addUserRequest })(AddUserForm);
+export default connect(mapStateToProps, { searchUsers, addUserRequest })(AddUserForm);

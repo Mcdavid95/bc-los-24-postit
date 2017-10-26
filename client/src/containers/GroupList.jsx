@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import messages from '../actions/getMessagesActions';
+import { getGroupMessages } from '../actions';
 import history from '../utils/History';
 /**
  * 
@@ -45,7 +45,7 @@ class GroupList extends Component {
   onClick(e) {
     console.log(this.props.match.params.groupId);
     e.preventDefault();
-    this.props.messages(this.props.match.params.groupId)
+    this.props.getGroupMessages(this.props.match.params.groupId)
       .then(() => {
         history.push(`/group/${this.props.match.params.groupId}/messages`);
       })
@@ -75,11 +75,11 @@ class GroupList extends Component {
 GroupList.propTypes = {
   match: PropTypes.object.isRequired,
   userGroupList: PropTypes.array.isRequired,
-  messages: PropTypes.func.isRequired,
+  getGroupMessages: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   groupMessages: state.groupMessages
 });
 
-export default connect(mapStateToProps, { messages })(GroupList);
+export default connect(mapStateToProps, { getGroupMessages })(GroupList);

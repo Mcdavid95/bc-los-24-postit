@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import initialState from '../initialState';
-import createGroupRequest from '../actions/createGroupAction';
+import { createGroupRequest } from '../actions';
 /**
  * @class
  */

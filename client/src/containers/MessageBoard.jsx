@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
 import history from '../utils/History';
-import getMessages from '../actions/getMessagesActions';
+import getGroupMessages from '../actions';
 
 
 /**
@@ -93,4 +93,4 @@ const mapStateToProps = state => ({
   groupMessages: state.groupMessages
 });
 
-export default connect(mapStateToProps, { getMessages })(MessageBoard);
+export default connect(mapStateToProps, { getGroupMessages })(MessageBoard);

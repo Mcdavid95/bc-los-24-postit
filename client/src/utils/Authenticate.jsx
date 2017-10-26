@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import history from './History';
-import flashMessage from '../actions/flashMessageAction';
 
 const AuthenticateFunc = (ComposedComponent) => {
   /**
@@ -49,9 +48,8 @@ const AuthenticateFunc = (ComposedComponent) => {
 
   const mapStateToProps = state => ({
     isAuthenticated: state.setAuthToken.isAuthenticated,
-    addflashMessage: state.addflashMessages
   });
 
-  return connect(mapStateToProps, { flashMessage })(Authenticate);
+  return connect(mapStateToProps, null)(Authenticate);
 };
 export default AuthenticateFunc;

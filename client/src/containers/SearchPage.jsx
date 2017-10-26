@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header/Header';
 import Footer from './Footer';
 import initialState from '../initialState';
-import searchUser from '../actions/searchUserAction';
+import { searchUsers } from '../actions';
 /**
  * @class
  */
@@ -56,7 +56,7 @@ export class SearchPage extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
-    this.props.searchUser(this.state, this.state.offset);
+    this.props.searchUsers(this.state, this.state.offset);
   }
   /**
    * 
@@ -65,7 +65,7 @@ export class SearchPage extends Component {
    */
   onSubmit(e) {
     e.preventDefault();
-    this.props.searchUser(this.state, this.state.offset)
+    this.props.searchUsers(this.state, this.state.offset)
       .then(() => {
       });
   }
@@ -82,7 +82,7 @@ export class SearchPage extends Component {
     this.setState({
       offset
     });
-    this.props.searchUser(this.state, offset);
+    this.props.searchUsers(this.state, offset);
   }
   /**
    * @param {*} event
@@ -91,7 +91,7 @@ export class SearchPage extends Component {
   prevPage(event) {
     event.preventDefault();
     if (this.state.offset > 0) {
-      this.props.searchUser(this.state, this.state.offset - 1);
+      this.props.searchUsers(this.state, this.state.offset - 1);
       const newOffset = this.state.offset;
       this.setState({
         offset: newOffset - 1
@@ -105,7 +105,7 @@ export class SearchPage extends Component {
    */
   nextPage(e) {
     e.preventDefault();
-    this.props.searchUser(this.state, this.state.offset + 1);
+    this.props.searchUsers(this.state, this.state.offset + 1);
     const newOffset = this.state.offset;
     this.setState({
       offset: newOffset + 1
@@ -172,7 +172,7 @@ export class SearchPage extends Component {
 }
 
 SearchPage.propTypes = {
-  searchUser: PropTypes.func.isRequired,
+  searchUsers: PropTypes.func.isRequired,
   result: PropTypes.array.isRequired
 };
 
@@ -180,4 +180,4 @@ const mapStateToProps = state => ({
   result: state.search
 });
 
-export default connect(mapStateToProps, { searchUser })(SearchPage);
+export default connect(mapStateToProps, { searchUsers })(SearchPage);

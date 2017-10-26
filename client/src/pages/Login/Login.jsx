@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../../components/Header/Header';
 import LoginForm from '../../containers/LoginForm';
-import userLoginRequest from '../../actions/loginActions';
+import { userLoginRequest } from '../../actions';
 import FlashMessage from '../../containers/FlashMessageList';
 import Footer from '../../containers/Footer';
 

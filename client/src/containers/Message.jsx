@@ -7,12 +7,9 @@ import GroupForm from '../containers/GroupForm';
 import Header from '../components/Header/Header';
 import SideNav from '../pages/sideNav';
 import Footer from '../containers/Footer';
-import loadGroups from '../actions/loadUserGroupListActions';
-import messages from '../actions/getMessagesActions';
-import initialState from '../initialState';
-import postMessagesRequest from '../actions/postMessageAction';
 import AddUserForm from './AddUserForm';
-import users from '../actions/getAllUsersActions';
+import { createGroupRequest, getUserGroups, addUserRequest, getGroupMessages, postMessageRequest, getAllUsers } from '../actions';
+import initialState from '../initialState';
 /**
  * @class
  */
@@ -35,9 +32,9 @@ class Message extends Component {
  * @return {*} loads actions when page loads initially
  */
   componentDidMount() {
-    this.props.loadGroups();
-    this.props.messages(this.props.match.params.groupId);
-    this.props.users();
+    this.props.getUserGroups();
+    this.props.getGroupMessages(this.props.match.params.groupId);
+    this.props.getAllUsers();
 
     $('select').material_select();
     $('.modal').modal();
@@ -73,7 +70,7 @@ class Message extends Component {
                 data-dismiss="modal"
               >&times;</button>
 
-            
+
               <GroupForm createGroupRequest={this.props.createGroupRequest} />
             </div>
             <div className="modal-footer">
@@ -129,12 +126,12 @@ const mapStateToProps = state => ({
 
 Message.propTypes = {
   match: PropTypes.object.isRequired,
-  messages: PropTypes.func.isRequired,
+  getGroupMessages: PropTypes.func.isRequired,
   groupMessages: PropTypes.array.isRequired,
   postMessagesRequest: PropTypes.func.isRequired,
-  loadGroups: PropTypes.func.isRequired,
+  getUserGroups: PropTypes.func.isRequired,
   userGroupList: PropTypes.array.isRequired,
-  users: PropTypes.func.isRequired,
+  getAllUsers: PropTypes.func.isRequired,
   addUserRequest: PropTypes.func.isRequired,
   createGroupRequest: PropTypes.func.isRequired,
   allUsers: PropTypes.array.isRequired
@@ -142,7 +139,11 @@ Message.propTypes = {
 };
 
 export default connect(mapStateToProps,
-  { loadGroups,
-    users,
-    messages,
-    postMessagesRequest })(Message);
+  {
+    getUserGroups,
+    addUserRequest,
+    createGroupRequest,
+    getGroupMessages,
+    postMessageRequest,
+    getAllUsers
+  })(Message);

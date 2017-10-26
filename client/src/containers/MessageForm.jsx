@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import initialState from '../initialState';
-import postMessagesRequest from '../actions/postMessageAction';
-import messages from '../actions/getMessagesActions';
+import { postMessageRequest, getGroupMessages } from '../actions';
 /**
   * 
   */
@@ -42,13 +41,13 @@ class MessageForm extends Component {
    */
   onSubmit(e) {
     e.preventDefault();
-    this.props.postMessagesRequest(this.props.groupId, this.state)
+    this.props.postMessageRequest(this.props.groupId, this.state)
       .then(() => {
         this.setState({
           message: initialState.postMessage.message,
           priority: initialState.postMessage.priority
         });
-        this.props.messages(this.props.groupId);
+        this.props.getGroupMessages(this.props.groupId);
       });
   }
 
@@ -102,8 +101,8 @@ class MessageForm extends Component {
 
 MessageForm.propTypes = {
   groupId: PropTypes.string.isRequired,
-  postMessagesRequest: PropTypes.func.isRequired,
-  messages: PropTypes.func.isRequired
+  postMessageRequest: PropTypes.func.isRequired,
+  getGroupMessages: PropTypes.func.isRequired
 };
 
-export default connect(null, { postMessagesRequest, messages })(MessageForm);
+export default connect(null, { postMessageRequest, getGroupMessages })(MessageForm);
