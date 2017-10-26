@@ -13,7 +13,8 @@
     "document": true,
     "$": true,
     "jest": true,
-    "configureStore": true
+    "configureStore": true,
+    "window": true
 },
   "rules": {
     "one-var": 0,
