@@ -9,7 +9,7 @@ const getMessagesReducer = (state = initialState.groupMessages, action = {}) => 
       ];
 
     case types.GET_MESSAGES_FAILED:
-      return state;
+      return [];
 
     default:
       return state;

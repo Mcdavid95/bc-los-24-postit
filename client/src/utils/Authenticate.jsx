@@ -13,10 +13,6 @@ const AuthenticateFunc = (ComposedComponent) => {
      */
     componentWillMount() {
       if (!this.props.isAuthenticated) {
-        this.props.flashMessage({
-          type: 'error',
-          text: 'You need to be loggedIn first'
-        });
         history.push('/login');
       }
     }
@@ -43,7 +39,6 @@ const AuthenticateFunc = (ComposedComponent) => {
 
   Authenticate.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
-    flashMessage: PropTypes.func.isRequired
   };
 
   const mapStateToProps = state => ({
