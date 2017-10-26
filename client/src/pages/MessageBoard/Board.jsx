@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../../components/Header/Header';
-import FlashMessage from '../../containers/FlashMessageList';
 import SideNav from '../sideNav';
 import Footer from '../../containers/Footer';
 import GroupForm from '../../containers/GroupForm';
@@ -35,7 +34,6 @@ class Board extends Component {
     return (
       <div>
         <Header />
-        <FlashMessage />
         <main>
           <SideNav />
           <div id="modal1" className="modal modal-fixed-footer">

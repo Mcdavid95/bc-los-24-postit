@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import Header from '../../components/Header/Header';
 import LoginForm from '../../containers/LoginForm';
 import { userLoginRequest } from '../../actions';
-import FlashMessage from '../../containers/FlashMessageList';
 import Footer from '../../containers/Footer';
 
 /**
@@ -20,7 +19,6 @@ class Login extends Component {
     return (
       <div>
         <Header />
-        <FlashMessage />
         <main>
           <div className="container">
             <div>
