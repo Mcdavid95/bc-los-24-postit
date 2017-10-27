@@ -61,7 +61,7 @@ export class Message extends Component {
    */
   render() {
     return (
-      <div>
+      <div >
         <Header />
         <main>
           <Sidenav groupId={this.props.match.params.groupId} />
@@ -104,12 +104,12 @@ export class Message extends Component {
               >Close</a>
             </div>
           </div>
-          <div className="row">
+          <div className="row page">
             <a
-              className="modal-trigger center-align waves-effect waves-light btn"
+              className="modal-trigger center-align waves-effect waves-light btn btn-small"
               id="users"
               href="#modal2"
-            >Add new user</a>
+            >Add user</a>
             <Messageboard
               groupMessages={this.state.messages}
               groupId={this.props.match.params.groupId}

@@ -57,7 +57,7 @@ export class MessageBoard extends Component {
       <div className="container">
         <div id="message-board">
           <ul className="row" id="message-list">
-            {this.state.messages.length === 0 ? (<h3>You have no messages in this Group</h3>) :
+            {this.state.messages.length === 0 ? (<h3 className="center-align">You have no messages in this Group</h3>) :
               this.state.messages.map(message =>
                 (<li key={message.id} className="message-content">
                   <div className="message-card container">

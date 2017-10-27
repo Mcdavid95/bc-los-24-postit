@@ -69,9 +69,9 @@ export class MessageForm extends Component {
   render() {
     return (
       <div className="container">
-        <div className="row">
+        <div className="row message-input">
           <form className="col s12" id="message" onSubmit={this.onSubmit}>
-            <div className="row">
+            <div className="row message-form">
               <div className="input-field col s12 m6" id="message-input">
                 <label htmlFor="message" className="control-label">Message: </label>
                 <textarea
@@ -83,8 +83,9 @@ export class MessageForm extends Component {
                   onChange={this.onChange}
                 />
               </div>
-              <label htmlFor="options">Priority</label>
-              <div className="input-field col s10 m6 select-dropdown">
+            </div>
+            <div className="row">
+              <div className="input-field col s7 m6 select-dropdown">
                 <select
                   value={this.state.priority}
                   id="options"

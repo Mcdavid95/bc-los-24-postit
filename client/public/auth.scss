@@ -116,9 +116,11 @@ h1 {
 
 .side {
   z-index: 1;
-  margin-top: 7vh;
+  margin-top: 10vh;
+  margin-left: 0%;
   height: 90vh;
-  position: relative;
+  padding-left: 1%;
+  padding-top: 0%
 }
 
 #message-board {
@@ -126,7 +128,8 @@ h1 {
   width: 63vw;
   border: 0px solid #576883;
   margin: auto 24%;
-  overflow-y: scroll
+  overflow-y: scroll;
+  overflow-x: scroll;
 }
 
 .group-list {
@@ -163,6 +166,10 @@ form#message {
   margin: auto 25%
 }
 
+.message-form {
+  margin-bottom: 0
+}
+
 #forgot-password {
   color: whitesmoke;
   margin-bottom: 10%
@@ -193,7 +200,22 @@ form#message {
 #message-content {
   font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
   padding-left: 6%
+}
 
+.message-input {
+  margin-bottom: 0
+}
+
+.page {
+  height: 8vh;
+}
+
+textarea#message {
+  margin-bottom: 0
+}
+
+#message-list {
+  height: 2vh
 }
 
 #sidenav-overlay {
