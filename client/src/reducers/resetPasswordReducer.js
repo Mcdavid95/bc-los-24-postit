@@ -5,7 +5,6 @@ const resetPasswordReducer = (state = initialState.forgotPassword, action = {}) 
   switch (action.type) {
     case types.RESET_PASSWORD_SUCCESS:
       return [
-        state,
         ...state, action.password
       ];
 

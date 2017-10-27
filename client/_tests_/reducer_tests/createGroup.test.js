@@ -1,22 +1,36 @@
-import setAuthToken from '../../src/reducers/authTokenReducer';
+import createGroup from '../../src/reducers/createGroupReducer';
 import * as types from '../../constant';
 
-describe('Set Current User Reducer', () => {
-  it('should return.SET_CURRENT_USER', () => {
+describe('Create Group Reducer', () => {
+  it('should return CREATE_GROUP_SUCCES', () => {
     const state = {
-      isAuthenticated: false,
-      user: []
+      GroupName: '',
+      description: ''
     };
     const action = {
-      type: types.SET_CURRENT_USER,
-      isAuthenticated: true,
-      user: { id: 1, name: 'mcdavid', email: 'mcdavidemereuwa95@gmail.com', iat: 1505944828, exp: 1506031228 }
+      type: types.CREATE_GROUP_SUCCESS,
+      GroupName: 'Into the storm',
+      description: 'Love for Aliens',
     };
-    const results = setAuthToken(state, action);
+    const results = createGroup(state, action);
     expect(results)
-      .toEqual({
-        isAuthenticated: true,
-        user: { id: 1, name: 'mcdavid', email: 'mcdavidemereuwa95@gmail.com', iat: 1505944828, exp: 1506031228 }
-      });
+      .toEqual([{
+        type: types.CREATE_GROUP_SUCCESS,
+        GroupName: 'Into the storm',
+        description: 'Love for Aliens',
+      }]);
+  });
+  it('should return CREATE_GROUP_ERROR', () => {
+    const state = {
+      GroupName: '',
+      description: ''
+    };
+    const action = {
+      male: '',
+      type: types.CREATE_GROUP_ERROR,
+    };
+    const results = createGroup(state, action);
+    expect(results)
+      .toEqual([]);
   });
 });
