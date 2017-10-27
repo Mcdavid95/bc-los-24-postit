@@ -4,18 +4,21 @@ import { connect } from 'react-redux';
 import initialState from '../initialState';
 import { searchUsers, addUserRequest } from '../actions';
 /**
- * @class
+ * @class AddUserForm
+ * @extends React.Component
  */
-class AddUserForm extends Component {
+export class AddUserForm extends Component {
   /**
-   * 
+   * Creates Instance of AddUserForm
    * @param {*} props 
+   * @memberOf AddUserForm
    */
   constructor(props) {
     super(props);
     this.state = {
       username: initialState.addUser,
-      users: this.props.allUsers
+      result: [],
+      offset: 0
     };
 
     this.onChange = this.onChange.bind(this);
@@ -27,31 +30,38 @@ class AddUserForm extends Component {
    * @return {object} new state
    */
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      users: nextProps.allUsers[0]
-    });
+    if (nextProps.result.length === 0) {
+      this.setState({
+        result: nextProps.result.users.user
+      });
+    } else {
+      this.setState({
+        result: nextProps.result[nextProps.result.length - 1].users.user
+      });
+    }
   }
   /**
- * 
- * @param {Event} e 
+ * @description updates state when props changes
+ * @param {Event} event 
  * @return {object} new state
  */
-  onChange(e) {
+  onChange(event) {
+    const searchInput = {
+      username: event.target.value
+    };
     this.setState({
-      [e.target.name]: e.target.value
+      [event.target.name]: event.target.value
     });
+    this.props.searchUsers(searchInput, this.state.offset);
   }
   /**
  * 
- * @param {Event} e 
+ * @param {Event} event 
  * @return {func} send request to api
  */
-  onSubmit(e) {
-    e.preventDefault();
-    this.props.addUserRequest(this.state, this.props.groupId)
-      .then(() => {
-        this.props.users();
-      });
+  onSubmit(event) {
+    event.preventDefault();
+    this.props.addUserRequest(this.state, this.props.groupId);
   }
 
   /**
@@ -76,14 +86,14 @@ class AddUserForm extends Component {
 
               />
               <datalist id="users">
-                {this.state.users.map(user =>
+                {this.state.result.map(user =>
                   (<option key={user.id} value={user.username} />)
                 )}
               </datalist>
             </div>
             <button
               type="submit"
-              className="btn waves-effect waves-light modal-action modal-close"
+              className="btn waves-effect waves-light modal-action"
             >Add User</button>
           </form>
         </div>
@@ -93,15 +103,15 @@ class AddUserForm extends Component {
 }
 
 AddUserForm.propTypes = {
-  allUsers: PropTypes.array.isRequired,
   addUserRequest: PropTypes.func.isRequired,
   groupId: PropTypes.string.isRequired,
-  users: PropTypes.func.isRequired,
+  searchUsers: PropTypes.func.isRequired,
+  result: PropTypes.array.isRequired
 
 };
 
 const mapStateToProps = state => ({
-  allUsers: state.allUsers
+  result: state.search
 });
 
 export default connect(mapStateToProps, { searchUsers, addUserRequest })(AddUserForm);

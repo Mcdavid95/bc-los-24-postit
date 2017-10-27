@@ -56,7 +56,7 @@ class GroupList extends Component {
    */
   render() {
     return (
-      <ul className="row">
+      <ul className="row group-list">
         {this.state.groups.map(group =>
           (<li key={group.groupId}>
             <div className="col s12">

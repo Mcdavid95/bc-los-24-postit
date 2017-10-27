@@ -72,20 +72,6 @@ export default class SignupForm extends Component {
                 <label htmlFor="username" className="control-label">User Name</label>
               </div>
             </div>
-            <div className="input-field col s12 m6">
-              <input
-                className="form-control"
-                name="password"
-                type="password"
-                placeholder="password"
-                pattern=".{5,10}"
-                required
-                title="Password must be between 5 and 10 characters"
-                value={this.state.password}
-                onChange={this.onChange}
-              />
-              <label htmlFor="password" className="control-label">Password:</label>
-            </div>
             <div className="row">
               <div className="input-field col s12 m6">
                 <input
@@ -100,6 +86,19 @@ export default class SignupForm extends Component {
                   onChange={this.onChange}
                 />
                 <label htmlFor="phone" className="control-label">Phone:</label>
+              </div>
+              <div className="input-field col s12 m6">
+                <input
+                  className="form-control"
+                  name="password"
+                  type="password"
+                  pattern=".{5,10}"
+                  required
+                  title="Password must be between 5 and 10 characters"
+                  value={this.state.password}
+                  onChange={this.onChange}
+                />
+                <label htmlFor="password" className="control-label">Password:</label>
               </div>
             </div>
             <div className="row">
@@ -123,4 +122,3 @@ export default class SignupForm extends Component {
 SignupForm.propTypes = {
   userSignupRequest: PropTypes.func.isRequired
 };
-

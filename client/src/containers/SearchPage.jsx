@@ -37,35 +37,42 @@ export class SearchPage extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.result.length === 0) {
       this.setState({
-        result: nextProps.result.user,
-        pages: nextProps.result.metadata.pageCount
+        result: nextProps.result.users.user,
+        pages: nextProps.result.users.metadata.pageCount
       });
     } else {
       this.setState({
-        result: nextProps.result[nextProps.result.length - 1].user,
-        pages: nextProps.result[nextProps.result.length - 1].metadata.pageCount
+        result: nextProps.result[nextProps.result.length - 1].users.user,
+        pages: nextProps.result[nextProps.result.length - 1].users.metadata.pageCount
       });
     }
   }
   /**
    * 
-   * @param {*} e 
+   * @param {*} event 
    * @return {DOM} Dom
    */
-  onChange(e) {
+  onChange(event) {
+    const searchInput = {
+      username: event.target.value
+    };
+    event.preventDefault();
     this.setState({
-      [e.target.name]: e.target.value
+      [event.target.name]: event.target.value
     });
-    this.props.searchUsers(this.state, this.state.offset);
+    this.props.searchUsers(searchInput, this.state.offset);
   }
   /**
    * 
-   * @param {*} e 
+   * @param {*} event 
    * @return {DOM} DOM element
    */
-  onSubmit(e) {
-    e.preventDefault();
-    this.props.searchUsers(this.state, this.state.offset)
+  onSubmit(event) {
+    const searchInput = {
+      username: event.target.value
+    };
+    event.preventDefault();
+    this.props.searchUsers(searchInput, this.state.offset)
       .then(() => {
       });
   }
@@ -115,7 +122,31 @@ export class SearchPage extends Component {
    * @return {DOM} DOM element
    */
   render() {
-    console.log(this.state.offset);
+    console.log('======>', this.props);
+    console.log('======> state', this.props);
+    const notFound = (
+      <h5>User not found </h5>
+    );
+
+    const tableBody = (
+      <table className="container centered bordered">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.result.map(list =>
+            (<tr key={list.id}>
+              <td>{list.username}</td>
+              <td>{list.email}</td>
+            </tr>)
+          )
+          }
+        </tbody>
+      </table>
+    );
     return (
       <div>
         <Header />
@@ -134,25 +165,8 @@ export class SearchPage extends Component {
               </button>
             </form>
           </div>
-          <table className="container centered bordered">
-            <thead>
-              <tr>
-                <th>Username</th>
-                <th>Email</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {this.state.result.length > 0 ? this.state.result.map(list =>
-                (<tr key={list.id}>
-                  <td>{list.username}</td>
-                  <td>{list.email}</td>
-                </tr>)
-              ) : <h5>User not found </h5>
-              }
-            </tbody>
-          </table>
-
+          {this.state.result.length > 0 ? tableBody : notFound
+          }
           <ReactPaginate
             previousLabel={'previous'}
             nextLabel={'next'}
@@ -177,7 +191,8 @@ SearchPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  result: state.search
+  result: state.search,
+  username: state.username
 });
 
 export default connect(mapStateToProps, { searchUsers })(SearchPage);

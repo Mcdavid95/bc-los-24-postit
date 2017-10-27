@@ -18,8 +18,6 @@ const initialState = {
     user: {}
   },
 
-  addflashMessages: [],
-
   group: {
     GroupName: '',
     description: ''
@@ -33,8 +31,6 @@ const initialState = {
   search: {
     username: ''
   },
-
-  userList: [],
 
   addUser: {
     username: ''

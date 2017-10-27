@@ -7,9 +7,8 @@ class PageNotFound extends Component {
     return (
       <div className="not-found">
         <Header />
-        <main className="container">
+        <main>
           <div>
-            <img src="/client/public/404.jpg"  height="300" width="400" />
           </div>
           <div>
             <p>Click on the button below to go back to home page </p>

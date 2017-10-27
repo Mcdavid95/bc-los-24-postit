@@ -123,10 +123,15 @@ h1 {
 
 #message-board {
   height:50vh;
-  width: 75vw;
+  width: 63vw;
   border: 0px solid #576883;
-  margin: auto 10%;
+  margin: auto 24%;
   overflow-y: scroll
+}
+
+.group-list {
+  overflow-y: scroll;
+  height:50vh;
 }
 
 #message {
