@@ -6,6 +6,7 @@ const instance = () => {
   const props = {
     addUserRequest: jest.fn(() => Promise.resolve()),
     allUsers: [],
+    searchUsers: jest.fn(() => Promise.resolve()),
     groupId: '',
     getAllUsers: jest.fn(() => Promise.resolve())
   };
@@ -44,11 +45,17 @@ describe('AddUser form component test', () => {
       addUserRequest: jest.fn(() => Promise.resolve()),
       allUsers: [{ users: [{ id: 3, username: 'mcdavid' }] }],
       groupId: '',
+      result: [{
+        users: { user: [{
+          username: 'melody'
+        }] }
+      }],
       getAllUsers: jest.fn(() => Promise.resolve())
     };
     const nextprops = props;
     wrapper.setState({
-      users: [{ id: 3, username: 'mcdavid' }]
+      users: [{ id: 3, username: 'mcdavid' }],
+      result: nextprops.result[0].users.user
     });
     const component = wrapper;
     const onSubmitSpy = jest.spyOn(component.instance(), 'componentWillReceiveProps');

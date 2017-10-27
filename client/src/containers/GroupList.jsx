@@ -40,12 +40,11 @@ export class GroupList extends Component {
 
   /**
    * @method onClick
-   * @param {*} event 
+   * @param {*} click
    * @return {*} any
    */
-  onClick(e) {
-    console.log(this.props.match.params.groupId);
-    e.preventDefault();
+  onClick(click) {
+    click.preventDefault();
     this.props.getGroupMessages(this.props.match.params.groupId)
       .then(() => {
         history.push(`/group/${this.props.match.params.groupId}/messages`);
