@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom';
 import { getGroupMessages } from '../actions';
 import history from '../utils/History';
 /**
- * 
+ * @class GroupList
+ * @extends React.Component
  */
-class GroupList extends Component {
+export class GroupList extends Component {
   /**
-   * 
+   * @description Creates Instance of Group Form
    * @param {*} props 
    */
   constructor(props) {
@@ -21,7 +22,7 @@ class GroupList extends Component {
     this.onClick = this.onClick.bind(this);
   }
   /**
-   * 
+   * @method componentWillReceiveProps
    * @param { Array } nextProps 
    * @return {Array} new State
    */
@@ -38,8 +39,8 @@ class GroupList extends Component {
   }
 
   /**
-   * 
-   * @param {*} e 
+   * @method onClick
+   * @param {*} event 
    * @return {*} any
    */
   onClick(e) {

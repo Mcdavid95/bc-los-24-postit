@@ -107,7 +107,7 @@ export default {
                           description: groupExist.description,
                           email: req.decoded.email,
                           isCreator: false
-                          
+
                         })
                           .then((success) => {
                             if (success) {

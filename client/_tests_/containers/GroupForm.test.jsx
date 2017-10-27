@@ -1,22 +1,27 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-// import configureStore from 'redux-mock-store';
-import SignupForm from '../../src/containers/SignupForm';
+import { GroupForm } from '../../src/containers/GroupForm';
 
-describe('Signup form component test', () => {
+const instance = () => {
   const props = {
-    userSignupRequest: jest.fn(() => Promise.resolve())
+    createGroupRequest: jest.fn(() => Promise.resolve()),
   };
+  return shallow(<GroupForm {...props} />);
+};
+
+const wrapper = instance();
+
+describe('Group form component test', () => {
   it('should render without crashing', () => {
-    const component = shallow(<SignupForm />);
+    const component = wrapper;
     expect(component.node.type).toBe('div');
   });
   it('should contain the method onChange', () => {
-    const component = shallow(<SignupForm {...props} />);
+    const component = wrapper;
     const onChangeSpy = jest.spyOn(component.instance(), 'onChange');
     component.instance().onChange({
       target: {
-        name: 'username', value: 'mcdavid'
+        name: 'username', description: 'mcdavid'
       }
     });
     expect(onChangeSpy).toHaveBeenCalledTimes(1);
@@ -25,7 +30,7 @@ describe('Signup form component test', () => {
     const e = {
       preventDefault: jest.fn()
     };
-    const component = shallow(<SignupForm {...props} />);
+    const component = wrapper;
     const onSubmitSpy = jest.spyOn(component.instance(), 'onSubmit');
     component.instance().onSubmit(e);
     expect(onSubmitSpy).toHaveBeenCalledTimes(1);
