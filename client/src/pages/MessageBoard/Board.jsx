@@ -57,6 +57,11 @@ class Board extends Component {
               >Close</a>
             </div>
           </div>
+          <div className="white-board">
+            <p>
+              "ngjnjgjgjjjgjjgnjgj"
+            </p>
+          </div>
         </main>
         <Footer />
       </div>
@@ -77,4 +82,4 @@ export default connect(mapStateToProps, {
   createGroupRequest,
   getUserGroups,
   getGroupMessages })(Board);
-  
+

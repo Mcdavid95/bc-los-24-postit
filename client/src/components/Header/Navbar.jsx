@@ -8,7 +8,7 @@ import initialState from '../../initialState';
 /**
  * @class
  */
-class Navbar extends Component {
+export class Navbar extends Component {
 /**
  * 
  * @param {*} props 
