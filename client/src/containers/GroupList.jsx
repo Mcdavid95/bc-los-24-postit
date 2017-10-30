@@ -40,14 +40,15 @@ export class GroupList extends Component {
 
   /**
    * @method onClick
-   * @param {*} click
+   * @param {*} event
+   * @param {*} groupId
    * @return {*} any
    */
-  onClick(click) {
-    click.preventDefault();
-    this.props.getGroupMessages(this.props.match.params.groupId)
+  onClick(groupId) {
+    // event.preventDefault();
+    this.props.getGroupMessages(groupId)
       .then(() => {
-        history.push(`/group/${this.props.match.params.groupId}/messages`);
+        history.push(`/group/${groupId}/messages`);
       })
     ;
   }
@@ -61,7 +62,7 @@ export class GroupList extends Component {
           (<li key={group.groupId}>
             <div className="col s12">
               <div className="card blue-grey darken-1">
-                <Link onClick={this.onClick} to={`/group/${group.groupId}/messages`}><span className="card-title list-group"> {group.groupName}</span></Link>
+                <Link onClick={() => this.onClick(group.groupId)} to={`/group/${group.groupId}/messages`}><span className="card-title list-group"> {group.groupName}</span></Link>
               </div>
             </div>
           </li>)
