@@ -41,6 +41,7 @@ export class Message extends Component {
     this.props.getAllUsers();
 
     $('select').material_select();
+    $('.collapsible').collapsible();
     $('.modal').modal();
     $('.tooltipped').tooltip({ delay: 50 });
   }
