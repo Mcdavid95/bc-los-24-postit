@@ -10,9 +10,7 @@ const instance = () => {
   };
   return shallow(<MessageBoard {...props} />);
 };
-
 const wrapper = instance();
-
 describe('Message Board component test', () => {
   it('should render without crashing', () => {
     const component = wrapper;
@@ -46,6 +44,6 @@ describe('Message Board component test', () => {
     const component = wrapper;
     const onSubmitSpy = jest.spyOn(component.instance(), 'componentWillReceiveProps');
     component.instance().componentWillReceiveProps(nextProps);
-    expect(onSubmitSpy).toHaveBeenCalledTimes(1);
+    expect(onSubmitSpy).toHaveBeenCalledTimes(2);
   });
 });

@@ -10,7 +10,8 @@ const instance = () => {
   const props = {
     setAuthToken: {
       isAuthenticated: false
-    }
+    },
+    logout: jest.fn(() => Promise.resolve())
   };
   return shallow(<Navbar {...props} />);
 };
@@ -49,6 +50,17 @@ describe('Navbar component test', () => {
     });
     const component = wrapper;
     const onSubmitSpy = jest.spyOn(component.instance(), 'componentDidMount');
+    expect(onSubmitSpy).not.toHaveBeenCalled();
+  });
+
+  it('should contain the logout method', () => {
+    wrapper.setState({
+      match: {
+        params: { groupId: 1 }
+      },
+    });
+    const component = wrapper;
+    const onSubmitSpy = jest.spyOn(component.instance(), 'logout');
     expect(onSubmitSpy).toBeDefined();
   });
 });

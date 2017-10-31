@@ -41,12 +41,10 @@ export class MessageBoard extends Component {
       this.setState({
         messages: nextProps.groupMessages[0]
       });
-      history.push(`/group/${this.props.groupId}/messages`);
     } else {
       this.setState({
         messages: nextProps.groupMessages[nextProps.groupMessages.length - 1]
       });
-      history.push(`/group/${this.props.groupId}/messages`);
     }
   }
   /**
@@ -85,8 +83,7 @@ export class MessageBoard extends Component {
 }
 
 MessageBoard.propTypes = {
-  groupMessages: Proptypes.array.isRequired,
-  groupId: Proptypes.string.isRequired
+  groupMessages: Proptypes.array.isRequired
 };
 
 const mapStateToProps = state => ({

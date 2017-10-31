@@ -1,7 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
-import { createBrowserHistory } from 'history';
 import initialState from '../../src/initialState';
 import mockLocalStorage from '../_mocks_/mockLocalStorage';
 import * as actions from '../../src/actions/userActions';
@@ -134,13 +133,11 @@ describe('Logout Action', () => {
     moxios.install();
     mockLocalStorage.setItem('jwtToken', token);
     mockLocalStorage.getItem('jwtToken');
-    const history = createBrowserHistory();
   });
   afterEach(() => {
     moxios.uninstall();
     mockLocalStorage.removeItem('jwtToken');
   });
-  jest.mock('history', () => ({ createBrowserHistory: { push: jest.fn() } }));
   const store = mockStore(initialState);
 
   it('contains a logout function', () => {
@@ -148,12 +145,10 @@ describe('Logout Action', () => {
   });
 
   it('should dispatch LOGOUT_USER on successful logout', (done) => {
-    const expectedActions = [
-      { type: types.LOGOUT_USER }
-    ];
-    store.dispatch(actions.logout()).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
+    const expectedActions =
+      { type: types.LOGOUT_USER };
+    store.dispatch(actions.logout());
+    expect(store.getActions()[1].type).toEqual(expectedActions.type);
     done();
   });
 });

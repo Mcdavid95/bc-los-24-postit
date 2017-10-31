@@ -77,7 +77,7 @@ describe('Get User Groups Request action', () => {
     expect(typeof (actions.createGroupRequest())).toBe('function');
   });
 
-  it('should dispatch LOAD_GROUPS_SUCCESS after creating group', (done) => {
+  it('should dispatch [] after creating group errors', (done) => {
     moxios.stubRequest('/api/v1/user/groups', {
       status: 201,
       response: {
@@ -87,14 +87,14 @@ describe('Get User Groups Request action', () => {
         }
       }
     });
-    const expectedActions = { type: types.LOAD_GROUPS_SUCCESS };
+    const expectedActions = [];
 
     store.dispatch(actions.getUserGroups());
     expect(store.getActions()).toEqual(expectedActions);
     done();
   });
 
-  it('should dispatch LOAD_GROUPS_ERROR if unsuccessful', (done) => {
+  it('should dispatch LOAD_GROUPS_SUCCESS if successful', (done) => {
     moxios.stubRequest('/api/v1/user/groups', {
       status: 401,
       response: {
@@ -104,7 +104,7 @@ describe('Get User Groups Request action', () => {
         }
       }
     });
-    const expectedActions = 'LOAD_GROUPS_FAILED';
+    const expectedActions = 'LOAD_GROUPS_SUCCESS';
     store.dispatch(actions.getUserGroups());
     expect(store.getActions()[0].type).toEqual(expectedActions);
     done();
