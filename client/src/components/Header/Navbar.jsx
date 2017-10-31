@@ -22,7 +22,9 @@ export class Navbar extends Component {
     this.isAuthenticated = this.props.setAuthToken;
   }
   /**
-   * 
+   * @method ComponentDidMount
+   * @description React LifeCycle method
+   * @returns {*} any
    */
   componentDidMount() {
     $(document).ready(() => {
@@ -55,7 +57,6 @@ export class Navbar extends Component {
    */
   render() {
     const { isAuthenticated } = this.props.setAuthToken;
-    console.log('===========', this.props);
     const userLinks = (
       <div>
         <ul className="right hide-on-med-and-down">
