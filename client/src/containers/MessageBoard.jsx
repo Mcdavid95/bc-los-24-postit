@@ -55,28 +55,33 @@ export class MessageBoard extends Component {
         <div id="message-board">
           <ul className="row" id="message-list">
             {
-              this.state.messages.length === 0 ? (<h3 className="center-align">
+              this.state.messages.length === 0 ? (
+                <h3 className="center-align">
               You have no messages in this Group
-              </h3>) :
+                </h3>
+              ) :
                 this.state.messages.map(message =>
-                  (<li key={message.id} className="message-content">
-                    <div className="message-card container">
-                      <em><span className="username">  @{message.username} </span></em>
-                      <small>
-                        <span className="priority">{this.handlePriority(message.priority)}</span>
-                      </small>
-                      <small><span className="createdAt"> sent: {new Date(message.createdAt).toLocaleString('en-us', this.dateOptions)}</span></small>
-                      <br />
-                      <p>
-                        <strong>
-                          <span className="center-align" id="message-content">
-                            {message.message}
-                          </span>
-                        </strong>
-                      </p>
-                    </div>
-                  </li>)
-                )}
+                  (
+                    <li key={message.id} className="message-content">
+                      <div className="message-card container">
+                        <em><span className="username">  @{message.username} </span></em>
+                        <small>
+                          <span className="priority">{this.handlePriority(message.priority)}</span>
+                        </small>
+                        <small><span className="createdAt"> sent: {new Date(message.createdAt).toLocaleString('en-us', this.dateOptions)}</span></small>
+                        <br />
+                        <p>
+                          <strong>
+                            <span className="center-align" id="message-content">
+                              {message.message}
+                            </span>
+                          </strong>
+                        </p>
+                      </div>
+                    </li>
+                  )
+                )
+            }
           </ul>
         </div>
       </div>
