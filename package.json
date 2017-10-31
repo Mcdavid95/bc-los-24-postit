@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "db:migrate": "sequelize db:migrate",
-    "start": "npm run db:migrate && nodemon --exec babel-node server.js",
-    "start-dev": "npm run db:migrate && nodemon --exec babel-node serverTest.js",
+    "start": "babel-node server.prod.js",
+    "start-dev": "npm run db:migrate && nodemon --exec babel-node server.js",
+    "start-test": "npm run db:migrate && nodemon --exec babel-node serverTest.js",
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
     "test": "NODE_ENV=test npm run db:migrate && nyc --reporter=text --reporter=html --reporter=lcov mocha --compilers js:babel-core/register ./server/tests/ --timeout 15000 && npm run coverage-report",
     "dev": "webpack-dev-server --content-base client --inline --hot",
