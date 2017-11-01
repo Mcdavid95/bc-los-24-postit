@@ -17,7 +17,7 @@ import groupRoutes from './server/routes/groupRoute';
 
 dotenv.config();
 const compiler = webpack(config);
-const port = process.env.PORT_PROD;
+const port = process.env.PORT_PROD || process.env.PORT;
 const app = express();
 app.use(logger('dev'));
 
