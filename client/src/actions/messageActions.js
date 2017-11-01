@@ -29,7 +29,8 @@ export const getGroupMessages = groupId =>
       .then((response) => {
         dispatch(getMessageSuccess(response.data));
       })
-      .catch((err) => {
-        dispatch(getMessageFailed(err));
-        Materialize.toast(err.response.data.Error, 3000, 'rounded red');
+      .catch((response) => {
+        Materialize.toast('Group does not exist', 3000, 'rounded red');
+        history.push('*');
+        dispatch(getMessageFailed(response));
       });

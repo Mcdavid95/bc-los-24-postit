@@ -17,6 +17,8 @@ export const getUserGroups = () => (dispatch) => {
       dispatch(loadGroupsSuccess(response.data));
     })
     .catch((err) => {
+      Materialize.toast('Sorry your session expired please login', 3000, 'rounded red');
+      history.push('/login');
       dispatch(loadGroupFailed(err));
     });
 };
