@@ -57,7 +57,7 @@ export class GroupList extends Component {
     return (
       <ul className="row group-list">
         {!this.state.groups ? (<li> No groups Yet</li>) : this.state.groups.map(group =>
-          (<li key={group.groupId}>
+          (<li key={group.id}>
             <div className="col s12">
               <div className="card blue-grey darken-1">
                 <Link onClick={() => this.onClick(group.groupId)} to={`/group/${group.groupId}/messages`}><span className="card-title list-group"> {group.groupName}</span></Link>

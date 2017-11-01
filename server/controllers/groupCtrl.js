@@ -147,7 +147,7 @@ export default {
     GroupMembers
       .findAll({
         where: { username: req.decoded.name },
-        attributes: ['groupName', 'groupId', 'description']
+        attributes: ['id', 'groupName', 'groupId', 'description']
       })
       .then((group) => {
         res.send(group);
