@@ -106,7 +106,7 @@ AddUserForm.propTypes = {
   addUserRequest: PropTypes.func.isRequired,
   groupId: PropTypes.string.isRequired,
   searchUsers: PropTypes.func.isRequired,
-  result: PropTypes.array.isRequired
+  result: PropTypes.object.isRequired
 
 };
 

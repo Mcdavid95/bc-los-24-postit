@@ -46,7 +46,7 @@ ReactDom.render(
           component={ForgotPasswordPage}
         />
         <Route exact path="/dashboard" name="board" component={requireAuth(Board)} />
-        <Route path="/group/:groupId" name="group" component={requireAuth(Message)} />
+        <Route exact path="/group/:groupId/messages" name="group" component={requireAuth(Message)} />
         <Route path="/reset/:token" name="reset" component={ResetPassword} />
         <Route path="/search-user" name="search-user" component={requireAuth(SearchUserPage)} />
         <Route path="*" component={PageNotFound} />

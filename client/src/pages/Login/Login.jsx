@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -8,32 +8,34 @@ import { userLoginRequest } from '../../actions';
 import Footer from '../../containers/Footer';
 
 /**
- * @class
+ * @method Login
+ * @param {*} props 
+ * @returns {DOM} DOM Element
+ * @description renders the login page
  */
-class Login extends Component {
-  /**
-   * @return {Object} DOM element
-   */
-  render() {
-    const { userLoginRequest } = this.props;
-    return (
-      <div>
-        <Header />
-        <main>
-          <div className="container">
-            <div>
-              <h1>Welcome to <span className="brand" id="top">POSTIT!!</span></h1>
-              <h5>Connect to friends and loved ones all it takes is a click!!! Login to get started</h5>
-              <p id="signup">Don't have an account? Click <Link to="/register">here to Register</Link></p>
-            </div>
-            <LoginForm userLoginRequest={userLoginRequest} />
+const Login = (props) => {
+  const { userLoginRequest } = props;
+  return (
+    <div>
+      <Header />
+      <main>
+        <div className="container">
+          <div>
+            <h1>Welcome to <span className="brand" id="top">POSTIT!!</span></h1>
+            <h5>
+              Connect to friends and loved ones all it takes is a click!!! Login to get started
+            </h5>
+            <p id="signup">Don't have an account? Click
+              <Link to="/register">here to Register</Link>
+            </p>
           </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-}
+          <LoginForm userLoginRequest={userLoginRequest} />
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
+};
 
 Login.propTypes = {
   userLoginRequest: PropTypes.func.isRequired

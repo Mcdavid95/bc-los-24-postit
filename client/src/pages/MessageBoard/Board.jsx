@@ -23,7 +23,6 @@ class Board extends Component {
    */
   componentDidMount() {
     this.props.getUserGroups();
-    this.props.getGroupMessages(1);
     $(document).ready(() => {
       $('.collapsible').collapsible();
       $('.button-collapse').sideNav();
@@ -58,7 +57,7 @@ class Board extends Component {
             </div>
           </div>
           <div className="white-board">
-            <p>
+            <p className="blue-text">
               "ngjnjgjgjjjgjjgnjgj"
             </p>
           </div>

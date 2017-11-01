@@ -40,12 +40,10 @@ export class GroupList extends Component {
 
   /**
    * @method onClick
-   * @param {*} event
    * @param {*} groupId
    * @return {*} any
    */
   onClick(groupId) {
-    // event.preventDefault();
     this.props.getGroupMessages(groupId)
       .then(() => {
         history.push(`/group/${groupId}/messages`);
@@ -58,7 +56,7 @@ export class GroupList extends Component {
   render() {
     return (
       <ul className="row group-list">
-        {this.state.groups.map(group =>
+        {!this.state.groups ? (<li> No groups Yet</li>) : this.state.groups.map(group =>
           (<li key={group.groupId}>
             <div className="col s12">
               <div className="card blue-grey darken-1">
@@ -74,7 +72,6 @@ export class GroupList extends Component {
 
 
 GroupList.propTypes = {
-  match: PropTypes.object.isRequired,
   userGroupList: PropTypes.array.isRequired,
   getGroupMessages: PropTypes.func.isRequired,
 };

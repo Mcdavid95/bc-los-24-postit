@@ -34,7 +34,7 @@ export class SideNav extends Component {
                 href="#!email"
               ><span className="white-text email">{this.props.userDetails.user.email}</span></a>
             </div></li>
-          <li><a className="modal-trigger" href="#modal1">Create New Group</a></li>
+          <li><a className="modal-trigger" href="#modal1">Create New Group<i className="material-icons">group_add</i></a></li>
           <li className="no-padding">
             <ul className="collapsible collapsible-accordion">
               <li>
