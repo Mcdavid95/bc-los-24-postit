@@ -59,7 +59,7 @@ class Board extends Component {
           <div className="white-board black-text">
             <img height="15%" id="mail-box" src="http://res.cloudinary.com/mc-cloud/image/upload/v1509614951/mcdavid_umplak.png" alt="message" />
             <h4>Welcome <span className="caps">{this.props.userDetails.user.name}</span></h4>
-            <h6 id="clear"> You Currently have no groups selected<br /><br />
+            <h6 id="clear"> You Currently have no group selected<br /><br />
              Please pick one by clicking on the
               <i
                 className="material-icons teal-text"
