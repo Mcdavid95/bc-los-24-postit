@@ -35,7 +35,7 @@ class Board extends Component {
    */
   render() {
     return (
-      <div className="dashboard">
+      <div>
         <Header />
         <main>
           <SideNavigation />
@@ -56,10 +56,16 @@ class Board extends Component {
               >Close</a>
             </div>
           </div>
-          <div className="white-board">
-            <p className="blue-text">
-              "ngjnjgjgjjjgjjgnjgj"
-            </p>
+          <div className="white-board black-text">
+            <img height="15%" id="mail-box" src="http://res.cloudinary.com/mc-cloud/image/upload/v1509614951/mcdavid_umplak.png" alt="message" />
+            <h4>Welcome <span className="caps">{this.props.userDetails.user.name}</span></h4>
+            <h6 id="clear"> You Currently have no groups selected<br /><br />
+             Please pick one by clicking on the
+              <i
+                className="material-icons teal-text"
+              >
+              group
+              </i> icon on the left hand side of this page to access the  group options</h6>
           </div>
         </main>
         <Footer />
@@ -71,11 +77,13 @@ class Board extends Component {
 Board.propTypes = {
   createGroupRequest: PropTypes.func.isRequired,
   getUserGroups: PropTypes.func.isRequired,
-  getGroupMessages: PropTypes.func.isRequired,
-  userGroupList: PropTypes.array.isRequired
+  userDetails: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({ userGroupList: state.userGroupList });
+const mapStateToProps = state => ({
+  userGroupList: state.userGroupList,
+  userDetails: state.setAuthToken
+});
 
 export default connect(mapStateToProps, {
   createGroupRequest,

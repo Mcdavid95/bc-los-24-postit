@@ -34,6 +34,10 @@ export class AddUserForm extends Component {
       this.setState({
         result: nextProps.result.users.user
       });
+    } else if (typeof (nextProps.result.username) === 'string') {
+      this.setState({
+        result: []
+      });
     } else {
       this.setState({
         result: nextProps.result[nextProps.result.length - 1].users.user
