@@ -126,7 +126,7 @@ export default {
                       res.send(err);
                     });
                 } else {
-                  res.status(404).send({
+                  res.status(409).send({
                     Error: 'User already in Group'
                   });
                 }

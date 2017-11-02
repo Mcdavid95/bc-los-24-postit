@@ -376,9 +376,9 @@ describe('Group Route', () => {
       .send({
         username: 'melody'
       })
-      .expect(404)
+      .expect(409)
       .end((err, res) => {
-        res.status.should.equal(404);
+        res.status.should.equal(409);
         res.body.Error.should.equal('User already in Group');
         done();
       });
