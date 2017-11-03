@@ -13,29 +13,26 @@ import Footer from '../../containers/Footer';
  * @returns {DOM} DOM Element
  * @description renders the login page
  */
-const Login = (props) => {
-  const { userLoginRequest } = props;
-  return (
-    <div>
-      <Header />
-      <main>
-        <div className="container">
-          <div>
-            <h1>Welcome to <span className="brand" id="top">POSTIT!!</span></h1>
-            <h5>
+const Login = props => (
+  <div>
+    <Header />
+    <main>
+      <div className="container">
+        <div>
+          <h1>Welcome to <span className="brand" id="top">POSTIT!!</span></h1>
+          <h5>
               Connect to friends and loved ones all it takes is a click!!! Login to get started
-            </h5>
-            <p id="signup">Don't have an account? Click
-              <Link to="/register">here to Register</Link>
-            </p>
-          </div>
-          <LoginForm userLoginRequest={userLoginRequest} />
+          </h5>
+          <p id="signup">Don't have an account? Click
+            <Link to="/register">here to Register</Link>
+          </p>
         </div>
-      </main>
-      <Footer />
-    </div>
-  );
-};
+        <LoginForm userLoginRequest={props.userLoginRequest} />
+      </div>
+    </main>
+    <Footer />
+  </div>
+);
 
 Login.propTypes = {
   userLoginRequest: PropTypes.func.isRequired

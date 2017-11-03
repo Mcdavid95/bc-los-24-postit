@@ -72,7 +72,7 @@ export class MessageForm extends Component {
         <div className="row message-input">
           <form className="col s12" id="message" onSubmit={this.onSubmit}>
             <div className="row message-form">
-              <div className="input-field col s12 m6" id="message-input">
+              <div className="input-field col s12 m12" id="message-input">
                 <label htmlFor="message" className="control-label">Message: </label>
                 <textarea
                   name="message"

@@ -12,16 +12,13 @@ import Footer from '../../containers/Footer';
  * @returns {DOM} DOM Element
  * @description renders the signup page
  */
-const Signup = (props) => {
-  const { userSignupRequest } = props;
-  return (
-    <div>
-      <Header />
-      <SignupForm userSignupRequest={userSignupRequest} />
-      <Footer />
-    </div>
-  );
-};
+const Signup = props => (
+  <div>
+    <Header />
+    <SignupForm userSignupRequest={props.userSignupRequest} />
+    <Footer />
+  </div>
+);
 Signup.propTypes = {
   userSignupRequest: PropTypes.func.isRequired
 };
