@@ -34,13 +34,18 @@ export class SideNav extends Component {
                 href="#!email"
               ><span className="white-text email">{this.props.userDetails.user.email}</span></a>
             </div></li>
-          <li><a className="modal-trigger" href="#modal1">Create New Group</a></li>
+          <li>
+            <a
+              className="modal-trigger"
+              href="#modal1"
+            >Create New Group<i className="material-icons teal-text">group_add</i></a></li>
           <li className="no-padding">
             <ul className="collapsible collapsible-accordion">
               <li>
                 <a
                   className="collapsible-header"
-                >My Groups<i className="material-icons">arrow_drop_down</i></a>
+                >My Groups<i className="material-icons">
+                arrow_drop_down</i><i className="material-icons teal-text">group</i></a>
                 <div className="collapsible-body">
                   <ul>
                     <GroupList userGroupList={this.props.userGroupList} />
@@ -75,8 +80,4 @@ const mapStateToProps = state => ({
   userGroupList: state.userGroupList,
   userDetails: state.setAuthToken
 });
-
-// const mapDispatchToProps = dispatch => ({
-//   actions: bindActionCreators(getUserGroups, dispatch)
-// });
 export default connect(mapStateToProps)(SideNav);
