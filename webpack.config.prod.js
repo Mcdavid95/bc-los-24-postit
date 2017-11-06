@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const GLOBALS = {
@@ -10,11 +9,6 @@ const extractSass = new ExtractTextPlugin({
   filename: '[name].[contenthash].css',
   disable: process.env.NODE_ENV === 'development'
 });
-// const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-//   template: './client/index.html',
-//   filename: 'index.html',
-//   inject: 'body'
-// });
 module.exports = {
   entry: [path.resolve(__dirname, 'client/index.jsx')],
   output: {
@@ -26,7 +20,6 @@ module.exports = {
     loaders: [
       { test: /\.(css|scss)$/, loaders: ['style-loader', 'css-loader', 'sass-loader'] },
       { test: /\.(js|jsx)$/, include: path.join(__dirname, 'client'), loader: 'babel-loader', query: { presets: ['es2015', 'react'] } },
-      // { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader' },
       { test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
         loader: 'file-loader?name=fonts/[name].[ext]'
       },

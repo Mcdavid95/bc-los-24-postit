@@ -9,7 +9,6 @@ export const sendUrgentMail = (users, message) => {
   users.forEach((user) => {
     receivers += `${user.email},`;
   });
-  console.log(receivers);
 
 
   const transporter = nodemailer.createTransport({
@@ -23,7 +22,7 @@ export const sendUrgentMail = (users, message) => {
   const mailOptions = {
     from: 'POSTIT!!!',
     to: receivers,
-    subject: 'urgent',
+    subject: 'URGENT',
     html: `
     <div style="width: 100%; background-color: grey; padding: 2%;">
     <div style="width: 60%; background-color: white; margin: auto;">
