@@ -22,7 +22,6 @@ import './public/materialize.min.css';
 import './public/auth.scss';
 import './js/jquery-3.2.1.min';
 import './js/materialize.min';
-import './js/post';
 
 const app = document.getElementById('root');
 const store = configureStore();
