@@ -33,7 +33,7 @@ export class GroupList extends Component {
       });
     } else {
       this.setState({
-        groups: nextProps.userGroupList[1]
+        groups: nextProps.userGroupList[nextProps.userGroupList.length - 1]
       });
     }
   }

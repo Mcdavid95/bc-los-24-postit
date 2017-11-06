@@ -46,9 +46,9 @@ export default {
                 })
                   .then((users) => {
                     if (req.body.priority === 'critical') {
-                      sendUrgentMail(users, { message });
+                      sendUrgentMail(users, message);
                     } else if (req.body.priority === 'urgent') {
-                      sendUrgentMail(users, { message });
+                      sendUrgentMail(users, message);
                     }
                   });
                 res.status(200).send(message);

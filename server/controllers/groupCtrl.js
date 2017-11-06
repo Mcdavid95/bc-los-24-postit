@@ -105,7 +105,7 @@ export default {
                           username: req.body.username.toLowerCase(),
                           groupName: groupExist.GroupName,
                           description: groupExist.description,
-                          email: req.decoded.email,
+                          email: user.email,
                           isCreator: false
 
                         })

@@ -28,7 +28,7 @@ export const createGroupRequest = groupdata => dispatch => axios.post('/api/v1/g
     dispatch(createGroupSuccess(response));
     dispatch(getUserGroups());
     Materialize.toast(response.data.message, 3000, 'rounded, green');
-    history.push('dashboard');
+    history.push('/dashboard');
   })
   .catch((err) => {
     dispatch(createGroupFailed(err));
