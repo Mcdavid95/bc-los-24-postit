@@ -16,10 +16,11 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: 'body'
 });
 module.exports = {
-  entry: ['./client/index.jsx'],
+  entry: [path.resolve(__dirname, 'client/index.jsx')],
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, './client/dist')
+    path: path.resolve(__dirname, './client/dist'),
+    publicPath: '/'
   },
   module: {
     loaders: [
