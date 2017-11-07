@@ -5,6 +5,7 @@ import initialState from '../../src/initialState';
 import mockLocalStorage from '../_mocks_/mockLocalStorage';
 import * as actions from '../../src/actions/groupActions';
 import * as types from '../../constant';
+import { userData, invalidUserData, groupData, invalidGroupData } from '../_mocks_/actions.mock';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -15,14 +16,7 @@ describe('Create Group Request action', () => {
   beforeEach(() => moxios.install());
   afterEach(() => moxios.uninstall());
   const store = mockStore(initialState);
-  const groupData = {
-    groupName: 'Death',
-    description: 'All things dark'
-  };
 
-  const invalidGroupData = {
-    group: 'flash'
-  };
 
   it('contains a createGroupRequest function', () => {
     expect(typeof (actions.createGroupRequest())).toBe('function');
@@ -98,7 +92,6 @@ describe('Get User Groups Request action', () => {
     moxios.stubRequest('/api/v1/user/groups', {
       status: 401,
       response: {
-        message: 'Error.',
         data: {
           token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
         }
@@ -117,20 +110,15 @@ describe('Add User to Group Request action', () => {
   afterEach(() => moxios.uninstall());
   const store = mockStore(initialState);
 
-  const groupData = {
-    username: 'mcdavid',
-    groupId: 1
-  };
 
   it('contains a addUserRequest function', () => {
     expect(typeof (actions.addUserRequest())).toBe('function');
   });
 
   it('should dispatch ADD_USER_TO_GROUP_SUCCESS after creating group', (done) => {
-    moxios.stubRequest(`/api/v1/group/${groupData.groupId}/user`, {
+    moxios.stubRequest(`/api/v1/group/${userData.groupId}/user`, {
       status: 201,
       response: {
-        message: 'Error.',
         data: {
           token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
         }
@@ -139,14 +127,14 @@ describe('Add User to Group Request action', () => {
     const expectedActions = [
       { type: types.ADD_USER_TO_GROUP_SUCCESS }
     ];
-    store.dispatch(actions.addUserRequest(groupData, groupData.groupId)).then(() => {
+    store.dispatch(actions.addUserRequest(userData, userData.groupId)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
     done();
   });
 
   it('should dispatch ADD_USER_TO_GROUP_ERROR on successful sign up', (done) => {
-    moxios.stubRequest(`/api/v1/group/${groupData.groupId}/user`, {
+    moxios.stubRequest(`/api/v1/group/${invalidUserData.groupId}/user`, {
       status: 401,
       response: {
         message: 'Error.',
@@ -158,7 +146,7 @@ describe('Add User to Group Request action', () => {
     const expectedActions = [
       { type: types.ADD_USER_TO_GROUP_FAILED }
     ];
-    store.dispatch(actions.addUserRequest(groupData, groupData.groupId)).then(() => {
+    store.dispatch(actions.addUserRequest(userData, userData.groupId)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
     done();

@@ -1,20 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import LoginForm from '../../src/containers/LoginForm';
-
-const userData = {
-  username: 'username',
-  password: 'janike_13'
-};
-
-// const wrapper = mount(
-//   <SignupForm props={userLoginRequest(userData)} />
-// )
+import { props } from '../_mocks_/components.mock';
 
 describe('Signin form component test', () => {
-  const props = {
-    userLoginRequest: jest.fn(() => Promise.resolve())
-  };
   it('should render without crashing', () => {
     const component = shallow(<LoginForm />);
     expect(component.node.type).toBe('div');

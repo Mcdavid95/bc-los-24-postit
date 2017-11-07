@@ -4,7 +4,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import jwt from 'jsonwebtoken';
 
-import Message from './src/containers/Message';
+import Messages from './src/containers/Message';
 import Board from './src/pages/MessageBoard/Board';
 import Login from './src/pages/Login/Login';
 import Signup from './src/pages/Signup/Signup';
@@ -45,7 +45,12 @@ ReactDom.render(
           component={ForgotPasswordPage}
         />
         <Route exact path="/dashboard" name="board" component={requireAuth(Board)} />
-        <Route exact path="/group/:groupId/messages" name="group" component={requireAuth(Message)} />
+        <Route
+          exact
+          path="/group/:groupId/messages"
+          name="group"
+          component={requireAuth(Messages)}
+        />
         <Route path="/reset/:token" name="reset" component={ResetPassword} />
         <Route path="/search-user" name="search-user" component={requireAuth(SearchUserPage)} />
         <Route path="*" component={PageNotFound} />

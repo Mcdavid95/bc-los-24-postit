@@ -1,12 +1,9 @@
 import getAllUsers from '../../src/reducers/getAllUsersReducer';
 import * as types from '../../constant';
+import state from '../../src/initialState';
 
 describe('Get All Users Reducer', () => {
   it('should return GET_USERS_SUCCESS', () => {
-    const state = {
-      username: '',
-      users: []
-    };
     const action = {
       type: types.GET_USERS_SUCCESS,
       username: 'mcdavid',
@@ -21,10 +18,6 @@ describe('Get All Users Reducer', () => {
       }]);
   });
   it('should return GET_USERS_FAILED', () => {
-    const state = {
-      username: '',
-      users: []
-    };
     const action = {
       male: '',
       type: types.GET_USERS_FAILED,

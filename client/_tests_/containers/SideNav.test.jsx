@@ -1,19 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { SideNav } from '../../src/pages/SideNav';
+import { props } from '../_mocks_/components.mock';
 
-const instance = () => {
-  const props = {
-    userGroupList: [],
-    userDetails: {
-      user: {
-        name: 'mcdavid',
-        email: 'mcdave@gmail.com'
-      }
-    },
-  };
-  return shallow(<SideNav {...props} />);
-};
+const instance = () => shallow(<SideNav {...props} />);
 
 const wrapper = instance();
 

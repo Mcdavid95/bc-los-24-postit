@@ -5,6 +5,7 @@ import initialState from '../../src/initialState';
 import mockLocalStorage from '../_mocks_/mockLocalStorage';
 import * as actions from '../../src/actions/messageActions';
 import * as types from '../../constant';
+import { messageData, invalidMessageData } from '../_mocks_/actions.mock';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -15,14 +16,6 @@ describe('Post Message Request action', () => {
   beforeEach(() => moxios.install());
   afterEach(() => moxios.uninstall());
   const store = mockStore(initialState);
-  const messageData = {
-    message: 'Death to you hypocrites',
-    groupId: 1
-  };
-
-  const invalidMessageData = {
-    group: 'flash'
-  };
 
   it('contains a postMessageRequest function', () => {
     expect(typeof (actions.postMessageRequest())).toBe('function');
@@ -32,7 +25,7 @@ describe('Post Message Request action', () => {
     moxios.stubRequest(`/api/v1/group/${messageData.groupId}/message`, {
       status: 201,
       response: {
-        message: 'SGroup created succcesfully created.',
+        message: 'Group created succcesfully created.',
         data: {
           token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
         }
@@ -41,7 +34,8 @@ describe('Post Message Request action', () => {
     const expectedActions = [
       { type: types.POST_MESSAGE_SUCCESS }
     ];
-    store.dispatch(actions.postMessageRequest(messageData.groupId, messageData.message)).then(() => {
+    store.dispatch(actions.postMessageRequest(messageData.groupId,
+      messageData.message)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
     done();
@@ -60,7 +54,8 @@ describe('Post Message Request action', () => {
     const expectedActions = [
       { type: types.POST_MESSAGE_FAILED }
     ];
-    store.dispatch(actions.postMessageRequest(messageData.groupId, invalidMessageData.group)).then(() => {
+    store.dispatch(actions.postMessageRequest(messageData.groupId,
+      invalidMessageData.group)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
     done();
@@ -72,12 +67,6 @@ describe('Get Group Messages Request action', () => {
   beforeEach(() => moxios.install());
   afterEach(() => moxios.uninstall());
   const store = mockStore(initialState);
-
-  const messageData = {
-    message: 'Death to you hypocrites',
-    groupId: 1
-  };
-
 
   it('contains a postMessageRequest function', () => {
     expect(typeof (actions.postMessageRequest())).toBe('function');

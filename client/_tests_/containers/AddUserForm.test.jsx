@@ -1,25 +1,13 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { AddUserForm } from '../../src/containers/AddUserForm';
+import { props, nextProps } from '../_mocks_/components.mock';
 
-const instance = () => {
-  const props = {
-    addUserRequest: jest.fn(() => Promise.resolve()),
-    allUsers: [],
-    searchUsers: jest.fn(() => Promise.resolve()),
-    groupId: '',
-    getAllUsers: jest.fn(() => Promise.resolve())
-  };
-  return shallow(<AddUserForm {...props} />);
-};
+const instance = () => mount(<AddUserForm {...props} />);
 
 const wrapper = instance();
 
 describe('AddUser form component test', () => {
-  it('should render without crashing', () => {
-    const component = wrapper;
-    expect(component.node.type).toBe('div');
-  });
   it('should contain the method onChange', () => {
     const component = wrapper;
     const onChangeSpy = jest.spyOn(component.instance(), 'onChange');
@@ -41,25 +29,13 @@ describe('AddUser form component test', () => {
   });
 
   it('should contain the componentWillReceiveProps method', () => {
-    const props = {
-      addUserRequest: jest.fn(() => Promise.resolve()),
-      allUsers: [{ users: [{ id: 3, username: 'mcdavid' }] }],
-      groupId: '',
-      result: [{
-        users: { user: [{
-          username: 'melody'
-        }] }
-      }],
-      getAllUsers: jest.fn(() => Promise.resolve())
-    };
-    const nextprops = props;
     wrapper.setState({
       users: [{ id: 3, username: 'mcdavid' }],
-      result: nextprops.result[0].users.user
+      result: nextProps.result[0].users.user
     });
     const component = wrapper;
     const onSubmitSpy = jest.spyOn(component.instance(), 'componentWillReceiveProps');
-    component.instance().componentWillReceiveProps(nextprops);
+    component.instance().componentWillReceiveProps(nextProps);
     expect(onSubmitSpy).toHaveBeenCalledTimes(1);
   });
 });

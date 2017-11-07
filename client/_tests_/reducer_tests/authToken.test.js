@@ -1,12 +1,9 @@
 import setAuthToken from '../../src/reducers/authTokenReducer';
 import * as types from '../../constant';
+import state from '../../src/initialState';
 
 describe('Set Current User Reducer', () => {
   it('should return.SET_CURRENT_USER', () => {
-    const state = {
-      isAuthenticated: false,
-      user: []
-    };
     const action = {
       type: types.SET_CURRENT_USER,
       isAuthenticated: true,

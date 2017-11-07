@@ -1,15 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { MessageForm } from '../../src/containers/MessageForm';
+import { props } from '../_mocks_/components.mock';
 
-const instance = () => {
-  const props = {
-    postMessageRequest: jest.fn(() => Promise.resolve()),
-    groupId: '',
-    getAGroupMessages: jest.fn(() => Promise.resolve())
-  };
-  return shallow(<MessageForm {...props} />);
-};
+const instance = () => shallow(<MessageForm {...props} />);
 
 const wrapper = instance();
 

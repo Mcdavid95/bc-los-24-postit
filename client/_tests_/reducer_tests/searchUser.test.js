@@ -1,12 +1,9 @@
 import searchUser from '../../src/reducers/searchUserReducer';
 import * as types from '../../constant';
+import state from '../../src/initialState';
 
 describe('Search User Reducer', () => {
   it('should return SEARCH_USERS_SUCCESS', () => {
-    const state = {
-      username: '',
-      allUsers: []
-    };
     const action = {
       type: types.SEARCH_USERS_SUCCESS,
       username: 'mc',
@@ -21,10 +18,6 @@ describe('Search User Reducer', () => {
       }]);
   });
   it('should return SEARCH_USERS_FAILED', () => {
-    const state = {
-      username: '',
-      AllUsers: []
-    };
     const action = {
       male: '',
       type: types.SEARCH_USERS_FAILED,

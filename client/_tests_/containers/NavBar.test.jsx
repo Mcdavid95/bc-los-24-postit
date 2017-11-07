@@ -2,19 +2,12 @@ import React from 'react';
 import $ from 'jquery';
 import { shallow } from 'enzyme';
 import { Navbar } from '../../src/components/Header/Navbar';
+import { props, nextProps } from '../_mocks_/components.mock';
 
 
 global.$ = $;
 
-const instance = () => {
-  const props = {
-    setAuthToken: {
-      isAuthenticated: false
-    },
-    logout: jest.fn(() => Promise.resolve())
-  };
-  return shallow(<Navbar {...props} />);
-};
+const instance = () => shallow(<Navbar {...props} />);
 
 const wrapper = instance();
 
@@ -25,12 +18,6 @@ describe('Navbar component test', () => {
   });
 
   it('should contain the componentWillReceiveProps method', () => {
-    const props = {
-      setAuthToken: {
-        isAuthenticated: false
-      }
-    };
-    const nextprops = props;
     wrapper.setState({
       match: {
         params: { groupId: 1 }
@@ -38,7 +25,7 @@ describe('Navbar component test', () => {
     });
     const component = wrapper;
     const onSubmitSpy = jest.spyOn(component.instance(), 'componentWillReceiveProps');
-    component.instance().componentWillReceiveProps(nextprops);
+    component.instance().componentWillReceiveProps(nextProps);
     expect(onSubmitSpy).toHaveBeenCalledTimes(1);
   });
 

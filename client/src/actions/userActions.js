@@ -119,7 +119,7 @@ const confirmPasswordResetFailed = password => ({
   type: types.RESET_PASSWORD_FAILED, password
 });
 
-export const confirmPasswordResetRequest = (token, newPassword) => dispatch =>
+export const confirmPasswordReset = (token, newPassword) => dispatch =>
   axios.post(`/api/v1/reset-password/${token}`, newPassword)
     .then((response) => {
       dispatch(confirmPasswordResetSuccess(response));

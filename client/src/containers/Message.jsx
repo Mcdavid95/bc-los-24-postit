@@ -143,7 +143,6 @@ Message.propTypes = {
   groupMessages: PropTypes.array.isRequired,
   match: PropTypes.object.isRequired,
   postMessageRequest: PropTypes.func.isRequired,
-  userGroupList: PropTypes.array.isRequired,
 
 };
 

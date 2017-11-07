@@ -1,11 +1,9 @@
 import getMessages from '../../src/reducers/getMessagesReducer';
 import * as types from '../../constant';
+import state from '../../src/initialState';
 
 describe('Get Messages Reducer', () => {
   it('should return GET_MESSAGES_SUCCESS', () => {
-    const state = {
-      messages: {},
-    };
     const action = {
       type: types.GET_MESSAGES_SUCCESS,
       messages: [{ id: 1, message: 'hi', userId: 1, groupId: 1, username: 'mcdavid', priority: 'normal' }]
@@ -16,10 +14,6 @@ describe('Get Messages Reducer', () => {
       ]);
   });
   it('should return GET_MESSAGES_FAILED', () => {
-    const state = {
-      username: '',
-      users: []
-    };
     const action = {
       male: '',
       type: types.GET_MESSAGES_FAILED

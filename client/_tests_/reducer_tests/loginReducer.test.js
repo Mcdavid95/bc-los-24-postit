@@ -1,16 +1,9 @@
 import login from '../../src/reducers/loginReducer';
 import * as types from '../../constant';
-import reducers from '../../src/reducers';
+import state from '../../src/initialState';
 
 describe('Login Reducer', () => {
   it('should return LOGIN_USER_SUCCES success', () => {
-    const state = {
-      username: '',
-      email: '',
-      phoneNumber: 234,
-      loggedIn: false,
-      password: ''
-    };
     const action = {
       type: types.LOGIN_USER,
       username: 'Mcdavid',
@@ -34,13 +27,6 @@ describe('Login Reducer', () => {
 
 describe('Login Reducer', () => {
   it('should return LOGIN_USER_ERROR', () => {
-    const state = {
-      username: '',
-      email: '',
-      phoneNumber: 234,
-      loggedIn: false,
-      password: ''
-    };
     const action = {
       type: types.LOGIN_USER_ERROR,
       male: ''

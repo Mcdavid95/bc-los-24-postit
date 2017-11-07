@@ -17,12 +17,12 @@ export default {
         Error: 'Message content must not be empty'
       });
     } else {
-      Group.findOne({
+      return Group.findOne({
         where: { id: req.params.groupId }
       })
         .then((group) => {
           if (group) {
-            Message
+            return Message
 
               .create({
                 username: req.decoded.name,
@@ -56,17 +56,16 @@ export default {
               .catch((error) => {
                 res.status(400).send(error.message);
               });
-          } else {
-            res.status(404).send({
-              Error: `Group with id: ${req.params.groupId} does not exist`
-            });
           }
+          res.status(404).send({
+            Error: `Group with id: ${req.params.groupId} does not exist`
+          });
         });
     }
   },
 
   listMessages(req, res) {
-    Group
+    return Group
       .findOne({
         where: {
           id: req.params.groupId

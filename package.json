@@ -29,7 +29,8 @@
     ],
     "collectCoverage": true,
     "coveragePathIgnorePatterns": [
-      "<rootDir>/test-env.js"
+      "<rootDir>/test-env.js",
+      "<rootDir>/client/_tests_/_mocks_"
     ],
     "unmockedModulePathPatterns": [
       "node_modules/react/",

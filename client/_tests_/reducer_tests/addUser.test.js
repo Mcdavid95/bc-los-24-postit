@@ -1,12 +1,9 @@
 import addUser from '../../src/reducers/addUserToGroupReducer';
 import * as types from '../../constant';
+import state from '../../src/initialState';
 
 describe('Add User to Group Reducer', () => {
   it('should return ADD_USER_TO_GROUP_SUCCESS', () => {
-    const state = {
-      username: '',
-      users: []
-    };
     const action = {
       type: types.ADD_USER_TO_GROUP_SUCCESS,
       username: 'mcdavid',
@@ -21,10 +18,6 @@ describe('Add User to Group Reducer', () => {
       }]);
   });
   it('should return ADD_USER_TO_GROUP_FAILED', () => {
-    const state = {
-      username: '',
-      users: []
-    };
     const action = {
       male: '',
       type: types.ADD_USER_TO_GROUP_FAILED,

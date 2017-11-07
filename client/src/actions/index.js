@@ -5,7 +5,7 @@ export { logout } from './userActions';
 export { getAllUsers } from './userActions';
 export { searchUsers } from './userActions';
 export { forgotPassword } from './userActions';
-export { confirmPasswordResetRequest } from './userActions';
+export { confirmPasswordReset } from './userActions';
 export { setCurrentUser } from './userActions';
 
 // Group Actions

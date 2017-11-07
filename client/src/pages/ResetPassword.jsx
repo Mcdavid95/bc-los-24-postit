@@ -87,7 +87,8 @@ class ResetPasswordPage extends Component {
 }
 
 ResetPasswordPage.propTypes = {
-  confirmPasswordReset: PropTypes.func.isRequired
+  confirmPasswordReset: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired
 };
 
 export default connect(null, { confirmPasswordReset })(ResetPasswordPage);
