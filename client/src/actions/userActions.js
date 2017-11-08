@@ -16,10 +16,8 @@ export const setCurrentUser = user => ({
 
 /**
  * @function userSignupRequest
- * 
  * @param { object } userData
  * @returns {object} dispatches an action
- * 
  * @description It makes an api call to register a new user
  */
 export const userSignupRequest = userData => dispatch => axios.post('/api/v1/user/register', userData)
@@ -43,10 +41,8 @@ const userLoginFailed = user => ({ type: types.LOGIN_USER_ERROR, user });
 
 /**
  * @function userLoginRequest
- * 
  * @param { object } userData
  * @returns {object} dispatches an action
- * 
  * @description It makes an api call to log i a registered user
  */
 export const userLoginRequest = userData => dispatch => axios.post('/api/v1/user/login', userData)
