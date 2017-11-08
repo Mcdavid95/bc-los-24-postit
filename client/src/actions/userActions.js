@@ -128,7 +128,7 @@ const confirmEmailFailed = email => ({
 });
 
 /**
- * @function forgotPassword 
+ * @function forgotPassword
  * @param { object } email
  * @returns {object} dispatches an action
  * @description It makes an api call to check if email is valid and send
