@@ -42,7 +42,7 @@ describe('Authentication Route', () => {
       });
   });
 
-  it('should prevent users not logged in to access protected routes', (done) => {
+  it('should prevent users not logged from accessing protected routes', (done) => {
     api
       .get('/api/v1/users')
       .expect(403)

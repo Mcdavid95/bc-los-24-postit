@@ -31,8 +31,4 @@ router.post('/api/v1/forgot-password', AuthCtrl.forgotPassoword);
 // update user password
 router.post('/api/v1/reset-password/:token', AuthCtrl.reset);
 
-// authenticate reset password token
-router.post('/api/v1/reset/token', AuthCtrl.authToken);
-
-
 export default router;
