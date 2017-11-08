@@ -11,6 +11,13 @@ const User = model.User;
 
 const saltRounds = 10;
 export default {
+  /**
+   * @method register
+   * @param { object } req
+   * @param { object } res
+   * @returns { object } returns the response
+   * @description recieves useer details and create an instance of the User Model in the database
+   */
   register(req, res) {
     if (typeof (req.body.username) === 'undefined') {
       res.status(409).json({
@@ -96,6 +103,13 @@ export default {
     }
   },
 
+  /**
+   * @method  listUsers
+   * @param { object } req
+   * @param { object } res
+   * @returns { object } returns the response
+   * @description get all users in the database User table
+   */
   listUsers(req, res) {
     return User
       .findAll({ attributes:
@@ -108,6 +122,13 @@ export default {
       });
   },
 
+  /**
+   * @method  searchUser
+   * @param { object } req
+   * @param { object } res
+   * @returns { object } returns the response
+   * @description get all users in the first (n) users from database User table where n = offset
+   */
   searchUser(req, res) {
     const limit = 5;
     const offset = req.params.offset;
@@ -131,6 +152,13 @@ export default {
       });
   },
 
+  /**
+   * @method login
+   * @param { object } req
+   * @param { object } res
+   * @returns { object } returns the object containing response and jwt token
+   * @description recieves user details and checks if it exists in the database and returns a token
+   */
   login(req, res) {
     if (typeof (req.body.username) === 'undefined') {
       res.status(409).send({
@@ -171,18 +199,30 @@ export default {
           });
         })
         .catch(() => {
-          // res.status(400).send({
-          //  message: 'Validation error'
-          // });
         });
     }
   },
+
+  /**
+   * @method logout
+   * @param { object } req
+   * @param { object } res
+   * @returns { object } returns the object containing response and message
+   * @description logs out a user
+   */
   logout(req, res) {
     res.status(200).json({
       message: 'LogOut Successful'
     });
   },
 
+  /**
+   * @method forgotPassword
+   * @param { object } req
+   * @param { object } res
+   * @returns { object } returns the object containing response and reset password token
+   * @description recieves user email and creates password token i the database
+   */
   forgotPassoword(req, res) {
     if (!req.body.email) {
       res.status(401).send({
@@ -245,6 +285,13 @@ export default {
     }
   },
 
+  /**
+   * @method reset
+   * @param { object } req
+   * @param { object } res
+   * @returns { object } returns the object containing response and reset password token
+   * @description recieves new password details and updates user password in the database User table
+   */
   reset(req, res) {
     return User
       .findOne({
@@ -306,40 +353,5 @@ export default {
         });
       });
   },
-
-  authToken(req, res) {
-    if (!req.body.token) {
-      res.status(400).send({
-        success: false,
-        message: 'No token provided'
-      });
-    } else {
-      return User
-        .findOne({
-          where: {
-            resetPasswordToken: req.body.token
-          }
-        })
-        .then((user) => {
-          if (!user) {
-            res.status(400).send({
-              success: false,
-              message: 'failed token authentication'
-            });
-          } else {
-            res.status(200).send({
-              success: true,
-              message: 'valid token',
-              UserName: user.UserName
-            });
-          }
-        }, (err) => {
-          res.status(400).send({
-            success: false,
-            message: err.message
-          });
-        });
-    }
-  }
 
 };
