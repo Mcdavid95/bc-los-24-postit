@@ -77,7 +77,8 @@ GroupList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  groupMessages: state.groupMessages
+  groupMessages: state.groupMessages,
+  userGroupList: state.userGroupList,
 });
 
 export default connect(mapStateToProps, { getGroupMessages })(GroupList);

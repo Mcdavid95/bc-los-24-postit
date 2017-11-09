@@ -72,9 +72,11 @@ export class MessageBoard extends Component {
                         <br />
                         <p>
                           <strong>
-                            <span className="center-align" id="message-content">
-                              {message.message}
-                            </span>
+                            <span
+                              className="center-align"
+                              id="message-content"
+                              dangerouslySetInnerHTML={{ __html: message.message }}
+                            />
                           </strong>
                         </p>
                       </div>
