@@ -19,7 +19,7 @@ const loadGroupFailed = groups => ({ type: types.LOAD_GROUPS_FAILED, groups });
 export const getUserGroups = () => (dispatch) => {
   axios.get('/api/v1/user/groups')
     .then((response) => {
-      dispatch(loadGroupsSuccess(response.data));
+      dispatch(loadGroupsSuccess(response.data.group));
     })
     .catch((err) => {
       Materialize.toast('Sorry your session expired please login', 3000, 'rounded red');
@@ -56,7 +56,7 @@ const addUserFailed = username => ({ type: types.ADD_USER_TO_GROUP_FAILED, usern
  * @param { object } userData
  * @param { number} groupId
  * @returns {object} dispatches an action
- * @description It makes an api call to add a user to the current group
+ * @description It makes an api call to add a user and dispatches the action
  */
 export const addUserRequest = (userData, groupId) => dispatch => axios.post(`/api/v1/group/${groupId}/user`, userData)
   .then((response) => {

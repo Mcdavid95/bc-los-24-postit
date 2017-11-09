@@ -19,7 +19,7 @@ const initialState = {
   },
 
   group: {
-    GroupName: '',
+    groupName: '',
     description: ''
   },
 
