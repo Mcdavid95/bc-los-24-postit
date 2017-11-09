@@ -37,7 +37,7 @@ describe('Authentication Route', () => {
       .get('/api/v1/creepy')
       .expect(501)
       .end((err, res) => {
-        res.body.message.should.equal('Sorry, this address is not supported by this API.');
+        res.body.message.should.equal('Sorry, this endpoint is not supported by this API.');
         done();
       });
   });
@@ -180,7 +180,7 @@ describe('Authentication Route', () => {
       .send(yetAnotherValid)
       .end((err, res) => {
         res.status.should.equal(201);
-        expect(res.body.myToken).to.be.a('string');
+        expect(res.body.token).to.be.a('string');
         done();
       });
   });
@@ -196,7 +196,7 @@ describe('Authentication Route', () => {
         password: 'janike_13'
       })
       .end((err, res) => {
-        token = res.body.myToken;
+        token = res.body.token;
         res.status.should.equal(202);
         res.body.message.should.equal('Welcome back mcdavid');
         done();
@@ -249,7 +249,7 @@ describe('Authentication Route', () => {
       })
       .end((err, res) => {
         res.status.should.equal(202);
-        expect(res.body.myToken).to.be.a('string');
+        expect(res.body.token).to.be.a('string');
         done();
       });
   });
@@ -261,7 +261,7 @@ describe('Authentication Route', () => {
       .expect(200)
       .end((err, res) => {
         res.status.should.equal(200);
-        res.body.length.should.equal(3);
+        res.body.users.length.should.equal(3);
         done();
       });
   });
@@ -279,7 +279,7 @@ describe('Group Route', () => {
       .expect(201)
       .end((err, res) => {
         res.status.should.equal(201);
-        res.body.message.should.equal(`Group ${Group1.GroupName.toLowerCase()} successfully created`);
+        res.body.message.should.equal(`Group ${Group1.groupName.toLowerCase()} successfully created`);
         done();
       });
   });
@@ -326,7 +326,7 @@ describe('Group Route', () => {
       .set('Content-Type', 'application/json')
       .type('form')
       .send({
-        GroupName: 'lodash is vauge'
+        groupName: 'lodash is vauge'
       })
       .expect(400)
       .end((err, res) => {
@@ -343,7 +343,7 @@ describe('Group Route', () => {
       .expect(200)
       .end((err, res) => {
         res.status.should.equal(200);
-        res.body.length.should.equal(1);
+        res.body.groups.length.should.equal(1);
         done();
       });
   });
@@ -424,10 +424,10 @@ describe('Group Route', () => {
     api
       .get('/api/v1/group/1/users')
       .set('x-access-token', token)
-      .expect(200)
+      .expect(201)
       .end((err, res) => {
-        res.status.should.equal(200);
-        res.body.length.should.equal(2);
+        res.status.should.equal(201);
+        res.body.members.length.should.equal(2);
         done();
       });
   });
@@ -451,7 +451,7 @@ describe('Group Route', () => {
       .expect(200)
       .end((err, res) => {
         res.status.should.equal(200);
-        res.body.length.should.equal(1);
+        res.body.group.length.should.equal(1);
         done();
       });
   });
@@ -536,10 +536,10 @@ describe('Message Routes', () => {
     api
       .get('/api/v1/group/1/messages')
       .set('x-access-token', token)
-      .expect(200)
+      .expect(201)
       .end((err, res) => {
-        res.status.should.equal(200);
-        res.body.length.should.equal(1);
+        res.status.should.equal(201);
+        res.body.messages.length.should.equal(1);
         done();
       });
   });

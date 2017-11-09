@@ -162,7 +162,7 @@ export default {
   },
 
   ListGroupMembers(req, res) {
-    if (typeof req.params.groupId !== 'number') {
+    if (isNaN(parseInt(req.params.groupId, 10)) === true) {
       res.status(401).send({ message: 'Please groupId must be a number' });
     } else {
       Group

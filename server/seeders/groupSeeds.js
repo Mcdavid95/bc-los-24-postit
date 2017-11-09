@@ -1,10 +1,10 @@
 export const Group1 = {
-  GroupName: 'Jonny',
+  groupName: 'Jonny',
   description: 'for yemi alade'
 };
 
 export const Group2 = {
-  GroupName: 'Charlie',
+  groupName: 'Charlie',
   description: 'for Sarkodie'
 };
 
