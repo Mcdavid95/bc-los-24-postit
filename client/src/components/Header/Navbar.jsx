@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { logout } from '../../actions';
+import { logout, currentGroup } from '../../actions';
 import initialState from '../../initialState';
 //
 /**
@@ -16,7 +16,8 @@ export class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAuthenticated: initialState.setAuthToken.isAuthenticated
+      isAuthenticated: initialState.setAuthToken.isAuthenticated,
+      group: this.props.groupName
     };
     this.logout = this.logout.bind(this);
     this.isAuthenticated = this.props.setAuthToken;
@@ -27,6 +28,7 @@ export class Navbar extends Component {
    * @returns {*} any
    */
   componentDidMount() {
+    this.props.currentGroup(this.props.groupId);
     $(document).ready(() => {
       $('.button-collapse').sideNav();
       $('select').material_select();
@@ -40,7 +42,8 @@ export class Navbar extends Component {
  */
   componentWillReceiveProps(nextProps) {
     this.setState({
-      isAuthenticated: !nextProps.setAuthToken.isAuthenticated
+      isAuthenticated: !nextProps.setAuthToken.isAuthenticated,
+      group: nextProps.groupName
     });
   }
 
@@ -56,23 +59,31 @@ export class Navbar extends Component {
    * @return {DOM} Renders Dom Elements
    */
   render() {
+    const group = (
+      <li><NavLink to="#" activeClassName="active">Group: {this.state.group}</NavLink></li>
+    );
     const { isAuthenticated } = this.props.setAuthToken;
     const userLinks = (
       <div>
         <ul className="right hide-on-med-and-down">
           <li><NavLink to="/dashboard" activeClassName="active"><i
             className="material-icons tooltipped"
-            data-position="right"
-            data-delay="50"
+            data-position="bottom"
+            data-delay="10"
             data-tooltip="Home"
           >home</i></NavLink></li>
-          <li><NavLink to="/login" onClick={this.logout}>LOGOUT</NavLink></li>
-          <li><NavLink to="#" activeClassName="active">About</NavLink></li>
+          {this.props.groupId !== undefined ? group : null}
+          <li><NavLink to="/login" onClick={this.logout}><i
+            className="material-icons tooltipped"
+            data-position="bottom"
+            data-delay="10"
+            data-tooltip="Logout"
+          >exit_to_app</i></NavLink></li>
         </ul>
         <NavLink to="/search-user" className="right" activeClassName="active"><i
           className="material-icons tooltipped"
           data-position="bottom"
-          data-delay="50"
+          data-delay="10"
           data-tooltip="Search For Other Users"
         >
           search
@@ -82,13 +93,12 @@ export class Navbar extends Component {
 
     const guestLinks = (
       <ul className="right hide-on-med-and-down">
-        <li><NavLink to="/dashboard" activeClassName="active"><i
+        <li><NavLink to="/login" activeClassName="active"><i
           className="material-icons tooltipped"
-          data-position="left"
-          data-delay="50"
+          data-position="bottom"
+          data-delay="10"
           data-tooltip="Home"
         >home</i></NavLink></li>
-        <li><NavLink to="#" activeClassName="active">About</NavLink></li>
       </ul>
     );
 
@@ -96,24 +106,26 @@ export class Navbar extends Component {
       <ul className="side-nav" id="mobile-demo">
         <li><NavLink to="/dashboard" activeClassName="active"><i
           className="material-icons tooltipped"
-          data-position="left"
-          data-delay="50"
+          data-position="right"
+          data-delay="10"
           data-tooltip="Home"
         >home</i></NavLink></li>
-        <li><NavLink to="/login" onClick={this.logout}>LOGOUT</NavLink></li>
-        <li><NavLink to="#" activeClassName="active">About</NavLink></li>
+        <li>
+          <NavLink
+            to="/login"
+            onClick={this.logout}
+          ><i className="material-icons">exit_to_app</i></NavLink></li>
       </ul>
     );
 
     const sideNavGuests = (
       <ul className="side-nav" id="mobile-demo">
-        <li><NavLink to="/dashboard" activeClassName="active"><i
+        <li><NavLink to="/login" activeClassName="active"><i
           className="material-icons tooltipped"
-          data-position="left"
-          data-delay="50"
+          data-position="right"
+          data-delay="10"
           data-tooltip="Home"
         >home</i></NavLink></li>
-        <li><NavLink to="#" activeClassName="active">About</NavLink></li>
       </ul>
     );
 
@@ -138,11 +150,15 @@ export class Navbar extends Component {
 
 Navbar.propTypes = {
   setAuthToken: PropTypes.object.isRequired,
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
+  currentGroup: PropTypes.func.isRequired,
+  groupId: PropTypes.string.isRequired,
+  groupName: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
-  setAuthToken: state.setAuthToken
+  setAuthToken: state.setAuthToken,
+  groupName: state.currentGroup
 });
 
-export default connect(mapStateToProps, { logout })(Navbar);
+export default connect(mapStateToProps, { logout, currentGroup })(Navbar);
