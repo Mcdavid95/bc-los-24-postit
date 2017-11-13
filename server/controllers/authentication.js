@@ -133,7 +133,7 @@ export default {
    */
   searchUser(req, res) {
     const limit = 5;
-    const offset = req.params.offset;
+    const offset = req.query.offset;
     User
       .findAndCountAll({
         where: {
