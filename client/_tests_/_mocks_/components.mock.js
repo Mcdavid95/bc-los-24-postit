@@ -1,5 +1,6 @@
 export const props = {
   addUserRequest: jest.fn(() => Promise.resolve()),
+  currentGroup: jest.fn(() => Promise.resolve()),
   allUsers: [],
   searchUsers: jest.fn(() => Promise.resolve()),
   groupId: '',
