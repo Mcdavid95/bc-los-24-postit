@@ -137,7 +137,7 @@ export default {
     User
       .findAndCountAll({
         where: {
-          username: { $like: `%${req.body.username}%` }
+          username: { $like: `%${req.body.username.toLowerCase().trim()}%` }
         },
         attributes: ['id', 'username', 'email'],
         limit,
