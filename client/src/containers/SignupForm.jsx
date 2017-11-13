@@ -43,9 +43,8 @@ export default class SignupForm extends Component {
   render() {
     return (
       <div className="container">
-        <h1 className="center-align" id="acct">CREATE AN ACCOUNT</h1>
-
         <div className="row">
+          <h3 className="heading">Join <span className="brand">POSTIT!!</span> Today</h3>
           <form className="col s12" onSubmit={this.onSubmit}>
             <div className="row">
               <div className="input-field col s12 m6">
