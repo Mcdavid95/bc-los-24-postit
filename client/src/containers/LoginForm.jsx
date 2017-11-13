@@ -42,7 +42,7 @@ export default class LoginForm extends Component {
    */
   render() {
     return (
-      <div className="row">
+      <div className="login-form row">
         <form onSubmit={this.onSubmit}>
           <div className="input-field">
             <label htmlFor="email" className="control-label">Username: </label>
@@ -51,7 +51,6 @@ export default class LoginForm extends Component {
               name="username"
               value={this.state.username}
               className="form-control login"
-              placeholder="EMMY"
               required
               onChange={this.onChange}
             />
@@ -59,20 +58,22 @@ export default class LoginForm extends Component {
           <hr />
           <br />
           <div className="input-field">
-            <label htmlFor="password">Password: </label>
+            <label htmlFor="password" className="control-label">Password: </label>
             <input
               type="password"
               name="password"
               value={this.state.password}
               className="form-control login"
-              placeholder="..........."
               required
               onChange={this.onChange}
             />
           </div>
-          <div className="row">
+          <div className="forgot-password row">
             <button type="submit" className="btn">Login</button>
-            <p><Link to="/forgot-password"> Forgot password? click to reset </Link></p>
+            <p> Forgot password? <Link to="/forgot-password">click to reset </Link></p>
+            <p id="signup">Don&apos;t have an account? Click
+              <Link to="/register"> here to Register</Link>
+            </p>
           </div>
         </form>
       </div>
