@@ -17,7 +17,7 @@ export class AddUserForm extends Component {
     super(props);
     this.state = {
       username: initialState.addUser,
-      result: [],
+      result: [{ id: 1 }],
       offset: 0
     };
 
@@ -30,17 +30,17 @@ export class AddUserForm extends Component {
    * @return {object} new state
    */
   componentWillReceiveProps(nextProps) {
-    if (nextProps.result.length === 0 && nextProps.result.users) {
+    if (nextProps.result.length === 0) {
       this.setState({
-        result: nextProps.result.users.user
+        result: nextProps.result.users.users,
       });
     } else if (typeof (nextProps.result.username) === 'string') {
       this.setState({
         result: []
       });
-    } else if (nextProps.result.users) {
+    } else {
       this.setState({
-        result: nextProps.result[nextProps.result.length - 1].users.user
+        result: nextProps.result[nextProps.result.length - 1].users.users,
       });
     }
   }
@@ -115,7 +115,7 @@ AddUserForm.propTypes = {
   addUserRequest: PropTypes.func.isRequired,
   groupId: PropTypes.string.isRequired,
   searchUsers: PropTypes.func.isRequired,
-  result: PropTypes.object.isRequired
+  result: PropTypes.array.isRequired
 
 };
 

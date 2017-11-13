@@ -63,7 +63,7 @@ export class Message extends Component {
   render() {
     return (
       <div >
-        <Header />
+        <Header groupId={this.props.match.params.groupId} />
         <main>
           <Sidenav groupId={this.props.match.params.groupId} />
           <div id="modal1" className="modal  modal-fixed-footer">
@@ -74,7 +74,7 @@ export class Message extends Component {
                 className="waves-effect waves-light btn modal-close"
                 data-dismiss="modal"
               >&times;</button>
-              <h1 className="group-form">Create New Group</h1>
+              <h3 className="group-form heading">Create New Group</h3>
 
               <Groupform createGroupRequest={this.props.createGroupRequest} />
             </div>
@@ -92,7 +92,7 @@ export class Message extends Component {
                 className="waves-effect waves-light btn modal-close"
                 data-dismiss="modal"
               >&times;</button>
-              <h1>Add New User To This Group</h1>
+              <h3 className="heading">Add New User To This Group</h3>
               <AddUserform
                 addUserRequest={this.props.addUserRequest}
                 groupId={this.props.match.params.groupId}
@@ -106,11 +106,6 @@ export class Message extends Component {
             </div>
           </div>
           <div className="row page">
-            <a
-              className="modal-trigger center-align waves-effect waves-light btn btn-small"
-              id="users"
-              href="#modal2"
-            >Add user</a>
             <Messageboard
               groupMessages={this.state.messages}
               groupId={this.props.match.params.groupId}
