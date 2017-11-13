@@ -68,12 +68,6 @@ export class Message extends Component {
           <Sidenav groupId={this.props.match.params.groupId} />
           <div id="modal1" className="modal  modal-fixed-footer">
             <div className="modal-content">
-
-              <button
-                type="button"
-                className="waves-effect waves-light btn modal-close"
-                data-dismiss="modal"
-              >&times;</button>
               <h3 className="group-form heading">Create New Group</h3>
 
               <Groupform createGroupRequest={this.props.createGroupRequest} />
@@ -87,11 +81,6 @@ export class Message extends Component {
           </div>
           <div id="modal2" className="modal modal-fixed-footer">
             <div className="modal-content" id="options">
-              <button
-                type="button"
-                className="waves-effect waves-light btn modal-close"
-                data-dismiss="modal"
-              >&times;</button>
               <h3 className="heading">Add New User To This Group</h3>
               <AddUserform
                 addUserRequest={this.props.addUserRequest}

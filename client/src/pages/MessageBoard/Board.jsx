@@ -41,11 +41,6 @@ class Board extends Component {
           <SideNavigation />
           <div id="modal1" className="modal modal-fixed-footer">
             <div className="modal-content">
-              <button
-                type="button"
-                className="waves-effect waves-light btn modal-close"
-                data-dismiss="modal"
-              >&times;</button>
               <h3 className="group-form heading">Create New Group</h3>
               <GroupForms createGroupRequest={this.props.createGroupRequest} />
             </div>
