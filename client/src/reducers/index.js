@@ -11,6 +11,8 @@ import allUsers from './getAllUsersReducer';
 import forgotPassword from './forgotPasswordReducer';
 import resetPassword from './resetPasswordReducer';
 import search from './searchUserReducer';
+import groupMembers from './groupMembersReducer';
+import currentGroup from './getCurrentGroupReducer';
 
 const rootReducer = combineReducers({
   signup,
@@ -24,7 +26,9 @@ const rootReducer = combineReducers({
   allUsers,
   forgotPassword,
   resetPassword,
-  search
+  search,
+  groupMembers,
+  currentGroup
 });
 
 export default rootReducer;

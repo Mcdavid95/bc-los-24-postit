@@ -17,7 +17,7 @@ export default {
       Group
         .findOne({
           where: {
-            GroupName: req.body.groupName.toLowerCase()
+            GroupName: req.body.groupName.toLowerCase().trim()
           },
         })
         .then((groupExist) => {
@@ -28,7 +28,7 @@ export default {
           } else {
             Group
               .create({
-                GroupName: req.body.groupName.toLowerCase(),
+                GroupName: req.body.groupName.toLowerCase().trim(),
                 description: req.body.description.toLowerCase(),
                 userId: req.decoded.id
               })
@@ -83,13 +83,13 @@ export default {
       res.status(401).send({ message: 'Please add Username or email' });
     } else {
       User.findOne({
-        where: { username: req.body.username.toLowerCase() }
+        where: { username: req.body.username.toLowerCase().trim() }
       })
         .then((user) => {
           if (user) {
             GroupMembers.findOne({
               where: {
-                username: req.body.username.toLowerCase(),
+                username: req.body.username.toLowerCase().trim(),
                 $and: {
                   groupId: req.params.groupId
                 }
@@ -107,7 +107,7 @@ export default {
                       if (groupExist) {
                         GroupMembers.create({
                           groupId: req.params.groupId,
-                          username: req.body.username.toLowerCase(),
+                          username: req.body.username.toLowerCase().trim(),
                           groupName: groupExist.GroupName,
                           description: groupExist.description,
                           email: user.email,
@@ -189,4 +189,26 @@ export default {
         });
     }
   },
+
+  getCurrentGroup(req, res) {
+    if (isNaN(parseInt(req.params.groupId, 10)) === true) {
+      res.status(401).send({ message: 'Please groupId must be a number' });
+    } else {
+      Group
+        .findOne({
+          where: { id: req.params.groupId },
+          attributes: ['id', 'GroupName']
+        })
+        .then((group) => {
+          if (group) {
+            return res.status(201).send({
+              groupName: group.GroupName
+            });
+          }
+          res.status(404).send({
+            Error: 'Group does not exist'
+          });
+        });
+    }
+  }
 };

@@ -31,5 +31,8 @@ router.get('/api/v1/group/:groupId/messages', Verify.hasToken, MessageCtrl.listM
 // fetch all groups of a single user
 router.get('/api/v1/user/groups', Verify.hasToken, GroupCtrl.listUserGroups);
 
+// get current groupName
+router.get('/api/v1/group/:groupId', Verify.hasToken, GroupCtrl.getCurrentGroup);
+
 
 export default router;
