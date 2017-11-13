@@ -70,13 +70,28 @@ export const resetPasswordMail = (token, email, host) => {
     from: '"PostIt" <mcdavidemereuwa95@gmail.com>',
     to: email,
     subject: 'POSTIT PASSWORD RESET',
-    text: `You are receiving this because you (or someone else) 
-    have requested the reset of the password for your account.\n\n
+    html: `
+    <div style="width: 100%; background-color: grey; padding: 2%;">
+    <div style="width: 60%; background-color: white; margin: auto;">
+      <div style="height: 8%; background-color: #2c3e56; width:100%">
+        <p style="color: palevioletred; margin-left: 3%; padding-top: 2% font-family: kurale serif">POSTIT!!</p>
+      </div>
+      <div style="padding: 8%">
+        <div class="row">
+          You are receiving this because you (or someone else) 
+    have requested the reset of the password for your account.
     Please click on the following link or paste this into your browser 
-    to complete the process: \n\n
-    http://${host}/reset/${token}\n\n
-    If you did not request this, please ignore this mail and your 
-    password will remain unchanged.`
+    to complete the process
+        </div>
+        <div>
+          <br>
+          <a href="http://${host}/reset/${token}"><button style="background-color: teal; color: white">Reset Password</button></a>
+        </div>
+        <p style="font-weight: bold; color: palevioletred">POSTIT!!</p>
+      </div>
+    </div>
+  </div>
+    `
   };
 
   transporter.sendMail(mailOptions, (error) => {
@@ -104,8 +119,25 @@ export const sendSuccessfulResetMail = (email) => {
     from: '"PostIt" <mcdavidemereuwa95@gmail.com>',
     to: email,
     subject: 'POSTIT PASSWORD CHANGE SUCCESSFUL',
-    text: `This email confirms that your new POSTIT password has been set.\n\n
-    You can now access your Account.`
+    html: ` <div style="width: 100%; background-color: grey; padding: 2%;">
+    <div style="width: 60%; background-color: white; margin: auto;">
+      <div style="height: 8%; background-color: #2c3e56; width:100%">
+        <p style="color: palevioletred; margin-left: 3%; padding-top: 2% font-family: kurale serif">POSTIT!!</p>
+      </div>
+      <div style="padding: 8%">
+        <div class="row">
+          This email confirms that your new POSTIT password has been set.
+    You can now access your Account.
+        </div>
+          <br>
+          Thanks.
+        <div>
+          <br>
+        </div>
+        <p style="font-weight: bold; color: palevioletred">POSTIT!!</p>
+      </div>
+    </div>
+  </div>`
   };
 
   // send mail with defined transport object
