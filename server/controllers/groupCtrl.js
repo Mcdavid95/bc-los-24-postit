@@ -7,8 +7,7 @@ const GroupMembers = model.GroupMember;
 export default {
 
   createGroup(req, res) {
-    // const userId = req.decoded.id;
-    if (!req.body.GroupName) {
+    if (!req.body.groupName) {
       res.status(400).json({ message: 'Please add Group name' });
       return;
     }
@@ -18,7 +17,7 @@ export default {
       Group
         .findOne({
           where: {
-            GroupName: req.body.GroupName.toLowerCase()
+            GroupName: req.body.groupName.toLowerCase()
           },
         })
         .then((groupExist) => {
@@ -29,7 +28,7 @@ export default {
           } else {
             Group
               .create({
-                GroupName: req.body.GroupName.toLowerCase(),
+                GroupName: req.body.groupName.toLowerCase(),
                 description: req.body.description.toLowerCase(),
                 userId: req.decoded.id
               })
@@ -68,13 +67,19 @@ export default {
         attributes:
         ['id', 'GroupName']
       })
-      .then(groups => res.status(200).send(groups))
+      .then(groups => res.status(200).send({
+        groups
+      }))
 
-      .catch(error => res.status(400).send(error));
+      .catch(error => res.status(400).send({
+        Error: error.message
+      }));
   },
 
   addGroupMember(req, res) {
-    if (!(req.body.username || req.body.email)) {
+    if (isNaN(parseInt(req.params.groupId, 10)) === true) {
+      res.status(401).send({ message: 'Please add groupId must be a number' });
+    } else if (!(req.body.username || req.body.email)) {
       res.status(401).send({ message: 'Please add Username or email' });
     } else {
       User.findOne({
@@ -150,30 +155,38 @@ export default {
         attributes: ['id', 'groupName', 'groupId', 'description']
       })
       .then((group) => {
-        res.send(group);
+        res.send({
+          group
+        });
       });
   },
 
   ListGroupMembers(req, res) {
-    Group
-      .findOne({
-        where: { id: req.params.groupId }
-      })
-      .then((group) => {
-        if (group) {
-          GroupMembers
-            .findAll({ where: { groupId: req.params.groupId } })
+    if (isNaN(parseInt(req.params.groupId, 10)) === true) {
+      res.status(401).send({ message: 'Please groupId must be a number' });
+    } else {
+      Group
+        .findOne({
+          where: { id: req.params.groupId }
+        })
+        .then((group) => {
+          if (group) {
+            GroupMembers
+              .findAll({ where: { groupId: req.params.groupId } })
 
-            .then(groups => res.status(200).send(groups))
+              .then(members => res.status(201).send({
+                members
+              }))
 
-            .catch((error) => {
-              res.status(400).send(error);
+              .catch((error) => {
+                res.status(400).send(error);
+              });
+          } else {
+            res.status(404).send({
+              Error: `Group with id: ${req.params.groupId} does not exist`
             });
-        } else {
-          res.status(404).send({
-            Error: `Group with id: ${req.params.groupId} does not exist`
-          });
-        }
-      });
+          }
+        });
+    }
   },
 };

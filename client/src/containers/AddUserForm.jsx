@@ -30,7 +30,7 @@ export class AddUserForm extends Component {
    * @return {object} new state
    */
   componentWillReceiveProps(nextProps) {
-    if (nextProps.result.length === 0) {
+    if (nextProps.result.length === 0 && nextProps.result.users) {
       this.setState({
         result: nextProps.result.users.user
       });
@@ -38,7 +38,7 @@ export class AddUserForm extends Component {
       this.setState({
         result: []
       });
-    } else {
+    } else if (nextProps.result.users) {
       this.setState({
         result: nextProps.result[nextProps.result.length - 1].users.user
       });
@@ -65,7 +65,12 @@ export class AddUserForm extends Component {
  */
   onSubmit(event) {
     event.preventDefault();
-    this.props.addUserRequest(this.state, this.props.groupId);
+    this.props.addUserRequest(this.state, this.props.groupId)
+      .then(() => {
+        this.setState({
+          username: initialState.addUser
+        });
+      });
   }
 
   /**
@@ -75,7 +80,7 @@ export class AddUserForm extends Component {
     return (
       <div className="row">
         <div>
-          <form onSubmit={this.onSubmit} className="col s12">
+          <form id="reset" onSubmit={this.onSubmit} className="col s12">
             <div className="input-field col s12" >
               <label htmlFor="user" className="control-label">Username: </label>
               <input

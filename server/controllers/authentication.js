@@ -76,7 +76,7 @@ export default {
                               phoneNumber: req.body.phoneNumber
                             })
                             .then((detail) => {
-                              const myToken = jwt.sign({
+                              const token = jwt.sign({
                                 id: detail.id,
                                 name: detail.username,
                                 email: detail.email
@@ -84,7 +84,7 @@ export default {
                               'process.env.SECRET',
                               { expiresIn: 24 * 60 * 60 });
                               res.status(201).send({
-                                myToken,
+                                token,
                                 sucsess: true,
                                 message: `Welcome to POSTIT!! ${req.body.username}`
                               });
@@ -114,7 +114,9 @@ export default {
     return User
       .findAll({ attributes:
         ['id', 'username', 'email'] })
-      .then(users => res.status(200).send(users))
+      .then(users => res.status(200).send({
+        users
+      }))
       .catch(() => {
         res.status(400).send({
           message: 'Wrong request'
@@ -143,7 +145,7 @@ export default {
       })
       .then((users) => {
         res.status(201).send({
-          user: users.rows,
+          users: users.rows,
           metadata: paginate(users.count, limit, offset),
         });
       })
@@ -182,7 +184,7 @@ export default {
             });
           }
           if (user) {
-            const myToken = jwt.sign({
+            const token = jwt.sign({
               id: user.id,
               name: user.username,
               email: user.email
@@ -190,7 +192,7 @@ export default {
             'process.env.SECRET',
             { expiresIn: 24 * 60 * 60 });
             res.status(202).send({
-              myToken,
+              token,
               message: `Welcome back ${req.body.username}`
             });
           }

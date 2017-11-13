@@ -27,19 +27,11 @@ app.use(bodyParser.json());
 app.use(require('connect-multiparty')());
 
 app.use(webpackDevMiddleware(compiler, {
-  publicPath: config.output.publicPath
+  publicPath: config.output.publicPath,
+  open: false
 }));
 
 app.use(webpackHotMiddleware(compiler));
-
-
-// Express CONFIGURATION
-// app.use(require('express-session')({
-//   secret: 'Anywhere I go',
-//   resave: false,
-//   saveUninitialized: false
-// }));
-
 
 // ROUTES CONFIG
 
@@ -53,7 +45,7 @@ app.get('/*', (req, res) => {
 app.use((req, res, next) => {
   res.status(501).send({
     status: false,
-    message: 'Sorry, this address is not supported by this API.'
+    message: 'Sorry, this endpoint is not supported by this API.'
   });
   next();
 });

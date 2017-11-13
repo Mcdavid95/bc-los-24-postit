@@ -23,7 +23,7 @@ export const setCurrentUser = user => ({
 export const userSignupRequest = userData => dispatch => axios.post('/api/v1/user/register', userData)
   .then((response) => {
     dispatch(signupUserSuccess(response));
-    const token = response.data.myToken;
+    const token = response.data.token;
     localStorage.setItem('jwtToken', token);
     setAuthToken(token);
     dispatch(setCurrentUser(jwt.decode(token))
@@ -48,7 +48,7 @@ const userLoginFailed = user => ({ type: types.LOGIN_USER_ERROR, user });
 export const userLoginRequest = userData => dispatch => axios.post('/api/v1/user/login', userData)
   .then((response) => {
     dispatch(userLoginSuccess(response));
-    const token = response.data.myToken;
+    const token = response.data.token;
     localStorage.setItem('jwtToken', token);
     setAuthToken(token);
     dispatch(setCurrentUser(jwt.decode(token))

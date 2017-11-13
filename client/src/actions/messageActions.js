@@ -40,7 +40,7 @@ export const getGroupMessages = groupId =>
   dispatch =>
     axios.get(`/api/v1/group/${groupId}/messages`)
       .then((response) => {
-        dispatch(getMessageSuccess(response.data));
+        dispatch(getMessageSuccess(response.data.messages));
       })
       .catch((response) => {
         Materialize.toast('Group does not exist', 3000, 'rounded red');
