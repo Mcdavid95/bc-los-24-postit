@@ -5,6 +5,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
   color: white;
 
   .caps {
@@ -22,8 +23,12 @@ body {
   }
 
   .page-footer {
-    background: #2c3e56;
+    background: $primaryColor;
     padding-top: 0
+  }
+
+  .modal {
+    max-height: 60%
   }
 
   h1 {
@@ -32,11 +37,8 @@ body {
 
   .list-group {
     margin-left: 1%;
-    background: #576883;
-  }
-
-  .list-group:hover {
-    background: #ebebeb
+    text-decoration: none;
+   color: white
   }
 
    hr {
@@ -62,12 +64,16 @@ form {
 }
 
 #acct {
-  color: #2c3e56
+  color: $primaryColor
 }
 
 .brand {
     font-family: $brandFont;
     color: palevioletred
+  }
+
+  .heading {
+    font-family: 'Montserrat', sans-serif;
   }
 
 #top {
@@ -78,18 +84,26 @@ form {
   margin-bottom: 10
 }
 
+.forgot-password {
+  padding-left: 7%;
+}
+
 
 nav {
-    background: #2c3e56;
-    //margin-left: 2%
+    background: $primaryColor;
 }
 
-#signup {
-  margin-left: 80%
-}
+// #signup {
+//   margin-left: 80%
+// }
 
 #login {
   margin-left: 80%
+}
+
+.login-form {
+  margin-top: 5%;
+  margin-bottom: 20%
 }
 
 .login {
@@ -119,13 +133,12 @@ h1 {
 
 .white-board {
   border: 2px, solid rgb(109, 11, 11);
-  height: 50vh;
+  height: 70vh;
   width: 50%;
   margin: auto;
   margin-left: 30%;
   background: rgba(240, 236, 236, 0.604);
-  padding-left: 5%;
-  padding-top: 3%
+  padding: 5%;
 }
 
 .side {
@@ -134,21 +147,29 @@ h1 {
   margin-left: 0%;
   height: 90vh;
   padding-left: 1%;
-  padding-top: 0%
+  padding-top: 0%;
+}
+.black {
+  margin-bottom: 2%;
+  border-radius: 3%;
 }
 
 #message-board {
   height:46vh;
-  width: 63vw;
+  width: 53vw;
   border: 0px solid #576883;
-  margin: auto 24%;
+  margin: auto 20%;
   overflow-y: scroll;
   overflow-x: scroll;
 }
 
+.list-members {
+  padding-left: 10%
+}
+
 .group-list {
   overflow-y: scroll;
-  height:50vh;
+  height:20vh;
 }
 
 #message {
@@ -164,7 +185,9 @@ h1 {
 }
 
 #clear {
-  clear: both
+  clear: both;
+  font-size: 16px;
+  line-height: 31px;
 }
 
 .message-card {
@@ -220,7 +243,6 @@ form#message {
 }
 
 #message-content {
-  font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
   padding-left: 6%
 }
 

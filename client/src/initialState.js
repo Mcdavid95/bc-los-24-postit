@@ -18,6 +18,8 @@ const initialState = {
     user: {}
   },
 
+  currentGroup: '',
+
   group: {
     groupName: '',
     description: ''
@@ -48,7 +50,9 @@ const initialState = {
   resetPassword: {
     newPassword: '',
     confirmPassword: ''
-  }
+  },
+
+  groupMembers: []
 
 };
 export default initialState;

@@ -14,7 +14,7 @@ const router = express.Router();
 router.post('/api/v1/user/register', AuthCtrl.register);
 
 // route to paginate all users
-router.post('/api/v1/users/searchList/:offset', AuthCtrl.searchUser);
+router.post('/api/v1/users/searchList', AuthCtrl.searchUser);
 
 // Login logic
 

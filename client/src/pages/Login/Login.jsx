@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../../components/Header/Header';
@@ -18,14 +17,11 @@ const Login = props => (
     <Header />
     <main>
       <div className="container">
-        <div>
-          <h1>Welcome to <span className="brand" id="top">POSTIT!!</span></h1>
+        <div className="heading">
+          <h3>Welcome to <span className="brand" id="top">POSTIT!!</span></h3>
           <h5>
               Connect to friends and loved ones all it takes is a click!!! Login to get started
           </h5>
-          <p id="signup">Don't have an account? Click
-            <Link to="/register">here to Register</Link>
-          </p>
         </div>
         <LoginForm userLoginRequest={props.userLoginRequest} />
       </div>

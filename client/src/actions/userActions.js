@@ -111,7 +111,7 @@ const searchUserFailed = users => ({ type: types.SEARCH_USERS_FAILED, users });
  * @description It makes an api call to search users
  */
 export const searchUsers = (username, offset) => dispatch =>
-  axios.post(`/api/v1/users/searchList/${offset}`, username)
+  axios.post(`/api/v1/users/searchList?offset=${offset}`, username)
     .then((response) => {
       dispatch(searchUserSuccess(response.data));
     })

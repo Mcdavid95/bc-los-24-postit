@@ -1,9 +1,14 @@
 import React from 'react';
-import Navbar from './Navbar';
+import PropTypes from 'prop-types';
+import NavBar from './Navbar';
 
-const Header = () => (
+const Header = props => (
   <header>
-    <Navbar />
+    <NavBar groupId={props.groupId} />
   </header>
 );
+
+Header.propTypes = {
+  groupId: PropTypes.string.isRequired
+};
 export default Header;

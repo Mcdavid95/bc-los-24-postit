@@ -30,6 +30,8 @@ test('reducers', () => {
   addUser: { username: '' },
   allUsers: [],
   forgotPassword: { email: '' },
+  groupMembers: [],
+  currentGroup: '',
   resetPassword: { newPassword: '', confirmPassword: '' },
   search: { username: '' } });
 });

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import GroupList from '../containers/GroupList';
+import GroupsList from '../containers/GroupList';
+import GroupsMembers from '../containers/GroupMembers';
 /**
  * 
  */
@@ -18,6 +19,34 @@ export class SideNav extends Component {
    * @return {DOM} Dom component
    */
   render() {
+    const showMembers = (
+      <span>
+        <li><div className="divider" /></li>
+        <li><a className="subheader">Group Members</a></li>
+        <li>
+          <a
+            className="modal-trigger"
+            href="#modal2"
+          >Add user<i className="material-icons teal-text">add</i>
+          </a>
+        </li>
+        <li className="no-padding">
+          <ul className="collapsible collapsible-accordion">
+            <li>
+              <a
+                className="collapsible-header"
+              >Group Members List<i className="material-icons">
+        arrow_drop_down</i></a>
+              <div className="collapsible-body">
+                <ul>
+                  <GroupsMembers groupId={this.props.groupId} />
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </span>
+    );
     return (
       // <div className="row">
       <div className="col s12 m4 l3">
@@ -38,7 +67,8 @@ export class SideNav extends Component {
             <a
               className="modal-trigger"
               href="#modal1"
-            >Create New Group<i className="material-icons teal-text">group_add</i></a></li>
+            >Create New Group<i className="material-icons teal-text">group_add</i></a>
+          </li>
           <li className="no-padding">
             <ul className="collapsible collapsible-accordion">
               <li>
@@ -48,12 +78,13 @@ export class SideNav extends Component {
                 arrow_drop_down</i><i className="material-icons teal-text">group</i></a>
                 <div className="collapsible-body">
                   <ul>
-                    <GroupList userGroupList={this.props.userGroupList} />
+                    <GroupsList userGroupList={this.props.userGroupList} />
                   </ul>
                 </div>
               </li>
             </ul>
           </li>
+          {this.props.groupId !== undefined ? showMembers : null}
         </ul>
         <button
           data-activates="slide-out"
@@ -67,14 +98,14 @@ export class SideNav extends Component {
             data-tooltip="My Groups"
           >group</i></button>
       </div>
-      // </div>
     );
   }
 }
 
 SideNav.propTypes = {
   userGroupList: PropTypes.array.isRequired,
-  userDetails: PropTypes.object.isRequired
+  userDetails: PropTypes.object.isRequired,
+  groupId: PropTypes.string.isRequired
 };
 const mapStateToProps = state => ({
   userGroupList: state.userGroupList,

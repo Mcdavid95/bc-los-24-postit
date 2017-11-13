@@ -46,7 +46,7 @@ class Board extends Component {
                 className="waves-effect waves-light btn modal-close"
                 data-dismiss="modal"
               >&times;</button>
-              <h1 className="group-form">Create New Group</h1>
+              <h3 className="group-form heading">Create New Group</h3>
               <GroupForms createGroupRequest={this.props.createGroupRequest} />
             </div>
             <div className="modal-footer">
@@ -58,7 +58,9 @@ class Board extends Component {
           </div>
           <div className="white-board black-text">
             <img height="15%" id="mail-box" src="http://res.cloudinary.com/mc-cloud/image/upload/v1509614951/mcdavid_umplak.png" alt="message" />
-            <h4>Welcome <span className="caps">{this.props.userDetails.user.name}</span></h4>
+            <h4
+              className="heading"
+            >Welcome <span className="caps">{this.props.userDetails.user.name}</span></h4>
             <h6 id="clear"> You Currently have no group selected<br /><br />
              Please pick one by clicking on the
               <i

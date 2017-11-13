@@ -35,7 +35,9 @@ ReactDom.render(
   <Provider store={store}>
     <Router history={history}>
       <Switch>
-        <Route exact path="/" component={requireAuth(Board)} />
+        {localStorage.jwtToken
+          ? <Route exact path="/" component={requireAuth(Board)} /> :
+          <Route exact path="/" name="login" component={Login} />}
         <Route exact path="/register" name="signup" component={Signup} />
         <Route exact path="/login" name="login" component={Login} />
         <Route

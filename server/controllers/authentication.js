@@ -49,7 +49,7 @@ export default {
             User
               .findOne({
                 where: {
-                  username: req.body.username.toLowerCase()
+                  username: req.body.username.toLowerCase().trim()
                 },
               })
               .then((user) => {
@@ -70,7 +70,7 @@ export default {
                         .then((hash) => {
                           User
                             .create({
-                              username: req.body.username.toLowerCase(),
+                              username: req.body.username.toLowerCase().trim(),
                               password: hash,
                               email: req.body.email.toLowerCase(),
                               phoneNumber: req.body.phoneNumber
@@ -133,11 +133,11 @@ export default {
    */
   searchUser(req, res) {
     const limit = 5;
-    const offset = req.params.offset;
+    const offset = req.query.offset;
     User
       .findAndCountAll({
         where: {
-          username: { $like: `%${req.body.username}%` }
+          username: { $like: `%${req.body.username.toLowerCase().trim()}%` }
         },
         attributes: ['id', 'username', 'email'],
         limit,
@@ -170,7 +170,7 @@ export default {
       return User
         .findOne({
           where:
-        { username: req.body.username.toLowerCase() }
+        { username: req.body.username.toLowerCase().trim() }
         })
         .then((user) => {
           if (!user) {

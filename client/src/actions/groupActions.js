@@ -67,3 +67,51 @@ export const addUserRequest = (userData, groupId) => dispatch => axios.post(`/ap
     dispatch(addUserFailed(err));
     Materialize.toast(err.response.data.Error, 3000, 'rounded red');
   });
+
+const getGroupMembersSuccess = members => ({
+  type: types.GET_GROUPMEMBERS_SUCCESS,
+  members
+});
+
+const getGroupMembersFailed = members => ({
+  type: types.GET_GROUPMEMBERS_FAILED,
+  members
+});
+
+/**
+ * @function groupMembers
+ * @param { number} groupId
+ * @returns {object} dispatches an action
+ * @description It makes an api call to get all users in the current group and dispatches the action
+ */
+export const groupMembers = groupId => dispatch => axios.get(`/api/v1/group/${groupId}/users`)
+  .then((response) => {
+    dispatch(getGroupMembersSuccess(response.data.members));
+  })
+  .catch((err) => {
+    dispatch(getGroupMembersFailed(err.response.Error));
+  });
+
+const getCurrentGroupSuccess = groupName => ({
+  type: types.GET_CURRENTGROUP_SUCCESS,
+  groupName
+});
+
+const getCurrentGroupFailed = groupName => ({
+  type: types.GET_CURRENTGROUP_FAILED,
+  groupName
+});
+
+  /**
+ * @function currentGroup
+ * @param { number} groupId
+ * @returns {object} dispatches an action
+ * @description It makes an api call to get the current group and dispatches the action
+ */
+export const currentGroup = groupId => dispatch => axios.get(`/api/v1/group/${groupId}`)
+  .then((response) => {
+    dispatch(getCurrentGroupSuccess(response.data.groupName));
+  })
+  .catch((err) => {
+    dispatch(getCurrentGroupFailed(err.response.Error));
+  });
