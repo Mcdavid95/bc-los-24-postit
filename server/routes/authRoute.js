@@ -23,6 +23,7 @@ router.post('/api/v1/user/login', AuthCtrl.login);
 // Add logout route
 router.post('/api/v1/user/logout', AuthCtrl.logout);
 
+// Get all registered Users
 router.get('/api/v1/users', Verify.hasToken, AuthCtrl.listUsers);
 
 // forgot password api for the user

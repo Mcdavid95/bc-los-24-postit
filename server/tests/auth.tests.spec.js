@@ -64,7 +64,7 @@ describe('Authentication Route', () => {
       });
   });
 
-  it('should not allow user with empty password field to log in', (done) => {
+  it('should not allow user with empty password field to register', (done) => {
     api
       .post('/api/v1/user/register')
       .set('Connetion', 'keep alive')
@@ -78,6 +78,24 @@ describe('Authentication Route', () => {
       .end((err, res) => {
         res.status.should.equal(409);
         res.body.message.should.equal('Password field must not be empty');
+        done();
+      });
+  });
+
+  it('should not allow user with empty phoneNumber field to register', (done) => {
+    api
+      .post('/api/v1/user/register')
+      .set('Connetion', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        username: 'mcdavid',
+        password: 'ytujtoit',
+        email: 'mcdavidemereuwa@gmail.com'
+      })
+      .end((err, res) => {
+        res.status.should.equal(409);
+        res.body.message.should.equal('Phone Number field must not be empty');
         done();
       });
   });
@@ -233,6 +251,22 @@ describe('Authentication Route', () => {
       .end((err, res) => {
         res.status.should.equal(401);
         res.body.message.should.equal('Incorrect password');
+        done();
+      });
+  });
+
+  it('should not allow user without username to log in ', (done) => {
+    api
+      .post('/api/v1/user/login')
+      .set('Connetion', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        password: 'janike_13a'
+      })
+      .end((err, res) => {
+        res.status.should.equal(401);
+        res.body.message.should.equal('Input username field');
         done();
       });
   });
@@ -546,6 +580,10 @@ describe('Message Routes', () => {
 });
 
 describe('Forgot Password route', () => {
+  const body = {
+    success: true,
+    message: 'successfully updated password'
+  };
   it('should generate a token if user passes in a correct email address', (done) => {
     api
       .post('/api/v1/forgot-password')
@@ -557,9 +595,114 @@ describe('Forgot Password route', () => {
         email: 'mcdavidemereuwa95@gmail.com'
       })
       .end((err, res) => {
+        token = res.body.token;
         res.status.should.equal(201);
         expect(res.body.token).to.be.a('string');
         done();
       });
   });
+
+  it('should return error with failed token', (done) => {
+    api
+      .post(`/api/v1/reset-password/${token}`)
+      .expect(200)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        newPassword: 'mcdavid356',
+        confirmPassword: 'mcdavid356'
+      })
+      .end((err, res) => {
+        res.status.should.equal(201);
+        res.body.should.deep.equals(body);
+        done();
+      });
+  });
+
+  it('should not generate a token if user passes in no email address', (done) => {
+    api
+      .post('/api/v1/forgot-password')
+      .expect(200)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        name: ' fkmfkmk'
+      })
+      .end((err, res) => {
+        res.status.should.equal(401);
+        res.body.message.should.equal('Please provide your email');
+        done();
+      });
+  });
+
+  it('should not generate a token if user passes in wrong email address', (done) => {
+    api
+      .post('/api/v1/forgot-password')
+      .expect(200)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        email: 'joe@gmail.com'
+      })
+      .end((err, res) => {
+        res.status.should.equal(401);
+        res.body.message.should.equal('Account associated with this email not found');
+        done();
+      });
+  });
 });
+
+describe('Search User Route', () => {
+  const users = [
+    {
+      id: 1,
+      username: 'mcdavid',
+      email: 'mcdavidemereuwa95@gmail.com'
+    }
+  ];
+  it('should return search results', (done) => {
+    api
+      .post('/api/v1/users/searchList?offset=0')
+      .expect(200)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        username: 'mc'
+      })
+      .end((err, res) => {
+        res.status.should.equal(201);
+        res.body.users.should.deep.equals(users);
+        done();
+      });
+  });
+});
+
+describe('Reset Passwordr Route', () => {
+  const body = {
+    success: false,
+    message: 'failed token authentication'
+  };
+  it('should return error with failed token', (done) => {
+    api
+      .post('/api/v1/reset-password/:token')
+      .expect(400)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        username: 'mc'
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.should.deep.equals(body);
+        done();
+      });
+  });
+});
+
+const getToken = () => token;
+export default getToken;

@@ -163,7 +163,7 @@ export default {
    */
   login(req, res) {
     if (typeof (req.body.username) === 'undefined') {
-      res.status(409).send({
+      res.status(401).send({
         message: 'Input username field'
       });
     } else {

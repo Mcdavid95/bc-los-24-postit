@@ -11,3 +11,12 @@ export const Group2 = {
 export const addUser1 = {
   username: 'melody'
 };
+
+export const Group3 = {
+  groupName: 'LadyBee',
+  description: 'help save a bee'
+};
+
+export const groupName = {
+  groupName: Group3.groupName.toLowerCase()
+};

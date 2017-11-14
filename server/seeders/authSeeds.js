@@ -19,6 +19,14 @@ export const yetAnotherValid = {
   phoneNumber: 98167188889
 };
 
+export const newUser = {
+  username: 'Lowei',
+  password: 'lowe_13',
+  email: 'lowe@gmail.com',
+  phoneNumber: 88167188889
+};
+
+
 export const invalidUsername = {
   username: 'mcdavid',
   password: 'step_hen',
@@ -38,4 +46,9 @@ export const invalidEmail = {
   password: 'step_hen',
   email: 'mcdavidemereuwa95@gmail.com',
   phoneNumber: 8033379342
+};
+
+export const newUser1 = {
+  username: 'Lowei',
+  password: 'lowe_13',
 };
