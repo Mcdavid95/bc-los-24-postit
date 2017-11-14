@@ -111,11 +111,16 @@ export default {
    * @description get all users in the database User table
    */
   listUsers(req, res) {
+    const { limit, offset } = req.query;
     return User
-      .findAll({ attributes:
-        ['id', 'username', 'email'] })
+      .findAndCountAll({
+        attributes: ['id', 'username', 'email'],
+        limit,
+        offset
+      })
       .then(users => res.status(200).send({
-        users
+        users: users.rows,
+        metadata: paginate(users.count, limit, offset)
       }))
       .catch(() => {
         res.status(400).send({
