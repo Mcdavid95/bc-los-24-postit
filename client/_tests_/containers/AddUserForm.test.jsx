@@ -31,7 +31,7 @@ describe('AddUser form component test', () => {
   it('should contain the componentWillReceiveProps method', () => {
     wrapper.setState({
       users: [{ id: 3, username: 'mcdavid' }],
-      result: nextProps.result[0].users.user
+      result: nextProps.result[0].users.users
     });
     const component = wrapper;
     const onSubmitSpy = jest.spyOn(component.instance(), 'componentWillReceiveProps');

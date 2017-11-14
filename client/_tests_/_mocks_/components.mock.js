@@ -6,6 +6,7 @@ export const props = {
   groupId: '',
   getAllUsers: jest.fn(() => Promise.resolve()),
   createGroupRequest: jest.fn(() => Promise.resolve()),
+  groupMembers: jest.fn(() => Promise.resolve()),
   userLoginRequest: jest.fn(() => Promise.resolve()),
   userGroupList: [],
   match: {
@@ -32,7 +33,7 @@ export const nextProps = {
   allUsers: [{ users: [{ id: 3, username: 'mcdavid' }] }],
   groupId: '',
   result: [{
-    users: { user: [{
+    users: { users: [{
       username: 'melody'
     }] }
   }],
