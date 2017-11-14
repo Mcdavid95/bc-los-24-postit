@@ -52,3 +52,10 @@ export const newUser1 = {
   username: 'Lowei',
   password: 'lowe_13',
 };
+
+export const User = {
+  username: 'harry',
+  password: 'step_hen',
+  email: 'harry@gmail.com',
+  phoneNumber: 8033379342
+};

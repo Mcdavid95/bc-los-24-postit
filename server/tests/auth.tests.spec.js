@@ -8,7 +8,6 @@ import { Group1 } from '../seeders/groupSeeds';
 
 chai.use(chaiHttp);
 const api = supertest.agent(server);
-const should = chai.should();
 const expect = chai.expect;
 
 let token;

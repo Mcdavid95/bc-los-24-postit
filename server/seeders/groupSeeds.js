@@ -20,3 +20,21 @@ export const Group3 = {
 export const groupName = {
   groupName: Group3.groupName.toLowerCase()
 };
+
+
+export const groupMember = {
+  groupId: 1,
+  username: 'melody',
+  groupName: 'everyday',
+  description: 'daily life',
+  email: 'melo@gmail.com',
+  isCreator: false
+};
+
+export const message = {
+  message: 'off with you',
+  priority: 'normal',
+  userId: 2,
+  groupId: 1,
+  username: 'mcdavid'
+};
