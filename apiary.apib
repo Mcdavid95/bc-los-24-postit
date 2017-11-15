@@ -8,7 +8,7 @@ POSTIT is an application that allows users to create groups and reach them all a
 It includes a RESTful API that allows registered users to create groups and add other users to their groups.
 The cool feature about the app is the email notifications for its users
 
-## User SignUp [/api/user/register]
+## User SignUp [/api/v1/user/register]
 
 ### SIGNUP [POST]
 
@@ -42,7 +42,7 @@ It returns a success message and a jwt(JSON web token)
                 "message": "Welcome to POSTIT!! Jabuike"
             }
 
-## User Login [/api/user/login]
+## User Login [/api/v1/user/login]
 
 ### LOGIN [POST]
 
@@ -71,38 +71,146 @@ It returns a welcome message and a (jwt)JSON web token
                 "message": "Welcome back Jabuike"
             }
             
-## Get All Users [/api/users]
+## Get All Users [/api/v1/users]
 
-### Get User [GET]
+### Get All Registered Users User [GET]
 
 This action gets all registered users returning the following:
 
 * User id
 * username
 * email
+* offset (passed as a query in the url)
+* limit (passed as a query in the url
 
 + Response 201 (application/json)
 
     + Body
+    
+            {
 
-            [
-                {
-                    "id": 1,
-                    "username": "steven",
-                    "email": "steve@hifh.com"
-                },
-                {
-                    "id": 2,
-                    "username": "jabuike",
-                    "email": "jabike@gmail.com"
+                "users": [
+                    {
+                        "id": 1,
+                        "username": "steven",
+                        "email": "steve@hifh.com"
+                    },
+                    {
+                        "id": 2,
+                        "username": "jabuike",
+                        "email": "jabike@gmail.com"
+                    }
+                ],
+                "metadata": {
+                    "page": 1,
+                    "pageCount": 1,
+                    "pageSize": 2,
+                    "count": 2
                 }
-            ]
+            }
+## Search [/api/v1/users/searchList]
+
+### Search User [POST]
+
+This endpoint allows a loggedin user to search for other users. It takes in an object with the username  as search term, it includes the following
+* username
+* offset{number} passed as query in url
+
++ Request (application/json)
+
+    + Headers
+        
+            x-access-token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphYnVpa2UiLCJlbWFpbCI6ImphYmlrZUBnbWFpbC5jb20iLCJpYXQiOjE1MDU0MjAyMDMsImV4cCI6MTUwNTUwNjYwM30.kIrAqGIx-ahvfXo7moW5Llu5G0fBlqOa2dz7d6ctN9Y"
+        
+    + Body
+        
+            {
+                "username": "ja"
+            }
             
-## Create Group [/api/group]
++ Response 201 (application/json)
+
+    + Body
+            
+            {
+                "users": [
+                    {
+                        "id": 1,
+                        "username": "jabuike",
+                        "email": "jabike@gmail.com"
+                    }
+                ],
+                "metadata": {
+                    "page": 1,
+                    "pageCount": 1,
+                    "pageSize": 1,
+                    "count": 1
+                }
+            }
+            
+## Forgot Password [/api/v1/forgot-password]
+
+### Forgot Password Request [POST]
+
+This endpoint enables a registered user to request for a password reset.
+It takes in the following arguments:
+
+* email of registered user
+
+After the passed email is successfully verified, an email is sent to the user with a link to update his password
+
++ Request (application/json)
+
+    + Body 
+    
+            {
+                "email": "jabike@gmail.com"
+            }
+            
++ Response 201 (application/json) 
+
+    + Body
+            
+            {
+                 "success": true,
+                 "token": "gvhbnh2hkj2jhh34jhk5hvjbkn5hjk5uyj"
+            }
+        
+## Reset Password [/api/v1/reset-password/:token]
+
+### Reset Password Request [POST]
+
+This endpoint enables a registered user to update his password.
+It takes in the following arguments:
+
+* newPassword 
+* confirmPassword
+
+After the passed email is successfully verified, an email is sent to the user with a link to update his password
+
++ Request (application/json)
+
+    + Body 
+    
+            {
+                "newPassword": "jas8474m"
+                "confirmPassword": "jas8474m"
+            }
+            
++ Response 201 (application/json) 
+
+    + Body
+            
+            {
+                 "success": true,
+                 "message": "successfully updated password"
+            }
+            
+## Create Group [/api/v1/group]
 
 ### Create New Group [POST]
 
-This action allows a loggedin user to create new groups. It takes i a JSON object containing the group credentials which includes the following:
+This endpoint allows a loggedin user to create new groups. It takes i a JSON object containing the group credentials which includes the following:
 
 * GroupName
 * description
@@ -118,7 +226,7 @@ It return a success message, confirming group
     + Body
     
             {
-                "GroupName": "Angular Ninjas"
+                "groupName": "Angular Ninjas"
                 "description": "For the Love of angular 4"
             }
 
@@ -132,7 +240,7 @@ It return a success message, confirming group
             }
 
 
-## Add User to Group [/api/group/:groupId/user]
+## Add User to Group [/api/v1/group/:groupId/user]
 
 ### Add User to Group [POST]
 
@@ -162,7 +270,7 @@ This action allows a user to add other registered users to groups they belong to
             }
 
 
-## Send Message [/api/group/:groupId/message]
+## Send Message [/api/group/v1/:groupId/message]
 
 ### Create Message [POST]
 
@@ -189,6 +297,7 @@ Upon completion of action if the priority chosen is either `urgent` or `critical
     
                 {
                     "message": "hi humans"
+                    "priority": "normal"
                 }
 
 
@@ -208,9 +317,9 @@ Upon completion of action if the priority chosen is either `urgent` or `critical
             }
 
 
-## List all Messages [/api/group/:groupId/messages]
+## List all group Messages [/api/group/v1/:groupId/messages]
 
-### Get all Messages [GET]
+### Get all group messages Messages [GET]
 
 This action get all messages in a single group
 
@@ -324,11 +433,11 @@ This action get all messages in a single group
 
 
 
-## Get Group Belonging to a  single User [/api/user/groups]
+## Get Groups Belonging to a  single User [/api/v1/user/groups]
 
-### Get all Group belnging to one user [GET]
+### Get all Groups belonging to one user [GET]
 
-This action get all groups where a user has been added to.
+This endpoint gets all groups where a user has been added to.
 
 + Response 201 (apication/json)
 
@@ -338,11 +447,90 @@ This action get all groups where a user has been added to.
 
 
     + Body
+    
+            {
+                "group": [
+                
+                        {
+                            "groupName": "lana",
+                            "groupId": 4,
+                            "description": "we kill"
+                        }
+                ]
+            }
 
-            [
-                {
-                    "groupName": "lana",
-                    "groupId": 4,
-                    "description": "we kill"
-                }
-            ]
+## Get Users in a group [/api/v1/group/:groupId/users]
+
+### Group Members [GET]
+
+This endpoint gets all users in a selected group
+
+#### Params
+* groupId {number} groupId of selected group
+
++ Response 201 (application/json)
+
+    + Headers
+    
+            x-access-token:  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphYnVpa2UiLCJlbWFpbCI6ImphYmlrZUBnbWFpbC5jb20iLCJpYXQiOjE1MDU0MjAyMDMsImV4cCI6MTUwNTUwNjYwM30.kIrAqGIx-ahvfXo7moW5Llu5G0fBlqOa2dz7d6ctN9Y"
+
+    + Body 
+    
+            {
+                "members": {
+                                 {
+                                    "id": 1,
+                                    "isCreator": true,
+                                    "userId": "1",
+                                    "groupId": 1,
+                                    "groupName": "lana",
+                                    "email": "mcdavidemereuwa95@gmail.com",
+                                    "description": "we kill",
+                                    "username": "jabuike",
+                                    "createdAt": "2017-11-15T12:52:48.137Z",
+                                    "updatedAt": "2017-11-15T12:52:48.137Z"
+                            }
+                                 }
+            }
+            
+## Get Current group [/api/v1/group/:groupId]
+
+### Group Members [GET]
+
+This endpoint gets the name of the selected group
+
+#### Params
+* groupId {number} groupId of selected group
+
++ Response 201 (application/json)
+
+    + Headers
+    
+            x-access-token:  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphYnVpa2UiLCJlbWFpbCI6ImphYmlrZUBnbWFpbC5jb20iLCJpYXQiOjE1MDU0MjAyMDMsImV4cCI6MTUwNTUwNjYwM30.kIrAqGIx-ahvfXo7moW5Llu5G0fBlqOa2dz7d6ctN9Y"
+
+    + Body 
+    
+            {
+                "groupName": "lana" 
+            }
+            
+## Logout User [/api/v1/user/logout]
+
+### Logout [POST]
+
+This endpoint gets the name of the selected group
+
+#### Params
+* groupId {number} groupId of selected group
+
++ Response 201 (application/json)
+
+    + Headers
+    
+            x-access-token:  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphYnVpa2UiLCJlbWFpbCI6ImphYmlrZUBnbWFpbC5jb20iLCJpYXQiOjE1MDU0MjAyMDMsImV4cCI6MTUwNTUwNjYwM30.kIrAqGIx-ahvfXo7moW5Llu5G0fBlqOa2dz7d6ctN9Y"
+
+    + Body 
+    
+            {
+                "message": "LogOut Successful"
+            }
