@@ -65,36 +65,37 @@ export default {
                     .then((emailExists) => {
                       if (emailExists) {
                         res.status(409).send({ message: 'Email already in use' });
+                      } else {
+                        bcrypt.hash(req.body.password, saltRounds)
+                          .then((hash) => {
+                            User
+                              .create({
+                                username: req.body.username.toLowerCase().trim(),
+                                password: hash,
+                                email: req.body.email.toLowerCase(),
+                                phoneNumber: req.body.phoneNumber
+                              })
+                              .then((detail) => {
+                                const token = jwt.sign({
+                                  id: detail.id,
+                                  name: detail.username,
+                                  email: detail.email
+                                },
+                                'process.env.SECRET',
+                                { expiresIn: 24 * 60 * 60 });
+                                res.status(201).send({
+                                  token,
+                                  sucsess: true,
+                                  message: `Welcome to POSTIT!! ${req.body.username}`
+                                });
+                              })
+                              .catch(() => {
+                                res.status(404).send({
+                                  message: 'phone number already in use'
+                                });
+                              });
+                          });
                       }
-                      bcrypt.hash(req.body.password, saltRounds)
-                        .then((hash) => {
-                          User
-                            .create({
-                              username: req.body.username.toLowerCase().trim(),
-                              password: hash,
-                              email: req.body.email.toLowerCase(),
-                              phoneNumber: req.body.phoneNumber
-                            })
-                            .then((detail) => {
-                              const token = jwt.sign({
-                                id: detail.id,
-                                name: detail.username,
-                                email: detail.email
-                              },
-                              'process.env.SECRET',
-                              { expiresIn: 24 * 60 * 60 });
-                              res.status(201).send({
-                                token,
-                                sucsess: true,
-                                message: `Welcome to POSTIT!! ${req.body.username}`
-                              });
-                            })
-                            .catch(() => {
-                              res.status(404).send({
-                                message: 'phone number already in use'
-                              });
-                            });
-                        });
                     });
                 }
               });

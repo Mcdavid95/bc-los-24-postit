@@ -6,7 +6,7 @@ import MessageCtrl from '../controllers/messageCtrl';
 const router = express.Router();
 
 // ======================
-// AUTH ROUTES
+// GROUP ROUTES
 // ======================
 
 // create group
@@ -16,7 +16,6 @@ router.post('/api/v1/group', Verify.hasToken, GroupCtrl.createGroup);
 router.get('/api/v1/groups', Verify.hasToken, GroupCtrl.listGroups);
 
 // add user to group
-
 router.post('/api/v1/group/:groupId/user', Verify.hasToken, GroupCtrl.addGroupMember);
 
 // fetch users in a group

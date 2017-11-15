@@ -111,7 +111,8 @@ export default {
                           groupName: groupExist.GroupName,
                           description: groupExist.description,
                           email: user.email,
-                          isCreator: false
+                          isCreator: false,
+                          userId: user.id
 
                         })
                           .then((success) => {
