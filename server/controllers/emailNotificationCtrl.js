@@ -2,7 +2,12 @@ import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 
 dotenv.config();
-
+/**
+ * @function sendUrgentMail
+ * @param {*} users 
+ * @param {*} message 
+ * @returns {*} Email notification
+ */
 export const sendUrgentMail = (users, message) => {
   let receivers = '';
 
@@ -56,7 +61,13 @@ export const sendUrgentMail = (users, message) => {
     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
   });
 };
-
+/**
+ * @function sendUrgentMail
+ * @param {*} token 
+ * @param {*} email
+ * @param {*} host
+ * @returns {*} Email notification
+ */
 export const resetPasswordMail = (token, email, host) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -103,7 +114,11 @@ export const resetPasswordMail = (token, email, host) => {
     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
   });
 };
-
+/**
+ * @function sendUrgentMail
+ * @param {*} email
+ * @returns {*} Email notification
+ */
 export const sendSuccessfulResetMail = (email) => {
   // create reusable transporter object using the default SMTP transport
   const transporter = nodemailer.createTransport({

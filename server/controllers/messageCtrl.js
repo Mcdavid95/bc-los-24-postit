@@ -8,11 +8,11 @@ const GroupMembers = model.GroupMember;
 export default {
 
   /**
-   * @method register
+   * @method postMessage
    * @param { object } req
    * @param { object } res
    * @returns { object } returns the response
-   * @description recieves useer details and create an instance of the User Model in the database
+   * @description recieves message body and create an instance of the Message Model in the database
    */
   postMessage(req, res) {
     if (isNaN(parseInt(req.params.groupId, 10)) === true) {
@@ -92,7 +92,14 @@ export default {
         });
     }
   },
-
+  /**
+   * @method listMessages
+   * @param { object } req
+   * @param { object } res
+   * @returns { object } returns the response
+   * @description queries the Message Model table with the groupId of the current group
+   *  and returns all messages with the groupId attached to it
+   */
   listMessages(req, res) {
     if (isNaN(parseInt(req.params.groupId, 10)) === true) {
       res.status(401).send({ message: 'Please groupId must be a number' });

@@ -12,7 +12,8 @@ import { searchUsers } from '../actions';
  */
 export class SearchPage extends Component {
   /**
-   * 
+   * Creates Instance of SearchPage
+   * @constructor
    * @param {*} props 
    */
   constructor(props) {
@@ -30,8 +31,9 @@ export class SearchPage extends Component {
     this.handlePageClick = this.handlePageClick.bind(this);
   }
   /**
-   * 
+   * @method ComponentWillRecieveProps
    * @param {*} nextProps 
+   * @description updates state when props changes
    * @return {*} new state
    */
   componentWillReceiveProps(nextProps) {
@@ -48,8 +50,9 @@ export class SearchPage extends Component {
     }
   }
   /**
-   * 
+   * @method onChange
    * @param {*} event 
+   * @description updates state on event change and makes call to api via props
    * @return {DOM} Dom
    */
   onChange(event) {
@@ -63,7 +66,7 @@ export class SearchPage extends Component {
     this.props.searchUsers(searchInput, this.state.offset);
   }
   /**
-   * 
+   * @method onSubmit
    * @param {*} event 
    * @return {DOM} DOM element
    */
@@ -77,7 +80,7 @@ export class SearchPage extends Component {
       });
   }
   /**
- * 
+ * @method handlePageClick
  * @param {*} event 
  * @return {DOM} returns a new page of result
  * 
@@ -92,6 +95,7 @@ export class SearchPage extends Component {
     this.props.searchUsers(this.state, offset);
   }
   /**
+   * @method prevPage
    * @param {*} event
    * @return {DOM} previous set of results
    */
@@ -107,11 +111,11 @@ export class SearchPage extends Component {
   }
   /**
    * 
-   * @param {*} e 
+   * @param {*} event
    * @return {DOM} next set of results
    */
-  nextPage(e) {
-    e.preventDefault();
+  nextPage(event) {
+    event.preventDefault();
     this.props.searchUsers(this.state, this.state.offset + 1);
     const newOffset = this.state.offset;
     this.setState({
@@ -119,6 +123,8 @@ export class SearchPage extends Component {
     });
   }
   /**
+   * @method render
+   * @description returns table containing users detaila - username and email
    * @return {DOM} DOM element
    */
   render() {

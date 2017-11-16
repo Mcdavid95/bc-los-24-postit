@@ -680,7 +680,7 @@ describe('Search User Route', () => {
   });
 });
 
-describe('Reset Passwordr Route', () => {
+describe('Reset Password Route', () => {
   const body = {
     success: false,
     message: 'failed token authentication'
@@ -702,6 +702,3 @@ describe('Reset Passwordr Route', () => {
       });
   });
 });
-
-const getToken = () => token;
-export default getToken;

@@ -16,7 +16,7 @@ export default {
    * @param { object } req
    * @param { object } res
    * @returns { object } returns the response
-   * @description recieves useer details and create an instance of the User Model in the database
+   * @description recieves user details and create an instance of the User Model in the database
    */
   register(req, res) {
     if (typeof (req.body.username) === 'undefined') {

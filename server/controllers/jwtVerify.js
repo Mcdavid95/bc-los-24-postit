@@ -1,6 +1,13 @@
 import jwt from 'jsonwebtoken';
 
 export default {
+  /**
+   * @method hasToken
+   * @param {*} req 
+   * @param {*} res 
+   * @param {*} next 
+   * @returns {*} response
+   */
   hasToken(req, res, next) {
     const token = req.body.token || req.headers['x-access-token'];
     if (token) {

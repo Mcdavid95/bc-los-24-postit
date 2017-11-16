@@ -5,7 +5,13 @@ const Group = model.Group;
 const GroupMembers = model.GroupMember;
 
 export default {
-
+/**
+ * @method createGroup
+ * @param {object} req 
+ * @param { object } res 
+ * @returns { object } returns success or error message
+ * @description receives user details creates an instance of the Group Model
+ */
   createGroup(req, res) {
     if (!req.body.groupName) {
       res.status(400).json({ message: 'Please add Group name' });
@@ -60,7 +66,13 @@ export default {
         });
     }
   },
-
+  /**
+   * @method listGroups
+   * @param {object} req 
+   * @param { object } res 
+   * @returns { object } returns list of groups
+   * @description queries database to fetch list of groups from the Group Model
+   */
   listGroups(req, res) {
     return Group
       .findAll({
@@ -75,7 +87,13 @@ export default {
         Error: error.message
       }));
   },
-
+  /**
+   * @method addGroupMember
+   * @param {object} req 
+   * @param { object } res 
+   * @returns { object } returns success or error response
+   * @description get user and group details and creates an instance of GroupMembers table
+   */
   addGroupMember(req, res) {
     if (isNaN(parseInt(req.params.groupId, 10)) === true) {
       res.status(401).send({ message: 'Please add groupId must be a number' });
@@ -148,7 +166,14 @@ export default {
         });
     }
   },
-
+  /**
+   * @method listUserGroups
+   * @param {*} req 
+   * @param {*} res 
+   * @returns { object } returns an object with the list of groups belonging to a user 
+   * @description It queries the GroupMembers with the username of the loggin user
+   *  Fetches the groups with that username  attached to it
+   */
   listUserGroups(req, res) {
     GroupMembers
       .findAll({
@@ -161,6 +186,14 @@ export default {
         });
       });
   },
+  /**
+   * @method listGroupMembers
+   * @param {*} req 
+   * @param {*} res 
+   * @returns { object } returns an object with the list of groupmembers in a group 
+   * @description It queries the GroupMembers with the groupId of the current group
+   *  Fetches the  of group members with that groupId  attached to it
+   */
 
   ListGroupMembers(req, res) {
     if (isNaN(parseInt(req.params.groupId, 10)) === true) {
@@ -190,6 +223,14 @@ export default {
         });
     }
   },
+  /**
+   * @method getCurrentGroup
+   * @param {*} req 
+   * @param {*} res 
+   * @returns { object } returns an object with the name of the current group 
+   * @description It queries the GroupMembers with the groupId from the params
+   *  Fetches the name of the current group
+   */
 
   getCurrentGroup(req, res) {
     if (isNaN(parseInt(req.params.groupId, 10)) === true) {

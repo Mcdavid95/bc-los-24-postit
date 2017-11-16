@@ -25,7 +25,7 @@ export class AddUserForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   /**
-   * 
+   * @method ComponentWillRecieveProps
    * @param {object} nextProps 
    * @return {object} new state
    */
@@ -74,6 +74,8 @@ export class AddUserForm extends Component {
   }
 
   /**
+   * @description returns list of users per search term
+   * @method render 
    * @return {object} DOM Object
    */
   render() {
