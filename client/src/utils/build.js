@@ -14,7 +14,5 @@ webpack(webpackConfig).run((err, stats) => {
   if (jsonStats.hasWarnings) {
     jsonStats.warnings.map(warning => console.log(warning.yellow));
   }
-  console.log(`Webpack stats: ${stats}`);
-  console.log('Your app has been compiled to production mode and written to /dist. Its ready now'.green);
   return 0;
 });

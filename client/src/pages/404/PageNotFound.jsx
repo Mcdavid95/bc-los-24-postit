@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header';
-
+/**
+ * @function PageNotFound
+ * @returns {DOM} DOM with 404 page
+ */
 const PageNotFound = () => (
   <div className="not-found">
     <Header />

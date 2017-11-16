@@ -8,11 +8,9 @@ import initialState from './initialState';
 const logger = createLogger();
 const middleware = applyMiddleware(logger, thunk);
 
-const configureStore = (state = initialState) => {
-  return createStore(
-    rootReducer,
-    state,
-    compose(middleware, window.devToolsExtension ? window.devToolsExtension() : f => f));
-};
+const configureStore = (state = initialState) => createStore(
+  rootReducer,
+  state,
+  compose(middleware, window.devToolsExtension ? window.devToolsExtension() : f => f));
 
 export default configureStore;

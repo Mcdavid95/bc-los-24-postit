@@ -46,7 +46,10 @@ class ForgotPasswordPage extends Component {
         <Header />
         <main>
           <div>
-            <h5 id="forgot-password" className="center-align">Input the email address associated with your account</h5>
+            <h5
+              id="forgot-password"
+              className="center-align"
+            >Input the email address associated with your account</h5>
           </div>
           <form className="col s12" onSubmit={this.onSubmit}>
             <div className="row">

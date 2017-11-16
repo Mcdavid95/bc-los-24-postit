@@ -35,7 +35,8 @@ export class SideNav extends Component {
             <li>
               <a
                 className="collapsible-header"
-              >Group Members List<i className="material-icons">
+              >
+              Group Members List<i className="material-icons">
         arrow_drop_down</i></a>
               <div className="collapsible-body">
                 <ul>
