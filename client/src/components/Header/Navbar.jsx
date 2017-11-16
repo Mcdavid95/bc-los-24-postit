@@ -60,7 +60,9 @@ export class Navbar extends Component {
    */
   render() {
     const group = (
-      <li><NavLink to="#" activeClassName="active">Group: {this.state.group}</NavLink></li>
+      <ul
+        className="right group-name"
+      ><li><NavLink to="#" activeClassName="active">Group: {this.state.group} </NavLink></li></ul>
     );
     const { isAuthenticated } = this.props.setAuthToken;
     const userLinks = (
@@ -72,8 +74,7 @@ export class Navbar extends Component {
             data-delay="10"
             data-tooltip="Home"
           >home</i></NavLink></li>
-          {this.props.groupId !== undefined ? group : null}
-          <li><NavLink to="/login" onClick={this.logout}><i
+          <li><NavLink to="/login" onClick={this.logout}> <i
             className="material-icons tooltipped"
             data-position="bottom"
             data-delay="10"
@@ -88,6 +89,7 @@ export class Navbar extends Component {
         >
           search
         </i></NavLink>
+        {this.props.groupId !== undefined ? group : null}
       </div>
     );
 
