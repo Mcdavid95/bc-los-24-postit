@@ -8,6 +8,7 @@ export const props = {
   createGroupRequest: jest.fn(() => Promise.resolve()),
   groupMembers: jest.fn(() => Promise.resolve()),
   userLoginRequest: jest.fn(() => Promise.resolve()),
+  memberList: [[{ id: 2, username: 'mcdavid' }]],
   userGroupList: [],
   match: {
     params: { groupId: 1 }
@@ -31,6 +32,7 @@ export const props = {
 export const nextProps = {
   addUserRequest: jest.fn(() => Promise.resolve()),
   allUsers: [{ users: [{ id: 3, username: 'mcdavid' }] }],
+  memberList: [[{ id: 2, username: 'mcdavid' }]],
   groupId: '',
   result: [{
     users: { users: [{
@@ -41,6 +43,7 @@ export const nextProps = {
   userGroupList: [[{ groupId: 3, groupName: 'mcdavid', description: 'nothing' }, { groupId: 4, groupName: 'laugh', description: 'nothing' }], [{ groupId: 3, groupName: 'mcdavid', description: 'nothing' }, { groupId: 4, groupName: 'laugh', description: 'nothing' }]],
   props: {
     userGroupList: [[{ groupId: 3, groupName: 'mcdavid', description: 'nothing' }, { groupId: 4, groupName: 'laugh', description: 'nothing' }]],
+    memberList: [[{ id: 2, username: 'mcdavid' }, { id: 3, username: 'love' }], [{ id: 2, username: 'mcdavid' }, { id: 3, username: 'love' }]],
     groupMessages: [[{ messages: 'mcdavid', priority: 'nothing' }, { groupId: 4, groupName: 'laugh', priority: 'nothing' }], [{ messages: 'mcdavid', priority: 'nothing' }, { groupId: 4, groupName: 'laugh', priority: 'nothing' }]],
 
   },

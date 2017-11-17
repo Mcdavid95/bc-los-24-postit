@@ -34,7 +34,7 @@ export class GroupMembers extends Component {
    * @return {Array} new State
    */
   componentWillReceiveProps(nextProps) {
-    if (nextProps.memberList === 1) {
+    if (nextProps.memberList.length === 1) {
       this.setState({
         members: nextProps.memberList[0]
       });
