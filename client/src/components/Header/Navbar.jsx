@@ -131,13 +131,23 @@ export class Navbar extends Component {
       </ul>
     );
 
+    const userLogo = (
+      <NavLink to="/dashboard" className="brand-logo"id="brand">
+      POSTIT!!
+      </NavLink>
+    );
+
+    const guestLogo = (
+      <NavLink to="/login" className="brand-logo"id="brand">
+      POSTIT!!
+      </NavLink>
+    );
+
     return (
       <div className="row">
         <nav>
           <div className="nav-wrapper container">
-            <NavLink to="/dashboard" className="brand-logo"id="brand">
-            POSTIT!!
-            </NavLink>
+            { isAuthenticated ? userLogo : guestLogo }
             <NavLink to="#" data-activates="mobile-demo" className="button-collapse">
               <i className="material-icons">menu</i>
             </NavLink>
