@@ -5,9 +5,9 @@ import Messageboard from './MessageBoard';
 import Messageform from './MessageForm';
 import Groupform from '../containers/GroupForm';
 import Header from '../components/Header/Header';
-import Sidenav from '../pages/SideNav';
+import Sidenav from '../containers/SideNav';
 import Footer from '../containers/Footer';
-import { createGroupRequest, getUserGroups, addUserRequest, getGroupMessages, postMessageRequest, getAllUsers } from '../actions';
+import { createGroupRequest, getUserGroups, groupMembers, addUserRequest, getGroupMessages, postMessageRequest, getAllUsers } from '../actions';
 import initialState from '../initialState';
 import AddUserform from './AddUserForm';
 /**
@@ -38,6 +38,7 @@ export class Message extends Component {
   componentDidMount() {
     this.props.getUserGroups();
     this.props.getGroupMessages(this.props.match.params.groupId);
+    this.props.groupMembers(this.props.match.params.groupId);
     this.props.getAllUsers();
 
     $('select').material_select();
@@ -127,7 +128,7 @@ Message.propTypes = {
   groupMessages: PropTypes.array.isRequired,
   match: PropTypes.object.isRequired,
   postMessageRequest: PropTypes.func.isRequired,
-
+  groupMembers: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps,
@@ -137,4 +138,5 @@ export default connect(mapStateToProps,
     getAllUsers,
     createGroupRequest,
     getGroupMessages,
+    groupMembers,
     postMessageRequest })(Message);

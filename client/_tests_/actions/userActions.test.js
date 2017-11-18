@@ -4,7 +4,7 @@ import moxios from 'moxios';
 import initialState from '../../src/initialState';
 import mockLocalStorage from '../_mocks_/mockLocalStorage';
 import * as actions from '../../src/actions/userActions';
-import * as types from '../../constant';
+import * as types from '../../src/constant';
 import { payLoad, token, userDetails, invalidUserDetails, userSigninData, invalidUserSigninData } from '../_mocks_/actions.mock';
 
 const middlewares = [thunk];

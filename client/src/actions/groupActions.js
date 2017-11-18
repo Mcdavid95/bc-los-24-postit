@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as types from '../../constant';
+import * as types from '../constant';
 import history from '../utils/History';
 
 const createGroupSuccess = group => ({ type: types.CREATE_GROUP_SUCCESS, group });

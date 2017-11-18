@@ -49,7 +49,8 @@ const initialState = {
 
   resetPassword: {
     newPassword: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    class: 'reset'
   },
 
   groupMembers: []

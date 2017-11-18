@@ -4,7 +4,7 @@ import moxios from 'moxios';
 import initialState from '../../src/initialState';
 import mockLocalStorage from '../_mocks_/mockLocalStorage';
 import * as actions from '../../src/actions/messageActions';
-import * as types from '../../constant';
+import * as types from '../../src/constant';
 import { messageData, invalidMessageData } from '../_mocks_/actions.mock';
 
 const middlewares = [thunk];

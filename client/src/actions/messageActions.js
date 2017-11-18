@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as types from '../../constant';
+import * as types from '../constant';
 import history from '../utils/History';
 
 const postMessageSuccess = message => ({ type: types.POST_MESSAGE_SUCCESS, message });

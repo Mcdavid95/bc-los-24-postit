@@ -1,5 +1,5 @@
 import setAuthToken from '../../src/reducers/authTokenReducer';
-import * as types from '../../constant';
+import * as types from '../../src/constant';
 import state from '../../src/initialState';
 
 describe('Set Current User Reducer', () => {

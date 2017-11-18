@@ -1,5 +1,5 @@
 import resetPassword from '../../src/reducers/resetPasswordReducer';
-import * as types from '../../constant';
+import * as types from '../../src/constant';
 import state from '../../src/initialState';
 
 describe('Reset password Reducer', () => {

@@ -1,5 +1,5 @@
 import groupMembers from '../../src/reducers/groupMembersReducer';
-import * as types from '../../constant';
+import * as types from '../../src/constant';
 import state from '../../src/initialState';
 
 describe('Get User Groups Reducer', () => {
