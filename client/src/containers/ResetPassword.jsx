@@ -19,23 +19,36 @@ class ResetPasswordPage extends Component {
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.showPassword = this.showPassword.bind(this);
   }
   /**
    * 
-   * @param {Event} e 
+   * @param {Event} event 
    * @return {*} updates state for any change
    */
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+  onChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
   /**
    * 
-   * @param {*} e 
+   * @param {*} event 
    * @return {action} dispatches an action
    */
-  onSubmit(e) {
-    e.preventDefault();
+  onSubmit(event) {
+    event.preventDefault();
     this.props.confirmPasswordReset(this.props.match.params.token, this.state);
+  }
+  /**
+   * @method showPassword
+   * @returns {*} void
+   */
+  showPassword() {
+    const element = document.getElementById(this.state.class || 'reset-password');
+    if (element.type === 'password') {
+      element.type = 'text';
+    } else {
+      element.type = 'password';
+    }
   }
   /**
    * @return {DOM} DOM
@@ -53,10 +66,11 @@ class ResetPasswordPage extends Component {
           </div>
           <form className="col s12" onSubmit={this.onSubmit}>
             <div className="row">
-              <div className="input-field">
+              <div className="input-field reset">
                 <input
                   className="form-control"
-                  type="text"
+                  type="password"
+                  id="reset"
                   name="newPassword"
                   required
                   value={this.state.newPassword}
@@ -67,8 +81,8 @@ class ResetPasswordPage extends Component {
 
               <div className="input-field">
                 <input
-                  className="form-control"
-                  type="text"
+                  className="form-control reset"
+                  type="password"
                   name="confirmPassword"
                   required
                   value={this.state.confirmPassword}
@@ -76,6 +90,10 @@ class ResetPasswordPage extends Component {
                 />
                 <label htmlFor="email" className="control-label">Confirm Password</label>
               </div>
+              <p>
+                <input type="checkbox" onClick={() => this.showPassword()} id="check" />
+                <label htmlFor="check">Show Password</label>
+              </p>
             </div>
             <button type="submit" className="form-control btn btn-login btn-primary">Send</button>
           </form>

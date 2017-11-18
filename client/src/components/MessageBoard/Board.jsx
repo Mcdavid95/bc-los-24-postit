@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../../components/Header/Header';
-import SideNavigation from '../SideNav';
+import SideNavigation from '../../containers/SideNav';
 import Footer from '../../containers/Footer';
 import GroupForms from '../../containers/GroupForm';
 import { createGroupRequest, getUserGroups, getGroupMessages } from '../../actions';
