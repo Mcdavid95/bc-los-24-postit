@@ -56,36 +56,6 @@ The functionality of this web app being a node.js app depends on the following t
 12. ``` npm run client-test ``` runs the client-side test
 13. The API can be consumed with postman.
 
-## The API.
-The API exposes the following endpoints for consumption:  
-  1. ```POST``` /api/v1/user/register. The API takes the following parameters name, username, email, password, phone.  
-    Registers a new user.  
-  2. ```POST``` /api/v1/user/loginin. The API takes the following parameters username, password.  
-    Signs In a registered user.  
-  3. ```POST``` /api/v1/group. The API takes the following parameters groupName, description.  
-    Creates a group.  
-  4. ```POST``` /api/v1/group/:groupid/user. The API takes the following parameters groupId(url params), userId(from decoded jwt token).  
-    Adds a user to a group.  
-  5. ```POST``` /api/group/:groupid/message. The API takes the following parameters groupId, message, priority.   
-    Sends a message to a group  
-  6. ```GET``` /api/group/:groupid/messages. The API takes groupId as parameter.  
-    Retrieves Messages of a Group.  
-  7. ```GET``` /api/v1/users. The API takes the following parameters offset and limit both pased as url query.  
-    Gets all users in the application.  
-  9. ```POST``` /api/v1/users/searchList. The API takes the following parameters username, offset(passed as url query).  
-    Searches the application for a user  
-  10. ```POST``` /api/v1/user/forgot-password. The API takes email as the parameter.  
-    For Requesting for a change of password  
-  11. ```POST``` /api/v1/user/reset-password/:token. The API takes the following parameters newPassword and confirmPassword and token which is passed from params.  
-    For resetting password   
-  12. ```GET``` /api/v1/user/groups. The API takes no parameter just JSON web token.  
-    For getting every group a user belongs to  
-  13. ```GET``` /api/v1/group/:groupId/users. The API takes groupId as parameter.  
-    For getting members of a group.
-    
-  14. ```GET``` /api/v1/group/:groupId. The API takes groupId as parameter.  
-    For getting name of current group
-
 ## Test  
 API test is written with ``` jasmine ``` and ``` supertest ```.
 Frontend tests is written with ``` jest ``` and ``` enzyme ```.
@@ -105,7 +75,7 @@ The project is open for contribution. You can start by forking this project repo
 ## License
 [MIT](https://github.com/Mcdavid95/bc-los-24-postit/blob/defense-feedback/LICENSE)
 
-## FAQ's
+## FAQs
 - Is this an open source application? 
         __Ans:__ Definately it is.
 - Can I use it for commercial use or profit making?
