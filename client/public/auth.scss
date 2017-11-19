@@ -16,6 +16,10 @@ body {
     flex: 1 0 auto;
   }
 
+  .modal-overlay {
+    display: none
+  }
+
   #brand {
     font-family: $brandFont;
     color: palevioletred;
