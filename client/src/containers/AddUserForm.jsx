@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import initialState from '../initialState';
-import { searchUsers, addUserRequest } from '../actions';
+import { searchUsers, addUserRequest, groupMembers } from '../actions';
 /**
  * @class AddUserForm
  * @extends React.Component
@@ -67,6 +67,7 @@ export class AddUserForm extends Component {
     event.preventDefault();
     this.props.addUserRequest(this.state, this.props.groupId)
       .then(() => {
+        this.props.groupMembers(this.props.groupId);
         this.setState({
           username: initialState.addUser
         });
@@ -117,12 +118,12 @@ AddUserForm.propTypes = {
   addUserRequest: PropTypes.func.isRequired,
   groupId: PropTypes.string.isRequired,
   searchUsers: PropTypes.func.isRequired,
-  result: PropTypes.array.isRequired
-
+  result: PropTypes.array.isRequired,
+  groupMembers: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   result: state.search
 });
 
-export default connect(mapStateToProps, { searchUsers, addUserRequest })(AddUserForm);
+export default connect(mapStateToProps, { searchUsers, addUserRequest, groupMembers })(AddUserForm);

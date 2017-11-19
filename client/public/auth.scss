@@ -18,6 +18,7 @@ body {
 
   .modal-overlay {
     display: none;
+    background: none
   }
 
   #brand {
@@ -272,6 +273,7 @@ textarea#message {
 
 #sidenav-overlay {
   z-index: 0;
+  background: none;
 }
 
 .username {
@@ -305,7 +307,7 @@ th {
 }
 
 button#side-nav.button-collapse {
-  color: teal;
+  color: teal
 }
 
 
