@@ -38,7 +38,6 @@ export class Message extends Component {
   componentDidMount() {
     this.props.getUserGroups();
     this.props.getGroupMessages(this.props.match.params.groupId);
-    this.props.groupMembers(this.props.match.params.groupId);
     this.props.getAllUsers();
 
     $('select').material_select();
