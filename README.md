@@ -101,3 +101,16 @@ The API documentation for this project can be found [here](http://docs.postit6.a
 
 ## How to Contribute
 The project is open for contribution. You can start by forking this project repo. If you have improvements you want to add, feel free to do so and create a PR against development branch
+
+## License
+[MIT](https://github.com/Mcdavid95/bc-los-24-postit/blob/defense-feedback/LICENSE)
+
+## FAQ's
+- Is this an open source application? 
+        __Ans:__ Definately it is.
+- Can I use it for commercial use or profit making?
+        __Ans:__ Yes you can?
+- Can I contribute to this project?
+        __Ans:__ Yes anyone can contribute.
+- How do I contribute?
+        __Ans:__ Create your own branch and raise a PR against development
