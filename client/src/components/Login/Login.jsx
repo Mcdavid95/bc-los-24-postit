@@ -17,11 +17,11 @@ const Login = props => (
     <Header />
     <main>
       <div className="container">
-        <div className="heading">
-          <h3>Welcome to <span className="brand" id="top">POSTIT!!</span></h3>
-          <h5>
+        <div className="heading center">
+          <h4>Welcome to <span className="brand" id="top">POSTIT!!</span></h4>
+          <p>
               Connect to friends and loved ones all it takes is a click!!! Login to get started
-          </h5>
+          </p>
         </div>
         <LoginForm userLoginRequest={props.userLoginRequest} />
       </div>

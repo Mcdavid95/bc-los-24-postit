@@ -90,7 +90,7 @@ form {
 }
 
 .forgot-password {
-  padding-left: 7%;
+  padding-left: 2%;
 }
 
 
@@ -107,8 +107,13 @@ nav {
 }
 
 .login-form {
-  margin-top: 5%;
-  margin-bottom: 20%;
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+  border-radius: 2px;
+  box-shadow: 3px 3px 3px 3px #888888;
+  /* margin-bottom: 20px; */
+  padding-bottom: 25px;
 }
 
 .login {
