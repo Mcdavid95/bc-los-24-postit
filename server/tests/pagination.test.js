@@ -1,5 +1,5 @@
 import chai from 'chai';
-import paginate from '../controllers/pagination';
+import paginate from '../utils/pagination';
 
 const expect = chai.expect;
 
