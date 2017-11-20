@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import crypto from 'crypto';
 import { resetPasswordMail, sendSuccessfulResetMail } from './emailNotificationCtrl';
 import model from '../models/';
-import pagination from './pagination';
+import pagination from '../utils/pagination';
 
 dotenv.config();
 const User = model.User;
