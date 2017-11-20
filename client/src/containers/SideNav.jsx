@@ -103,11 +103,23 @@ export class SideNav extends Component {
   }
 }
 
-SideNav.propTypes = {
-  userGroupList: PropTypes.array.isRequired,
-  userDetails: PropTypes.object.isRequired,
-  groupId: PropTypes.string.isRequired
+const sideNavPropTypes = () => {
+  const sideNav = new SideNav();
+  if (sideNav.props.groupId) {
+    return {
+      userGroupList: PropTypes.array.isRequired,
+      userDetails: PropTypes.object.isRequired,
+      groupId: PropTypes.string.isRequired
+    };
+  }
+  return {
+    userGroupList: PropTypes.array.isRequired,
+    userDetails: PropTypes.object.isRequired,
+  };
 };
+
+SideNav.propTypes = sideNavPropTypes;
+
 const mapStateToProps = state => ({
   userGroupList: state.userGroupList,
   userDetails: state.setAuthToken

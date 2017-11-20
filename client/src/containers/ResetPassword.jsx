@@ -8,7 +8,7 @@ import { confirmPasswordReset } from '../actions';
 /**
  * @class
  */
-class ResetPasswordPage extends Component {
+class ResetPassword extends Component {
   /**
    * 
    * @param {*} props 
@@ -104,9 +104,9 @@ class ResetPasswordPage extends Component {
   }
 }
 
-ResetPasswordPage.propTypes = {
+ResetPassword.propTypes = {
   confirmPasswordReset: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired
 };
 
-export default connect(null, { confirmPasswordReset })(ResetPasswordPage);
+export default connect(null, { confirmPasswordReset })(ResetPassword);

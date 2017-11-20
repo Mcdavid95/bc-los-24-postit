@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import crypto from 'crypto';
 import { resetPasswordMail, sendSuccessfulResetMail } from './emailNotificationCtrl';
 import model from '../models/';
-import paginate from './pagination';
+import pagination from './pagination';
 
 dotenv.config();
 const User = model.User;
@@ -121,7 +121,7 @@ export default {
       })
       .then(users => res.status(200).send({
         users: users.rows,
-        metadata: paginate(users.count, limit, offset)
+        pageInfo: pagination(users.count, limit, offset)
       }))
       .catch(() => {
         res.status(400).send({
@@ -152,7 +152,7 @@ export default {
       .then((users) => {
         res.status(201).send({
           users: users.rows,
-          metadata: paginate(users.count, limit, offset),
+          pageInfo: pagination(users.count, limit, offset),
         });
       })
       .catch((err) => {

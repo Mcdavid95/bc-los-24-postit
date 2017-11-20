@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-export default {
+const jwtVerify = {
   /**
    * @method hasToken
    * @param {*} req 
@@ -25,3 +25,4 @@ export default {
     }
   }
 };
+export default jwtVerify;

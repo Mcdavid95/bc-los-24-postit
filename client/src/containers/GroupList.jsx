@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import shortId from 'shortid';
 import { Link } from 'react-router-dom';
 import { getGroupMessages, currentGroup, groupMembers } from '../actions';
 import history from '../utils/History';
@@ -61,7 +62,7 @@ export class GroupList extends Component {
     return (
       <ul className="row group-list">
         {!this.state.groups ? (<li> No groups Yet</li>) : this.state.groups.map(group =>
-          (<li key={group.id}>
+          (<li key={shortId.generate()}>
             <div className="col s12">
               <div className="black">
                 <Link onClick={() => this.onClick(group.groupId)} to={`/group/${group.groupId}/messages`}><span className="card-title list-group"> {group.groupName}</span></Link>

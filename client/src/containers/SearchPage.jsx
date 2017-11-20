@@ -40,12 +40,12 @@ export class SearchPage extends Component {
     if (nextProps.result.length === 0) {
       this.setState({
         result: nextProps.result.users.users,
-        pages: nextProps.result.users.metadata.pageCount
+        pages: nextProps.result.users.pageInfo.pageCount
       });
     } else {
       this.setState({
         result: nextProps.result[nextProps.result.length - 1].users.users,
-        pages: nextProps.result[nextProps.result.length - 1].users.metadata.pageCount
+        pages: nextProps.result[nextProps.result.length - 1].users.pageInfo.pageCount
       });
     }
   }

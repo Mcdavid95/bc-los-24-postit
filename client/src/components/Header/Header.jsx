@@ -8,7 +8,13 @@ const Header = props => (
   </header>
 );
 
-Header.propTypes = {
-  groupId: PropTypes.string.isRequired
+const headerPropTypes = () => {
+  if (Header().props.groupId) {
+    return {
+      groupId: PropTypes.string.isRequired
+    };
+  }
 };
+
+Header.propTypes = headerPropTypes;
 export default Header;

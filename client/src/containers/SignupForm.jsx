@@ -5,7 +5,7 @@ import initialState from '../initialState';
 
 
 /**
- * @class Signup
+ * @class SignupForm
  */
 export default class SignupForm extends Component {
   /**

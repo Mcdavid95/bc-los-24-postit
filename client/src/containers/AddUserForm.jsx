@@ -114,13 +114,27 @@ export class AddUserForm extends Component {
   }
 }
 
-AddUserForm.propTypes = {
-  addUserRequest: PropTypes.func.isRequired,
-  groupId: PropTypes.string.isRequired,
-  searchUsers: PropTypes.func.isRequired,
-  result: PropTypes.array.isRequired,
-  groupMembers: PropTypes.func.isRequired
+const addUserFormPropTypes = () => {
+  const addUserForm = new AddUserForm();
+  if (Array.isArray(addUserForm.props.result)) {
+    return {
+      addUserRequest: PropTypes.func.isRequired,
+      groupId: PropTypes.string.isRequired,
+      searchUsers: PropTypes.func.isRequired,
+      result: PropTypes.array.isRequired,
+      groupMembers: PropTypes.func.isRequired
+    };
+  }
+  return {
+    addUserRequest: PropTypes.func.isRequired,
+    groupId: PropTypes.string.isRequired,
+    searchUsers: PropTypes.func.isRequired,
+    result: PropTypes.object.isRequired,
+    groupMembers: PropTypes.func.isRequired
+  };
 };
+
+AddUserForm.propTypes = addUserFormPropTypes;
 
 const mapStateToProps = state => ({
   result: state.search
