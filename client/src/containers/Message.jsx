@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Messageboard from './MessageBoard';
-import Messageform from './MessageForm';
-import Groupform from '../containers/GroupForm';
+import MessageBoard from './MessageBoard';
+import MessageForm from './MessageForm';
+import GroupForm from '../containers/GroupForm';
 import Header from '../components/Header/Header';
-import Sidenav from '../containers/SideNav';
+import SideNav from '../containers/SideNav';
 import Footer from '../containers/Footer';
 import { createGroupRequest, getUserGroups, groupMembers, addUserRequest, getGroupMessages, postMessageRequest, getAllUsers } from '../actions';
 import initialState from '../initialState';
-import AddUserform from './AddUserForm';
+import AddUserForm from './AddUserForm';
 /**
  * @class Message
  * @extends React.Component
@@ -65,12 +65,12 @@ export class Message extends Component {
       <div >
         <Header groupId={this.props.match.params.groupId} />
         <main>
-          <Sidenav groupId={this.props.match.params.groupId} />
+          <SideNav groupId={this.props.match.params.groupId} />
           <div id="modal1" className="modal  modal-fixed-footer">
             <div className="modal-content">
               <h3 className="group-form heading">Create New Group</h3>
 
-              <Groupform createGroupRequest={this.props.createGroupRequest} />
+              <GroupForm createGroupRequest={this.props.createGroupRequest} />
             </div>
             <div className="modal-footer">
               <a
@@ -82,7 +82,7 @@ export class Message extends Component {
           <div id="modal2" className="modal modal-fixed-footer">
             <div className="modal-content" id="options">
               <h3 className="heading">Add New User To This Group</h3>
-              <AddUserform
+              <AddUserForm
                 addUserRequest={this.props.addUserRequest}
                 groupId={this.props.match.params.groupId}
               />
@@ -95,11 +95,11 @@ export class Message extends Component {
             </div>
           </div>
           <div className="row page">
-            <Messageboard
+            <MessageBoard
               groupMessages={this.state.messages}
               groupId={this.props.match.params.groupId}
             />
-            <Messageform
+            <MessageForm
               groupId={this.props.match.params.groupId}
               postMessageRequest={this.props.postMessageRequest}
             />
@@ -127,7 +127,6 @@ Message.propTypes = {
   groupMessages: PropTypes.array.isRequired,
   match: PropTypes.object.isRequired,
   postMessageRequest: PropTypes.func.isRequired,
-  groupMembers: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps,

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../../components/Header/Header';
-import SideNavigation from '../../containers/SideNav';
+import SideNav from '../../containers/SideNav';
 import Footer from '../../containers/Footer';
-import GroupForms from '../../containers/GroupForm';
+import GroupForm from '../../containers/GroupForm';
 import { createGroupRequest, getUserGroups, getGroupMessages } from '../../actions';
 /**
  * @class
@@ -38,11 +38,11 @@ class Board extends Component {
       <div>
         <Header />
         <main>
-          <SideNavigation />
+          <SideNav />
           <div id="modal1" className="modal modal-fixed-footer">
             <div className="modal-content">
               <h3 className="group-form heading">Create New Group</h3>
-              <GroupForms createGroupRequest={this.props.createGroupRequest} />
+              <GroupForm createGroupRequest={this.props.createGroupRequest} />
             </div>
             <div className="modal-footer">
               <a
