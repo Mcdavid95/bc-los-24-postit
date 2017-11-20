@@ -28,7 +28,9 @@ export class Navbar extends Component {
    * @returns {*} any
    */
   componentDidMount() {
-    this.props.currentGroup(this.props.groupId);
+    if (this.props.groupId) {
+      this.props.currentGroup(this.props.groupId);
+    }
     $(document).ready(() => {
       $('.button-collapse').sideNav();
       $('select').material_select();
@@ -160,13 +162,27 @@ export class Navbar extends Component {
   }
 }
 
-Navbar.propTypes = {
-  setAuthToken: PropTypes.object.isRequired,
-  logout: PropTypes.func.isRequired,
-  currentGroup: PropTypes.func.isRequired,
-  groupId: PropTypes.string.isRequired,
-  groupName: PropTypes.string.isRequired,
+
+const navBarPropTypes = () => {
+  const navBar = new Navbar();
+  if (navBar.props.groupId) {
+    return {
+      setAuthToken: PropTypes.object.isRequired,
+      logout: PropTypes.func.isRequired,
+      currentGroup: PropTypes.func.isRequired,
+      groupId: PropTypes.string.isRequired,
+      groupName: PropTypes.string.isRequired,
+    };
+  }
+  return {
+    setAuthToken: PropTypes.object.isRequired,
+    logout: PropTypes.func.isRequired,
+    currentGroup: PropTypes.func.isRequired,
+    groupName: PropTypes.string.isRequired,
+  };
 };
+
+Navbar.propTypes = navBarPropTypes;
 
 const mapStateToProps = state => ({
   setAuthToken: state.setAuthToken,
