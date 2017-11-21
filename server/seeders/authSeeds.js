@@ -61,7 +61,7 @@ export const User = {
 };
 
 export const wrongUser = {
-  username: 'mcdavid',
+  username: 'emmanuel',
   password: 'janike_13'
 };
 

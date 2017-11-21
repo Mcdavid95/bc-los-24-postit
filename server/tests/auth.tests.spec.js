@@ -203,7 +203,7 @@ describe('Authentication Route', () => {
       .end((err, res) => {
         token = res.body.token;
         res.status.should.equal(202);
-        res.body.message.should.equal('Welcome back mcdavid');
+        res.body.message.should.equal('Welcome back Mcdavid');
         done();
       });
   });
