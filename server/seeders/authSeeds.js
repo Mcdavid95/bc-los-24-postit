@@ -59,3 +59,26 @@ export const User = {
   email: 'harry@gmail.com',
   phoneNumber: 8033379342
 };
+
+export const wrongUser = {
+  username: 'emmanuel',
+  password: 'janike_13'
+};
+
+export const noEmail = {
+  username: 'mcdavid',
+  phoneNumber: 9093839393,
+  password: 'mcdavidemereuwa@gmail.com'
+};
+
+export const noPassword = {
+  username: 'mcdavid',
+  phoneNumber: 9093839393,
+  email: 'mcdavidemereuwa@gmail.com'
+};
+
+export const noPhoneNumber = {
+  username: 'mcdavid',
+  password: 'ytujtoit',
+  email: 'mcdavidemereuwa@gmail.com'
+};

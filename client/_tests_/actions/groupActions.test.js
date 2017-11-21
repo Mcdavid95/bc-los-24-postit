@@ -5,7 +5,7 @@ import initialState from '../../src/initialState';
 import mockLocalStorage from '../_mocks_/mockLocalStorage';
 import * as actions from '../../src/actions/groupActions';
 import * as types from '../../src/constant';
-import { userData, invalidUserData, groupData, invalidGroupData } from '../_mocks_/actions.mock';
+import { userData, invalidUserData, groupData, invalidGroupData, getGroupMembersData, token } from '../_mocks_/actions.mock';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -26,7 +26,7 @@ describe('Create Group Request action', () => {
       response: {
         message: 'SGroup created succcesfully created.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -45,7 +45,7 @@ describe('Create Group Request action', () => {
       response: {
         message: 'Error.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -75,7 +75,7 @@ describe('Get User Groups Request action', () => {
       response: {
         message: 'Welcome.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -91,7 +91,7 @@ describe('Get User Groups Request action', () => {
       status: 401,
       response: {
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -118,7 +118,7 @@ describe('Add User to Group Request action', () => {
       status: 201,
       response: {
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -137,7 +137,7 @@ describe('Add User to Group Request action', () => {
       response: {
         message: 'Error.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -165,20 +165,7 @@ describe('Get Group members', () => {
       status: 201,
       response: {
         message: 'Welcome.',
-        data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk',
-          members: [
-            {
-              id: 1,
-              isCreator: true,
-              userId: '1',
-              groupId: 1,
-              groupName: 'jonny',
-              email: 'mcdavidemereuwa95@gmail.com',
-              description: 'for yemi alade',
-              username: 'mcdavid',
-              createdAt: '2017-11-15T12:52:48.137Z',
-              updatedAt: '2017-11-15T12:52:48.137Z' }, { id: 2, isCreator: false, userId: '3', groupId: 1, groupName: 'jonny', email: 'melody@gmail.com', description: 'for yemi alade', username: 'melody', createdAt: '2017-11-15T12:52:48.276Z', updatedAt: '2017-11-15T12:52:48.276Z' }, { id: 5, isCreator: false, userId: null, groupId: 1, groupName: 'everyday', email: 'melo@gmail.com', description: 'daily life', username: 'melody', createdAt: '2017-11-15T12:52:49.872Z', updatedAt: '2017-11-15T12:52:49.872Z' }, { id: 6, isCreator: false, userId: null, groupId: 1, groupName: 'everyday', email: 'melo@gmail.com', description: 'daily life', username: 'melody', createdAt: '2017-11-15T12:52:49.884Z', updatedAt: '2017-11-15T12:52:49.884Z' }, { id: 7, isCreator: false, userId: null, groupId: 1, groupName: 'everyday', email: 'melo@gmail.com', description: 'daily life', username: 'melody', createdAt: '2017-11-15T12:52:49.888Z', updatedAt: '2017-11-15T12:52:49.888Z' }] }
+        data: getGroupMembersData
       }
     });
     const expectedActions = { members: [{ id: 2, username: 'mcdavid' }],
@@ -223,7 +210,7 @@ describe('Get Current Group', () => {
       response: {
         message: 'Welcome.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk',
+          token,
           groupName: 'Pheonix'
         }
       }

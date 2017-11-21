@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { AddUserForm } from '../../src/containers/AddUserForm';
-import { props, nextProps } from '../_mocks_/components.mock';
+import { props, nextProps, user } from '../_mocks_/components.mock';
 
 const instance = () => mount(<AddUserForm {...props} />);
 
@@ -12,9 +12,7 @@ describe('AddUser form component test', () => {
     const component = wrapper;
     const onChangeSpy = jest.spyOn(component.instance(), 'onChange');
     component.instance().onChange({
-      target: {
-        name: 'username', value: 'mcdavid'
-      }
+      target: user
     });
     expect(onChangeSpy).toHaveBeenCalledTimes(1);
   });

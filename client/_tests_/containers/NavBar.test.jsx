@@ -19,9 +19,7 @@ describe('Navbar component test', () => {
 
   it('should contain the componentWillReceiveProps method', () => {
     wrapper.setState({
-      match: {
-        params: { groupId: 1 }
-      },
+      match: nextProps.match
     });
     const component = wrapper;
     const onSubmitSpy = jest.spyOn(component.instance(), 'componentWillReceiveProps');
@@ -31,9 +29,7 @@ describe('Navbar component test', () => {
 
   it('should contain the componentDidMount method', () => {
     wrapper.setState({
-      match: {
-        params: { groupId: 1 }
-      },
+      match: nextProps.match
     });
     const component = wrapper;
     const onSubmitSpy = jest.spyOn(component.instance(), 'componentDidMount');

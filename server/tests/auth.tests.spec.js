@@ -3,7 +3,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../../serverTest';
 import models from '../models';
-import { valid, yetAnotherValid, anotherValid, invalidUsername, invalidEmail, invalidNumber } from '../seeders/authSeeds';
+import { valid, yetAnotherValid, anotherValid, invalidUsername, invalidEmail, invalidNumber, wrongUser, noEmail, noPassword, noPhoneNumber } from '../seeders/authSeeds';
 import { Group1 } from '../seeders/groupSeeds';
 
 chai.use(chaiHttp);
@@ -69,11 +69,7 @@ describe('Authentication Route', () => {
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
-      .send({
-        username: 'mcdavid',
-        phoneNumber: 9093839393,
-        email: 'mcdavidemereuwa@gmail.com'
-      })
+      .send(noPassword)
       .end((err, res) => {
         res.status.should.equal(409);
         res.body.message.should.equal('Password field must not be empty');
@@ -87,11 +83,7 @@ describe('Authentication Route', () => {
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
-      .send({
-        username: 'mcdavid',
-        password: 'ytujtoit',
-        email: 'mcdavidemereuwa@gmail.com'
-      })
+      .send(noPhoneNumber)
       .end((err, res) => {
         res.status.should.equal(409);
         res.body.message.should.equal('Phone Number field must not be empty');
@@ -105,11 +97,7 @@ describe('Authentication Route', () => {
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
-      .send({
-        username: 'mcdavid',
-        phoneNumber: 9093839393,
-        password: 'mcdavidemereuwa@gmail.com'
-      })
+      .send(noEmail)
       .end((err, res) => {
         res.status.should.equal(409);
         res.body.message.should.equal('Email field must not be empty');
@@ -209,13 +197,13 @@ describe('Authentication Route', () => {
       .set('Content-Type', 'application/json')
       .type('form')
       .send({
-        username: 'mcdavid',
-        password: 'janike_13'
+        username: valid.username,
+        password: valid.password
       })
       .end((err, res) => {
         token = res.body.token;
         res.status.should.equal(202);
-        res.body.message.should.equal('Welcome back mcdavid');
+        res.body.message.should.equal('Welcome back Mcdavid');
         done();
       });
   });
@@ -226,10 +214,7 @@ describe('Authentication Route', () => {
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
-      .send({
-        username: 'emmanuel',
-        password: 'janike_13'
-      })
+      .send(wrongUser)
       .end((err, res) => {
         res.status.should.equal(401);
         res.body.message.should.equal('Username not correct');
@@ -261,7 +246,7 @@ describe('Authentication Route', () => {
       .set('Content-Type', 'application/json')
       .type('form')
       .send({
-        password: 'janike_13a'
+        password: valid.password
       })
       .end((err, res) => {
         res.status.should.equal(401);
@@ -277,8 +262,8 @@ describe('Authentication Route', () => {
       .set('Content-Type', 'application/json')
       .type('form')
       .send({
-        username: 'kelechi',
-        password: 'kele_13'
+        username: yetAnotherValid.username,
+        password: yetAnotherValid.password
       })
       .end((err, res) => {
         res.status.should.equal(202);

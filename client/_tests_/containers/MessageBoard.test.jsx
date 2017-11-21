@@ -21,7 +21,7 @@ describe('Message Board component test', () => {
 
   it('should contain the componentWillReceiveProps method', () => {
     wrapper.setState({
-      messages: [{ id: 3, username: 'mcdavid' }]
+      messages: nextProps.props.groupMessages
     });
     const component = wrapper;
     const onSubmitSpy = jest.spyOn(component.instance(), 'componentWillReceiveProps');
