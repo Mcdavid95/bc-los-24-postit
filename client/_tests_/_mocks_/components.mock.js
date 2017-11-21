@@ -5,6 +5,7 @@ export const props = {
   searchUsers: jest.fn(() => Promise.resolve()),
   groupId: '',
   getAllUsers: jest.fn(() => Promise.resolve()),
+  userSignupRequest: jest.fn(() => Promise.resolve()),
   createGroupRequest: jest.fn(() => Promise.resolve()),
   groupMembers: jest.fn(() => Promise.resolve()),
   userLoginRequest: jest.fn(() => Promise.resolve()),
@@ -58,5 +59,9 @@ export const nextProps = {
 
 export const target = {
   name: 'username', description: 'mcdavid'
+};
+
+export const user = {
+  name: 'username', value: 'mcdavid'
 };
 
