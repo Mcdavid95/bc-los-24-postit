@@ -65,7 +65,7 @@ export const sendUrgentMail = (users, message) => {
                         </p>
         </div>
         <div style="border-top: 3px solid #2c3e56;"></div>
-        <p style="font-weight: bold; font-family:kurale serif"; color: palevioletred">POSTIT!!</p>
+        <p style="font-weight: bold; font-family:kurale serif; color: palevioletred">POSTIT!!</p>
       </div>
      <div style="height: 8%; background-color: #2c3e56; width:100%">
        <p><small style="text-align: center; color:white;"> Copyright m.jeck</small></p>
@@ -124,7 +124,7 @@ export const resetPasswordMail = (token, email, host) => {
           <br>
           <a href="http://${host}/reset/${token}"><button style="background-color: teal; color: white">Reset Password</button></a>
         </div>
-        <p style="font-weight: bold; color: palevioletred">POSTIT!!</p>
+        <p style="font-weight: bold; font-family:kurale serif; color: palevioletred">POSTIT!!</p>
       </div>
       <div style="height: 8%; background-color: #2c3e56; width:100%">
       <p><small style="text-align: center; color:white;"> Copyright m.jeck</small></p>
@@ -178,7 +178,7 @@ export const sendSuccessfulResetMail = (email) => {
         <div>
           <br>
         </div>
-        <p style="font-weight: bold; color: palevioletred">POSTIT!!</p>
+        <p style="font-weight: bold; font-family:kurale serif; color: palevioletred">POSTIT!!</p>
       </div>
       <div style="height: 8%; background-color: #2c3e56; width:100%">
         <p><small style="text-align: center; color:white;"> Copyright m.jeck</small></p>
