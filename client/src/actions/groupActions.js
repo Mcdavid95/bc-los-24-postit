@@ -26,8 +26,8 @@ export const getUserGroups = () => (dispatch) => {
     .catch((err) => {
       localStorage.removeItem('jwtToken');
       Materialize.toast('Sorry your session expired please login', 3000, 'rounded red');
-      history.push('/login');
       setAuthToken(false);
+      history.push('/login');
       dispatch(setCurrentUser({}));
       dispatch(loadGroupFailed(err));
     });

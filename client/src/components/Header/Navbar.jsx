@@ -66,9 +66,14 @@ export class Navbar extends Component {
         className="right group-name"
       ><li><NavLink to="#" activeClassName="active">Group: {this.state.group} </NavLink></li></ul>
     );
+
     const { isAuthenticated } = this.props.setAuthToken;
+
     const userLinks = (
       <div>
+        <NavLink to="#" data-activates="mobile-demo" className="button-collapse">
+          <i className="material-icons">menu</i>
+        </NavLink>
         <ul className="right hide-on-med-and-down">
           <li><NavLink to="/dashboard" activeClassName="active"><i
             className="material-icons tooltipped"
@@ -95,17 +100,6 @@ export class Navbar extends Component {
       </div>
     );
 
-    const guestLinks = (
-      <ul className="right hide-on-med-and-down">
-        <li><NavLink to="/login" activeClassName="active"><i
-          className="material-icons tooltipped"
-          data-position="bottom"
-          data-delay="10"
-          data-tooltip="Home"
-        >home</i></NavLink></li>
-      </ul>
-    );
-
     const sideNavUsers = (
       <ul className="side-nav" id="mobile-demo">
         <li><NavLink to="/dashboard" activeClassName="active"><i
@@ -122,17 +116,6 @@ export class Navbar extends Component {
       </ul>
     );
 
-    const sideNavGuests = (
-      <ul className="side-nav" id="mobile-demo">
-        <li><NavLink to="/login" activeClassName="active"><i
-          className="material-icons tooltipped"
-          data-position="right"
-          data-delay="10"
-          data-tooltip="Home"
-        >home</i></NavLink></li>
-      </ul>
-    );
-
     const userLogo = (
       <NavLink to="/dashboard" className="brand-logo"id="brand">
       POSTIT!!
@@ -140,9 +123,9 @@ export class Navbar extends Component {
     );
 
     const guestLogo = (
-      <NavLink to="/login" className="brand-logo"id="brand">
+      <span className="brand-logo"id="brand">
       POSTIT!!
-      </NavLink>
+      </span>
     );
 
     return (
@@ -150,11 +133,8 @@ export class Navbar extends Component {
         <nav>
           <div className="nav-wrapper container">
             { isAuthenticated ? userLogo : guestLogo }
-            <NavLink to="#" data-activates="mobile-demo" className="button-collapse">
-              <i className="material-icons">menu</i>
-            </NavLink>
-            { isAuthenticated ? userLinks : guestLinks }
-            { isAuthenticated ? sideNavUsers : sideNavGuests }
+            { isAuthenticated ? userLinks : null }
+            { isAuthenticated ? sideNavUsers : null }
           </div>
         </nav>
       </div>
