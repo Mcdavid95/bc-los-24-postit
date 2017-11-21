@@ -23,7 +23,7 @@ const CheckLoggedInUser = (ComposedComponent) => {
      */
     componentWillUpdate(nextProps) {
       if (!nextProps.isAuthenticated) {
-        this.props.isAuthenticated = true;
+        this.props.isAuthenticated = false;
         history.push('/dashboard');
       }
     }
