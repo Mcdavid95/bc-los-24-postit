@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../components/Header/Header';
 import Footer from '../containers/Footer';
 import initialState from '../initialState';
-import resetPasswordRequest from '../actions/resetPasswordAction';
+import { confirmPasswordReset } from '../actions';
 /**
  * @class
  */
@@ -35,7 +35,7 @@ class ResetPasswordPage extends Component {
    */
   onSubmit(e) {
     e.preventDefault();
-    this.props.resetPasswordRequest(this.props.match.params.token, this.state);
+    this.props.confirmPasswordReset(this.props.match.params.token, this.state);
   }
   /**
    * @return {DOM} DOM
@@ -87,7 +87,8 @@ class ResetPasswordPage extends Component {
 }
 
 ResetPasswordPage.propTypes = {
-  resetPasswordRequest: PropTypes.func.isRequired
+  confirmPasswordReset: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired
 };
 
-export default connect(null, { resetPasswordRequest })(ResetPasswordPage);
+export default connect(null, { confirmPasswordReset })(ResetPasswordPage);

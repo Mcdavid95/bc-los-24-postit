@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import initialState from '../initialState';
 /**
- * @class
+ * @class LoginForm
+ * @extends React.Component
  */
 export default class LoginForm extends Component {
   /**
-   * 
+   * @constructor
+   * @description Creates Instance of LoginForm
    * @param {Object} props 
+   * @memberOf LoginForm
    */
   constructor(props) {
     super(props);
@@ -18,20 +21,20 @@ export default class LoginForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   /**
-   * 
-   * @param {Event} e 
+   * @method onChange
+   * @param {Event} event 
    * @return {Object} updates State
    */
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+  onChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
   /**
-   * 
-   * @param {Event} e 
+   * @method onSubmit
+   * @param {Event} event 
    * @return {Object} new State
    */
-  onSubmit(e) {
-    e.preventDefault();
+  onSubmit(event) {
+    event.preventDefault();
     this.props.userLoginRequest(this.state);
   }
   /**
@@ -47,7 +50,7 @@ export default class LoginForm extends Component {
               type="text"
               name="username"
               value={this.state.username}
-              className="form-control"
+              className="form-control login"
               placeholder="EMMY"
               required
               onChange={this.onChange}
@@ -61,16 +64,16 @@ export default class LoginForm extends Component {
               type="password"
               name="password"
               value={this.state.password}
-              className="form-control"
+              className="form-control login"
               placeholder="..........."
               required
               onChange={this.onChange}
             />
           </div>
-          <button type="submit" className="form-control btn btn-login btn-primary">Login</button>
-          <hr />
-          <br />
-          <p><Link to="/forgot-password"> Forgot password? click to reset </Link></p>
+          <div className="row">
+            <button type="submit" className="btn">Login</button>
+            <p><Link to="/forgot-password"> Forgot password? click to reset </Link></p>
+          </div>
         </form>
       </div>
     );

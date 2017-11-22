@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import history from './History';
-import flashMessage from '../actions/flashMessageAction';
 
 const AuthenticateFunc = (ComposedComponent) => {
   /**
@@ -14,10 +13,6 @@ const AuthenticateFunc = (ComposedComponent) => {
      */
     componentWillMount() {
       if (!this.props.isAuthenticated) {
-        this.props.flashMessage({
-          type: 'error',
-          text: 'You need to be loggedIn first'
-        });
         history.push('/login');
       }
     }
@@ -44,14 +39,12 @@ const AuthenticateFunc = (ComposedComponent) => {
 
   Authenticate.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
-    flashMessage: PropTypes.func.isRequired
   };
 
   const mapStateToProps = state => ({
     isAuthenticated: state.setAuthToken.isAuthenticated,
-    addflashMessage: state.addflashMessages
   });
 
-  return connect(mapStateToProps, { flashMessage })(Authenticate);
+  return connect(mapStateToProps, null)(Authenticate);
 };
 export default AuthenticateFunc;

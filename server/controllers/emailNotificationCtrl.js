@@ -7,25 +7,41 @@ export const sendUrgentMail = (users, message) => {
   let receivers = '';
 
   users.forEach((user) => {
-    receivers += `${user.email}`;
+    receivers += `${user.email},`;
   });
-  console.log(receivers);
 
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.EMAIL,
-      pass: process.env.PASSWORD
+      user: 'mcdavidemereuwa95@gmail.com',
+      pass: 'Jabike_13'
     }
   });
 
   const mailOptions = {
-    from: process.env.EMAIL,
+    from: 'POSTIT!!!',
     to: receivers,
-    subject: 'urgent',
-    text: message,
-    html: message
+    subject: 'URGENT',
+    html: `
+    <div style="width: 100%; background-color: grey; padding: 2%;">
+    <div style="width: 60%; background-color: white; margin: auto;">
+      <div style="height: 8%; background-color: #2c3e56; width:100%">
+        <h6 style="color: palevioletred; margin-left: 3%; top: 2% font-family: kurale serif">POSTIT!!</h6>
+      </div>
+      <div style="padding: 8%">
+        <div class="row">
+          Hi, you have a new message:
+        </div>
+        <div class="next-container" style="border: 2px solid; margin-top:2%; padding: 2%;">
+          ${message.message}
+        </div>
+        <div style="border-top: 3px solid #2c3e56;"></div>
+        <p style="font-weight: bold; color: palevioletred">POSTIT!!</p>
+      </div>
+    </div>
+  </div>
+    `
   };
 
   transporter.sendMail(mailOptions, (error, info) => {

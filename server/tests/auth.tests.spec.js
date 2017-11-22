@@ -42,7 +42,7 @@ describe('Authentication Route', () => {
       });
   });
 
-  it('should prevent users not logged in to access protected routes', (done) => {
+  it('should prevent users not logged from accessing protected routes', (done) => {
     api
       .get('/api/v1/users')
       .expect(403)
@@ -376,9 +376,9 @@ describe('Group Route', () => {
       .send({
         username: 'melody'
       })
-      .expect(404)
+      .expect(409)
       .end((err, res) => {
-        res.status.should.equal(404);
+        res.status.should.equal(409);
         res.body.Error.should.equal('User already in Group');
         done();
       });

@@ -6,7 +6,7 @@ const searchUser = (state = initialState.search, action) => {
     case types.SEARCH_USERS_SUCCESS:
       return [
         ...state,
-        action.users
+        action
       ];
     case types.SEARCH_USERS_FAILED:
       return [];

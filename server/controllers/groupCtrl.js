@@ -105,9 +105,9 @@ export default {
                           username: req.body.username.toLowerCase(),
                           groupName: groupExist.GroupName,
                           description: groupExist.description,
-                          email: req.decoded.email,
+                          email: user.email,
                           isCreator: false
-                          
+
                         })
                           .then((success) => {
                             if (success) {
@@ -126,7 +126,7 @@ export default {
                       res.send(err);
                     });
                 } else {
-                  res.status(404).send({
+                  res.status(409).send({
                     Error: 'User already in Group'
                   });
                 }
@@ -147,7 +147,7 @@ export default {
     GroupMembers
       .findAll({
         where: { username: req.decoded.name },
-        attributes: ['groupName', 'groupId', 'description']
+        attributes: ['id', 'groupName', 'groupId', 'description']
       })
       .then((group) => {
         res.send(group);

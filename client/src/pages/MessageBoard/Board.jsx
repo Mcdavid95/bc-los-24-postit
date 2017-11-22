@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../../components/Header/Header';
-import FlashMessage from '../../containers/FlashMessageList';
-import SideNav from '../sideNav';
+import SideNavigation from '../SideNav';
 import Footer from '../../containers/Footer';
-import GroupForm from '../../containers/GroupForm';
-import createGroupRequest from '../../actions/createGroupAction';
-import loadGroups from '../../actions/loadUserGroupListActions';
-import messages from '../../actions/getMessagesActions';
+import GroupForms from '../../containers/GroupForm';
+import { createGroupRequest, getUserGroups, getGroupMessages } from '../../actions';
 /**
  * @class
  */
@@ -25,10 +22,13 @@ class Board extends Component {
    *  @return {DOM} DOM elements
    */
   componentDidMount() {
-    this.props.loadGroups();
-    $('select').material_select();
-    this.props.messages(1);
-    $('.modal').modal();
+    this.props.getUserGroups();
+    $(document).ready(() => {
+      $('.collapsible').collapsible();
+      $('.button-collapse').sideNav();
+      $('select').material_select();
+      $('.modal').modal();
+    });
   }
   /**
    * @return{DOM} returns DOM element
@@ -37,18 +37,35 @@ class Board extends Component {
     return (
       <div>
         <Header />
-        <FlashMessage />
         <main>
-          <SideNav />
+          <SideNavigation />
           <div id="modal1" className="modal modal-fixed-footer">
             <div className="modal-content">
-              <button type="button" className="waves-effect waves-light btn modal-close" data-dismiss="modal">&times;</button>
+              <button
+                type="button"
+                className="waves-effect waves-light btn modal-close"
+                data-dismiss="modal"
+              >&times;</button>
               <h1 className="group-form">Create New Group</h1>
-              <GroupForm createGroupRequest={this.props.createGroupRequest} />
+              <GroupForms createGroupRequest={this.props.createGroupRequest} />
             </div>
             <div className="modal-footer">
-              <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+              <a
+                href="#!"
+                className="modal-action modal-close waves-effect waves-green btn-flat "
+              >Close</a>
             </div>
+          </div>
+          <div className="white-board black-text">
+            <img height="15%" id="mail-box" src="http://res.cloudinary.com/mc-cloud/image/upload/v1509614951/mcdavid_umplak.png" alt="message" />
+            <h4>Welcome <span className="caps">{this.props.userDetails.user.name}</span></h4>
+            <h6 id="clear"> You Currently have no group selected<br /><br />
+             Please pick one by clicking on the
+              <i
+                className="material-icons teal-text"
+              >
+              group
+              </i> icon on the left hand side of this page to access the  group options</h6>
           </div>
         </main>
         <Footer />
@@ -59,11 +76,17 @@ class Board extends Component {
 
 Board.propTypes = {
   createGroupRequest: PropTypes.func.isRequired,
-  loadGroups: PropTypes.func.isRequired,
-  messages: PropTypes.func.isRequired,
-  userGroupList: PropTypes.array.isRequired
+  getUserGroups: PropTypes.func.isRequired,
+  userDetails: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({ userGroupList: state.userGroupList });
+const mapStateToProps = state => ({
+  userGroupList: state.userGroupList,
+  userDetails: state.setAuthToken
+});
 
-export default connect(mapStateToProps, { createGroupRequest, loadGroups, messages })(Board);
+export default connect(mapStateToProps, {
+  createGroupRequest,
+  getUserGroups,
+  getGroupMessages })(Board);
+

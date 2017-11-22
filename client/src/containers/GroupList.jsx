@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import messages from '../actions/getMessagesActions';
+import { getGroupMessages } from '../actions';
 import history from '../utils/History';
 /**
- * 
+ * @class GroupList
+ * @extends React.Component
  */
-class GroupList extends Component {
+export class GroupList extends Component {
   /**
-   * 
+   * @description Creates Instance of Group Form
    * @param {*} props 
    */
   constructor(props) {
@@ -21,7 +22,7 @@ class GroupList extends Component {
     this.onClick = this.onClick.bind(this);
   }
   /**
-   * 
+   * @method componentWillReceiveProps
    * @param { Array } nextProps 
    * @return {Array} new State
    */
@@ -32,22 +33,20 @@ class GroupList extends Component {
       });
     } else {
       this.setState({
-        groups: nextProps.userGroupList[1]
+        groups: nextProps.userGroupList[nextProps.userGroupList.length - 1]
       });
     }
   }
 
   /**
-   * 
-   * @param {*} e 
+   * @method onClick
+   * @param {*} groupId
    * @return {*} any
    */
-  onClick(e) {
-    console.log(this.props.match.params.groupId);
-    e.preventDefault();
-    this.props.messages(this.props.match.params.groupId)
+  onClick(groupId) {
+    this.props.getGroupMessages(groupId)
       .then(() => {
-        history.push(`/group/${this.props.match.params.groupId}/messages`);
+        history.push(`/group/${groupId}/messages`);
       })
     ;
   }
@@ -56,12 +55,12 @@ class GroupList extends Component {
    */
   render() {
     return (
-      <ul className="row">
-        {this.state.groups.map(group =>
-          (<li key={group.groupId}>
+      <ul className="row group-list">
+        {!this.state.groups ? (<li> No groups Yet</li>) : this.state.groups.map(group =>
+          (<li key={group.id}>
             <div className="col s12">
               <div className="card blue-grey darken-1">
-                <Link onClick={this.onClick} to={`/group/${group.groupId}/messages`}><span className="card-title list-group"> {group.groupName}</span></Link>
+                <Link onClick={() => this.onClick(group.groupId)} to={`/group/${group.groupId}/messages`}><span className="card-title list-group"> {group.groupName}</span></Link>
               </div>
             </div>
           </li>)
@@ -73,13 +72,12 @@ class GroupList extends Component {
 
 
 GroupList.propTypes = {
-  match: PropTypes.object.isRequired,
   userGroupList: PropTypes.array.isRequired,
-  messages: PropTypes.func.isRequired,
+  getGroupMessages: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   groupMessages: state.groupMessages
 });
 
-export default connect(mapStateToProps, { messages })(GroupList);
+export default connect(mapStateToProps, { getGroupMessages })(GroupList);

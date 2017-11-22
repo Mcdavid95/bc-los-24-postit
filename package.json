@@ -5,16 +5,37 @@
   "main": "index.js",
   "scripts": {
     "db:migrate": "sequelize db:migrate",
-    "start": "npm run db:migrate && nodemon --exec babel-node server.js",
-    "start-dev": "npm run db:migrate && nodemon --exec babel-node serverTest.js",
+    "start": "babel-node --optimize_for_size --max_old_space_size=460 server.prod.js",
+    "start-dev": "npm run db:migrate && nodemon --exec babel-node server.js",
+    "start-test": "npm run db:migrate && nodemon --exec babel-node serverTest.js",
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
     "test": "NODE_ENV=test npm run db:migrate && nyc --reporter=text --reporter=html --reporter=lcov mocha --compilers js:babel-core/register ./server/tests/ --timeout 15000 && npm run coverage-report",
     "dev": "webpack-dev-server --content-base client --inline --hot",
-    "test-dev": "npm run db:migrate && nyc --reporter=text --reporter=html --reporter=lcov mocha --compilers js:babel-core/register ./server/tests/ --timeout 15000 && npm run coverage-report"
+    "test-dev": "npm run db:migrate && nyc --reporter=text --reporter=html --reporter=lcov mocha --compilers js:babel-core/register ./server/tests/ --timeout 15000 && npm run coverage-report",
+    "heroku-postbuild": "babel-node ./client/src/utils/build.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mcdavid95/bc-los-24-postit.git"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/client/_tests_"
+    ],
+    "testURL": "http:/test.com",
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/test-env.js",
+      "<rootDir>/client/_tests_/_mocks_"
+    ],
+    "unmockedModulePathPatterns": [
+      "node_modules/react/",
+      "node_modules/enzyme/"
+    ]
   },
   "keywords": [
     "post",
@@ -55,23 +76,28 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
     "eventsource-polyfill": "^0.9.6",
+    "expect": "^21.2.1",
     "express": "^4.15.3",
     "express-session": "^1.15.3",
+    "extract-text-webpack-plugin": "^3.0.1",
     "file-loader": "^0.11.2",
     "font-loader": "^0.1.2",
     "hammerjs": "^2.0.8",
     "history": "^4.6.3",
-    "html-webpack-plugin": "^2.29.0",
+    "http": "0.0.0",
     "image-webpack-loader": "^3.4.2",
     "jasmine-node": "^1.14.5",
     "jest": "^21.1.0",
     "jquery": "^3.2.1",
+    "jsdom": "^11.3.0",
     "jsonwebtoken": "^7.4.1",
     "lodash": "^4.17.4",
     "logger": "0.0.1",
     "mocha": "^3.4.2",
     "mocha-lcov-reporter": "^1.3.0",
     "morgan": "^1.8.2",
+    "moxios": "^0.4.0",
+    "nock": "^9.0.22",
     "node-mailer": "^0.1.1",
     "node-sass": "^4.5.3",
     "nodemailer": "^4.1.0",
@@ -110,6 +136,7 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "eslint": "^4.1.1",
+    "jsdom": "^11.3.0",
     "react": "^15.6.1",
     "react-addons-test-utils": "^15.6.0",
     "react-dom": "^15.5.4",
@@ -118,13 +145,9 @@
     "react-test-renderer": "^15.6.1",
     "sass-loader": "^6.0.6",
     "sequelize": "^4.2.1",
+    "sinon": "^4.0.2",
     "style-loader": "^0.18.2",
     "webpack": "^3.3.0",
     "webpack-dev-server": "^2.5.1"
-  },
-  "jest": {
-    "roots": [
-      "<rootDir>/client/_tests_"
-    ]
   }
 }

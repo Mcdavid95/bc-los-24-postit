@@ -7,6 +7,9 @@ body {
   flex-direction: column;
   color: white;
 
+  .caps {
+    text-transform: uppercase
+  }
   
   main {
     flex: 1 0 auto;
@@ -44,18 +47,13 @@ body {
 
 footer {
   bottom: 0;
-  position: absolute;
+  position: fixed;
   width: 100%;
   z-index: 1;
 }
 
 form {
   margin: auto 30%;
-
-  textarea#message {
-    margin-bottom: 0;
-    padding-bottom: 0
-  }
 }
 
 .select-dropdown {
@@ -94,6 +92,10 @@ nav {
   margin-left: 80%
 }
 
+.login {
+  margin-bottom: 10%
+}
+
 h1 {
   margin: auto;
 }
@@ -112,31 +114,57 @@ h1 {
 
 .side-nav {
   padding-top: 10px;
-  margin-top: 5%;
+  margin-top: 1%;
+}
+
+.white-board {
+  border: 2px, solid rgb(109, 11, 11);
+  height: 50vh;
+  width: 50%;
+  margin: auto;
+  margin-left: 30%;
+  background: rgba(240, 236, 236, 0.604);
+  padding-left: 5%;
+  padding-top: 3%
 }
 
 .side {
   z-index: 1;
-  margin-top: 5%;
-  height: 85%;
-  position: relative;
+  margin-top: 10vh;
+  margin-left: 0%;
+  height: 90vh;
+  padding-left: 1%;
+  padding-top: 0%
 }
 
 #message-board {
-  height:390px;
-  width: 40%;
+  height:46vh;
+  width: 63vw;
   border: 0px solid #576883;
-  margin: auto;
-  overflow-y: scroll
+  margin: auto 24%;
+  overflow-y: scroll;
+  overflow-x: scroll;
 }
 
-// #message-card {
-//   border: 0px solid black;
-//   border-radius: 0.5px;
-// }
+.group-list {
+  overflow-y: scroll;
+  height:50vh;
+}
 
 #message {
-  width: 40%
+  width: 40vw
+}
+
+#message-input {
+  width: 40vw
+}
+
+#mail-box {
+  float: left;
+}
+
+#clear {
+  clear: both
 }
 
 .message-card {
@@ -145,14 +173,8 @@ h1 {
   width: 100%;
   border-radius: 3px;
   background-color: rgba(239, 239, 239, 0.96);
-  height: 100px;
   color: black;
 }
-
-#message-content {
-  color: black
-}
-
 .card {
   max-height: 40px
 }
@@ -164,6 +186,10 @@ h1 {
 
 form#message {
   margin: auto 25%
+}
+
+.message-form {
+  margin-bottom: 0
 }
 
 #forgot-password {
@@ -194,8 +220,24 @@ form#message {
 }
 
 #message-content {
-  font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif
+  font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+  padding-left: 6%
+}
 
+.message-input {
+  margin-bottom: 0
+}
+
+.page {
+  height: 8vh;
+}
+
+textarea#message {
+  margin-bottom: 0
+}
+
+#message-list {
+  height: 2vh
 }
 
 #sidenav-overlay {
@@ -204,14 +246,36 @@ form#message {
 
 .username {
   color: palevioletred;
+  padding-left: 6%
 }
+.priority {
+  padding-left: 1%
+}
+
 
 th {
   color: paleturquoise
 }
 
+.not-found {
+  background: url("http://res.cloudinary.com/mc-cloud/image/upload/v1508772780/404_Not_Found_Vector-01_w0vi9l.jpg");
+  width: 100%;
+  height: 700px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
 .group-form {
   color: black;
+}
+.dashboard {
+  width: 100%;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+button#side-nav.button-collapse {
+  color: teal
 }
 
 
