@@ -8,7 +8,8 @@ POSTIT is an application that allows users to create groups and reach them all a
 It includes a RESTful API that allows registered users to create groups and add other users to their groups.
 The cool feature about the app is the email notifications for its users
 
-## User SignUp [/api/v1/user/register]
+
+## User Signup [/api/v1/user/register]
 
 ### SIGNUP [POST]
 
@@ -41,7 +42,15 @@ It returns a success message and a jwt(JSON web token)
                 "sucsess": true,
                 "message": "Welcome to POSTIT!! Jabuike"
             }
+            
++ Response 409 (application/json)
 
+    + Body 
+            
+            {
+                "message": "Phone Number already in use"
+            }
+            
 ## User Login [/api/v1/user/login]
 
 ### LOGIN [POST]
@@ -56,7 +65,7 @@ It returns a welcome message and a (jwt)JSON web token
 + Request (application/json)
 
     + Body
-
+    
             {
                 "username": "Jabuike",
                 "password": "jay4Dlion"
@@ -65,10 +74,18 @@ It returns a welcome message and a (jwt)JSON web token
 + Response 201 (application/json)
 
     + Body
-
+    
             {
                 "myToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphYnVpa2UiLCJlbWFpbCI6ImphYmlrZUBnbWFpbC5jb20iLCJpYXQiOjE1MDU0MjAyMDMsImV4cCI6MTUwNTUwNjYwM30.kIrAqGIx-ahvfXo7moW5Llu5G0fBlqOa2dz7d6ctN9Y",
                 "message": "Welcome back Jabuike"
+            }
+            
++ Response 401 (application/json)
+
+    + Body
+            
+            {
+                "message": "Username not correct"
             }
             
 ## Get All Users [/api/v1/users]
@@ -101,13 +118,23 @@ This action gets all registered users returning the following:
                         "email": "jabike@gmail.com"
                     }
                 ],
-                "metadata": {
+                "pageInfo": {
                     "page": 1,
                     "pageCount": 1,
                     "pageSize": 2,
                     "count": 2
                 }
             }
+            
++ Response 400 (application/json)
+
+    + Body 
+    
+            {
+                "message": "wrong request"
+            }
+            
+
 ## Search [/api/v1/users/searchList]
 
 ### Search User [POST]
@@ -148,6 +175,14 @@ This endpoint allows a loggedin user to search for other users. It takes in an o
                 }
             }
             
++ Response 400 (application/json)
+
+    + Body 
+    
+            {
+                "message": "wrong resuest"
+            }
+            
 ## Forgot Password [/api/v1/forgot-password]
 
 ### Forgot Password Request [POST]
@@ -175,8 +210,27 @@ After the passed email is successfully verified, an email is sent to the user wi
                  "success": true,
                  "token": "gvhbnh2hkj2jhh34jhk5hvjbkn5hjk5uyj"
             }
+            
++ Response 404 (application/json)
+
+    + Body
+    
+            {
+                "message": "Account associated with this email not found"
+            }
+            
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "message": "wrong request"
+            }
         
-## Reset Password [/api/v1/reset-password/:token]
+## Reset Password [/api/v1/reset-password/{token}]
+
++ Parameters
+    + token(string) - id to link to user in data base
 
 ### Reset Password Request [POST]
 
@@ -234,13 +288,25 @@ It return a success message, confirming group
 + Response 201 (application/json)
 
     + Body
-
+    
             {
                 "message": "Group killers successfully created"
             }
 
 
-## Add User to Group [/api/v1/group/:groupId/user]
++ Response 409 (application/json)
+
+    + Body
+    
+            {
+                "message": "groupname already exists"
+            }
+
+
+## Add User to Group [/api/v1/group/{groupId}/user]
+
++ Parameters
+    + groupId(number) - id of current group
 
 ### Add User to Group [POST]
 
@@ -256,21 +322,40 @@ This action allows a user to add other registered users to groups they belong to
 
     + Body
     
-                {
-                    "username": "steven"
-                }
+             {
+                "username": "steven"
+             }
 
 
 + Response 201 (application/json)
 
     + Body
-
+    
             {
                 "message": "Group killers successfully created"
             }
+            
++ Response 404 (application/json)
+
+    + Body
+        
+            {
+                "message": "Group does not exist"
+            }
+            
++ Response 409 (application/json)
+
+    + Body
+        
+            {
+                "message": "User already exist"
+            }
 
 
-## Send Message [/api/group/v1/:groupId/message]
+## Send Message [/api/group/v1/{groupId}/message]
+
++ Parameters
+    + groupId(number) - id of current group
 
 ### Create Message [POST]
 
@@ -315,9 +400,20 @@ Upon completion of action if the priority chosen is either `urgent` or `critical
                  "updatedAt": "2017-09-14T23:22:28.852Z",
                  "createdAt": "2017-09-14T23:22:28.852Z"
             }
+            
++ Response 404 (application/json)
+
+    + Body
+        
+            {
+                "message": "You do not belong to group with id: {groupId}"
+            }
 
 
-## List all group Messages [/api/group/v1/:groupId/messages]
+## List all group Messages [/api/group/v1/{groupId}/messages]
+
++ Parameters
+    + groupId(number) - id of current group
 
 ### Get all group messages Messages [GET]
 
@@ -430,6 +526,24 @@ This action get all messages in a single group
                     "priority": "normal"
                 }
             ]
+            
++ Response 403 (application/json)
+
+    + Body
+        
+            {
+                "message": "You do not belong to this group"
+            }
+            
+            
+            
++ Response 404 (application/json)
+
+    + Body
+        
+            {
+                "message": "Group does not exist"
+            }
 
 
 
@@ -459,7 +573,10 @@ This endpoint gets all groups where a user has been added to.
                 ]
             }
 
-## Get Users in a group [/api/v1/group/:groupId/users]
+## Get Users in a group [/api/v1/group/{groupId}/users]
+
++ Parameters
+    + groupId(number) - id of current group
 
 ### Group Members [GET]
 
@@ -493,14 +610,24 @@ This endpoint gets all users in a selected group
                                  }
             }
             
-## Get Current group [/api/v1/group/:groupId]
+            
+            
++ Response 404 (application/json)
 
-### Group Members [GET]
+    + Body
+        
+            {
+                "message": "Group with id: {groupId} does not exist"
+            }
+            
+## Get Current group [/api/v1/group/{groupId}]
+
++ Parameters
+    + groupId(number) - id of current group
+
+### Current Group [GET]
 
 This endpoint gets the name of the selected group
-
-#### Params
-* groupId {number} groupId of selected group
 
 + Response 201 (application/json)
 
@@ -512,6 +639,16 @@ This endpoint gets the name of the selected group
     
             {
                 "groupName": "lana" 
+            }
+            
+            
+            
++ Response 404 (application/json)
+
+    + Body
+        
+            {
+                "message": "Group does not exist"
             }
             
 ## Logout User [/api/v1/user/logout]
