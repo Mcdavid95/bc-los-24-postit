@@ -9,6 +9,7 @@ const AuthenticateFunc = (ComposedComponent) => {
    */
   class Authenticate extends Component {
     /**
+     * @method componentWillMount
      * @return {*} set user authentication status
      */
     componentWillMount() {
@@ -17,13 +18,12 @@ const AuthenticateFunc = (ComposedComponent) => {
       }
     }
     /**
-     * 
+     * @method componentWillUpdate
      * @param {*} nextProps 
      * @return {*} props
      */
     componentWillUpdate(nextProps) {
       if (!nextProps.isAuthenticated) {
-        this.props.isAuthenticated = false;
         history.push('/login');
       }
     }
