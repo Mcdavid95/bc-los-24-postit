@@ -137,7 +137,7 @@ export const forgotPassword = email => dispatch =>
   axios.post('/api/v1/forgot-password', email)
     .then((response) => {
       dispatch(confirmEmailSuccess(response));
-      Materialize.toast('A Link has been sent to your mail to reset your email /n It expires after 30mins', 6000, 'rounded, green');
+      Materialize.toast('A Link has been sent to your mail to reset your email It expires after 30mins', 6000, 'rounded, green');
       history.push('/login');
     })
     .catch((err) => {

@@ -77,14 +77,9 @@ export const sendUrgentMail = (users, message) => {
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      return console.log(error);
+      return error;
     }
-    console.log('Message sent: %s', info.messageId);
-    // Preview only available when sending through an Ethereal account
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@blurdybloop.com>
-    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+    return ('Message sent: %s', info.messageId);
   });
 };
 /**
@@ -136,11 +131,8 @@ export const resetPasswordMail = (token, email, host) => {
 
   transporter.sendMail(mailOptions, (error) => {
     if (error) {
-      return console.log(error);
+      return error;
     }
-
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@blurdybloop.com>
-    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
   });
 };
 /**
@@ -190,8 +182,8 @@ export const sendSuccessfulResetMail = (email) => {
   // send mail with defined transport object
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      return console.log(error);
+      return error;
     }
-    console.log(`Message ${info.messageId} send: ${info.response}`);
+    return (`Message ${info.messageId} send: ${info.response}`);
   });
 };
