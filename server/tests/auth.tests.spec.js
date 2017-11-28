@@ -586,7 +586,7 @@ describe('Forgot Password route', () => {
       });
   });
 
-  it('should return error with failed token', (done) => {
+  it('should succesfully reset the password', (done) => {
     api
       .post(`/api/v1/reset-password/${token}`)
       .expect(200)
