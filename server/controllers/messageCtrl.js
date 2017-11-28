@@ -1,5 +1,5 @@
 import model from '../models';
-import { sendUrgentMail } from './emailNotificationCtrl';
+import { sendUrgentMail } from '../utils//emailNotificationCtrl';
 
 const Message = model.Message;
 const Group = model.Group;

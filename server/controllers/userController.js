@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import crypto from 'crypto';
-import { resetPasswordMail, sendSuccessfulResetMail } from './emailNotificationCtrl';
+import { resetPasswordMail, sendSuccessfulResetMail } from '../utils/emailNotificationCtrl';
 import model from '../models/';
 import pagination from '../utils/pagination';
 
