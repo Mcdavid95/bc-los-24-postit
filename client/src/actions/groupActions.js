@@ -1,6 +1,8 @@
 import axios from 'axios';
 import * as types from '../constant';
 import history from '../utils/History';
+import setAuthToken from '../utils/setAuthToken';
+import { setCurrentUser } from './';
 
 const createGroupSuccess = group => ({ type: types.CREATE_GROUP_SUCCESS, group });
 
@@ -22,8 +24,11 @@ export const getUserGroups = () => (dispatch) => {
       dispatch(loadGroupsSuccess(response.data.group));
     })
     .catch((err) => {
+      localStorage.removeItem('jwtToken');
       Materialize.toast('Sorry your session expired please login', 3000, 'rounded red');
+      setAuthToken(false);
       history.push('/login');
+      dispatch(setCurrentUser({}));
       dispatch(loadGroupFailed(err));
     });
 };

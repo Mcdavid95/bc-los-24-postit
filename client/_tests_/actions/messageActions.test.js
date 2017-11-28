@@ -5,7 +5,7 @@ import initialState from '../../src/initialState';
 import mockLocalStorage from '../_mocks_/mockLocalStorage';
 import * as actions from '../../src/actions/messageActions';
 import * as types from '../../src/constant';
-import { messageData, invalidMessageData } from '../_mocks_/actions.mock';
+import { messageData, invalidMessageData, token } from '../_mocks_/actions.mock';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -27,7 +27,7 @@ describe('Post Message Request action', () => {
       response: {
         message: 'Group created succcesfully created.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -47,7 +47,7 @@ describe('Post Message Request action', () => {
       response: {
         message: 'Error.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -91,7 +91,7 @@ describe('Get Group Messages Request action', () => {
       response: {
         message: 'Error.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });

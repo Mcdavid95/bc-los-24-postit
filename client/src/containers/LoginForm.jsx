@@ -42,40 +42,43 @@ export default class LoginForm extends Component {
    */
   render() {
     return (
-      <div className="login-form row">
-        <form onSubmit={this.onSubmit}>
-          <div className="input-field">
-            <label htmlFor="email" className="control-label">Username: </label>
-            <input
-              type="text"
-              name="username"
-              value={this.state.username}
-              className="form-control login"
-              required
-              onChange={this.onChange}
-            />
+      <div className="container">
+        <div className="login-form row">
+          <div className="s12">
+            <form className="col s12" onSubmit={this.onSubmit}>
+              <div className="input-field">
+                <label htmlFor="email" className="control-label">Username: </label>
+                <input
+                  type="text"
+                  name="username"
+                  value={this.state.username}
+                  className="form-control login"
+                  required
+                  onChange={this.onChange}
+                />
+              </div>
+              <br />
+              <div className="input-field">
+                <label htmlFor="password" className="control-label">Password: </label>
+                <input
+                  type="password"
+                  name="password"
+                  value={this.state.password}
+                  className="form-control login"
+                  required
+                  onChange={this.onChange}
+                />
+              </div>
+              <div className="forgot-password row">
+                <button type="submit" className="btn">Login</button>
+                <p> Forgot password? <Link to="/forgot-password">click to reset </Link></p>
+                <p id="signup">Don&apos;t have an account? Click
+                  <Link to="/register"> here to Register</Link>
+                </p>
+              </div>
+            </form>
           </div>
-          <hr />
-          <br />
-          <div className="input-field">
-            <label htmlFor="password" className="control-label">Password: </label>
-            <input
-              type="password"
-              name="password"
-              value={this.state.password}
-              className="form-control login"
-              required
-              onChange={this.onChange}
-            />
-          </div>
-          <div className="forgot-password row">
-            <button type="submit" className="btn">Login</button>
-            <p> Forgot password? <Link to="/forgot-password">click to reset </Link></p>
-            <p id="signup">Don&apos;t have an account? Click
-              <Link to="/register"> here to Register</Link>
-            </p>
-          </div>
-        </form>
+        </div>
       </div>
     );
   }

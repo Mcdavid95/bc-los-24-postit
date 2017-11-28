@@ -14,7 +14,7 @@ describe('Message Board component test', () => {
 
   it('should contain the componentWillReceiveProps method', () => {
     wrapper.setState({
-      members: [[{ id: 2, username: 'mcdavid' }, { id: 3, username: 'love' }], [{ id: 2, username: 'mcdavid' }, { id: 3, username: 'love' }]],
+      members: nextProps.memberList
     });
     const component = wrapper;
     const onSubmitSpy = jest.spyOn(component.instance(), 'componentWillReceiveProps');
@@ -24,7 +24,7 @@ describe('Message Board component test', () => {
 
   it('should contain the componentWillReceiveProps method', () => {
     wrapper.setState({
-      members: [[{ id: 2, username: 'mcdavid' }, { id: 3, username: 'love' }]],
+      members: nextProps.props.memberList
     });
     const component = wrapper;
     const onSubmitSpy = jest.spyOn(component.instance(), 'componentWillReceiveProps');

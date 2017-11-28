@@ -1,5 +1,5 @@
 import express from 'express';
-import jwtVerify from '../controllers/jwtVerify';
+import jwtVerify from '../utils/jwtVerify';
 
 
 import userController from '../controllers/userController';

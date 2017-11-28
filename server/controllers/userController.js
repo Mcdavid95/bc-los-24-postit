@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import crypto from 'crypto';
 import { resetPasswordMail, sendSuccessfulResetMail } from './emailNotificationCtrl';
 import model from '../models/';
-import pagination from './pagination';
+import pagination from '../utils/pagination';
 
 dotenv.config();
 const User = model.User;
@@ -325,11 +325,8 @@ export default {
             .then(() => {
               res.status(400).send({ success: false });
             }, err => res.status(400).send(err.message));
-        } else if (req.body.newPassword &&
-            req.body.newPassword.length > 7 &&
-            req.body.confirmPassword &&
-            req.body.confirmPassword.length > 7 &&
-            (req.body.newPassword === req.body.confirmPassword)
+        } else if (
+          req.body.newPassword === req.body.confirmPassword
         ) {
           user.update({
             password: bcrypt.hashSync(req.body.confirmPassword, 10),
@@ -351,7 +348,7 @@ export default {
         } else {
           res.status(400).send({
             success: false,
-            message: 'invalid passwords'
+            message: 'passwords do not match'
           });
         }
       }, (err) => {
