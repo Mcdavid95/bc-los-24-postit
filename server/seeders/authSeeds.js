@@ -19,6 +19,14 @@ export const yetAnotherValid = {
   phoneNumber: 98167188889
 };
 
+export const newUser = {
+  username: 'Lowei',
+  password: 'lowe_13',
+  email: 'lowe@gmail.com',
+  phoneNumber: 88167188889
+};
+
+
 export const invalidUsername = {
   username: 'mcdavid',
   password: 'step_hen',
@@ -38,4 +46,39 @@ export const invalidEmail = {
   password: 'step_hen',
   email: 'mcdavidemereuwa95@gmail.com',
   phoneNumber: 8033379342
+};
+
+export const newUser1 = {
+  username: 'Lowei',
+  password: 'lowe_13',
+};
+
+export const User = {
+  username: 'harry',
+  password: 'step_hen',
+  email: 'harry@gmail.com',
+  phoneNumber: 8033379342
+};
+
+export const wrongUser = {
+  username: 'emmanuel',
+  password: 'janike_13'
+};
+
+export const noEmail = {
+  username: 'mcdavid',
+  phoneNumber: 9093839393,
+  password: 'mcdavidemereuwa@gmail.com'
+};
+
+export const noPassword = {
+  username: 'mcdavid',
+  phoneNumber: 9093839393,
+  email: 'mcdavidemereuwa@gmail.com'
+};
+
+export const noPhoneNumber = {
+  username: 'mcdavid',
+  password: 'ytujtoit',
+  email: 'mcdavidemereuwa@gmail.com'
 };

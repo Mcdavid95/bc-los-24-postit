@@ -1,12 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-// import configureStore from 'redux-mock-store';
+import { user, props } from '../_mocks_/components.mock';
 import SignupForm from '../../src/containers/SignupForm';
 
 describe('Signup form component test', () => {
-  const props = {
-    userSignupRequest: jest.fn(() => Promise.resolve())
-  };
   it('should render without crashing', () => {
     const component = shallow(<SignupForm />);
     expect(component.node.type).toBe('div');
@@ -16,7 +13,7 @@ describe('Signup form component test', () => {
     const onChangeSpy = jest.spyOn(component.instance(), 'onChange');
     component.instance().onChange({
       target: {
-        name: 'username', value: 'mcdavid'
+        name: user
       }
     });
     expect(onChangeSpy).toHaveBeenCalledTimes(1);

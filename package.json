@@ -9,9 +9,9 @@
     "start-dev": "npm run db:migrate && nodemon --exec babel-node server.js",
     "start-test": "npm run db:migrate && nodemon --exec babel-node serverTest.js",
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
-    "test": "NODE_ENV=test npm run db:migrate && nyc --reporter=text --reporter=html --reporter=lcov mocha --compilers js:babel-core/register ./server/tests/ --timeout 15000 && npm run coverage-report",
+    "test": "NODE_ENV=test npm run db:migrate && nyc --reporter=text --reporter=html --reporter=lcov mocha --compilers js:babel-core/register ./server/tests/** --timeout 35000 && npm run coverage-report",
     "dev": "webpack-dev-server --content-base client --inline --hot",
-    "test-dev": "npm run db:migrate && nyc --reporter=text --reporter=html --reporter=lcov mocha --compilers js:babel-core/register ./server/tests/ --timeout 15000 && npm run coverage-report",
+    "test-dev": "npm run db:migrate && nyc --reporter=text --reporter=html --reporter=lcov mocha --compilers js:babel-core/register ./server/tests/** --timeout 35000 && npm run coverage-report",
     "heroku-postbuild": "babel-node ./client/src/utils/build.js"
   },
   "repository": {

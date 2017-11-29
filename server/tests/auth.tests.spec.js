@@ -3,12 +3,11 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../../serverTest';
 import models from '../models';
-import { valid, yetAnotherValid, anotherValid, invalidUsername, invalidEmail, invalidNumber } from '../seeders/authSeeds';
+import { valid, yetAnotherValid, anotherValid, invalidUsername, invalidEmail, invalidNumber, wrongUser, noEmail, noPassword, noPhoneNumber } from '../seeders/authSeeds';
 import { Group1 } from '../seeders/groupSeeds';
 
 chai.use(chaiHttp);
 const api = supertest.agent(server);
-const should = chai.should();
 const expect = chai.expect;
 
 let token;
@@ -37,7 +36,7 @@ describe('Authentication Route', () => {
       .get('/api/v1/creepy')
       .expect(501)
       .end((err, res) => {
-        res.body.message.should.equal('Sorry, this address is not supported by this API.');
+        res.body.message.should.equal('Sorry, this endpoint is not supported by this API.');
         done();
       });
   });
@@ -64,20 +63,30 @@ describe('Authentication Route', () => {
       });
   });
 
-  it('should not allow user with empty password field to log in', (done) => {
+  it('should not allow user with empty password field to register', (done) => {
     api
       .post('/api/v1/user/register')
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
-      .send({
-        username: 'mcdavid',
-        phoneNumber: 9093839393,
-        email: 'mcdavidemereuwa@gmail.com'
-      })
+      .send(noPassword)
       .end((err, res) => {
         res.status.should.equal(409);
         res.body.message.should.equal('Password field must not be empty');
+        done();
+      });
+  });
+
+  it('should not allow user with empty phoneNumber field to register', (done) => {
+    api
+      .post('/api/v1/user/register')
+      .set('Connetion', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(noPhoneNumber)
+      .end((err, res) => {
+        res.status.should.equal(409);
+        res.body.message.should.equal('Phone Number field must not be empty');
         done();
       });
   });
@@ -88,11 +97,7 @@ describe('Authentication Route', () => {
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
-      .send({
-        username: 'mcdavid',
-        phoneNumber: 9093839393,
-        password: 'mcdavidemereuwa@gmail.com'
-      })
+      .send(noEmail)
       .end((err, res) => {
         res.status.should.equal(409);
         res.body.message.should.equal('Email field must not be empty');
@@ -180,7 +185,7 @@ describe('Authentication Route', () => {
       .send(yetAnotherValid)
       .end((err, res) => {
         res.status.should.equal(201);
-        expect(res.body.myToken).to.be.a('string');
+        expect(res.body.token).to.be.a('string');
         done();
       });
   });
@@ -192,13 +197,13 @@ describe('Authentication Route', () => {
       .set('Content-Type', 'application/json')
       .type('form')
       .send({
-        username: 'mcdavid',
-        password: 'janike_13'
+        username: valid.username,
+        password: valid.password
       })
       .end((err, res) => {
-        token = res.body.myToken;
+        token = res.body.token;
         res.status.should.equal(202);
-        res.body.message.should.equal('Welcome back mcdavid');
+        res.body.message.should.equal('Welcome back Mcdavid');
         done();
       });
   });
@@ -209,10 +214,7 @@ describe('Authentication Route', () => {
       .set('Connetion', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
-      .send({
-        username: 'emmanuel',
-        password: 'janike_13'
-      })
+      .send(wrongUser)
       .end((err, res) => {
         res.status.should.equal(401);
         res.body.message.should.equal('Username not correct');
@@ -237,6 +239,22 @@ describe('Authentication Route', () => {
       });
   });
 
+  it('should not allow user without username to log in ', (done) => {
+    api
+      .post('/api/v1/user/login')
+      .set('Connetion', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        password: valid.password
+      })
+      .end((err, res) => {
+        res.status.should.equal(401);
+        res.body.message.should.equal('Input username field');
+        done();
+      });
+  });
+
   it('should generate token when user logs in', (done) => {
     api
       .post('/api/v1/user/login')
@@ -244,12 +262,12 @@ describe('Authentication Route', () => {
       .set('Content-Type', 'application/json')
       .type('form')
       .send({
-        username: 'kelechi',
-        password: 'kele_13'
+        username: yetAnotherValid.username,
+        password: yetAnotherValid.password
       })
       .end((err, res) => {
         res.status.should.equal(202);
-        expect(res.body.myToken).to.be.a('string');
+        expect(res.body.token).to.be.a('string');
         done();
       });
   });
@@ -261,7 +279,7 @@ describe('Authentication Route', () => {
       .expect(200)
       .end((err, res) => {
         res.status.should.equal(200);
-        res.body.length.should.equal(3);
+        res.body.users.length.should.equal(3);
         done();
       });
   });
@@ -279,7 +297,7 @@ describe('Group Route', () => {
       .expect(201)
       .end((err, res) => {
         res.status.should.equal(201);
-        res.body.message.should.equal(`Group ${Group1.GroupName.toLowerCase()} successfully created`);
+        res.body.message.should.equal(`Group ${Group1.groupName.toLowerCase()} successfully created`);
         done();
       });
   });
@@ -326,7 +344,7 @@ describe('Group Route', () => {
       .set('Content-Type', 'application/json')
       .type('form')
       .send({
-        GroupName: 'lodash is vauge'
+        groupName: 'lodash is vauge'
       })
       .expect(400)
       .end((err, res) => {
@@ -343,7 +361,7 @@ describe('Group Route', () => {
       .expect(200)
       .end((err, res) => {
         res.status.should.equal(200);
-        res.body.length.should.equal(1);
+        res.body.groups.length.should.equal(1);
         done();
       });
   });
@@ -424,10 +442,10 @@ describe('Group Route', () => {
     api
       .get('/api/v1/group/1/users')
       .set('x-access-token', token)
-      .expect(200)
+      .expect(201)
       .end((err, res) => {
-        res.status.should.equal(200);
-        res.body.length.should.equal(2);
+        res.status.should.equal(201);
+        res.body.members.length.should.equal(2);
         done();
       });
   });
@@ -451,7 +469,7 @@ describe('Group Route', () => {
       .expect(200)
       .end((err, res) => {
         res.status.should.equal(200);
-        res.body.length.should.equal(1);
+        res.body.group.length.should.equal(1);
         done();
       });
   });
@@ -536,16 +554,20 @@ describe('Message Routes', () => {
     api
       .get('/api/v1/group/1/messages')
       .set('x-access-token', token)
-      .expect(200)
+      .expect(201)
       .end((err, res) => {
-        res.status.should.equal(200);
-        res.body.length.should.equal(1);
+        res.status.should.equal(201);
+        res.body.messages.length.should.equal(1);
         done();
       });
   });
 });
 
 describe('Forgot Password route', () => {
+  const body = {
+    success: true,
+    message: 'successfully updated password'
+  };
   it('should generate a token if user passes in a correct email address', (done) => {
     api
       .post('/api/v1/forgot-password')
@@ -557,8 +579,110 @@ describe('Forgot Password route', () => {
         email: 'mcdavidemereuwa95@gmail.com'
       })
       .end((err, res) => {
+        token = res.body.token;
         res.status.should.equal(201);
         expect(res.body.token).to.be.a('string');
+        done();
+      });
+  });
+
+  it('should succesfully reset the password', (done) => {
+    api
+      .post(`/api/v1/reset-password/${token}`)
+      .expect(200)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        newPassword: 'mcdavid356',
+        confirmPassword: 'mcdavid356'
+      })
+      .end((err, res) => {
+        res.status.should.equal(201);
+        res.body.should.deep.equals(body);
+        done();
+      });
+  });
+
+  it('should not generate a token if user passes in no email address', (done) => {
+    api
+      .post('/api/v1/forgot-password')
+      .expect(200)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        name: ' fkmfkmk'
+      })
+      .end((err, res) => {
+        res.status.should.equal(401);
+        res.body.message.should.equal('Please provide your email');
+        done();
+      });
+  });
+
+  it('should not generate a token if user passes in wrong email address', (done) => {
+    api
+      .post('/api/v1/forgot-password')
+      .expect(200)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        email: 'joe@gmail.com'
+      })
+      .end((err, res) => {
+        res.status.should.equal(401);
+        res.body.message.should.equal('Account associated with this email not found');
+        done();
+      });
+  });
+});
+
+describe('Search User Route', () => {
+  const users = [
+    {
+      id: 1,
+      username: 'mcdavid',
+      email: 'mcdavidemereuwa95@gmail.com'
+    }
+  ];
+  it('should return search results', (done) => {
+    api
+      .post('/api/v1/users/searchList?offset=0')
+      .expect(200)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        username: 'mc'
+      })
+      .end((err, res) => {
+        res.status.should.equal(201);
+        res.body.users.should.deep.equals(users);
+        done();
+      });
+  });
+});
+
+describe('Reset Password Route', () => {
+  const body = {
+    success: false,
+    message: 'failed token authentication'
+  };
+  it('should return error with failed token', (done) => {
+    api
+      .post('/api/v1/reset-password/:token')
+      .expect(400)
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({
+        username: 'mc'
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.should.deep.equals(body);
         done();
       });
   });

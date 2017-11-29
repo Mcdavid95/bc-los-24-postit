@@ -4,13 +4,12 @@ import moxios from 'moxios';
 import initialState from '../../src/initialState';
 import mockLocalStorage from '../_mocks_/mockLocalStorage';
 import * as actions from '../../src/actions/groupActions';
-import * as types from '../../constant';
-import { userData, invalidUserData, groupData, invalidGroupData } from '../_mocks_/actions.mock';
+import * as types from '../../src/constant';
+import { userData, invalidUserData, groupData, invalidGroupData, getGroupMembersData, token } from '../_mocks_/actions.mock';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 window.localStorage = mockLocalStorage;
-
 
 describe('Create Group Request action', () => {
   beforeEach(() => moxios.install());
@@ -21,14 +20,13 @@ describe('Create Group Request action', () => {
   it('contains a createGroupRequest function', () => {
     expect(typeof (actions.createGroupRequest())).toBe('function');
   });
-
   it('should dispatch CREATE_GROUP_SUCCESS after creating group', (done) => {
     moxios.stubRequest('/api/v1/group', {
       status: 201,
       response: {
         message: 'SGroup created succcesfully created.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -47,7 +45,7 @@ describe('Create Group Request action', () => {
       response: {
         message: 'Error.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -77,7 +75,7 @@ describe('Get User Groups Request action', () => {
       response: {
         message: 'Welcome.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -93,7 +91,7 @@ describe('Get User Groups Request action', () => {
       status: 401,
       response: {
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -120,7 +118,7 @@ describe('Add User to Group Request action', () => {
       status: 201,
       response: {
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -139,7 +137,7 @@ describe('Add User to Group Request action', () => {
       response: {
         message: 'Error.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -152,3 +150,97 @@ describe('Add User to Group Request action', () => {
     done();
   });
 });
+
+describe('Get Group members', () => {
+  beforeEach(() => moxios.install());
+  afterEach(() => moxios.uninstall());
+  const store = mockStore(initialState);
+
+  it('contains a getMembers function', () => {
+    expect(typeof (actions.groupMembers())).toBe('function');
+  });
+
+  it('should dispatch GET_GROUPMEMBERS_SUCCESS', (done) => {
+    moxios.stubRequest('/api/v1/group/1/users', {
+      status: 201,
+      response: {
+        message: 'Welcome.',
+        data: getGroupMembersData
+      }
+    });
+    const expectedActions = { members: [{ id: 2, username: 'mcdavid' }],
+      type: 'GET_GROUPMEMBERS_SUCCESS' };
+
+    store.dispatch(actions.groupMembers(1)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+    done();
+  });
+
+  it('should dispatch GET_GROUPMEMBERS_FAILED if unsuccessful', (done) => {
+    moxios.stubRequest('/api/v1/group/1/users', {
+      status: 401,
+      response: {
+        message: 'Welcome.',
+        data: { }
+      }
+    });
+    const expectedActions = {
+      type: 'GET_GROUPMEMBERS_FAILED'
+    };
+    store.dispatch(actions.groupMembers(1)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+    done();
+  });
+});
+
+describe('Get Current Group', () => {
+  beforeEach(() => moxios.install());
+  afterEach(() => moxios.uninstall());
+  const store = mockStore(initialState);
+
+  it('contains a currentGroup function', () => {
+    expect(typeof (actions.currentGroup())).toBe('function');
+  });
+
+  it('should dispatch GET_CURRENTGROUP_SUCCESS, and group name', (done) => {
+    moxios.stubRequest('/api/v1/group/1', {
+      status: 201,
+      response: {
+        message: 'Welcome.',
+        data: {
+          token,
+          groupName: 'Pheonix'
+        }
+      }
+    });
+    const expectedActions = {
+      groupName: 'Pheonix',
+      type: 'GET_CURRENTGROUP_SUCCESS'
+    };
+    store.dispatch(actions.currentGroup(1)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+    done();
+  });
+
+  it('should dispatch GET_CURRENTGROUP_FAILED if unsuccessful', (done) => {
+    moxios.stubRequest('/api/v1/group/undefined', {
+      status: 401,
+      response: {
+        message: 'Welcome.',
+        data: { }
+      }
+    });
+    const expectedActions = {
+      groupName: undefined,
+      type: 'GET_CURRENTGROUP_FAILED'
+    };
+    store.dispatch(actions.currentGroup(undefined)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+    done();
+  });
+});
+

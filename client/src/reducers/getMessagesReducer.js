@@ -1,4 +1,4 @@
-import * as types from '../../constant';
+import * as types from '../constant';
 import initialState from '../initialState';
 
 const getMessagesReducer = (state = initialState.groupMessages, action = {}) => {

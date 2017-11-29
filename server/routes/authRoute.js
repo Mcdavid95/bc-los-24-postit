@@ -1,8 +1,8 @@
 import express from 'express';
-import Verify from '../controllers/jwtVerify';
+import jwtVerify from '../utils/jwtVerify';
 
 
-import AuthCtrl from '../controllers/authentication';
+import userController from '../controllers/userController';
 
 const router = express.Router();
 
@@ -10,25 +10,26 @@ const router = express.Router();
 // AUTH ROUTES
 // ======================
 
-// Sign up logic
-router.post('/api/v1/user/register', AuthCtrl.register);
+// Sign up route
+router.post('/api/v1/user/register', userController.register);
 
 // route to paginate all users
-router.post('/api/v1/users/searchList/:offset', AuthCtrl.searchUser);
+router.post('/api/v1/users/searchList', userController.searchUser);
 
-// Login logic
+// Login route
 
-router.post('/api/v1/user/login', AuthCtrl.login);
+router.post('/api/v1/user/login', userController.login);
 
-// Add logout route
-router.post('/api/v1/user/logout', AuthCtrl.logout);
+// Logout route
+router.post('/api/v1/user/logout', userController.logout);
 
-router.get('/api/v1/users', Verify.hasToken, AuthCtrl.listUsers);
+// Get all registered Users route
+router.get('/api/v1/users', jwtVerify.hasToken, userController.listUsers);
 
-// forgot password api for the user
-router.post('/api/v1/forgot-password', AuthCtrl.forgotPassoword);
+// forgot password api for the user route
+router.post('/api/v1/forgot-password', userController.forgotPassoword);
 
-// update user password
-router.post('/api/v1/reset-password/:token', AuthCtrl.reset);
+// update user password route
+router.post('/api/v1/reset-password/:token', userController.reset);
 
 export default router;

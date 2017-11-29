@@ -1,6 +1,6 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import * as types from '../../constant';
+import * as types from '../constant';
 import history from '../utils/History';
 import setAuthToken from '../utils/setAuthToken';
 
@@ -23,7 +23,7 @@ export const setCurrentUser = user => ({
 export const userSignupRequest = userData => dispatch => axios.post('/api/v1/user/register', userData)
   .then((response) => {
     dispatch(signupUserSuccess(response));
-    const token = response.data.myToken;
+    const token = response.data.token;
     localStorage.setItem('jwtToken', token);
     setAuthToken(token);
     dispatch(setCurrentUser(jwt.decode(token))
@@ -48,7 +48,7 @@ const userLoginFailed = user => ({ type: types.LOGIN_USER_ERROR, user });
 export const userLoginRequest = userData => dispatch => axios.post('/api/v1/user/login', userData)
   .then((response) => {
     dispatch(userLoginSuccess(response));
-    const token = response.data.myToken;
+    const token = response.data.token;
     localStorage.setItem('jwtToken', token);
     setAuthToken(token);
     dispatch(setCurrentUser(jwt.decode(token))
@@ -111,7 +111,7 @@ const searchUserFailed = users => ({ type: types.SEARCH_USERS_FAILED, users });
  * @description It makes an api call to search users
  */
 export const searchUsers = (username, offset) => dispatch =>
-  axios.post(`/api/v1/users/searchList/${offset}`, username)
+  axios.post(`/api/v1/users/searchList?offset=${offset}`, username)
     .then((response) => {
       dispatch(searchUserSuccess(response.data));
     })
@@ -137,7 +137,7 @@ export const forgotPassword = email => dispatch =>
   axios.post('/api/v1/forgot-password', email)
     .then((response) => {
       dispatch(confirmEmailSuccess(response));
-      Materialize.toast('A Link has been sent to your mail to reset your email /n It expires after 30mins', 6000, 'rounded, green');
+      Materialize.toast('A Link has been sent to your mail to reset your email It expires after 30mins', 6000, 'rounded, green');
       history.push('/login');
     })
     .catch((err) => {

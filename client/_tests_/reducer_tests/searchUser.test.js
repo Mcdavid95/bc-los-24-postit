@@ -1,5 +1,5 @@
 import searchUser from '../../src/reducers/searchUserReducer';
-import * as types from '../../constant';
+import * as types from '../../src/constant';
 import state from '../../src/initialState';
 
 describe('Search User Reducer', () => {

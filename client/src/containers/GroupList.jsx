@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import shortId from 'shortid';
 import { Link } from 'react-router-dom';
-import { getGroupMessages } from '../actions';
+import { getGroupMessages, currentGroup, groupMembers } from '../actions';
 import history from '../utils/History';
 /**
  * @class GroupList
@@ -10,6 +11,7 @@ import history from '../utils/History';
  */
 export class GroupList extends Component {
   /**
+   * @constructor
    * @description Creates Instance of Group Form
    * @param {*} props 
    */
@@ -44,22 +46,25 @@ export class GroupList extends Component {
    * @return {*} any
    */
   onClick(groupId) {
-    this.props.getGroupMessages(groupId)
+    this.props.getGroupMessages(groupId);
+    this.props.currentGroup(groupId);
+    this.props.groupMembers(groupId)
       .then(() => {
         history.push(`/group/${groupId}/messages`);
       })
     ;
   }
   /**
+   * @method render
    * @return {Object} DOM Object
    */
   render() {
     return (
       <ul className="row group-list">
         {!this.state.groups ? (<li> No groups Yet</li>) : this.state.groups.map(group =>
-          (<li key={group.id}>
+          (<li key={shortId.generate()}>
             <div className="col s12">
-              <div className="card blue-grey darken-1">
+              <div className="black">
                 <Link onClick={() => this.onClick(group.groupId)} to={`/group/${group.groupId}/messages`}><span className="card-title list-group"> {group.groupName}</span></Link>
               </div>
             </div>
@@ -74,10 +79,14 @@ export class GroupList extends Component {
 GroupList.propTypes = {
   userGroupList: PropTypes.array.isRequired,
   getGroupMessages: PropTypes.func.isRequired,
+  currentGroup: PropTypes.func.isRequired,
+  groupMembers: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  groupMessages: state.groupMessages
+  groupMessages: state.groupMessages,
+  userGroupList: state.userGroupList,
 });
 
-export default connect(mapStateToProps, { getGroupMessages })(GroupList);
+export default connect(mapStateToProps,
+  { getGroupMessages, currentGroup, groupMembers })(GroupList);

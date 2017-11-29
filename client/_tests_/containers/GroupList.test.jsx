@@ -24,7 +24,7 @@ describe('Group List component test', () => {
 
   it('should contain the componentWillReceiveProps method', () => {
     wrapper.setState({
-      groups: [[{ groupId: 3, groupName: 'mcdavid', description: 'nothing' }, { groupId: 4, groupName: 'laugh', description: 'nothing' }], [{ groupId: 3, groupName: 'mcdavid', description: 'nothing' }, { groupId: 4, groupName: 'laugh', description: 'nothing' }]],
+      groups: nextProps.userGroupList
     });
     const component = wrapper;
     const onSubmitSpy = jest.spyOn(component.instance(), 'componentWillReceiveProps');
@@ -34,7 +34,7 @@ describe('Group List component test', () => {
 
   it('should contain the componentWillReceiveProps method', () => {
     wrapper.setState({
-      groups: [[{ groupId: 3, groupName: 'mcdavid', description: 'nothing' }, { groupId: 4, groupName: 'laugh', description: 'nothing' }]],
+      groups: nextProps.props.userGroupList
     });
     const component = wrapper;
     const onSubmitSpy = jest.spyOn(component.instance(), 'componentWillReceiveProps');

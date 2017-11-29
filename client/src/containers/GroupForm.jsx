@@ -49,10 +49,9 @@ export class GroupForm extends Component {
             <label htmlFor="title" className="control-label">Group Name</label>
             <input
               type="text"
-              name="GroupName"
+              name="groupName"
               className="form-control"
               value={this.state.GroupName}
-              placeholder="Enter title"
               required
               onChange={this.onChange}
             />
@@ -63,7 +62,6 @@ export class GroupForm extends Component {
               name="description"
               type="text"
               className="materialize-textarea"
-              placeholder="Purpose for creating this group"
               onChange={this.onChange}
             />
             <label htmlFor="textarea1">Description</label>
@@ -72,7 +70,7 @@ export class GroupForm extends Component {
             <label htmlFor="submit" className="control-label" />
             <button
               type="submit"
-              className="btn waves-effect waves-light modal-action modal-close"
+              className="btn waves-effect waves-light modal-action"
             >Submit</button>
           </div>
         </form>

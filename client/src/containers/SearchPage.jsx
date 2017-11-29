@@ -12,14 +12,15 @@ import { searchUsers } from '../actions';
  */
 export class SearchPage extends Component {
   /**
-   * 
+   * Creates Instance of SearchPage
+   * @constructor
    * @param {*} props 
    */
   constructor(props) {
     super(props);
     this.state = {
       username: initialState.search,
-      result: [],
+      result: [{ id: 1 }],
       pages: 0,
       offset: 0,
     };
@@ -30,26 +31,28 @@ export class SearchPage extends Component {
     this.handlePageClick = this.handlePageClick.bind(this);
   }
   /**
-   * 
+   * @method ComponentWillRecieveProps
    * @param {*} nextProps 
+   * @description updates state when props changes
    * @return {*} new state
    */
   componentWillReceiveProps(nextProps) {
     if (nextProps.result.length === 0) {
       this.setState({
-        result: nextProps.result.users.user,
-        pages: nextProps.result.users.metadata.pageCount
+        result: nextProps.result.users.users,
+        pages: nextProps.result.users.pageInfo.pageCount
       });
     } else {
       this.setState({
-        result: nextProps.result[nextProps.result.length - 1].users.user,
-        pages: nextProps.result[nextProps.result.length - 1].users.metadata.pageCount
+        result: nextProps.result[nextProps.result.length - 1].users.users,
+        pages: nextProps.result[nextProps.result.length - 1].users.pageInfo.pageCount
       });
     }
   }
   /**
-   * 
+   * @method onChange
    * @param {*} event 
+   * @description updates state on event change and makes call to api via props
    * @return {DOM} Dom
    */
   onChange(event) {
@@ -63,7 +66,7 @@ export class SearchPage extends Component {
     this.props.searchUsers(searchInput, this.state.offset);
   }
   /**
-   * 
+   * @method onSubmit
    * @param {*} event 
    * @return {DOM} DOM element
    */
@@ -77,7 +80,7 @@ export class SearchPage extends Component {
       });
   }
   /**
- * 
+ * @method handlePageClick
  * @param {*} event 
  * @return {DOM} returns a new page of result
  * 
@@ -92,6 +95,7 @@ export class SearchPage extends Component {
     this.props.searchUsers(this.state, offset);
   }
   /**
+   * @method prevPage
    * @param {*} event
    * @return {DOM} previous set of results
    */
@@ -107,11 +111,11 @@ export class SearchPage extends Component {
   }
   /**
    * 
-   * @param {*} e 
+   * @param {*} event
    * @return {DOM} next set of results
    */
-  nextPage(e) {
-    e.preventDefault();
+  nextPage(event) {
+    event.preventDefault();
     this.props.searchUsers(this.state, this.state.offset + 1);
     const newOffset = this.state.offset;
     this.setState({
@@ -119,33 +123,47 @@ export class SearchPage extends Component {
     });
   }
   /**
+   * @method render
+   * @description returns table containing users detaila - username and email
    * @return {DOM} DOM element
    */
   render() {
-    console.log('======>', this.props);
-    console.log('======> state', this.props);
     const notFound = (
       <h5>User not found </h5>
     );
 
     const tableBody = (
-      <table className="container centered bordered">
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.state.result.map(list =>
-            (<tr key={list.id}>
-              <td>{list.username}</td>
-              <td>{list.email}</td>
-            </tr>)
-          )
-          }
-        </tbody>
-      </table>
+      <div>
+        <table className="container centered bordered">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.result.map(list =>
+              (<tr key={list.id}>
+                <td>{list.username}</td>
+                <td>{list.email}</td>
+              </tr>)
+            )
+            }
+          </tbody>
+        </table>
+
+        <ReactPaginate
+          previousLabel={'previous'}
+          nextLabel={'next'}
+          pageCount={this.state.pages}
+          marginPagesDisplayed={1}
+          pageRangeDisplayed={5}
+          onPageChange={this.handlePageClick}
+          containerClassName={'pagination'}
+          subContainerClassName={'pages pagination'}
+          activeClassName={'active'}
+        />
+      </div>
     );
     return (
       <div>
@@ -167,17 +185,6 @@ export class SearchPage extends Component {
           </div>
           {this.state.result.length > 0 ? tableBody : notFound
           }
-          <ReactPaginate
-            previousLabel={'previous'}
-            nextLabel={'next'}
-            pageCount={this.state.pages}
-            marginPagesDisplayed={1}
-            pageRangeDisplayed={5}
-            onPageChange={this.handlePageClick}
-            containerClassName={'pagination'}
-            subContainerClassName={'pages pagination'}
-            activeClassName={'active'}
-          />
         </main>
         <Footer />
       </div>

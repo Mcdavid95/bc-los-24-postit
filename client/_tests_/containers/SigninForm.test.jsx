@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import LoginForm from '../../src/containers/LoginForm';
-import { props } from '../_mocks_/components.mock';
+import { props, user } from '../_mocks_/components.mock';
 
 describe('Signin form component test', () => {
   it('should render without crashing', () => {
@@ -12,9 +12,7 @@ describe('Signin form component test', () => {
     const component = shallow(<LoginForm {...props} />);
     const onChangeSpy = jest.spyOn(component.instance(), 'onChange');
     component.instance().onChange({
-      target: {
-        name: 'username', value: 'mcdavid'
-      }
+      target: user
     });
     expect(onChangeSpy).toHaveBeenCalledTimes(1);
   });

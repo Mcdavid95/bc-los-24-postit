@@ -1,4 +1,4 @@
-import * as types from '../../constant';
+import * as types from '../constant';
 import initialState from '../initialState';
 
 const signupReducer = (state = initialState.signup, action) => {

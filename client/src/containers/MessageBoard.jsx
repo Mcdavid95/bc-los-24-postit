@@ -31,6 +31,15 @@ export class MessageBoard extends Component {
     };
   }
   /**
+   *
+   * @return {*} loads actions when page loads initially
+   */
+  componentDidMount() {
+    $(document).ready(() => {
+      $('#message-board').scrollTop($('#message-board')[0].scrollHeight);
+    });
+  }
+  /**
  * @description updates state when props changes
  * @param {Object} nextProps 
  * @returns {Object} new state
@@ -43,6 +52,9 @@ export class MessageBoard extends Component {
     } else {
       this.setState({
         messages: nextProps.groupMessages[nextProps.groupMessages.length - 1]
+      });
+      $(document).ready(() => {
+        $('#message-board').scrollTop($('#message-board')[0].scrollHeight);
       });
     }
   }
@@ -73,8 +85,10 @@ export class MessageBoard extends Component {
                         <p>
                           <strong>
                             <span className="center-align" id="message-content">
-                              {message.message}
+                              { message.message}
                             </span>
+
+
                           </strong>
                         </p>
                       </div>

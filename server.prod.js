@@ -53,7 +53,7 @@ app.get('/*', (req, res) => {
 app.use((req, res, next) => {
   res.status(501).send({
     status: false,
-    message: 'Sorry, this address is not supported by this API.'
+    message: 'Sorry, this endpoint is not supported by this API.'
   });
   next();
 });

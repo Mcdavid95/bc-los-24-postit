@@ -1,5 +1,5 @@
 import getAllUsers from '../../src/reducers/getAllUsersReducer';
-import * as types from '../../constant';
+import * as types from '../../src/constant';
 import state from '../../src/initialState';
 
 describe('Get All Users Reducer', () => {

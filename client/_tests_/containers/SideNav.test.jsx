@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { SideNav } from '../../src/pages/SideNav';
+import { SideNav } from '../../src/containers/SideNav';
 import { props } from '../_mocks_/components.mock';
 
 const instance = () => shallow(<SideNav {...props} />);

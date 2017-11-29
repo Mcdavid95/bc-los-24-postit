@@ -1,6 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
 import initialState from '../initialState';
-import * as types from '../../constant';
+import * as types from '../constant';
 
 const tokenReducer = (state = initialState.setAuthToken, action = {}) => {
   switch (action.type) {

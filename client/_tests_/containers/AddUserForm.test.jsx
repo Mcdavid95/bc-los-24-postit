@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { AddUserForm } from '../../src/containers/AddUserForm';
-import { props, nextProps } from '../_mocks_/components.mock';
+import { props, nextProps, user } from '../_mocks_/components.mock';
 
 const instance = () => mount(<AddUserForm {...props} />);
 
@@ -12,9 +12,7 @@ describe('AddUser form component test', () => {
     const component = wrapper;
     const onChangeSpy = jest.spyOn(component.instance(), 'onChange');
     component.instance().onChange({
-      target: {
-        name: 'username', value: 'mcdavid'
-      }
+      target: user
     });
     expect(onChangeSpy).toHaveBeenCalledTimes(1);
   });
@@ -31,7 +29,7 @@ describe('AddUser form component test', () => {
   it('should contain the componentWillReceiveProps method', () => {
     wrapper.setState({
       users: [{ id: 3, username: 'mcdavid' }],
-      result: nextProps.result[0].users.user
+      result: nextProps.result[0].users.users
     });
     const component = wrapper;
     const onSubmitSpy = jest.spyOn(component.instance(), 'componentWillReceiveProps');

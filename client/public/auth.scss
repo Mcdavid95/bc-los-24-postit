@@ -5,6 +5,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
   color: white;
 
   .caps {
@@ -15,15 +16,24 @@ body {
     flex: 1 0 auto;
   }
 
+  .modal-overlay {
+    display: none;
+    background: none
+  }
+
   #brand {
     font-family: $brandFont;
-    color: palevioletred
-    
+    color: palevioletred;
+    padding-right: 8%;
   }
 
   .page-footer {
-    background: #2c3e56;
-    padding-top: 0
+    background: $primaryColor;
+    padding-top: 0;
+  }
+
+  .modal {
+    max-height: 60%;
   }
 
   h1 {
@@ -32,11 +42,8 @@ body {
 
   .list-group {
     margin-left: 1%;
-    background: #576883;
-  }
-
-  .list-group:hover {
-    background: #ebebeb
+    text-decoration: none;
+   color: white;
   }
 
    hr {
@@ -62,38 +69,55 @@ form {
 }
 
 #acct {
-  color: #2c3e56
+  color: $primaryColor;
 }
 
 .brand {
     font-family: $brandFont;
-    color: palevioletred
+    color: palevioletred;
+  }
+
+  .heading {
+    font-family: 'Montserrat', sans-serif;
   }
 
 #top {
-  margin-top: 30%
+  margin-top: 30%;
 }
 
 #slide-out {
-  margin-bottom: 10
+  margin-bottom: 10;
+}
+
+.forgot-password {
+  padding-left: 2%;
 }
 
 
 nav {
-    background: #2c3e56;
-    //margin-left: 2%
+    background: $primaryColor;
 }
 
-#signup {
-  margin-left: 80%
-}
+// #signup {
+//   margin-left: 80%
+// }
 
 #login {
-  margin-left: 80%
+  margin-left: 80%;
+}
+
+.login-form {
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+  border-radius: 2px;
+  box-shadow: 3px 3px 3px 3px #888888;
+  /* margin-bottom: 20px; */
+  padding-bottom: 25px;
 }
 
 .login {
-  margin-bottom: 10%
+  margin-bottom: 10%;
 }
 
 h1 {
@@ -101,7 +125,7 @@ h1 {
 }
 
 #signin {
-  margin-top: 0
+  margin-top: 0;
 }
 
 #side-nav {
@@ -109,7 +133,7 @@ h1 {
 }
 
 .footer-copyright {
-  padding-top: 0
+  padding-top: 0;
 }
 
 .side-nav {
@@ -119,13 +143,12 @@ h1 {
 
 .white-board {
   border: 2px, solid rgb(109, 11, 11);
-  height: 50vh;
+  height: 70vh;
   width: 50%;
   margin: auto;
   margin-left: 30%;
   background: rgba(240, 236, 236, 0.604);
-  padding-left: 5%;
-  padding-top: 3%
+  padding: 5%;
 }
 
 .side {
@@ -134,29 +157,41 @@ h1 {
   margin-left: 0%;
   height: 90vh;
   padding-left: 1%;
-  padding-top: 0%
+  padding-top: 0%;
+}
+.black {
+  margin-bottom: 2%;
+  border-radius: 3%;
 }
 
 #message-board {
   height:46vh;
-  width: 63vw;
-  border: 0px solid #576883;
-  margin: auto 24%;
-  overflow-y: scroll;
-  overflow-x: scroll;
+  width: 73vw;
+  border: 2px solid #f1f0e5;
+  margin: auto 15%;
+  overflow: auto;
+  bottom: 0
+}
+
+.group-name {
+  text-transform: capitalize;
+}
+
+.list-members {
+  padding-left: 10%;
 }
 
 .group-list {
   overflow-y: scroll;
-  height:50vh;
+  height:20vh;
 }
 
 #message {
-  width: 40vw
+  width: 40vw;
 }
 
 #message-input {
-  width: 40vw
+  width: 40vw;
 }
 
 #mail-box {
@@ -164,37 +199,39 @@ h1 {
 }
 
 #clear {
-  clear: both
+  clear: both;
+  font-size: 16px;
+  line-height: 31px;
 }
 
 .message-card {
   margin-top: 10px;
   border: 0px solid #fff7aa;
-  width: 100%;
-  border-radius: 3px;
+  width: 95%;
+  border-radius: 10px;
   background-color: rgba(239, 239, 239, 0.96);
   color: black;
 }
 .card {
-  max-height: 40px
+  max-height: 40px;
 }
 
 #users{
   position: relative;
-  left: 50%
+  left: 50%;
 }
 
 form#message {
-  margin: auto 25%
+  margin: auto 25%;
 }
 
 .message-form {
-  margin-bottom: 0
+  margin-bottom: 0;
 }
 
 #forgot-password {
   color: whitesmoke;
-  margin-bottom: 10%
+  margin-bottom: 10%;
 }
 
 #options {
@@ -204,28 +241,27 @@ form#message {
 .normal{
   border: 1px solid #2FFF6F;
   border-radius: 3px;
-  background: #2FFF6F 
+  background: #2FFF6F;
 }
 
 .urgent{
   border: 1px solid #8A693E;
   border-radius: 3px;
-  background: #8A693E 
+  background: #8A693E;
 }
 
 .critical{
   border: 1px solid red;
   border-radius: 3px;
-  background: red 
+  background: red;
 }
 
 #message-content {
-  font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
-  padding-left: 6%
+  padding-left: 6%;
 }
 
 .message-input {
-  margin-bottom: 0
+  margin-bottom: 0;
 }
 
 .page {
@@ -233,28 +269,29 @@ form#message {
 }
 
 textarea#message {
-  margin-bottom: 0
+  margin-bottom: 0;
 }
 
 #message-list {
-  height: 2vh
+  height: 2vh;
 }
 
 #sidenav-overlay {
   z-index: 0;
+  background: none;
 }
 
 .username {
   color: palevioletred;
-  padding-left: 6%
+  padding-left: 6%;
 }
 .priority {
-  padding-left: 1%
+  padding-left: 1%;
 }
 
 
 th {
-  color: paleturquoise
+  color: paleturquoise;
 }
 
 .not-found {
@@ -285,3 +322,12 @@ button#side-nav.button-collapse {
         padding-left: 0;
       }
     }
+
+    @media only screen and (min-width: 993px) {
+    .show-on-large {
+        display: block !important;
+    }
+    button#side-nav.button-collapse {
+      margin-top: 3%
+    }
+  }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import initialState from '../initialState';
-import { searchUsers, addUserRequest } from '../actions';
+import { searchUsers, addUserRequest, groupMembers } from '../actions';
 /**
  * @class AddUserForm
  * @extends React.Component
@@ -17,7 +17,7 @@ export class AddUserForm extends Component {
     super(props);
     this.state = {
       username: initialState.addUser,
-      result: [],
+      result: [{ id: 1 }],
       offset: 0
     };
 
@@ -25,14 +25,14 @@ export class AddUserForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   /**
-   * 
+   * @method ComponentWillRecieveProps
    * @param {object} nextProps 
    * @return {object} new state
    */
   componentWillReceiveProps(nextProps) {
     if (nextProps.result.length === 0) {
       this.setState({
-        result: nextProps.result.users.user
+        result: nextProps.result.users.users,
       });
     } else if (typeof (nextProps.result.username) === 'string') {
       this.setState({
@@ -40,7 +40,7 @@ export class AddUserForm extends Component {
       });
     } else {
       this.setState({
-        result: nextProps.result[nextProps.result.length - 1].users.user
+        result: nextProps.result[nextProps.result.length - 1].users.users,
       });
     }
   }
@@ -65,17 +65,25 @@ export class AddUserForm extends Component {
  */
   onSubmit(event) {
     event.preventDefault();
-    this.props.addUserRequest(this.state, this.props.groupId);
+    this.props.addUserRequest(this.state, this.props.groupId)
+      .then(() => {
+        this.props.groupMembers(this.props.groupId);
+        this.setState({
+          username: initialState.addUser
+        });
+      });
   }
 
   /**
+   * @description returns list of users per search term
+   * @method render 
    * @return {object} DOM Object
    */
   render() {
     return (
       <div className="row">
         <div>
-          <form onSubmit={this.onSubmit} className="col s12">
+          <form id="reset" onSubmit={this.onSubmit} className="col s12">
             <div className="input-field col s12" >
               <label htmlFor="user" className="control-label">Username: </label>
               <input
@@ -106,16 +114,30 @@ export class AddUserForm extends Component {
   }
 }
 
-AddUserForm.propTypes = {
-  addUserRequest: PropTypes.func.isRequired,
-  groupId: PropTypes.string.isRequired,
-  searchUsers: PropTypes.func.isRequired,
-  result: PropTypes.object.isRequired
-
+const addUserFormPropTypes = () => {
+  const addUserForm = new AddUserForm();
+  if (Array.isArray(addUserForm.props.result)) {
+    return {
+      addUserRequest: PropTypes.func.isRequired,
+      groupId: PropTypes.string.isRequired,
+      searchUsers: PropTypes.func.isRequired,
+      result: PropTypes.array.isRequired,
+      groupMembers: PropTypes.func.isRequired
+    };
+  }
+  return {
+    addUserRequest: PropTypes.func.isRequired,
+    groupId: PropTypes.string.isRequired,
+    searchUsers: PropTypes.func.isRequired,
+    result: PropTypes.object.isRequired,
+    groupMembers: PropTypes.func.isRequired
+  };
 };
+
+AddUserForm.propTypes = addUserFormPropTypes;
 
 const mapStateToProps = state => ({
   result: state.search
 });
 
-export default connect(mapStateToProps, { searchUsers, addUserRequest })(AddUserForm);
+export default connect(mapStateToProps, { searchUsers, addUserRequest, groupMembers })(AddUserForm);

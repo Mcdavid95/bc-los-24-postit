@@ -1,6 +1,6 @@
 import signup from '../../src/reducers/signupReducer';
 import reducers from '../../src/reducers';
-import * as types from '../../constant';
+import * as types from '../../src/constant';
 import currentState from '../../src/initialState';
 
 test('reducers', () => {
@@ -30,6 +30,8 @@ test('reducers', () => {
   addUser: { username: '' },
   allUsers: [],
   forgotPassword: { email: '' },
+  groupMembers: [],
+  currentGroup: '',
   resetPassword: { newPassword: '', confirmPassword: '' },
   search: { username: '' } });
 });

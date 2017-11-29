@@ -12,6 +12,8 @@ export { setCurrentUser } from './userActions';
 export { createGroupRequest } from './groupActions';
 export { getUserGroups } from './groupActions';
 export { addUserRequest } from './groupActions';
+export { groupMembers } from './groupActions';
+export { currentGroup } from './groupActions';
 
 // Message Actions
 export { postMessageRequest } from './messageActions';

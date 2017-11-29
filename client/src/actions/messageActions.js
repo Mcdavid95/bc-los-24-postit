@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as types from '../../constant';
+import * as types from '../constant';
 import history from '../utils/History';
 
 const postMessageSuccess = message => ({ type: types.POST_MESSAGE_SUCCESS, message });
@@ -40,7 +40,7 @@ export const getGroupMessages = groupId =>
   dispatch =>
     axios.get(`/api/v1/group/${groupId}/messages`)
       .then((response) => {
-        dispatch(getMessageSuccess(response.data));
+        dispatch(getMessageSuccess(response.data.messages));
       })
       .catch((response) => {
         Materialize.toast('Group does not exist', 3000, 'rounded red');

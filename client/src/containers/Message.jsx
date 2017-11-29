@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Messageboard from './MessageBoard';
-import Messageform from './MessageForm';
-import Groupform from '../containers/GroupForm';
+import MessageBoard from './MessageBoard';
+import MessageForm from './MessageForm';
+import GroupForm from '../containers/GroupForm';
 import Header from '../components/Header/Header';
-import Sidenav from '../pages/SideNav';
+import SideNav from '../containers/SideNav';
 import Footer from '../containers/Footer';
-import { createGroupRequest, getUserGroups, addUserRequest, getGroupMessages, postMessageRequest, getAllUsers } from '../actions';
+import { createGroupRequest, getUserGroups, groupMembers, addUserRequest, getGroupMessages, postMessageRequest, getAllUsers } from '../actions';
 import initialState from '../initialState';
-import AddUserform from './AddUserForm';
+import AddUserForm from './AddUserForm';
 /**
  * @class Message
  * @extends React.Component
@@ -63,20 +63,14 @@ export class Message extends Component {
   render() {
     return (
       <div >
-        <Header />
+        <Header groupId={this.props.match.params.groupId} />
         <main>
-          <Sidenav groupId={this.props.match.params.groupId} />
+          <SideNav groupId={this.props.match.params.groupId} />
           <div id="modal1" className="modal  modal-fixed-footer">
             <div className="modal-content">
+              <h3 className="group-form heading">Create New Group</h3>
 
-              <button
-                type="button"
-                className="waves-effect waves-light btn modal-close"
-                data-dismiss="modal"
-              >&times;</button>
-              <h1 className="group-form">Create New Group</h1>
-
-              <Groupform createGroupRequest={this.props.createGroupRequest} />
+              <GroupForm createGroupRequest={this.props.createGroupRequest} />
             </div>
             <div className="modal-footer">
               <a
@@ -87,13 +81,8 @@ export class Message extends Component {
           </div>
           <div id="modal2" className="modal modal-fixed-footer">
             <div className="modal-content" id="options">
-              <button
-                type="button"
-                className="waves-effect waves-light btn modal-close"
-                data-dismiss="modal"
-              >&times;</button>
-              <h1>Add New User To This Group</h1>
-              <AddUserform
+              <h3 className="heading">Add New User To This Group</h3>
+              <AddUserForm
                 addUserRequest={this.props.addUserRequest}
                 groupId={this.props.match.params.groupId}
               />
@@ -106,16 +95,11 @@ export class Message extends Component {
             </div>
           </div>
           <div className="row page">
-            <a
-              className="modal-trigger center-align waves-effect waves-light btn btn-small"
-              id="users"
-              href="#modal2"
-            >Add user</a>
-            <Messageboard
+            <MessageBoard
               groupMessages={this.state.messages}
               groupId={this.props.match.params.groupId}
             />
-            <Messageform
+            <MessageForm
               groupId={this.props.match.params.groupId}
               postMessageRequest={this.props.postMessageRequest}
             />
@@ -143,7 +127,6 @@ Message.propTypes = {
   groupMessages: PropTypes.array.isRequired,
   match: PropTypes.object.isRequired,
   postMessageRequest: PropTypes.func.isRequired,
-
 };
 
 export default connect(mapStateToProps,
@@ -153,4 +136,5 @@ export default connect(mapStateToProps,
     getAllUsers,
     createGroupRequest,
     getGroupMessages,
+    groupMembers,
     postMessageRequest })(Message);

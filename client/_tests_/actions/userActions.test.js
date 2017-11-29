@@ -4,7 +4,7 @@ import moxios from 'moxios';
 import initialState from '../../src/initialState';
 import mockLocalStorage from '../_mocks_/mockLocalStorage';
 import * as actions from '../../src/actions/userActions';
-import * as types from '../../constant';
+import * as types from '../../src/constant';
 import { payLoad, token, userDetails, invalidUserDetails, userSigninData, invalidUserSigninData } from '../_mocks_/actions.mock';
 
 const middlewares = [thunk];
@@ -26,7 +26,7 @@ describe('Sign up action', () => {
       response: {
         message: 'Sign in succesful.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -46,7 +46,7 @@ describe('Sign up action', () => {
       response: {
         message: 'Sign in succesful.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -75,7 +75,7 @@ describe('Sign in action', () => {
       response: {
         message: 'Sign in succesful.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -94,7 +94,7 @@ describe('Sign in action', () => {
       response: {
         message: 'Error.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -148,7 +148,7 @@ describe('Get all users action', () => {
       response: {
         message: 'yea it workedl.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -167,7 +167,7 @@ describe('Get all users action', () => {
       response: {
         message: 'Error.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -196,7 +196,7 @@ describe('Search users action', () => {
       response: {
         message: 'yea it workedl.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -215,7 +215,7 @@ describe('Search users action', () => {
       response: {
         message: 'Error.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -244,7 +244,7 @@ describe('Forgot password action', () => {
       response: {
         message: 'yea it workedl.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -263,7 +263,7 @@ describe('Forgot password action', () => {
       response: {
         message: 'Error.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -293,7 +293,7 @@ describe('confirm Password reset', () => {
       response: {
         message: 'yea it workedl.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });
@@ -312,7 +312,7 @@ describe('confirm Password reset', () => {
       response: {
         message: 'Error.',
         data: {
-          token: '0SX6NVMqqQpgdUebW3iRBJz8oerTtfzYUm4ADESM7fk'
+          token
         }
       }
     });

@@ -1,5 +1,5 @@
 import getMessages from '../../src/reducers/getMessagesReducer';
-import * as types from '../../constant';
+import * as types from '../../src/constant';
 import state from '../../src/initialState';
 
 describe('Get Messages Reducer', () => {
