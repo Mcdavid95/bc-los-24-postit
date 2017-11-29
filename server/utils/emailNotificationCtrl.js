@@ -28,8 +28,8 @@ export const sendUrgentMail = (users, message) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'mcdavidemereuwa95@gmail.com',
-      pass: 'Jabike_13'
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD
     }
   });
 
@@ -38,16 +38,16 @@ export const sendUrgentMail = (users, message) => {
     to: receivers,
     subject: 'URGENT',
     html: `
-    <div style="width: 100%; background-color: grey; padding: 2%;">
-    <div style="width: 60%; background-color: white; margin: auto;">
-      <div style="height: 8%; background-color: #2c3e56; width:100%">
-        <p style="color:palevioletred; font-weight:bold; margin-left:3%; top: 2%; font-family:kurale serif">POSTIT!!</>
+    <div style="width: 100%; color: white; background-color: #fff; padding: 2%;">
+    <div style="width: 60%; background-color: #2c3e56; margin: auto;">
+      <div style="height: 8%; background-color: #2c3e56; width:100%; border-bottom: 1.2px solid black">
+        <p style="color:palevioletred; font-weight:bold; margin-left:3%; padding-top: 2%; font-family:kurale serif">POSTIT!!</>
       </div>
       <div style="padding: 8%">
         <div class="row">
           Hi, you have a new message:
         </div>
-        <div class="next-container" style="border: 2px solid; margin-top:2%; padding: 2%; background-color: rgba(239, 239, 239, 0.96); border-radius:4%">
+        <div class="next-container" style="color: black; border: 2px solid; margin-top:2%; padding: 2%; background-color: rgba(239, 239, 239, 0.96); border-radius:4%">
           <em><span style="color:palevioletred; padding-left:6%;">  @${message.username} </span></em>
                         <small>
                           <span style="background-color:#8A693E; padding-left:1%">${message.priority}</span>
@@ -67,9 +67,9 @@ export const sendUrgentMail = (users, message) => {
         <div style="border-top: 3px solid #2c3e56;"></div>
         <p style="font-weight: bold; font-family:kurale serif; color: palevioletred">POSTIT!!</p>
       </div>
-     <div style="height: 8%; background-color: #2c3e56; width:100%">
-       <p><small style="text-align: center; color:white;"> Copyright m.jeck</small></p>
-      </div>
+     <div style="height: 8%; background-color: #2c3e56; width:100%; border-top: 1.2px solid black">
+      <p><small style="padding-left: 2%; text-align: center; color:white;"> Copyright M.jeck</small></p>
+     </div>
     </div>
   </div>
     `
@@ -93,8 +93,8 @@ export const resetPasswordMail = (token, email, host) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'mcdavidemereuwa95@gmail.com',
-      pass: 'Jabike_13'
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD
     }
   });
 
@@ -103,9 +103,9 @@ export const resetPasswordMail = (token, email, host) => {
     to: email,
     subject: 'POSTIT PASSWORD RESET',
     html: `
-    <div style="width: 100%; background-color: grey; padding: 2%;">
-    <div style="width: 60%; background-color: white; margin: auto;">
-      <div style="height: 8%; background-color: #2c3e56; width:100%">
+    <div style="width: 100%; color: white; background-color: #fff; padding: 2%;">
+    <div style="width: 60%; background-color: #2c3e56; margin: auto;">
+      <div style="height: 8%; background-color: #2c3e56; width:100%; border-bottom: 1.2px solid black">
         <p style="color: palevioletred; font-weight:bold; margin-left: 3%; padding-top: 2%; font-family: kurale serif">POSTIT!!</p>
       </div>
       <div style="padding: 8%">
@@ -117,12 +117,12 @@ export const resetPasswordMail = (token, email, host) => {
         </div>
         <div>
           <br>
-          <a href="http://${host}/reset/${token}"><button style="background-color: teal; color: white">Reset Password</button></a>
+          <a href="http://${host}/reset/${token}"><button style="background-color: teal; color: white; border-color: teal">Reset Password</button></a>
         </div>
         <p style="font-weight: bold; font-family:kurale serif; color: palevioletred">POSTIT!!</p>
       </div>
-      <div style="height: 8%; background-color: #2c3e56; width:100%">
-      <p><small style="text-align: center; color:white;"> Copyright m.jeck</small></p>
+      <div style="height: 8%; background-color: #2c3e56; width:100%; border-top: 1.2px solid black">
+      <p><small style="padding-left: 2%; text-align: center; color:white;"> Copyright m.jeck</small></p>
      </div>
     </div>
   </div>
@@ -145,8 +145,8 @@ export const sendSuccessfulResetMail = (email) => {
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-      user: 'mcdavidemereuwa95@gmail.com',
-      pass: 'Jabike_13'
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD
     }
   });
 
@@ -155,28 +155,28 @@ export const sendSuccessfulResetMail = (email) => {
     from: '"PostIt" <mcdavidemereuwa95@gmail.com>',
     to: email,
     subject: 'POSTIT PASSWORD CHANGE SUCCESSFUL',
-    html: ` <div style="width: 100%; background-color: grey; padding: 2%;">
-    <div style="width: 60%; background-color: white; margin: auto;">
-      <div style="height: 8%; background-color: #2c3e56; width:100%">
-        <p style="color: palevioletred; font-weight:bold; margin-left: 3%; padding-top: 2% font-family: kurale serif">POSTIT!!</p>
+    html: `  <div style="width: 100%; color: white; background-color: #fff; padding: 2%;">
+    <div style="width: 60%; background-color: #2c3e56; margin: auto;">
+      <div style="height: 8%; background-color: #2c3e56; width:100%; border-bottom: 1.2px solid black">
+        <p style="color: palevioletred; font-weight:bold; margin-left: 3%; padding-top: 2%; font-family: kurale serif">POSTIT!!</p>
       </div>
       <div style="padding: 8%">
         <div class="row">
-          This email confirms that your new POSTIT password has been set.
+          This email confirms that your new POSTIT password has been updated.
     You can now access your Account.
         </div>
           <br>
-          Thanks.
+          Thanks You.
         <div>
           <br>
         </div>
         <p style="font-weight: bold; font-family:kurale serif; color: palevioletred">POSTIT!!</p>
       </div>
-      <div style="height: 8%; background-color: #2c3e56; width:100%">
-        <p><small style="text-align: center; color:white;"> Copyright m.jeck</small></p>
+      <div style="height: 8%; background-color: #2c3e56; border-top: 1.2px solid black; width:100%">
+        <p><small style="padding-left: 2%; text-align: center; color:white;"> Copyright M.jeck</small></p>
       </div>
     </div>
-  </div>`
+  </div> `
   };
 
   // send mail with defined transport object

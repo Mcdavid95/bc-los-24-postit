@@ -322,3 +322,12 @@ button#side-nav.button-collapse {
         padding-left: 0;
       }
     }
+
+    @media only screen and (min-width: 993px) {
+    .show-on-large {
+        display: block !important;
+    }
+    button#side-nav.button-collapse {
+      margin-top: 3%
+    }
+  }
